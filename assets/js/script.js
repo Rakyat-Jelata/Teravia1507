@@ -93,10 +93,10 @@ function tampilkanKabupaten(){
     elDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
 
     if(!idPilih) return;
-
-    // ✅ UBAH KE ANGKA SECARA PASTI SEBELUM DIFILTER
     const idAngka = Number(idPilih);
-    const hasil = dataKabupaten.filter(k => Number(k.province_id) === idAngka);
+
+    // ✅ SUDAH SESUAIKAN DENGAN NAMA KOLOM DI DATAMU: provincies_id
+    const hasil = dataKabupaten.filter(k => Number(k.provincies_id) === idAngka);
     console.log("📌 Kabupaten ditemukan:", hasil.length);
 
     hasil.forEach(item => {
@@ -108,6 +108,7 @@ function tampilkanKabupaten(){
 
     elKab.addEventListener("change", tampilkanKecamatan);
 }
+
 
 
 // ==============================================
