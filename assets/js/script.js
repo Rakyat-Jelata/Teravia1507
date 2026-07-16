@@ -1,38 +1,40 @@
 // ==============================================
-// SCRIPT FINAL TERAVIA - REPOSITORI: Teravia1507
+// SCRIPT LENGKAP TERAVIA - REPOSITORI: Teravia1507
+// Fitur: Menu, Wilayah, AI Generator, Meta Ads
 // ==============================================
 
 document.addEventListener('DOMContentLoaded', function(){
-    // Menu Hamburger
+    // === 1. MENU HAMBURGER ===
     const tombolMenu = document.getElementById('tombolMenu');
     const menuMobile = document.getElementById('menuMobile');
     if(tombolMenu && menuMobile){
         tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
     }
 
-    // Jalankan semua fitur
+    // === 2. JALANKAN FITUR WILAYAH ===
     muatDataLokasi();
+
+    // === 3. JALANKAN FITUR TAMBAHAN ===
     fiturTambahan();
 });
 
 // ==============================================
-// AMBIL DATA WILAYAH (ALAMAT SUDAH BENAR!)
+// AMBIL DATA WILAYAH (ALAMAT SUDAH SESUAI GITHUB)
 // ==============================================
 async function ambilData(namaFile) {
   try {
-    // ✅ ALAMAT SUDAH DIKUNCI SESUAI REPOSITORI KAMU: Teravia1507
     const res = await fetch(`/Teravia1507/assets/data/${namaFile}.json`);
     if (!res.ok) throw new Error(`File ${namaFile}.json tidak ditemukan`);
     return await res.json();
   } catch (err) {
-    console.error("❌ Kesalahan ambil data:", err);
-    alert("Gagal memuat wilayah: " + err.message);
+    console.error("❌ Kesalahan ambil data wilayah:", err);
+    alert("Gagal memuat daftar wilayah. Coba muat ulang halaman.");
     return [];
   }
 }
 
 // ==============================================
-// PILIHAN WILAYAH BERANTAI
+// DROPDOWN WILAYAH BERANTAI
 // ==============================================
 async function muatDataLokasi() {
   const provinsiEl = document.getElementById("pilihProvinsi");
@@ -40,10 +42,11 @@ async function muatDataLokasi() {
   const kecamatanEl = document.getElementById("pilihKecamatan");
   const desaEl = document.getElementById("pilihDesa");
 
-  if (!provinsiEl) return;
+  // Berhenti jika elemen tidak ada di halaman
+  if (!provinsiEl || !kabupatenEl || !kecamatanEl || !desaEl) return;
 
   // Muat semua data sekaligus
-  const [provinsi, kabupaten, kecamatan, desa] = await Promise.all([
+  const [dataProvinsi, dataKabupaten, dataKecamatan, dataDesa] = await Promise.all([
     ambilData("provinces"),
     ambilData("regencies"),
     ambilData("districts"),
@@ -52,98 +55,118 @@ async function muatDataLokasi() {
 
   // Tampilkan Provinsi
   provinsiEl.innerHTML = '<option value="">-- Pilih Provinsi --</option>';
-  provinsi.forEach(item => {
-    const opt = document.createElement("option");
-    opt.value = item.id;
-    opt.textContent = item.name;
-    provinsiEl.appendChild(opt);
+  dataProvinsi.forEach(item => {
+    const opsi = document.createElement("option");
+    opsi.value = item.id;
+    opsi.textContent = item.name;
+    provinsiEl.appendChild(opsi);
   });
 
-  // Provinsi → Kabupaten
+  // Provinsi dipilih → Tampilkan Kabupaten
   provinsiEl.addEventListener("change", function(){
-    const id = parseInt(this.value);
+    const idProv = parseInt(this.value);
     kabupatenEl.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
     kecamatanEl.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
     desaEl.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
-    if (!id) return;
-    kabupaten.filter(k => k.province_id === id).forEach(item => {
-      const opt = document.createElement("option");
-      opt.value = item.id;
-      opt.textContent = item.name;
-      kabupatenEl.appendChild(opt);
+    if (!idProv) return;
+    dataKabupaten.filter(k => k.province_id === idProv).forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      kabupatenEl.appendChild(opsi);
     });
   });
 
-  // Kabupaten → Kecamatan
+  // Kabupaten dipilih → Tampilkan Kecamatan
   kabupatenEl.addEventListener("change", function(){
-    const id = parseInt(this.value);
+    const idKab = parseInt(this.value);
     kecamatanEl.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
     desaEl.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
-    if (!id) return;
-    kecamatan.filter(k => k.regency_id === id).forEach(item => {
-      const opt = document.createElement("option");
-      opt.value = item.id;
-      opt.textContent = item.name;
-      kecamatanEl.appendChild(opt);
+    if (!idKab) return;
+    dataKecamatan.filter(k => k.regency_id === idKab).forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      kecamatanEl.appendChild(opsi);
     });
   });
 
-  // Kecamatan → Desa
+  // Kecamatan dipilih → Tampilkan Desa
   kecamatanEl.addEventListener("change", function(){
-    const id = parseInt(this.value);
+    const idKec = parseInt(this.value);
     desaEl.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
-    if (!id) return;
-    desa.filter(d => d.district_id === id).forEach(item => {
-      const opt = document.createElement("option");
-      opt.value = d.id;
-      opt.textContent = d.name;
-      desaEl.appendChild(opt);
+    if (!idKec) return;
+    dataDesa.filter(d => d.district_id === idKec).forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      desaEl.appendChild(opsi);
     });
   });
 }
 
 // ==============================================
-// AI GENERATOR & META ADS
+// FITUR TAMBAHAN: AI GENERATOR & META ADS
 // ==============================================
 function fiturTambahan(){
-    // 1. Tombol Buat Judul & Deskripsi
+    // ------------------------------
+    // ✨ GENERATOR AI: Isi hanya kolom yang BELUM diisi
+    // ------------------------------
     const tombolAI = document.getElementById("tombolAI");
-    const judul = document.getElementById("judulIklan");
-    const deskripsi = document.getElementById("deskripsiIklan");
-    if(tombolAI && judul && deskripsi){
+    if(tombolAI){
         tombolAI.addEventListener("click", function(){
-            const jenis = document.getElementById("jenisProperti")?.selectedOptions[0]?.text || "Properti";
+            // Ambil data dasar yang sudah diisi pengguna
             const status = document.getElementById("statusListing")?.selectedOptions[0]?.text || "";
-            const harga = document.getElementById("hargaJual")?.value || document.getElementById("hargaSewa")?.value || "Sesuai kesepakatan";
-            const lokasi = document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text || "lokasi strategis";
+            const jenis = document.getElementById("jenisProperti")?.selectedOptions[0]?.text || "Properti";
+            const lokasi = document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text || "Lokasi strategis";
+            const harga = document.getElementById("hargaJual")?.value || document.getElementById("hargaSewa")?.value || "";
 
-            judul.value = `${jenis} ${status} di ${lokasi} - Harga Terbaik`;
-            deskripsi.value = `Properti istimewa di ${lokasi}, akses mudah, lingkungan aman dan nyaman. Harga penawaran Rp ${harga}. Sangat cocok untuk hunian keluarga maupun investasi jangka panjang!`;
-            alert("✅ Judul & Deskripsi berhasil dibuat! Silakan diedit.");
+            // 1. Isi Judul JIKA MASIH KOSONG
+            const judulEl = document.getElementById("judulIklan");
+            if(judulEl && !judulEl.value.trim()){
+                judulEl.value = `${jenis} ${status} di ${lokasi} - Harga Terbaik`;
+            }
+
+            // 2. Isi Deskripsi JIKA MASIH KOSONG
+            const deskripsiEl = document.getElementById("deskripsiIklan");
+            if(deskripsiEl && !deskripsiEl.value.trim()){
+                deskripsiEl.value = `Dijual/disewakan ${jenis} yang sangat layak. Terletak di ${lokasi}, akses mudah dijangkau, lingkungan aman dan tenang, dekat fasilitas umum. ${harga ? `Ditawarkan dengan harga sangat kompetitif Rp ${harga}.` : ""} Segera hubungi untuk jadwal kunjungan!`;
+            }
+
+            // Pesan pengingat wajib isi
+            alert(`✅ Selesai!
+Judul & Deskripsi sudah diisi otomatis.
+
+⚠️ PENTING: Silakan lengkapi semua kolom detail yang bertanda * (bintang merah) sebelum mengirim iklan!`);
         });
     }
 
-    // 2. Tampilkan Info Meta Ads
+    // ------------------------------
+    // 📢 INFO PROMOSI META ADS
+    // ------------------------------
     const opsiAds = document.querySelectorAll('input[name="metaAds"]');
     const kotakTujuan = document.querySelector('input[name="metaAds"]')?.closest(".form-group");
+    
     if(opsiAds.length && kotakTujuan){
-        const info = document.createElement("div");
-        info.className = "sembunyi form-group";
-        info.innerHTML = `
-            <div style="background:#eff6ff; padding:15px; border-radius:8px; border:1px solid #165DFF; margin-top:10px;">
-                <p style="font-weight:bold; margin:0 0 5px 0;">📢 Paket Promosi Meta Ads</p>
-                <p style="margin:2px 0;">💸 Harga: Rp 75.000</p>
-                <p style="margin:2px 0;">⏳ Durasi: 7 Hari Penayangan</p>
-                <p style="margin:2px 0; font-size:13px; color:#666;">Jangkauan hingga 50.000 calon pembeli di Facebook & Instagram</p>
+        // Buat kotak info harga & durasi
+        const infoAds = document.createElement("div");
+        infoAds.id = "infoMetaAds";
+        infoAds.className = "form-group sembunyi";
+        infoAds.innerHTML = `
+            <div style="background:#f0f7ff; padding:15px; border-radius:8px; border:1px solid #165DFF;">
+                <p style="margin:0 0 8px 0; font-weight:600;">Paket Promosi Meta Ads</p>
+                <p style="margin:0 0 5px 0;">💸 Harga: Rp 75.000</p>
+                <p style="margin:0 0 5px 0;">⏳ Durasi: 7 Hari Penayangan</p>
+                <p style="margin:0; font-size:13px; color:#555;">Jangkauan hingga 50.000 calon pembeli di Facebook & Instagram.</p>
             </div>
         `;
-        kotakTujuan.after(info);
+        kotakTujuan.after(infoAds);
 
+        // Tampilkan/sembunyikan saat pilih Ya/Tidak
         opsiAds.forEach(radio => {
-            radio.addEventListener("change", () => {
-                info.classList.toggle("sembunyi", radio.value !== "ya");
+            radio.addEventListener("change", function(){
+                infoAds.classList.toggle("sembunyi", this.value !== "ya");
             });
         });
     }
 }
-
