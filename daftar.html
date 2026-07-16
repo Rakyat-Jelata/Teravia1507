@@ -8,39 +8,37 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
-<body class="halaman-auth">
+<body>
+<header class="navbar">
+    <div class="container">
+        <div class="nav-brand">
+            <img src="assets/img/logo.png" alt="Teravia" height="36">
+        </div>
+        <button class="hamburger" id="tombolMenu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+<div class="menu-mobile" id="menuMobile">
+    <a href="index.html">Kembali ke Beranda</a>
+    <a href="masuk.html">Sudah Punya Akun? Masuk</a>
+</div>
+
+<div class="halaman-auth">
     <div class="bagian-kiri">
         <div class="kotak-form">
             <img src="assets/img/logo.png" alt="Teravia" class="logo-auth">
-            <h2>Buat Akun Baru</h2>
-            <p class="keterangan-form">Isi data berikut untuk bergabung</p>
-            
+            <h2>Daftar Akun</h2>
             <form>
-                <div class="form-grup">
-                    <input type="text" placeholder="Nama Lengkap" required>
-                </div>
-                <div class="form-grup">
-                    <input type="email" placeholder="Alamat Email" required>
-                </div>
-                <div class="form-grup">
-                    <input type="password" placeholder="Kata Sandi" required>
-                </div>
-                <div class="form-grup">
-                    <input type="password" placeholder="Konfirmasi Kata Sandi" required>
-                </div>
-                <button type="submit" class="btn-utama btn-penuh">Daftar Sekarang</button>
+                <input type="text" placeholder="Nama Lengkap" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Kata Sandi" required>
+                <button type="submit" class="btn-utama btn-penuh">Daftar</button>
             </form>
-
-            <p class="tautan-bawah">Sudah punya akun? <a href="masuk.html">Masuk Sekarang</a></p>
         </div>
     </div>
-
-    <div class="bagian-kanan" style="background-image: url('assets/img/hero-bg.png');">
-        <div class="tulisan-latar">
-            <h1>TERAVIA</h1>
-            <p>Mitra terpercaya mencari properti impian Anda</p>
-        </div>
-    </div>
+    <div class="bagian-kanan"></div>
+</div>
+<script src="assets/js/script.js"></script>
 </body>
 </html>
-
