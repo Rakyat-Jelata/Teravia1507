@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 // ==============================================
 async function ambilData(namaFile) {
   try {
-    const res = await fetch(`assets/data/${namaFile}.json`);
+    const res = await fetch(`../assets/data/${namaFile}.json`);
     if (!res.ok) throw new Error(`Gagal baca ${namaFile}`);
     return await res.json();
   } catch (err) {
