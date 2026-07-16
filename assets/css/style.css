@@ -96,17 +96,16 @@ a {
     font-weight: 500;
 }
 
-/* BERANDA */
+/* BERANDA SETENGAH LAYAR */
 .beranda {
-    min-height: calc(100vh - 60px);
+    min-height: 55vh; /* 55% tinggi layar (sedikit lebih dari setengah biar enak dilihat) */
     background-image: url('assets/img/hero-bg.png');
-    min-height: 50vh;
-    background-size: cover;
-    background-position: center;
+    background-size: 100% auto; /* Lebar penuh, tinggi menyesuaikan gambar */
+    background-position: center top;
     background-repeat: no-repeat;
     display: flex;
-    align-items: flex-start; /* Pindah ke atas */
-    padding-top: 120px; /* Jarak dari atas, atur angka ini kalau mau lebih naik/turun */
+    align-items: flex-start;
+    padding-top: 100px; /* Jarak tulisan dari atas */
 }
 
 .teks-sambutan {
