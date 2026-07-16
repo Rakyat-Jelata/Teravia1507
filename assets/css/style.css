@@ -142,3 +142,13 @@ a {
         font-size: 16px;
     }
 }
+
+/* FOOTER */
+.footer {
+    background: var(--gelap);
+    color: var(--abu);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 0; /* Tempel rapi di bawah hero */
+}
