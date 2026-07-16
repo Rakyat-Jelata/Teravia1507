@@ -3,34 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teravia - Marketplace Properti Terpercaya</title>
-    <meta name="description" content="Temukan rumah, tanah, dan ruko terbaik di Indonesia">
-    <!-- HANYA DI SINI PANGGIL CSS & ICON -->
+    <title>Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/auth.css">
 </head>
 <body>
 
-<!-- ==============================================
-    NAVIGASI BAR ATAS (DENGAN MENU HAMBURGER)
-============================================== -->
+<!-- NAVIGASI -->
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
-            <img src="assets/img/logo.png" alt="Logo Teravia" height="36">
+            <img src="assets/img/logo.png" alt="Teravia" height="36">
         </div>
+
         <nav class="nav-menu">
-            <a href="#beranda">Beranda</a>
-            <a href="#properti">Cari Properti</a>
-            <a href="#tentang">Tentang Kami</a>
-            <a href="#bantu">Bantuan</a>
+            <a href="masuk.html">Masuk</a>
+            <a href="daftar.html" class="btn-utama">Daftar</a>
         </nav>
-        <div class="nav-aksi">
-            <a href="masuk.html" class="btn-outline">Masuk</a>
-            <a href="daftar.html" class="btn-utama">Pasang Iklan</a>
-        </div>
-        <!-- TOMBOL HAMBURGER -->
+
         <button class="hamburger" id="tombolMenu">
             <span></span>
             <span></span>
@@ -38,33 +28,26 @@
         </button>
     </div>
 </header>
-<!-- HERO & PENCARIAN -->
+    
+<!-- HERO -->
     <section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center;">
-        
-<!-- MENU MOBILE -->
+
+        <!-- MENU MOBILE -->
 <div class="menu-mobile" id="menuMobile">
-    <a href="#beranda">Beranda</a>
-    <a href="#properti">Cari Properti</a>
-    <a href="#tentang">Tentang Kami</a>
-    <a href="#bantu">Bantuan</a>
-    <div class="tombol-penuh">
-        <a href="masuk.html" class="btn-outline">Masuk</a>
-        <a href="daftar.html" class="btn-utama">Pasang Iklan</a>
-    </div>
+    <a href="masuk.html">Masuk</a>
+    <a href="daftar.html" class="btn-utama">Daftar</a>
 </div>
 
-
-<!-- FOOTER -->
-<footer class="footer">
+<!-- ISI BERANDA SEMENTARA -->
+<main class="beranda">
     <div class="container">
-        <p>&copy; 2026 Teravia. Semua Hak Dilindungi.</p>
+        <h1>Selamat Datang di Teravia</h1>
+        <p>Marketplace Properti Terpercaya Indonesia</p>
     </div>
-</footer>
+</main>
 
 <!-- JAVASCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/script.js"></script>
-
 </body>
 </html>
 
