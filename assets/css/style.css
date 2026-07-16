@@ -355,3 +355,31 @@ select:focus {
 .menu-mobile .tombol-penuh button {
     width: 100%;
 }
+
+/* PERBAIKAN AKHIR MENU HAMBURGER */
+/* Pastikan tautan di menu mobile tampil rapi */
+.menu-mobile a {
+    color: var(--gelap);
+    text-align: left;
+}
+
+.menu-mobile a:hover {
+    color: var(--utama);
+    padding-left: 5px;
+    transition: 0.2s;
+}
+
+/* Tombol di dalam menu mobile lebar penuh */
+.menu-mobile .tombol-penuh a,
+.menu-mobile .tombol-penuh button {
+    width: 100%;
+    text-align: center;
+    border: none;
+    margin: 0;
+}
+
+/* Tambahan agar tinggi navbar pas dengan posisi menu */
+.navbar {
+    min-height: 60px;
+}
+
