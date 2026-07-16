@@ -1,0 +1,292 @@
+/* ==============================================
+   SETTING DASAR & WARNA UTAMA
+============================================== */
+:root {
+    --utama: #165DFF;
+    --sekunder: #0E42CC;
+    --gelap: #1E293B;
+    --terang: #F8FAFC;
+    --abu: #94A3B8;
+    --putih: #FFFFFF;
+    --bayangan: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #F9FAFB;
+    color: var(--gelap);
+    line-height: 1.6;
+}
+
+.container {
+    width: 92%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--putih);
+    outline: none;
+    transition: border 0.2s;
+}
+
+select:focus {
+    border-color: var(--utama);
+}
+
+/* ==============================================
+   NAVIGASI
+============================================== */
+.navbar {
+    background: var(--putih);
+    box-shadow: var(--bayangan);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+}
+
+.nav-brand h2 {
+    color: var(--utama);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-menu a {
+    font-size: 15px;
+    color: var(--gelap);
+    font-weight: 500;
+}
+
+.nav-menu a:hover {
+    color: var(--utama);
+}
+
+.nav-aksi {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-outline {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--utama);
+    color: var(--utama);
+    font-size: 14px;
+}
+
+.btn-outline:hover {
+    background: rgba(22, 93, 255, 0.05);
+}
+
+.btn-utama {
+    padding: 10px 20px;
+    background: var(--utama);
+    color: var(--putih);
+    font-size: 14px;
+}
+
+.btn-utama:hover {
+    background: var(--sekunder);
+    transform: translateY(-1px);
+}
+
+/* ==============================================
+   BAGIAN UTAMA / HERO
+============================================== */
+.hero {
+    background: linear-gradient(135deg, #EBF3FF 0%, #F9FAFB 100%);
+    padding: 50px 0 70px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 38px;
+    color: var(--gelap);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 17px;
+    color: #475569;
+    margin-bottom: 40px;
+}
+
+.kotak-pencarian {
+    background: var(--putih);
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: var(--bayangan);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #475569;
+}
+
+.btn-cari {
+    grid-column: 1 / -1;
+    padding: 14px;
+    background: var(--utama);
+    color: var(--putih);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.btn-cari:hover {
+    background: var(--sekunder);
+}
+
+/* ==============================================
+   DAFTAR PROPERTI
+============================================== */
+.daftar-properti {
+    padding: 60px 0;
+}
+
+.judul-bagian {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.judul-bagian h2 {
+    font-size: 26px;
+    color: var(--gelap);
+}
+
+.lihat-semua {
+    color: var(--utama);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.grid-properti {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+}
+
+.loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--abu);
+    font-size: 16px;
+}
+
+/* ==============================================
+   KATEGORI LOKASI
+============================================== */
+.kategori {
+    padding: 20px 0 60px;
+}
+
+.kategori h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--gelap);
+}
+
+.grid-kategori {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.item-kategori {
+    background: var(--putih);
+    padding: 14px 24px;
+    border-radius: 10px;
+    box-shadow: var(--bayangan);
+    font-weight: 500;
+    color: var(--gelap);
+    transition: all 0.2s;
+}
+
+.item-kategori:hover {
+    background: var(--utama);
+    color: var(--putih);
+    transform: translateY(-2px);
+}
+
+/* ==============================================
+   FOOTER
+============================================== */
+.footer {
+    background: var(--gelap);
+    color: var(--abu);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ==============================================
+   TAMPILAN KHUSUS HP (RESPONSIF)
+============================================== */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* nanti ganti menu hamburger */
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .kotak-pencarian {
+        padding: 20px;
+    }
+
+    .judul-bagian h2 {
+        font-size: 20px;
+    }
+  }
+
