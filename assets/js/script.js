@@ -130,3 +130,28 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 });
+
+// === TAMPILKAN INFO ADS JIKA PILIH YA ===
+document.addEventListener('DOMContentLoaded', function(){
+    const opsiMeta = document.querySelectorAll('input[name="metaAds"]');
+    const infoAds = document.createElement('div');
+    infoAds.id = 'infoMetaAds';
+    infoAds.className = 'form-group sembunyi';
+    infoAds.innerHTML = `
+        <div style="background:#f0f7ff; padding:15px; border-radius:8px; border:1px solid #165DFF;">
+            <p style="margin:0 0 8px 0; font-weight:600;">Paket Promosi Meta Ads</p>
+            <p style="margin:0 0 5px 0;">💸 Harga: Rp 75.000</p>
+            <p style="margin:0 0 5px 0;">⏳ Durasi: 7 Hari Penayangan</p>
+            <p style="margin:0; font-size:13px; color:#555;">Iklan akan tampil di Facebook & Instagram jangkauan sampai 50.000 orang potensial.</p>
+        </div>
+    `;
+    // Masukkan setelah pilihan radio
+    document.querySelector('input[name="metaAds"][value="tidak"]').closest('.form-group').after(infoAds);
+
+    opsiMeta.forEach(radio => {
+        radio.addEventListener('change', function(){
+            infoAds.classList.toggle('sembunyi', this.value !== 'ya');
+        });
+    });
+});
+
