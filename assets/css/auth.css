@@ -1,0 +1,49 @@
+.halaman-auth {
+    min-height: 100vh;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.bagian-kiri {
+    width: 40%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.kotak-form {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.logo-auth {
+    height: 48px;
+    margin-bottom: 24px;
+}
+
+.bagian-kanan {
+    width: 60%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.tulisan-latar h1 {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .bagian-kanan { display: none; }
+    .bagian-kiri { width: 100%; padding: 24px; }
+}
+
