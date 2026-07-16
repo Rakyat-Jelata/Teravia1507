@@ -1,8 +1,6 @@
 .halaman-auth {
-    min-height: 100vh;
     display: flex;
-    margin: 0;
-    padding: 0;
+    min-height: calc(100vh - 60px);
 }
 
 .bagian-kiri {
@@ -11,39 +9,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
-}
-
-.kotak-form {
-    width: 100%;
-    max-width: 360px;
-    text-align: center;
-}
-
-.logo-auth {
-    height: 48px;
-    margin-bottom: 24px;
+    padding: 20px;
 }
 
 .bagian-kanan {
     width: 60%;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    background: linear-gradient(135deg, #EBF3FF 0%, #D7E7FF 100%);
 }
 
-.tulisan-latar h1 {
-    font-size: 48px;
+.kotak-form {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+}
+
+.logo-auth {
+    height: 45px;
+    margin-bottom: 15px;
+}
+
+.kotak-form input {
+    width: 100%;
+    padding: 12px;
     margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
 }
 
-/* Responsif untuk HP */
+.btn-penuh {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
-    .bagian-kanan { display: none; }
-    .bagian-kiri { width: 100%; padding: 24px; }
+    .bagian-kanan {display: none;}
+    .bagian-kiri {width: 100%;}
 }
-
