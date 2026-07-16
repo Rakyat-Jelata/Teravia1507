@@ -11,24 +11,50 @@
 </head>
 <body>
 
-<!-- NAVIGASI -->
+<!-- ==============================================
+    NAVIGASI BAR ATAS (DENGAN MENU HAMBURGER)
+============================================== -->
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
             <img src="assets/img/logo.png" alt="Logo Teravia" height="36">
         </div>
-        <nav class="nav-menu">
+
+        <!-- MENU UTAMA (TAMPAK DI DEKSTOP) -->
+        <nav class="nav-menu" id="menuUtama">
             <a href="#beranda">Beranda</a>
             <a href="#properti">Cari Properti</a>
             <a href="#tentang">Tentang Kami</a>
             <a href="#bantu">Bantuan</a>
         </nav>
-        <div class="nav-aksi">
+
+        <!-- TOMBOL AKSI -->
+        <div class="nav-aksi" id="tombolAksi">
             <button class="btn-outline">Masuk</button>
             <button class="btn-utama">Pasang Iklan</button>
         </div>
+
+        <!-- TOMBOL HAMBURGER (TAMPAK DI HP SAJA) -->
+        <button class="hamburger" id="tombolMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 </header>
+
+<!-- MENU TARIK BAWAH KHUSUS HP -->
+<div class="menu-mobile" id="menuMobile">
+    <a href="#beranda">Beranda</a>
+    <a href="#properti">Cari Properti</a>
+    <a href="#tentang">Tentang Kami</a>
+    <a href="#bantu">Bantuan</a>
+    <div class="tombol-penuh">
+        <button class="btn-outline">Masuk</button>
+        <button class="btn-utama">Pasang Iklan</button>
+    </div>
+</div>
+
 
 <!-- HERO & PENCARIAN -->
 <main>
