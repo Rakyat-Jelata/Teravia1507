@@ -196,3 +196,71 @@ function pasangFiturMetaAds(){
     radioTidak.addEventListener("change", tampilInfo);
 }
 
+// ==============================================
+// FORMAT RUPIAH & TERBILANG BAHASA INDONESIA
+// ==============================================
+function ubahKeTerbilang(angka) {
+    const satuan = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan'];
+    const terbilang = ['', 'Ribu', 'Juta', 'Miliar', 'Triliun'];
+
+    if (angka === 0) return "Nol Rupiah";
+    if (angka < 0) return "minus " + ubahKeTerbilang(Math.abs(angka));
+
+    let kalimat = '';
+    let i = 0;
+    while (angka > 0) {
+        let bagian = angka % 1000;
+        if (bagian !== 0) {
+            let strBagian = '';
+            if (bagian >= 100) {
+                strBagian += satuan[Math.floor(bagian / 100)] + ' Ratus ';
+                bagian %= 100;
+            }
+            if (bagian >= 20) {
+                strBagian += satuan[Math.floor(bagian / 10)] + ' Puluh ';
+                bagian %= 10;
+            }
+            if (bagian >= 10 && bagian <= 19) {
+                if (bagian === 10) strBagian += 'Sepuluh ';
+                else if (bagian === 11) strBagian += 'Sebelas ';
+                else strBagian += satuan[bagian - 10] + ' Belas ';
+            } else if (bagian > 0) {
+                strBagian += satuan[bagian] + ' ';
+            }
+            kalimat = strBagian + terbilang[i] + ' ' + kalimat;
+        }
+        angka = Math.floor(angka / 1000);
+        i++;
+    }
+    return kalimat.trim() + ' Rupiah';
+}
+
+function pasangFormatHarga(inputId, formatId, terbilangId) {
+    const input = document.getElementById(inputId);
+    const tampilFormat = document.getElementById(formatId);
+    const tampilTerbilang = document.getElementById(terbilangId);
+    if (!input || !tampilFormat || !tampilTerbilang) return;
+
+    input.addEventListener('input', function(){
+        // Hapus semua karakter selain angka
+        let nilai = this.value.replace(/[^0-9]/g, '');
+        if (!nilai) {
+            tampilFormat.textContent = '';
+            tampilTerbilang.textContent = '';
+            return;
+        }
+        const angkaMurni = parseInt(nilai);
+        // Tampilkan format Rupiah
+        tampilFormat.textContent = 'Rp ' + angkaMurni.toLocaleString('id-ID');
+        // Tampilkan terbilang
+        tampilTerbilang.textContent = ubahKeTerbilang(angkaMurni);
+        // Simpan angka murni ke input (tanpa titik)
+        this.value = nilai;
+    });
+}
+
+// Jalankan saat halaman siap
+document.addEventListener('DOMContentLoaded', function(){
+    pasangFormatHarga('hargaJual', 'formatHargaJual', 'terbilangJual');
+    pasangFormatHarga('hargaSewa', 'formatHargaSewa', 'terbilangSewa');
+});
