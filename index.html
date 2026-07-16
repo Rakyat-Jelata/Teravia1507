@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teravia</title>
-    <link rel="icon" href="../assets/img/logo.png">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- Hapus tanda ../ di depan -->
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- NAVIGASI -->
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
@@ -17,8 +17,9 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="masuk.html">Masuk</a>
-            <a href="daftar.html" class="btn-utama">Daftar</a>
+            <a href="pages/masuk.html">Masuk</a>
+            <a href="pages/daftar.html" class="btn-utama">Daftar</a>
+            <a href="pages/pasang-iklan.html">Pasang Iklan</a>
         </nav>
 
         <button class="hamburger" id="tombolMenu">
@@ -29,17 +30,14 @@
     </div>
 </header>
     
-<!-- HERO -->
-    <section class="hero" style="background-image: url('../assets/img/hero-bg.png'); background-size: cover; background-position: center;">
+<section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center;">
 
-        <!-- MENU MOBILE -->
 <div class="menu-mobile" id="menuMobile">
-    <a href="masuk.html">Masuk</a>
-    <a href="daftar.html" class="btn-utama">Daftar</a>
+    <a href="pages/masuk.html">Masuk</a>
+    <a href="pages/daftar.html" class="btn-utama">Daftar</a>
+    <a href="pages/pasang-iklan.html">Pasang Iklan</a>
 </div>
 
-<!-- ISI BERANDA SEMENTARA -->
-<!-- ISI BERANDA -->
 <main class="beranda">
     <div class="container beranda-konten">
         <div class="kotak-sambutan">
@@ -47,16 +45,9 @@
             <p>Marketplace Properti Berbasis AI dan Ads</p>
         </div>
     </div>
-    <div style="position:fixed;bottom:20px;right:20px;z-index:9999;">
-  
-    </div>
-    
 </main>
 
-
-<!-- JAVASCRIPT -->
-<script src="../assets/js/script.js" type="module"></script>
+<script src="assets/js/script.js" type="module"></script>
     
 </body>
 </html>
-
