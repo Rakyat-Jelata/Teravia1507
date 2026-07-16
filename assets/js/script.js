@@ -1,8 +1,9 @@
-// === KONEKSI FIREBASE ===
+// === 1. SEMUA IMPOR DI ATAS SAJA ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10/firebase-auth.js";
 
+// === 2. KONEKSI FIREBASE ===
 const firebaseConfig = {
   apiKey: "AIzaSyCuAuSm-3fp0OEjqDVwaT8JJhU6e7fmSKA",
   authDomain: "teravia-9d672.firebaseapp.com",
@@ -12,43 +13,11 @@ const firebaseConfig = {
   appId: "1:717751333401:web:f3e4eacb88e83b26c2f088"
 };
 
-// Jalankan koneksi
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// === FUNGSI MENU HAMBURGER ===
-document.addEventListener('DOMContentLoaded', function(){
-    const tombolMenu = document.getElementById('tombolMenu');
-    const menuMobile = document.getElementById('menuMobile');
-    if(tombolMenu && menuMobile){
-        tombolMenu.addEventListener('click', function(){
-            menuMobile.classList.toggle('buka');
-        });
-    }
-
-    // === FUNGSI TOMBOL MASUK DATA ===
-    const tombolData = document.getElementById('tombolMasukData');
-    if(tombolData){
-        tombolData.addEventListener('click', async function(){
-            tombolData.textContent = "Sedang Memproses...";
-            tombolData.disabled = true;
-            try {
-                await simpanProvinsi();
-                alert("✅ BERHASIL! Data Provinsi sudah masuk!");
-            } catch (err) {
-                alert("❌ Gagal: " + err.message);
-            }
-            tombolData.textContent = "Selesai!";
-        });
-    }
-});
-
-
-// === FUNGSI MASUKKAN DATA PROVINSI ===
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10/firebase-firestore.js";
-
-// Tempel seluruh data provinsi yang sudah rapi di sini
+// === 3. DATA & FUNGSI SIMPAN ===
 const dataProvinsi = [
   {"id": 11, "name": "ACEH"},
   {"id": 12, "name": "SUMATERA UTARA"},
@@ -86,15 +55,34 @@ const dataProvinsi = [
   {"id": 94, "name": "PAPUA"}
 ];
 
-// Jalankan proses masuk data
 async function simpanProvinsi() {
-  console.log("🔄 Mulai memasukkan data provinsi...");
   for (const item of dataProvinsi) {
     await addDoc(collection(db, "provinces"), item);
   }
-  console.log("✅ SELESAI! Semua provinsi sudah masuk ke Firestore.");
-  alert("Data Provinsi Berhasil Disimpan!");
 }
 
-// Panggil fungsi sekali saja
-simpanProvinsi();
+// === 4. FUNGSI TOMBOL & MENU HAMBURGER ===
+document.addEventListener('DOMContentLoaded', function(){
+  // Menu Hamburger
+  const tombolMenu = document.getElementById('tombolMenu');
+  const menuMobile = document.getElementById('menuMobile');
+  if(tombolMenu && menuMobile){
+    tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
+  }
+
+  // Tombol Masuk Data
+  const tombolData = document.getElementById('tombolMasukData');
+  if(tombolData){
+    tombolData.addEventListener('click', async function(){
+      tombolData.textContent = "Sedang Memproses...";
+      tombolData.disabled = true;
+      try {
+        await simpanProvinsi();
+        alert("✅ BERHASIL! Cek Firestore ya!");
+      } catch (err) {
+        alert("❌ Gagal: " + err.message);
+      }
+      tombolData.textContent = "Selesai!";
+    });
+  }
+});
