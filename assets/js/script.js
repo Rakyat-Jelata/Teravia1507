@@ -94,8 +94,9 @@ function tampilkanKabupaten(){
 
     if(!idPilih) return;
 
-    // Filter data
-    const hasil = dataKabupaten.filter(k => k.province_id == idPilih);
+    // ✅ UBAH KE ANGKA SECARA PASTI SEBELUM DIFILTER
+    const idAngka = Number(idPilih);
+    const hasil = dataKabupaten.filter(k => Number(k.province_id) === idAngka);
     console.log("📌 Kabupaten ditemukan:", hasil.length);
 
     hasil.forEach(item => {
@@ -108,9 +109,11 @@ function tampilkanKabupaten(){
     elKab.addEventListener("change", tampilkanKecamatan);
 }
 
+
 // ==============================================
 // TAMPILKAN KECAMATAN & DESA
 // ==============================================
+// Tampilkan Kecamatan
 function tampilkanKecamatan(){
     const idPilih = this.value;
     const elKec = document.getElementById("pilihKecamatan");
@@ -120,16 +123,31 @@ function tampilkanKecamatan(){
     elDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
 
     if(!idPilih) return;
-
-    dataKecamatan.filter(c => c.regency_id == idPilih).forEach(item => {
+    const idAngka = Number(idPilih);
+    dataKecamatan.filter(c => Number(c.regency_id) === idAngka).forEach(item => {
         const opt = document.createElement("option");
         opt.value = item.id;
         opt.textContent = item.name;
         elKec.appendChild(opt);
     });
-
     elKec.addEventListener("change", tampilkanDesa);
 }
+
+// Tampilkan Desa
+function tampilkanDesa(){
+    const idPilih = this.value;
+    const elDesa = document.getElementById("pilihDesa");
+    elDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
+    if(!idPilih) return;
+    const idAngka = Number(idPilih);
+    dataDesa.filter(d => Number(d.district_id) === idAngka).forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.id;
+        opt.textContent = item.name;
+        elDesa.appendChild(opt);
+    });
+}
+
 
 function tampilkanDesa(){
     const idPilih = this.value;
