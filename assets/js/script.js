@@ -1,89 +1,108 @@
-// ✅ SEMUA IMPOR WAJIB DI ATAS
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+// ==============================================
+// TERAVIA - SCRIPT LENGKAP
+// Menu + Data Wilayah Berantai
+// ==============================================
 
-// ✅ KONEKSI SUDAH BENAR
-const firebaseConfig = {
-  apiKey: "AIzaSyCuAuSm-3fp0OEjqDVwaT8JJhU6e7fmSKA",
-  authDomain: "teravia-9d672.firebaseapp.com",
-  projectId: "teravia-9d672",
-  storageBucket: "teravia-9d672.firebasestorage.app",
-  messagingSenderId: "717751333401",
-  appId: "1:717751333401:web:f3e4eacb88e83b26c2f088"
-};
+// === 1. FUNGSI MENU HAMBURGER ===
+document.addEventListener('DOMContentLoaded', function(){
+    const tombolMenu = document.getElementById('tombolMenu');
+    const menuMobile = document.getElementById('menuMobile');
+    if(tombolMenu && menuMobile){
+        tombolMenu.addEventListener('click', function(){
+            menuMobile.classList.toggle('buka');
+        });
+    }
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+    // === 2. JALANKAN MENU WILAYAH ===
+    inisialisasiWilayah();
+});
 
-// ✅ DATA PROVINSI
-const dataProvinsi = [
-  {"id": 11, "name": "ACEH"},
-  {"id": 12, "name": "SUMATERA UTARA"},
-  {"id": 13, "name": "SUMATERA BARAT"},
-  {"id": 14, "name": "RIAU"},
-  {"id": 15, "name": "JAMBI"},
-  {"id": 16, "name": "SUMATERA SELATAN"},
-  {"id": 17, "name": "BENGKULU"},
-  {"id": 18, "name": "LAMPUNG"},
-  {"id": 19, "name": "KEPULAUAN BANGKA BELITUNG"},
-  {"id": 21, "name": "KEPULAUAN RIAU"},
-  {"id": 31, "name": "DKI JAKARTA"},
-  {"id": 32, "name": "JAWA BARAT"},
-  {"id": 33, "name": "JAWA TENGAH"},
-  {"id": 34, "name": "DI YOGYAKARTA"},
-  {"id": 35, "name": "JAWA TIMUR"},
-  {"id": 36, "name": "BANTEN"},
-  {"id": 51, "name": "BALI"},
-  {"id": 52, "name": "NUSA TENGGARA BARAT"},
-  {"id": 53, "name": "NUSA TENGGARA TIMUR"},
-  {"id": 61, "name": "KALIMANTAN BARAT"},
-  {"id": 62, "name": "KALIMANTAN TENGAH"},
-  {"id": 63, "name": "KALIMANTAN SELATAN"},
-  {"id": 64, "name": "KALIMANTAN TIMUR"},
-  {"id": 65, "name": "KALIMANTAN UTARA"},
-  {"id": 71, "name": "SULAWESI UTARA"},
-  {"id": 72, "name": "SULAWESI TENGAH"},
-  {"id": 73, "name": "SULAWESI SELATAN"},
-  {"id": 74, "name": "SULAWESI TENGGARA"},
-  {"id": 75, "name": "GORONTALO"},
-  {"id": 76, "name": "SULAWESI BARAT"},
-  {"id": 81, "name": "MALUKU"},
-  {"id": 82, "name": "MALUKU UTARA"},
-  {"id": 91, "name": "PAPUA BARAT"},
-  {"id": 94, "name": "PAPUA"}
-];
-
-// ✅ FUNGSI SIMPAN
-async function simpanProvinsi() {
-  for (const item of dataProvinsi) {
-    await addDoc(collection(db, "provinces"), item);
+// ==============================================
+// FUNGSI AMBIL DATA DARI FILE JSON
+// ==============================================
+async function ambilData(file) {
+  try {
+    const res = await fetch(`assets/data/${file}.json`);
+    if (!res.ok) throw new Error("Gagal ambil data " + file);
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
   }
 }
 
-// ✅ FUNGSI TOMBOL & MENU
-document.addEventListener('DOMContentLoaded', function(){
-  // Menu Hamburger
-  const tombolMenu = document.getElementById('tombolMenu');
-  const menuMobile = document.getElementById('menuMobile');
-  if(tombolMenu && menuMobile){
-    tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
-  }
+// ==============================================
+// FUNGSI TAMPILKAN PILIHAN WILAYAH BERANTAI
+// ==============================================
+async function inisialisasiWilayah() {
+  // Ambil elemen pilihan di HTML
+  const pilihProvinsi = document.getElementById("pilihProvinsi");
+  const pilihKabupaten = document.getElementById("pilihKabupaten");
+  const pilihKecamatan = document.getElementById("pilihKecamatan");
+  const pilihDesa = document.getElementById("pilihDesa");
 
-  // Tombol Masuk Data
-  const tombolData = document.getElementById('tombolMasukData');
-  if(tombolData){
-    tombolData.addEventListener('click', async function(){
-      tombolData.textContent = "Memproses...";
-      tombolData.disabled = true;
-      try {
-        await simpanProvinsi();
-        alert("✅ BERHASIL! Cek Firestore ya!");
-      } catch (err) {
-        alert("❌ Gagal: " + err.message);
-      }
-      tombolData.textContent = "Selesai!";
+  // Jika tidak ada elemen di halaman, berhenti saja
+  if (!pilihProvinsi) return;
+
+  // 1. Tampilkan Semua Provinsi
+  const dataProvinsi = await ambilData("provinces");
+  dataProvinsi.forEach(item => {
+    const opsi = document.createElement("option");
+    opsi.value = item.id;
+    opsi.textContent = item.name;
+    pilihProvinsi.appendChild(opsi);
+  });
+
+  // 2. Pilih Provinsi → Munculkan Kabupaten
+  const dataKabupaten = await ambilData("regencies");
+  pilihProvinsi.addEventListener("change", async function(){
+    const idProv = parseInt(this.value);
+    // Kosongkan pilihan bawahnya dulu
+    pilihKabupaten.innerHTML = '<option value="">Pilih Kabupaten/Kota...</option>';
+    pilihKecamatan.innerHTML = '<option value="">Pilih Kecamatan...</option>';
+    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+
+    if (!idProv) return;
+    // Filter kabupaten yang sesuai
+    const hasil = dataKabupaten.filter(kab => kab.province_id === idProv);
+    hasil.forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      pilihKabupaten.appendChild(opsi);
     });
-  }
-});
+  });
+
+  // 3. Pilih Kabupaten → Munculkan Kecamatan
+  const dataKecamatan = await ambilData("districts");
+  pilihKabupaten.addEventListener("change", async function(){
+    const idKab = parseInt(this.value);
+    pilihKecamatan.innerHTML = '<option value="">Pilih Kecamatan...</option>';
+    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+
+    if (!idKab) return;
+    const hasil = dataKecamatan.filter(kec => kec.regency_id === idKab);
+    hasil.forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      pilihKecamatan.appendChild(opsi);
+    });
+  });
+
+  // 4. Pilih Kecamatan → Munculkan Desa
+  const dataDesa = await ambilData("villages");
+  pilihKecamatan.addEventListener("change", async function(){
+    const idKec = parseInt(this.value);
+    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+
+    if (!idKec) return;
+    const hasil = dataDesa.filter(desa => desa.district_id === idKec);
+    hasil.forEach(item => {
+      const opsi = document.createElement("option");
+      opsi.value = item.id;
+      opsi.textContent = item.name;
+      pilihDesa.appendChild(opsi);
+    });
+  });
+}
