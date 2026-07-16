@@ -107,3 +107,26 @@ async function muatDataLokasi() {
     });
   });
 }
+
+// === FUNGSI GENERATE JUDUL & DESKRIPSI AI ===
+document.addEventListener('DOMContentLoaded', function(){
+    const tombolAI = document.getElementById('tombolAI');
+    if(tombolAI){
+        tombolAI.addEventListener('click', function(){
+            const jenis = document.getElementById('jenisProperti')?.selectedOptions[0]?.text || 'Properti';
+            const status = document.getElementById('statusListing')?.selectedOptions[0]?.text || '';
+            const harga = document.getElementById('hargaJual')?.value || document.getElementById('hargaSewa')?.value || '';
+            const lokasi = document.getElementById('pilihKabupaten')?.selectedOptions[0]?.text || '';
+
+            // Buat Judul Otomatis
+            const judul = `${jenis} ${status} Lokasi Strategis di ${lokasi} - Harga Terjangkau`;
+            document.getElementById('judulIklan').value = judul;
+
+            // Buat Deskripsi Otomatis
+            const deskripsi = `Dijual/Disewakan dengan harga sangat menarik sebesar Rp ${harga}. Lokasi sangat strategis, mudah diakses, lingkungan aman dan nyaman. Cocok untuk hunian keluarga maupun investasi. Segera hubungi untuk info lebih lanjut dan jadwalkan kunjungan!`;
+            document.getElementById('deskripsiIklan').value = deskripsi;
+
+            alert('✅ Judul & Deskripsi berhasil dibuat! Silakan diedit sesuai keinginan.');
+        });
+    }
+});
