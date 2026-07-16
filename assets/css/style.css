@@ -104,46 +104,41 @@ a {
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Pindah ke atas */
+    padding-top: 120px; /* Jarak dari atas, atur angka ini kalau mau lebih naik/turun */
 }
 
-.beranda-konten {
-    width: 100%;
-}
-
-.kotak-sambutan {
-    max-width: 500px;
-    background: rgba(255, 255, 255, 0.92);
-    padding: 32px 28px;
-    border-radius: 12px;
-    box-shadow: var(--bayangan);
+.teks-sambutan {
+    max-width: 550px;
     text-align: left;
-}
-
-.kotak-sambutan h1 {
     color: var(--gelap);
-    margin-bottom: 12px;
-    font-size: 40px;
 }
 
-.kotak-sambutan p {
-    color: #475569;
+.teks-sambutan h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #1E293B;
+}
+
+.teks-sambutan p {
     font-size: 18px;
+    color: #334155;
+    font-weight: 500;
 }
 
-/* RESPONSIF KHUSUS HP (TIDAK DIUBAH TATA LETAK MENU) */
+/* RESPONSIF HP */
 @media (max-width: 768px) {
-    .kotak-sambutan {
-        max-width: 100%;
-        padding: 24px 20px;
+    .beranda {
+        padding-top: 90px;
+    }
+    .teks-sambutan {
         margin: 0 16px;
     }
-
-    .kotak-sambutan h1 {
-        font-size: 28px;
+    .teks-sambutan h1 {
+        font-size: 30px;
     }
-
-    .kotak-sambutan p {
+    .teks-sambutan p {
         font-size: 16px;
     }
 }
