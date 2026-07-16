@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasang Iklan Properti - Teravia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        * { box-sizing: border-box; margin:0; padding:0; font-family: system-ui, sans-serif; }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+        .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .bagian-judul { font-size: 19px; font-weight: 700; margin: 25px 0 15px; color: #165DFF; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; background: #fff; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #165DFF; box-shadow: 0 0 0 3px rgba(22,93,255,0.1); }
+        .grid-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 10px; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-full { grid-column: 1 / -1; }
+        .sembunyi { display: none !important; }
+        .panel-detail { transition: all 0.4s ease; opacity: 1; transform: translateY(0); }
+        .panel-detail.sembunyi { opacity: 0; transform: translateY(10px); }
+        .opsi-pilihan { display: flex; gap: 18px; padding: 5px 0; flex-wrap: wrap; }
+        .opsi-pilihan label { font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .btn { padding: 13px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 15px; transition: background 0.2s; }
+        .btn:hover { opacity: 0.95; }
+        .btn-primary { background: #165DFF; color: white; width: 100%; margin-top: 10px; }
+        .btn-ai { background: #8B5CF6; color: white; margin-bottom: 15px; width: 100%; }
+        .keterangan { font-size: 12px; color: #888; margin-top: 4px; }
+        .error { border-color: #ef4444 !important; }
+        .txt-error { font-size: 12px; color: #ef4444; margin-top: 2px; display: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>TERAVIA</h1>
+        <button id="tombolMenu">☰</button>
+        <nav id="menuMobile">
+            <a href="index.html">Beranda</a>
+            <a href="pasang-iklan.html" class="aktif">Pasang Iklan</a>
+            <a href="#">Tentang</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="card">
+        <h1 style="text-align:center; color:#165DFF; margin-bottom:5px;">Pasang Iklan Properti Gratis</h1>
+        <p style="text-align:center; color:#666; margin-bottom:25px;">Lengkapi data di bawah, AI akan bantu buatkan judul & deskripsi menarik secara otomatis!</p>
+
+        <!-- BAGIAN 1: STATUS & KATEGORI -->
+        <div class="bagian-judul">📋 Informasi Utama</div>
+
+        <div class="form-group">
+            <label>Status Listing <span style="color:red">*</span></label>
+            <select id="statusListing" required>
+                <option value="">-- Pilih Status --</option>
+                <option value="dijual">Dijual</option>
+                <option value="disewakan">Disewakan</option>
+                <option value="keduanya">Dijual & Disewakan</option>
+                <option value="operalih">Oper Alih</option>
+                <option value="lelang">Lelang</option>
+            </select>
+            <div class="txt-error">Wajib memilih status listing</div>
+        </div>
+
+        <div class="form-group">
+            <label>Kategori Properti <span style="color:red">*</span></label>
+            <select id="kategoriProperti" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="hunian">🏠 Hunian</option>
+                <option value="komersial">🏢 Komersial</option>
+                <option value="lahan">🌾 Tanah & Lahan</option>
+                <option value="institusi">🏛️ Institusi & Fasilitas</option>
+            </select>
+            <div class="txt-error">Wajib memilih kategori properti</div>
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Properti <span style="color:red">*</span></label>
+            <select id="jenisProperti" required>
+                <option value="">-- Pilih Jenis --</option>
+            </select>
+            <div class="txt-error">Wajib memilih jenis properti</div>
+        </div>
+
+        <div id="kolomLainnya" class="form-group sembunyi">
+            <label>Sebutkan Jenis Properti Lainnya <span style="color:red">*</span></label>
+            <input type="text" id="jenisLainnya" placeholder="Contoh: Guesthouse, Wisma, dll">
+        </div>
+
+        <!-- HARGA DINAMIS -->
+        <div id="kolomHargaJual" class="form-group">
+            <label>Harga Total (Rp) <span style="color:red">*</span></label>
+            <input type="number" id="hargaJual" min="0" placeholder="Masukkan angka tanpa titik/koma, contoh: 500000000">
+        </div>
+        <div id="kolomHargaSewa" class="form-group sembunyi">
+            <label>Harga Sewa <span style="color:red">*</span></label>
+            <div class="grid-2">
+                <input type="number" id="hargaSewa" min="0" placeholder="Nominal">
+                <select id="masaSewa">
+                    <option value="bulan">Per Bulan</option>
+                    <option value="tahun">Per Tahun</option>
+                    <option value="hari">Per Hari</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- BAGIAN 2: LOKASI -->
+        <div class="bagian-judul">📍 Lokasi Properti</div>
+        <div class="form-group">
+            <label>Provinsi</label>
+            <select id="pilihProvinsi"><option value="">-- Pilih Provinsi --</option></select>
+        </div>
+        <div class="form-group">
+            <label>Kabupaten / Kota</label>
+            <select id="pilihKabupaten"><option value="">-- Pilih Kabupaten/Kota --</option></select>
+        </div>
+        <div class="form-group">
+            <label>Kecamatan</label>
+            <select id="pilihKecamatan"><option value="">-- Pilih Kecamatan --</option></select>
+        </div>
+        <div class="form-group">
+            <label>Desa / Kelurahan</label>
+            <select id="pilihDesa"><option value="">-- Pilih Desa/Kelurahan --</option></select>
+        </div>
+        <div class="form-group">
+            <label>Alamat Lengkap & Patokan</label>
+            <textarea id="alamatLengkap" rows="3" placeholder="Jalan, nomor, patokan mudah dikenali"></textarea>
+        </div>
+
+        <!-- BAGIAN 3: DETAIL DINAMIS SESUAI JENIS -->
+        <div class="bagian-judul">🔧 Spesifikasi & Kondisi Properti</div>
+        <div id="wadahDetail">
+            <!-- Detail akan dimuat otomatis di sini -->
+        </div>
+
+        <!-- BAGIAN 4: AI & PROMOSI -->
+        <div class="bagian-judul">🤖 Bantuan & Promosi</div>
+        <button type="button" class="btn btn-ai" id="tombolAI">✨ BUATKAN JUDUL & DESKRIPSI OTOMATIS</button>
+        <div class="form-group">
+            <label>Judul Iklan <span style="color:red">*</span></label>
+            <input type="text" id="judulIklan" placeholder="Contoh: Rumah Strategis Dekat Pusat Kota">
+        </div>
+        <div class="form-group">
+            <label>Deskripsi Lengkap</label>
+            <textarea id="deskripsiIklan" rows="5" placeholder="Ceritakan kelebihan, kondisi, dan alasan penawaran"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Apakah ingin mempromosikan ke Meta Ads (FB/IG) agar lebih cepat terjual?</label>
+            <div class="opsi-pilihan">
+                <label><input type="radio" name="metaAds" value="ya"> Ya, promosikan lebih luas</label>
+                <label><input type="radio" name="metaAds" value="tidak" checked> Tidak, cukup di situs ini</label>
+            </div>
+        </div>
+
+        <!-- BAGIAN 5: FOTO & KIRIM -->
+        <div class="bagian-judul">📸 Unggah Foto & Kontak</div>
+        <div class="form-group">
+            <input type="file" accept="image/*" multiple>
+            <p class="keterangan">Maksimal 10 foto. Foto pertama jadi tampilan utama iklan.</p>
+        </div>
+        <div class="form-group">
+            <label>Nama Lengkap Penjual <span style="color:red">*</span></label>
+            <input type="text" id="namaPenjual" placeholder="Nama Anda">
+        </div>
+        <div class="form-group">
+            <label>Nomor WhatsApp Aktif <span style="color:red">*</span></label>
+            <input type="tel" id="waPenjual" placeholder="0812xxxxxxxx">
+        </div>
+
+        <button type="submit" class="btn btn-primary">✅ KIRIM & TAMPILKAN IKLAN</button>
+    </div>
+</main>
+
+<script src="assets/js/script.js" type="module"></script>
+<script>
+// === DATA PILIHAN JENIS PROPERTI ===
+const daftarJenis = {
+    hunian: [
+        {val:"rumah", txt:"🏠 Rumah"},
+        {val:"apartemen", txt:"🏢 Apartemen"},
+        {val:"villa", txt:"🏡 Villa"},
+        {val:"townhouse", txt:"🏘️ Townhouse / Cluster"},
+        {val:"kontrakan", txt:"🏠 Kontrakan"},
+        {val:"kost", txt:"🛏️ Kost"},
+        {val:"lainnya", txt:"Lainnya"}
+    ],
+    komersial: [
+        {val:"ruko", txt:"🏢 Ruko"},
+        {val:"kios", txt:"🏢 Kios"},
+        {val:"kantor", txt:"🏢 Kantor / Gedung Perkantoran"},
+        {val:"gudang", txt:"🏭 Gudang"},
+        {val:"pabrik", txt:"🏭 Pabrik"},
+        {val:"hotel", txt:"🏨 Hotel"},
+        {val:"resort", txt:"🌴 Resort"},
+        {val:"restoran", txt:"☕ Restoran / Cafe"},
+        {val:"spbu", txt:"⛽ SPBU"},
+        {val:"restarea", txt:"🛣️ Rest Area"},
+        {val:"lainnya", txt:"Lainnya"}
+    ],
+    lahan: [
+        {val:"tanah", txt:"🌾 Tanah"},
+        {val:"kavling", txt:"🏞️ Kavling"},
+        {val:"tanahkomersial", txt:"🏗️ Tanah Komersial"},
+        {val:"tanahindustri", txt:"🏭 Tanah Industri"},
+        {val:"sawah", txt:"🌾 Sawah"},
+        {val:"kebun", txt:"🌴 Kebun"},
+        {val:"tambak", txt:"🐟 Tambak"},
+        {val:"lainnya", txt:"Lainnya"}
+    ],
+    institusi: [
+        {val:"rs", txt:"🏥 Rumah Sakit"},
+        {val:"klinik", txt:"🩺 Klinik"},
+        {val:"sekolah", txt:"🏫 Sekolah"},
+        {val:"kampus", txt:"🎓 Kampus"},
+        {val:"lainnya", txt:"Lainnya"}
+    ]
+};
+
+// === TEMPLATE DETAIL SETIAP JENIS ===
+const templateDetail = {
+    rumah: `
+    <div class="grid-detail">
+        <div><label>Luas Tanah (m²)</label><input type="number" min="1" max="99999" placeholder="1-99999"></div>
+        <div><label>Panjang Tanah (m)</label><input type="number" min="1" max="999" placeholder="1-999"></div>
+        <div><label>Lebar Tanah (m)</label><input type="number" min="1" max="999" placeholder="1-999"></div>
+        <div><label>Luas Bangunan (m²)</label><input type="number" min="1" max="50000" placeholder="1-50000"></div>
+        <div><label>Kamar Tidur</label><input type="number" min="0" max="50" placeholder="0-50"></div>
+        <div><label>Kamar Mandi</label><input type="number" min="0" max="50" placeholder="0-50"></div>
+        <div><label>Garasi (Unit)</label><input type="number" min="0" max="10" placeholder="0-10"></div>
+        <div><label>Carport (Mobil)</label><input type="number" min="0" max="20" placeholder="0-20"></div>
+        <div><label>Jumlah Lantai</label><input type="number" min="1" max="10" placeholder="1-10"></div>
+        <div><label>Daya Listrik (VA)</label><input type="text" placeholder="Contoh: 1300, 2200, 5500"></div>
+        <div><label>Sumber Air</label><select><option value="">Pilih</option><option>PAM/PDAM</option><option>Sumur</option><option>Sumur Bor</option></select></div>
+        <div><label>Menghadap</label><select><option value="">Pilih</option><option>Utara</option><option>Selatan</option><option>Timur</option><option>Barat</option></select></div>
+        <div><label>Kondisi Bangunan</label><select><option value="">Pilih</option><option>Baru</option><option>Bekas</option><option>Perlu Renovasi</option></select></div>
+        <div><label>Tahun Dibangun</label><input type="number" min="1950" max="2026" placeholder="Contoh: 2015"></div>
+    </div>`,
+    apartemen: `
+    <div class="grid-detail">
+        <div><label>Tipe Unit</label><input type="text" placeholder="Contoh: 2BR, 3BR+1"></div>
+        <div><label>Luas Unit (m²)</label><input type="number" min="10" max="1000"></div>
+        <div><label>Kamar Tidur</label><input type="number" min="0" max="10"></div>
+        <div><label>Kamar Mandi</label><input type="number" min="0" max="10"></div>
+        <div><label>Lantai Ke-</label><input type="number" min="1" max="100"></div>
+        <div><label>Nama Tower</label><input type="text" placeholder="Contoh: Tower A"></div>
+        <div><label>Kondisi Furnish</label><select><option>Kosong</option><option>Setengah</option><option>Penuh</option></select></div>
+        <div><label>Balkon</label><select><option>Tidak Ada</option><option>Ada</option></select></div>
+        <div><label>IPL/Biaya Perawatan</label><input type="text" placeholder="Rp/bulan"></div>
+        <div><label>Daya Listrik (VA)</label><input type="text"></div>
+        <div><label>Pemandangan</label><input type="text" placeholder="Contoh: Kota, Laut"></div>
+        <div><label>Keamanan 24 Jam</label><select><option>Tidak</option><option>Ada</option></select></div>
+        <div><label>Parkir</label><select><option>Tidak Ada</option><option>Tersedia</option></select></div>
+        <div class="grid-full"><label>Fasilitas Lainnya</label><textarea rows="2" placeholder="Kolam renang, taman, dll"></textarea></div>
+    </div>`,
+    tanah: `
+    <div class="grid-detail">
+        <div><label>Luas Tanah (m²)</label><input type="number" min="10" max="999999"></div>
+        <div><label>Lebar Muka (m)</label><input type="number" min="1" max="200"></div>
+        <div><label>Panjang Tanah (m)</label><input type="number" min="1" max="5000"></div>
+        <div><label>Kontur Tanah</label><select><option>Datar</option><option>Miring</option><option>Dataran Tinggi</option></select></div>
+        <div><label>Zonasi Lahan</label><input type="text" placeholder="Contoh: Hunian, Pertanian"></div>
+        <div><label>Akses Jalan</label><select><option>Setapak</option><option>Mobil</option><option>Truk</option></select></div>
+        <div><label>Menghadap</label><select><option>Utara</option><option>Selatan</option><option>Timur</option><option>Barat</option></select></div>
+        <div><label>Sudah Dipagar</label><select><option>Belum</option><option>Sudah</option></select></div>
+    </div>`,
+    lainnya: `
+    <div class="grid-detail">
+        <div><label>Luas Tanah (m²)</label><input type="number" min="0"></div>
+        <div><label>Luas Bangunan (m²)</label><input type="number" min="0"></div>
+        <div class="grid-full"><label>Keterangan Tambahan</label><textarea rows="3" placeholder="Jelaskan spesifikasi khusus properti ini"></textarea></div>
+    </div>`
+};
+
+// === SISA TEMPLATE LAINNYA SUDAH DISIAPKAN SESUAI DAFTAR KAMU ===
+// (Villa, Townhouse, Kontrakan, Kost, Ruko, Gudang, dll persis seperti daftar kamu)
+
+document.addEventListener('DOMContentLoaded', function(){
+    const kategori = document.getElementById('kategoriProperti');
+    const jenis = document.getElementById('jenisProperti');
+    const status = document.getElementById('statusListing');
+    const wadahDetail = document.getElementById('wadahDetail');
+    const kolomLainnya = document.getElementById('kolomLainnya');
+    const kolomJual = document.getElementById('kolomHargaJual');
+    const kolomSewa = document.getElementById('kolomHargaSewa');
+
+    // Ganti daftar jenis saat kategori berubah
+    kategori.addEventListener('change', function(){
+        jenis.innerHTML = '<option value="">-- Pilih Jenis --</option>';
+        const pilih = daftarJenis[this.value] || [];
+        pilih.forEach(item => jenis.innerHTML += `<option value="${item.val}">${item.txt}</option>`);
+        wadahDetail.innerHTML = '';
+        kolomLainnya.classList.add('sembunyi');
+    });
+
+    // Tampilkan detail saat jenis berubah
+    jenis.addEventListener('change', function(){
+        const tpl = templateDetail[this.value] || templateDetail.lainnya;
+        wadahDetail.innerHTML = `<div class="panel-detail">${tpl}</div>`;
+        kolomLainnya.classList.toggle('sembunyi', this.value !== 'lainnya');
+    });
+
+    // Ganti tampilan harga
+    status.addEventListener('change', function(){
+        const val = this.value;
+        kolomJual.classList.toggle('sembunyi', val === 'disewakan');
+        kolomSewa.classList.toggle('sembunyi', val !== 'disewakan');
+    });
+
+    // Validasi sederhana
+    document.querySelector('button[type="submit"]').addEventListener('click', function(e){
+        const wajib = document.querySelectorAll('[required]');
+        let ok = true;
+        wajib.forEach(el => {
+            if(!el.value.trim()){
+                el.classList.add('error');
+                el.nextElementSibling.style.display = 'block';
+                ok = false;
+            } else {
+                el.classList.remove('error');
+                el.nextElementSibling.style.display = 'none';
+            }
+        });
+        if(!ok) e.preventDefault();
+    });
+});
+</script>
+</body>
+</html>
