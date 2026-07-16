@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teravia - Marketplace Properti Terpercaya</title>
+    <meta name="description" content="Temukan rumah, tanah, dan ruko terbaik di Indonesia">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+
+<!-- ==============================================
+    1. NAVIGASI BAR ATAS
+============================================== -->
+<header class="navbar">
+    <div class="container">
+        <div class="nav-brand">
+            <h2>TERAVIA</h2>
+        </div>
+        <nav class="nav-menu">
+            <a href="#beranda">Beranda</a>
+            <a href="#properti">Cari Properti</a>
+            <a href="#tentang">Tentang Kami</a>
+            <a href="#bantu">Bantuan</a>
+        </nav>
+        <div class="nav-aksi">
+            <button class="btn-outline">Masuk</button>
+            <button class="btn-utama">Pasang Iklan</button>
+        </div>
+    </div>
+</header>
+
+<!-- ==============================================
+    2. BAGIAN UTAMA & PENCARIAN
+============================================== -->
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>Cari Properti Impianmu di Seluruh Indonesia</h1>
+            <p>Jual beli rumah, tanah, ruko, dan apartemen terpercaya & terverifikasi</p>
+
+            <div class="kotak-pencarian">
+                <div class="form-group">
+                    <label>Provinsi</label>
+                    <select id="pilih-provinsi">
+                        <option value="">-- Pilih Provinsi --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Kabupaten/Kota</label>
+                    <select id="pilih-kota" disabled>
+                        <option value="">-- Pilih Kota --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tipe Properti</label>
+                    <select id="pilih-tipe">
+                        <option value="">Semua Tipe</option>
+                        <option value="Rumah">Rumah</option>
+                        <option value="Tanah">Tanah</option>
+                        <option value="Ruko">Ruko</option>
+                        <option value="Apartemen">Apartemen</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Harga Maksimal</label>
+                    <select id="pilih-harga">
+                        <option value="">Bebas</option>
+                        <option value="500000000">≤ 500 Juta</option>
+                        <option value="1000000000">≤ 1 Miliar</option>
+                        <option value="3000000000">≤ 3 Miliar</option>
+                    </select>
+                </div>
+                <button id="btn-cari" class="btn-cari">Cari Properti</button>
+            </div>
+        </div>
+    </section>
+
+<!-- ==============================================
+    3. DAFTAR PROPERTI
+============================================== -->
+    <section class="daftar-properti" id="properti">
+        <div class="container">
+            <div class="judul-bagian">
+                <h2>Properti Terbaru</h2>
+                <a href="#" class="lihat-semua">Lihat Semua →</a>
+            </div>
+
+            <div id="grid-properti" class="grid-properti">
+                <!-- Nanti kartu properti akan muncul otomatis dari sini -->
+                <div class="loading">Memuat data properti...</div>
+            </div>
+        </div>
+    </section>
+
+<!-- ==============================================
+    4. KATEGORI POPULER
+============================================== -->
+    <section class="kategori">
+        <div class="container">
+            <h2>Cari Berdasarkan Lokasi Populer</h2>
+            <div class="grid-kategori">
+                <div class="item-kategori">DKI Jakarta</div>
+                <div class="item-kategori">Jawa Barat</div>
+                <div class="item-kategori">Jawa Timur</div>
+                <div class="item-kategori">Banten</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- ==============================================
+    5. FOOTER
+============================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bawah">
+            <p>&copy; 2026 Teravia. Semua Hak Dilindungi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ==============================================
+    HUBUNGKAN KE CSS & JAVASCRIPT
+============================================== -->
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
