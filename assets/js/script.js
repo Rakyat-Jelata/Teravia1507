@@ -1,9 +1,9 @@
-// === 1. SEMUA IMPOR DI ATAS SAJA ===
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10/firebase-auth.js";
+// ✅ SEMUA IMPOR WAJIB DI ATAS
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-// === 2. KONEKSI FIREBASE ===
+// ✅ KONEKSI SUDAH BENAR
 const firebaseConfig = {
   apiKey: "AIzaSyCuAuSm-3fp0OEjqDVwaT8JJhU6e7fmSKA",
   authDomain: "teravia-9d672.firebaseapp.com",
@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// === 3. DATA & FUNGSI SIMPAN ===
+// ✅ DATA PROVINSI
 const dataProvinsi = [
   {"id": 11, "name": "ACEH"},
   {"id": 12, "name": "SUMATERA UTARA"},
@@ -55,13 +55,14 @@ const dataProvinsi = [
   {"id": 94, "name": "PAPUA"}
 ];
 
+// ✅ FUNGSI SIMPAN
 async function simpanProvinsi() {
   for (const item of dataProvinsi) {
     await addDoc(collection(db, "provinces"), item);
   }
 }
 
-// === 4. FUNGSI TOMBOL & MENU HAMBURGER ===
+// ✅ FUNGSI TOMBOL & MENU
 document.addEventListener('DOMContentLoaded', function(){
   // Menu Hamburger
   const tombolMenu = document.getElementById('tombolMenu');
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const tombolData = document.getElementById('tombolMasukData');
   if(tombolData){
     tombolData.addEventListener('click', async function(){
-      tombolData.textContent = "Sedang Memproses...";
+      tombolData.textContent = "Memproses...";
       tombolData.disabled = true;
       try {
         await simpanProvinsi();
