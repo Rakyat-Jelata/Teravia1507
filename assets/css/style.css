@@ -98,21 +98,52 @@ a {
 
 /* BERANDA */
 .beranda {
-    padding: 80px 20px;
-    text-align: center;
+    min-height: calc(100vh - 60px);
+    background-image: url('assets/img/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
 }
 
-.beranda h1 {
+.beranda-konten {
+    width: 100%;
+}
+
+.kotak-sambutan {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 32px 28px;
+    border-radius: 12px;
+    box-shadow: var(--bayangan);
+    text-align: left;
+}
+
+.kotak-sambutan h1 {
     color: var(--gelap);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 40px;
 }
 
-/* RESPONSIF */
+.kotak-sambutan p {
+    color: #475569;
+    font-size: 18px;
+}
+
+/* RESPONSIF KHUSUS HP (TIDAK DIUBAH TATA LETAK MENU) */
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
+    .kotak-sambutan {
+        max-width: 100%;
+        padding: 24px 20px;
+        margin: 0 16px;
     }
-    .hamburger {
-        display: flex;
+
+    .kotak-sambutan h1 {
+        font-size: 28px;
+    }
+
+    .kotak-sambutan p {
+        font-size: 16px;
     }
 }
