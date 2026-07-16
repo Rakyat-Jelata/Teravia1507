@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teravia - Marketplace Properti Terpercaya</title>
     <meta name="description" content="Temukan rumah, tanah, dan ruko terbaik di Indonesia">
-    <!-- Logo & Tampilan -->
+    <!-- HANYA DI SINI PANGGIL CSS & ICON -->
     <link rel="icon" href="assets/img/logo.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- ==============================================
-    1. NAVIGASI BAR ATAS (SUDAH DIPERBAIKI LOGONYA)
-============================================== -->
+<!-- NAVIGASI -->
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
-            <!-- Logo sudah pas di tempat yang benar -->
             <img src="assets/img/logo.png" alt="Logo Teravia" height="36">
         </div>
         <nav class="nav-menu">
@@ -33,9 +30,7 @@
     </div>
 </header>
 
-<!-- ==============================================
-    2. BAGIAN UTAMA & PENCARIAN (SUDAH ADA LATAR BELAKANG)
-============================================== -->
+<!-- HERO & PENCARIAN -->
 <main>
     <section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center;">
         <div class="container">
@@ -79,26 +74,20 @@
         </div>
     </section>
 
-<!-- ==============================================
-    3. DAFTAR PROPERTI
-============================================== -->
+    <!-- DAFTAR PROPERTI -->
     <section class="daftar-properti" id="properti">
         <div class="container">
             <div class="judul-bagian">
                 <h2>Properti Terbaru</h2>
                 <a href="#" class="lihat-semua">Lihat Semua →</a>
             </div>
-
             <div id="grid-properti" class="grid-properti">
-                <!-- Nanti kartu properti akan muncul otomatis dari sini -->
                 <div class="loading">Memuat data properti...</div>
             </div>
         </div>
     </section>
 
-<!-- ==============================================
-    4. KATEGORI POPULER
-============================================== -->
+    <!-- KATEGORI -->
     <section class="kategori">
         <div class="container">
             <h2>Cari Berdasarkan Lokasi Populer</h2>
@@ -112,22 +101,17 @@
     </section>
 </main>
 
-<!-- ==============================================
-    5. FOOTER
-============================================== -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
-        <div class="footer-bawah">
-            <p>&copy; 2026 Teravia. Semua Hak Dilindungi.</p>
-        </div>
+        <p>&copy; 2026 Teravia. Semua Hak Dilindungi.</p>
     </div>
 </footer>
 
-<!-- ==============================================
-    HUBUNGKAN KE CSS & JAVASCRIPT
-============================================== -->
+<!-- JAVASCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 
 </body>
 </html>
+
