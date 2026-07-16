@@ -352,3 +352,6 @@ select:focus {
     }
    }
 
+.menu-mobile .tombol-penuh button {
+    width: 100%;
+}
