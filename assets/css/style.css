@@ -289,4 +289,66 @@ select:focus {
         font-size: 20px;
     }
   }
+/* ==============================================
+   MENU HAMBURGER & TAMPILAN MOBILE
+============================================== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    padding: 5px;
+}
+
+.hamburger span {
+    width: 24px;
+    height: 3px;
+    background: var(--gelap);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* MENU MOBILE YANG TERSEMBUNYI */
+.menu-mobile {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    z-index: 998;
+}
+
+.menu-mobile a {
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-weight: 500;
+}
+
+.menu-mobile .tombol-penuh {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* KELAS AKTIF SAAT MENU DIBUKA */
+.menu-mobile.buka {
+    display: flex;
+}
+
+/* UBAH TAMPILAN KHUSUS HP */
+@media (max-width: 768px) {
+    .nav-menu, .nav-aksi {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+   }
 
