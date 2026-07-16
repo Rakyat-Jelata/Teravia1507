@@ -1,84 +1,86 @@
 // ==============================================
-// TERAVIA - SCRIPT LENGKAP
-// Menu + Data Wilayah Berantai
+// SCRIPT LENGKAP TERAVIA
+// Menu Hamburger + Pilihan Lokasi Berantai
 // ==============================================
 
-// === 1. FUNGSI MENU HAMBURGER ===
 document.addEventListener('DOMContentLoaded', function(){
+    // === FUNGSI MENU HAMBURGER ===
     const tombolMenu = document.getElementById('tombolMenu');
     const menuMobile = document.getElementById('menuMobile');
     if(tombolMenu && menuMobile){
-        tombolMenu.addEventListener('click', function(){
-            menuMobile.classList.toggle('buka');
-        });
+        tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
     }
 
-    // === 2. JALANKAN MENU WILAYAH ===
-    inisialisasiWilayah();
+    // === JALANKAN SISTEM LOKASI ===
+    muatDataLokasi();
 });
 
 // ==============================================
-// FUNGSI AMBIL DATA DARI FILE JSON
+// AMBIL DATA DARI FILE JSON
 // ==============================================
-async function ambilData(file) {
+async function ambilData(namaFile) {
   try {
-    const res = await fetch(`assets/data/${file}.json`);
-    if (!res.ok) throw new Error("Gagal ambil data " + file);
+    const res = await fetch(`assets/data/${namaFile}.json`);
+    if (!res.ok) throw new Error(`Gagal baca ${namaFile}`);
     return await res.json();
   } catch (err) {
-    console.error(err);
+    console.error("❌ Kesalahan ambil data:", err);
     return [];
   }
 }
 
 // ==============================================
-// FUNGSI TAMPILKAN PILIHAN WILAYAH BERANTAI
+// SISTEM PILIHAN BERANTAI
 // ==============================================
-async function inisialisasiWilayah() {
-  // Ambil elemen pilihan di HTML
-  const pilihProvinsi = document.getElementById("pilihProvinsi");
-  const pilihKabupaten = document.getElementById("pilihKabupaten");
-  const pilihKecamatan = document.getElementById("pilihKecamatan");
-  const pilihDesa = document.getElementById("pilihDesa");
+async function muatDataLokasi() {
+  // Ambil elemen di halaman
+  const provinsiEl = document.getElementById("pilihProvinsi");
+  const kabupatenEl = document.getElementById("pilihKabupaten");
+  const kecamatanEl = document.getElementById("pilihKecamatan");
+  const desaEl = document.getElementById("pilihDesa");
 
-  // Jika tidak ada elemen di halaman, berhenti saja
-  if (!pilihProvinsi) return;
+  // Jika tidak ada form lokasi di halaman, berhenti saja
+  if (!provinsiEl) return;
 
-  // 1. Tampilkan Semua Provinsi
-  const dataProvinsi = await ambilData("provinces");
+  // Muat semua data sekaligus
+  const [dataProvinsi, dataKabupaten, dataKecamatan, dataDesa] = await Promise.all([
+    ambilData("provinces"),
+    ambilData("regencies"),
+    ambilData("districts"),
+    ambilData("villages")
+  ]);
+
+  // 1. TAMPILKAN SEMUA PROVINSI
   dataProvinsi.forEach(item => {
     const opsi = document.createElement("option");
     opsi.value = item.id;
     opsi.textContent = item.name;
-    pilihProvinsi.appendChild(opsi);
+    provinsiEl.appendChild(opsi);
   });
 
-  // 2. Pilih Provinsi → Munculkan Kabupaten
-  const dataKabupaten = await ambilData("regencies");
-  pilihProvinsi.addEventListener("change", async function(){
+  // 2. PROVINSI DIPILIH → TAMPILKAN KABUPATEN
+  provinsiEl.addEventListener("change", function(){
     const idProv = parseInt(this.value);
-    // Kosongkan pilihan bawahnya dulu
-    pilihKabupaten.innerHTML = '<option value="">Pilih Kabupaten/Kota...</option>';
-    pilihKecamatan.innerHTML = '<option value="">Pilih Kecamatan...</option>';
-    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+    // Reset pilihan di bawahnya
+    kabupatenEl.innerHTML = '<option value="">Pilih Kabupaten/Kota...</option>';
+    kecamatanEl.innerHTML = '<option value="">Pilih Kecamatan...</option>';
+    desaEl.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
 
     if (!idProv) return;
-    // Filter kabupaten yang sesuai
     const hasil = dataKabupaten.filter(kab => kab.province_id === idProv);
     hasil.forEach(item => {
       const opsi = document.createElement("option");
       opsi.value = item.id;
       opsi.textContent = item.name;
-      pilihKabupaten.appendChild(opsi);
+      kabupatenEl.appendChild(opsi);
     });
   });
 
-  // 3. Pilih Kabupaten → Munculkan Kecamatan
-  const dataKecamatan = await ambilData("districts");
-  pilihKabupaten.addEventListener("change", async function(){
+  // 3. KABUPATEN DIPILIH → TAMPILKAN KECAMATAN
+  kabupatenEl.addEventListener("change", function(){
     const idKab = parseInt(this.value);
-    pilihKecamatan.innerHTML = '<option value="">Pilih Kecamatan...</option>';
-    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+    kecamatanEl.innerHTML = '<option value="">Pilih Kecamatan...</option>';
+    desaEl.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
 
     if (!idKab) return;
     const hasil = dataKecamatan.filter(kec => kec.regency_id === idKab);
@@ -86,15 +88,14 @@ async function inisialisasiWilayah() {
       const opsi = document.createElement("option");
       opsi.value = item.id;
       opsi.textContent = item.name;
-      pilihKecamatan.appendChild(opsi);
+      kecamatanEl.appendChild(opsi);
     });
   });
 
-  // 4. Pilih Kecamatan → Munculkan Desa
-  const dataDesa = await ambilData("villages");
-  pilihKecamatan.addEventListener("change", async function(){
+  // 4. KECAMATAN DIPILIH → TAMPILKAN DESA
+  kecamatanEl.addEventListener("change", function(){
     const idKec = parseInt(this.value);
-    pilihDesa.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
+    desaEl.innerHTML = '<option value="">Pilih Desa/Kelurahan...</option>';
 
     if (!idKec) return;
     const hasil = dataDesa.filter(desa => desa.district_id === idKec);
@@ -102,7 +103,7 @@ async function inisialisasiWilayah() {
       const opsi = document.createElement("option");
       opsi.value = item.id;
       opsi.textContent = item.name;
-      pilihDesa.appendChild(opsi);
+      desaEl.appendChild(opsi);
     });
   });
 }
