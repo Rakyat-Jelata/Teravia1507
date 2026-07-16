@@ -89,21 +89,26 @@
         </div>
 
         <!-- HARGA DINAMIS -->
-        <div id="kolomHargaJual" class="form-group">
-            <label>Harga Total (Rp) <span style="color:red">*</span></label>
-            <input type="number" id="hargaJual" min="0" placeholder="Masukkan angka tanpa titik/koma, contoh: 500000000">
-        </div>
-        <div id="kolomHargaSewa" class="form-group sembunyi">
-            <label>Harga Sewa <span style="color:red">*</span></label>
-            <div class="grid-2">
-                <input type="number" id="hargaSewa" min="0" placeholder="Nominal">
-                <select id="masaSewa">
-                    <option value="bulan">Per Bulan</option>
-                    <option value="tahun">Per Tahun</option>
-                    <option value="hari">Per Hari</option>
-                </select>
-            </div>
-        </div>
+<div id="kolomHargaJual" class="form-group">
+    <label>Harga Total <span style="color:red">*</span></label>
+    <input type="text" id="hargaJual" placeholder="Masukkan angka" inputmode="numeric">
+    <p id="formatHargaJual" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
+    <p id="terbilangJual" class="keterangan"></p>
+</div>
+<div id="kolomHargaSewa" class="form-group sembunyi">
+    <label>Harga Sewa <span style="color:red">*</span></label>
+    <div class="grid-2">
+        <input type="text" id="hargaSewa" placeholder="Nominal" inputmode="numeric">
+        <select id="masaSewa">
+            <option value="bulan">Per Bulan</option>
+            <option value="tahun">Per Tahun</option>
+            <option value="hari">Per Hari</option>
+        </select>
+    </div>
+    <p id="formatHargaSewa" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
+    <p id="terbilangSewa" class="keterangan"></p>
+</div>
+
 
         <!-- BAGIAN 2: LOKASI -->
         <div class="bagian-judul">📍 Lokasi Properti</div>
