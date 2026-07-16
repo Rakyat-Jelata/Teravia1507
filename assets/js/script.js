@@ -19,14 +19,31 @@ const auth = getAuth(app);
 
 // === FUNGSI MENU HAMBURGER ===
 document.addEventListener('DOMContentLoaded', function(){
-    const tombol = document.getElementById('tombolMenu');
-    const menu = document.getElementById('menuMobile');
-    if(tombol && menu){
-        tombol.addEventListener('click', function(){
-            menu.classList.toggle('buka');
+    const tombolMenu = document.getElementById('tombolMenu');
+    const menuMobile = document.getElementById('menuMobile');
+    if(tombolMenu && menuMobile){
+        tombolMenu.addEventListener('click', function(){
+            menuMobile.classList.toggle('buka');
+        });
+    }
+
+    // === FUNGSI TOMBOL MASUK DATA ===
+    const tombolData = document.getElementById('tombolMasukData');
+    if(tombolData){
+        tombolData.addEventListener('click', async function(){
+            tombolData.textContent = "Sedang Memproses...";
+            tombolData.disabled = true;
+            try {
+                await simpanProvinsi();
+                alert("✅ BERHASIL! Data Provinsi sudah masuk!");
+            } catch (err) {
+                alert("❌ Gagal: " + err.message);
+            }
+            tombolData.textContent = "Selesai!";
         });
     }
 });
+
 
 // === FUNGSI MASUKKAN DATA PROVINSI ===
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10/firebase-firestore.js";
