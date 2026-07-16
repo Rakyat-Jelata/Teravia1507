@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teravia - Marketplace Properti Terpercaya</title>
     <meta name="description" content="Temukan rumah, tanah, dan ruko terbaik di Indonesia">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <!-- Logo & Tampilan -->
     <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- ==============================================
-    1. NAVIGASI BAR ATAS
+    1. NAVIGASI BAR ATAS (SUDAH DIPERBAIKI LOGONYA)
 ============================================== -->
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
-            <h2>TERAVIA</h2>
+            <!-- Logo sudah pas di tempat yang benar -->
+            <img src="assets/img/logo.png" alt="Logo Teravia" height="36">
         </div>
         <nav class="nav-menu">
             <a href="#beranda">Beranda</a>
@@ -33,10 +34,10 @@
 </header>
 
 <!-- ==============================================
-    2. BAGIAN UTAMA & PENCARIAN
+    2. BAGIAN UTAMA & PENCARIAN (SUDAH ADA LATAR BELAKANG)
 ============================================== -->
 <main>
-    <section class="hero">
+    <section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center;">
         <div class="container">
             <h1>Cari Properti Impianmu di Seluruh Indonesia</h1>
             <p>Jual beli rumah, tanah, ruko, dan apartemen terpercaya & terverifikasi</p>
@@ -48,10 +49,6 @@
                         <option value="">-- Pilih Provinsi --</option>
                     </select>
                 </div>
-                <div class="nav-brand">
-    <img src="assets/img/logo.png" alt="Logo Teravia" height="36">
-                </div>
-                
                 <div class="form-group">
                     <label>Kabupaten/Kota</label>
                     <select id="pilih-kota" disabled>
@@ -129,7 +126,6 @@
 <!-- ==============================================
     HUBUNGKAN KE CSS & JAVASCRIPT
 ============================================== -->
-<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 
