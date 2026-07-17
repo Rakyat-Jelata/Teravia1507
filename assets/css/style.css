@@ -117,7 +117,8 @@ a {
 
 .tutup-menu {
     text-align: right;
-    margin-bottom: 10px;
+    padding: 10px 20px;
+    margin-bottom: 5px;
 }
 
 .tutup-menu button {
@@ -192,29 +193,41 @@ a {
     margin-top: 5px;
 }
 
+/* TAMPILAN MENU DEKSTOP */
+@media (min-width: 992px) {
+    .menu-desktop {
+        display: flex;
+    }
+    .tombol-hamburger {
+        display: none;
+    }
+    .menu-samping, .latar-gelap {
+        display: none !important;
+    }
+}
+
 /* ==============================================
-   HERO - SERAGAM HP & DEKSTOP
+   HERO - POSISI SAMA PERSIS DI SEMUA LAYAR
 ============================================== */
 .hero {
     background-image: url('assets/img/hero-bg.png');
-    /* Biar gambar tarik penuh ke bawah di desktop */
     background-size: cover;
-    background-position: center bottom; /* Fokus ke bagian bawah gambar */
+    background-position: center bottom;
     background-repeat: no-repeat;
-    /* Tinggikan agar tidak terlalu sempit di desktop */
     min-height: 520px;
-    display: flex;
-    align-items: center;
     width: 100%;
+    /* ✅ INI KUNCI: POSISI SAMA DI HP, TABLET, PC */
+    display: flex;
+    align-items: flex-start;
+    padding-top: 80px;
 }
 
-/* Wadah teks sambutan */
 .beranda-konten {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    /* Jarak aman dari pinggir, tidak mepet */
-    padding: 0 20px;
+    /* ✅ JARAK SAMA PERSIS DARI SAMPING */
+    padding: 0 16px;
 }
 
 .kotak-sambutan h1 {
@@ -231,41 +244,9 @@ a {
     line-height: 1.5;
 }
 
-/* Khusus layar HP */
-@media (max-width: 768px) {
+/* KHUSUS TINGGI HERO HP TETAP OKE */
+@media (max-width: 991px) {
     .hero {
         min-height: 440px;
-        /* Posisi teks di HP tetap rapi, tidak mepet atas */
-        align-items: flex-start;
-        padding-top: 80px;
     }
-    .beranda-konten {
-        padding: 0 16px;
-    }
-}
-
-
-/* ✅ HANYA TAMBAHAN TOMBOL TUTUP, LAINNYA TIDAK DIUBAH */
-.tutup-menu {
-    text-align: right;
-    padding: 10px 20px;
-    margin-bottom: 5px;
-}
-
-.tutup-menu button {
-    background: #f3f4f6;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    color: #555;
-    transition: background 0.2s;
-}
-
-.tutup-menu button:hover {
-    background: #e5e7eb;
-    color: #111;
-   
 }
