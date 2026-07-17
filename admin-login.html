@@ -126,6 +126,7 @@
 </div>
 
 <script>
+<script>
 // === AKUN ADMIN ===
 const DAFTAR_ADMIN = [
   { 
@@ -144,25 +145,36 @@ document.getElementById('formLogin').addEventListener('submit', function(e){
 
     const akun = DAFTAR_ADMIN.find(a => a.email === email && a.sandi === sandi);
     if(akun){
-        // PAKAI localStorage AGAR LEBIH STABIL, BUKAN sessionStorage
-        localStorage.setItem('adminTeravia', JSON.stringify({
+        // Simpan dengan pasti
+        const dataSesi = JSON.stringify({
             nama: akun.nama,
             level: akun.level,
             email: akun.email
-        }));
-        // Beri waktu simpan sebelum pindah halaman
+        });
+        localStorage.setItem('adminTeravia', dataSesi);
+        
+        // Cek apakah sudah tersimpan, baru pindah
         setTimeout(() => {
-            window.location.href = 'admin-dashboard.html';
-        }, 200);
+            const cek = localStorage.getItem('adminTeravia');
+            if(cek){
+                window.location.href = '/admin-dashboard.html'; // Pakai jalur mutlak
+            } else {
+                pesan.textContent = 'Gagal menyimpan sesi, coba lagi!';
+                pesan.style.display = 'block';
+            }
+        }, 300);
     } else {
+        pesan.textContent = 'Email atau kata sandi salah!';
         pesan.style.display = 'block';
     }
 });
 
-// Cek jika sudah login
+// Alihkan jika sudah login
 if(localStorage.getItem('adminTeravia')){
-    window.location.href = 'admin-dashboard.html';
+    window.location.href = '/admin-dashboard.html';
 }
+</script>
+
 </script>
 
 </body>
