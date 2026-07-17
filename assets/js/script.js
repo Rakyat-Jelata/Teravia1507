@@ -471,3 +471,32 @@ function bukaPratinjauIklan(){
     `);
     jendela.document.close();
 }
+
+// FUNGSI PILIH BELI / SEWA
+const tombolTujuan = document.querySelectorAll('.btn-tujuan');
+let jenisTujuan = "beli";
+
+tombolTujuan.forEach(tombol => {
+    tombol.addEventListener('click', function() {
+        tombolTujuan.forEach(t => t.classList.remove('aktif'));
+        this.classList.add('aktif');
+        jenisTujuan = this.textContent.trim().toLowerCase();
+        console.log("Pilihan diubah ke:", jenisTujuan);
+    });
+});
+
+// FUNGSI TOMBOL CARI PROPERTI
+const tombolCari = document.querySelector('.btn-cari-biru');
+const inputLokasi = document.querySelector('.input-lokasi input');
+
+tombolCari.addEventListener('click', function() {
+    const lokasi = inputLokasi.value.trim();
+    window.location.href = `daftar-properti.html?tujuan=${jenisTujuan}&lokasi=${encodeURIComponent(lokasi)}`;
+});
+
+inputLokasi.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        tombolCari.click();
+  
+    }
+});
