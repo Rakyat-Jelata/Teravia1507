@@ -11,12 +11,32 @@ let dataDesa = [];
 document.addEventListener('DOMContentLoaded', function(){
     console.log("✅ Script Teravia Berjalan!");
 
-    // Menu Hamburger
-    const tombolMenu = document.getElementById('tombolMenu');
-    const menuMobile = document.getElementById('menuMobile');
-    if(tombolMenu && menuMobile){
-        tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
-    }
+   // Menu Hamburger
+const tombolMenu = document.getElementById('tombolMenu');
+const menuMobile = document.getElementById('menuMobile');
+const latarGelap = document.getElementById('latarGelap');
+
+if(tombolMenu && menuMobile && latarGelap){
+    tombolMenu.addEventListener('click', () => {
+        menuMobile.classList.toggle('buka');
+        latarGelap.classList.toggle('aktif');
+    });
+
+    // Tutup kalau klik area gelap di luar menu
+    latarGelap.addEventListener('click', () => {
+        menuMobile.classList.remove('buka');
+        latarGelap.classList.remove('aktif');
+    });
+
+    // Tutup otomatis setelah pilih menu
+    document.querySelectorAll('.tautan-menu, .btn-pasang-menu').forEach(link => {
+        link.addEventListener('click', () => {
+            menuMobile.classList.remove('buka');
+            latarGelap.classList.remove('aktif');
+        });
+    });
+}
+
 
     // Mulai muat data wilayah (FUNGSI LAMA TETAP DIPAKAI, DIPERBAIKI SAJA)
     muatSemuaDataWilayah();
