@@ -233,3 +233,28 @@ a {
     .tombol-hamburger { display: none; }
     .menu-samping, .latar-gelap { display: none !important; }
    }
+
+/* ✅ HANYA TAMBAHAN TOMBOL TUTUP, LAINNYA TIDAK DIUBAH */
+.tutup-menu {
+    text-align: right;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+}
+
+.tutup-menu button {
+    background: #f3f4f6;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    color: #555;
+    transition: background 0.2s;
+}
+
+.tutup-menu button:hover {
+    background: #e5e7eb;
+    color: #111;
+   
+}
