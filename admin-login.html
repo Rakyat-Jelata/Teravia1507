@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk Admin - Teravia</title>
     <link rel="icon" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/css/general.css">
     <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:system-ui, sans-serif; }
         body { 
             background: linear-gradient(135deg, #165DFF 0%, #0F4CD0 100%); 
             min-height: 100vh; 
@@ -14,168 +14,71 @@
             align-items: center; 
             justify-content: center; 
             padding: 20px; 
-            margin:0;
-            font-family: system-ui, sans-serif;
         }
-        .kotak-login { 
-            background: white; 
-            border-radius: 16px; 
-            padding: 32px 24px; 
-            width: 100%; 
-            max-width: 420px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15); 
-        }
-        .logo { 
-            text-align: center; 
-            margin-bottom: 24px; 
-        }
-        .logo img { 
-            height: 48px; 
-        }
-        .logo h2 { 
-            color: #165DFF; 
-            margin-top: 8px; 
-            font-size: 20px; 
-            margin: 10px 0 0;
-        }
-        .form-group { 
-            margin-bottom: 16px; 
-        }
-        label { 
-            display: block; 
-            font-weight: 600; 
-            margin-bottom: 6px; 
-            font-size: 14px; 
-            color:#333;
-        }
-        input { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            font-size: 15px; 
-            box-sizing: border-box;
-        }
-        input:focus { 
-            outline: none; 
-            border-color: #165DFF; 
-            box-shadow: 0 0 0 3px rgba(22,93,255,0.1); 
-        }
-        .btn { 
-            width: 100%; 
-            padding: 13px; 
-            border: none; 
-            border-radius: 8px; 
-            font-weight: 700; 
-            font-size: 15px; 
-            cursor: pointer; 
-            transition: 0.2s; 
-        }
-        .btn-primary { 
-            background: #165DFF; 
-            color: white; 
-        }
-        .btn-primary:hover { 
-            background: #0F4CD0; 
-        }
-        .pesan-error { 
-            color: #ef4444; 
-            font-size: 13px; 
-            margin-top: 8px; 
-            display: none; 
-            text-align: center; 
-            padding:8px;
-            background:#fef2f2;
-            border-radius:6px;
-        }
-        .kembali { 
-            text-align: center; 
-            margin-top: 16px; 
-        }
-        .kembali a { 
-            color: #666; 
-            font-size: 13px; 
-            text-decoration: none; 
-        }
+        .kotak { background: white; border-radius: 16px; padding: 32px 24px; width: 100%; max-width: 420px; }
+        h2 { text-align:center; color:#165DFF; margin-bottom:24px; }
+        .grup { margin-bottom:16px; }
+        label { display:block; margin-bottom:6px; font-weight:600; font-size:14px; }
+        input { width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:15px; }
+        button { width:100%; padding:13px; background:#165DFF; color:white; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
+        button:hover { background:#0F4CD0; }
+        .pesan { color:#ef4444; font-size:13px; margin-top:10px; text-align:center; display:none; }
+        .kembali { text-align:center; margin-top:16px; font-size:13px; }
+        .kembali a { color:#666; text-decoration:none; }
     </style>
 </head>
 <body>
 
-<div class="kotak-login">
-    <div class="logo">
-        <img src="/assets/img/logo.png" alt="Teravia">
-        <h2>Panel Admin Teravia</h2>
-    </div>
-
+<div class="kotak">
+    <h2>Panel Admin Teravia</h2>
     <form id="formLogin">
-        <div class="form-group">
+        <div class="grup">
             <label>Email Admin</label>
-            <input type="email" id="emailAdmin" placeholder="teravia.admin@gmail.com" required>
+            <input type="email" id="email" placeholder="teravia.admin@gmail.com" required>
         </div>
-        <div class="form-group">
+        <div class="grup">
             <label>Kata Sandi</label>
-            <input type="password" id="sandiAdmin" placeholder="Masukkan kata sandi" required>
+            <input type="password" id="sandi" placeholder="Masukkan sandi" required>
         </div>
-        <button type="submit" class="btn btn-primary">Masuk ke Panel</button>
-        <div class="pesan-error" id="pesanError">Email atau kata sandi salah!</div>
+        <button type="submit">Masuk</button>
+        <div class="pesan" id="pesanSalah">Email atau sandi salah!</div>
     </form>
-
     <div class="kembali">
-        <a href="/index.html">← Kembali ke Beranda Situs</a>
+        <a href="/index.html">← Kembali ke Beranda</a>
     </div>
 </div>
 
 <script>
-<script>
-// === AKUN ADMIN ===
-const DAFTAR_ADMIN = [
-  { 
-    email: "teravia.admin@gmail.com", 
-    sandi: "TeraviaAdmin@2026", 
-    nama: "Admin Utama Teravia", 
-    level: "Owner" 
-  }
-];
+// DATA AKUN
+const AKUN = {
+    email: "teravia.admin@gmail.com",
+    sandi: "TeraviaAdmin@2026"
+};
 
+// JALANKAN SAAT KLIK KIRIM
 document.getElementById('formLogin').addEventListener('submit', function(e){
     e.preventDefault();
-    const email = document.getElementById('emailAdmin').value.trim();
-    const sandi = document.getElementById('sandiAdmin').value.trim();
-    const pesan = document.getElementById('pesanError');
+    
+    const emailMasuk = document.getElementById('email').value.trim();
+    const sandiMasuk = document.getElementById('sandi').value.trim();
+    const pesan = document.getElementById('pesanSalah');
 
-    const akun = DAFTAR_ADMIN.find(a => a.email === email && a.sandi === sandi);
-    if(akun){
-        // Simpan dengan pasti
-        const dataSesi = JSON.stringify({
-            nama: akun.nama,
-            level: akun.level,
-            email: akun.email
-        });
-        localStorage.setItem('adminTeravia', dataSesi);
-        
-        // Cek apakah sudah tersimpan, baru pindah
-        setTimeout(() => {
-            const cek = localStorage.getItem('adminTeravia');
-            if(cek){
-                window.location.href = '/admin-dashboard.html'; // Pakai jalur mutlak
-            } else {
-                pesan.textContent = 'Gagal menyimpan sesi, coba lagi!';
-                pesan.style.display = 'block';
-            }
-        }, 300);
+    // COCOKKAN DATA
+    if(emailMasuk === AKUN.email && sandiMasuk === AKUN.sandi){
+        // SIMPAN DENGAN PASTI
+        localStorage.setItem('adminLogin', 'YA_SUDAH_MASUK');
+        // PINDAH HALAMAN
+        window.location.replace('/admin-dashboard.html');
     } else {
-        pesan.textContent = 'Email atau kata sandi salah!';
         pesan.style.display = 'block';
     }
 });
 
-// Alihkan jika sudah login
-if(localStorage.getItem('adminTeravia')){
-    window.location.href = '/admin-dashboard.html';
+// JIKA SUDAH MASUK, LANGSUNG KE DASHBOARD
+if(localStorage.getItem('adminLogin') === 'YA_SUDAH_MASUK'){
+    window.location.replace('/admin-dashboard.html');
 }
 </script>
-
-</script>
-
 </body>
-</html>
+</
+    html>
