@@ -500,3 +500,218 @@ a {
     }
 }
 
+/* ==============================================
+   KOTAK PENCARIAN UTAMA
+============================================== */
+.pencarian-utama {
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+}
+
+.kotak-pencarian {
+    background: white;
+    padding: 24px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.kotak-pencarian h3 {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #1e293b;
+    font-size: 20px;
+}
+
+.grup-pencarian {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-lokasi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 15px;
+    background: #f8fafc;
+}
+
+.input-lokasi input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+}
+
+.tombol-tujuan {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-tujuan {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-tujuan.aktif {
+    background: var(--utama);
+    color: white;
+    border-color: var(--utama);
+}
+
+.btn-cari-biru {
+    width: 100%;
+    padding: 13px;
+    background: var(--utama);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cari-biru:hover {
+    background: #0b4cdb;
+}
+
+/* ==============================================
+   DAFTAR PROPERTI
+============================================== */
+.daftar-properti-beranda {
+    margin-top: 60px;
+}
+
+.judul-bagian {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.judul-bagian h2 {
+    font-size: 22px;
+    color: #1e293b;
+}
+
+.lihat-semua {
+    color: var(--utama);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.grid-kartu-properti {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.kartu-properti {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.gambar-properti {
+    height: 180px;
+    position: relative;
+}
+
+.label-unggulan {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fbbf24;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.label-baru {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.label-sewa {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #8b5cf6;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.isi-kartu {
+    padding: 16px;
+}
+
+.harga {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--utama);
+    margin-bottom: 6px;
+}
+
+.isi-kartu h4 {
+    font-size: 16px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.lokasi {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.spesifikasi {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: #475569;
+}
+
+/* RESPONSIF LAYAR BESAR */
+@media (min-width: 768px) {
+    .grup-pencarian {
+        flex-direction: row;
+        align-items: center;
+    }
+    .input-lokasi { flex: 2; }
+    .tombol-tujuan { flex: 1; }
+    .btn-cari-biru { flex: 1; }
+
+    .grid-kartu-properti {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-kartu-properti {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
