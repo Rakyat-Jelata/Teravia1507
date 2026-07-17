@@ -44,16 +44,16 @@ document.getElementById('formRegistrasi').addEventListener('submit', function(e)
   // === KIRIM EMAIL VERIFIKASI ASLI ===
   emailjs.send("service_nkaf4um", "template_xuz82mj", {
     nama: nama,
-    email: email
-  })
-  .then(() => {
-    alert('✅ Pendaftaran berhasil!\n\nSilakan cek kotak masuk email (' + email + ') untuk mengaktifkan akunmu!');
-    window.location.href = '/login.html';
-  })
-  .catch((error) => {
-    alert('⚠️ Pendaftaran tersimpan, tapi gagal kirim email: ' + error.message);
-    window.location.href = '/login.html';
-  });
+  email: email
+})
+.then((hasil) => {
+  console.log("BERHASIL:", hasil);
+  alert('✅ Pendaftaran berhasil! Cek email (' + email + ') untuk verifikasi.');
+  window.location.href = '/login.html';
+})
+.catch((error) => {
+  console.error("GAGAL KIRIM:", error);
+  alert('⚠️ Pendaftaran tersimpan, tapi gagal kirim: ' + error.text + '\nLihat F12 Console untuk detail.');
 });
    
 </script>
