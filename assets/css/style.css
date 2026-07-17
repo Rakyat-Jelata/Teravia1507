@@ -1,3 +1,177 @@
+/* ==============================================
+   NAVBAR & HAMBURGER MENU
+============================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 999;
+}
+
+.wadah-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    text-decoration: none;
+}
+
+.menu-desktop {
+    display: none;
+    align-items: center;
+    gap: 20px;
+}
+
+.tautan-nav {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.tautan-nav:hover, .tautan-nav.aktif {
+    color: #165DFF;
+}
+
+.btn-pasang {
+    background: #165DFF;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* TOMBOL HAMBURGER */
+.tombol-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.tombol-hamburger span {
+    width: 24px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* MENU MOBILE */
+.menu-samping {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    padding: 60px 20px 20px;
+}
+
+.menu-samping.buka {
+    right: 0;
+}
+
+.latar-gelap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.latar-gelap.aktif {
+    opacity: 1;
+    visibility: visible;
+}
+
+.isi-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tautan-menu {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.tautan-menu:hover, .tautan-menu.aktif {
+    background: #f0f7ff;
+    color: #165DFF;
+}
+
+.garis-pemisah {
+    height: 1px;
+    background: #eee;
+    margin: 5px 0;
+}
+
+.btn-pasang-menu {
+    background: #165DFF;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/* SESUAIKAN TAMPILAN DI LAYAR BESAR */
+@media (min-width: 768px) {
+    .menu-desktop {
+        display: flex;
+    }
+    .tombol-hamburger {
+        display: none;
+    }
+    .menu-samping {
+        display: none;
+    }
+    .latar-gelap {
+        display: none;
+    }
+}
+
+/* BERI JARAK KONTEN AGAR TIDAK TERTUTUP NAVBAR */
+body {
+    padding-top: 55px;
+}
+
 :root {
     --utama: #165DFF;
     --sekunder: #0E42CC;
@@ -152,3 +326,4 @@ a {
     font-size: 14px;
     margin-top: 0; /* Tempel rapi di bawah hero */
 }
+
