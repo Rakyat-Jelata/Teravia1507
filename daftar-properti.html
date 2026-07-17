@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Properti - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR SAMA PERSIS DENGAN BERANDA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="Teravia" style="height: 32px; width: auto; display: block;">
+        </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav aktif">Cari Properti</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="blog.html" class="tautan-nav">Blog Properti</a>
+            <a href="tentang-kami.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING -->
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu">
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
+    </div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu aktif">🔍 Cari Properti</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
+        <a href="tentang-kami.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pasang-iklan.html" class="btn-pasang-menu">+ Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk / Daftar</a>
+    </div>
+</div>
+<div id="latarGelap" class="latar-gelap"></div>
+
+<!-- KONTEN UTAMA -->
+<main class="beranda">
+    <div class="container" style="padding-top: 30px;">
+
+        <!-- INFORMASI HASIL PENCARIAN -->
+        <div class="info-pencarian">
+            <h2 id="judulHasil">Mencari Properti</h2>
+            <p id="lokasiHasil">Seluruh Indonesia</p>
+        </div>
+
+        <!-- FILTER LANJUTAN -->
+        <div class="baris-filter">
+            <button class="btn-filter" id="btnFilterBeli">Beli</button>
+            <button class="btn-filter" id="btnFilterSewa">Sewa</button>
+            <select class="pilih-filter" id="pilihTipe">
+                <option value="">Semua Tipe</option>
+                <option value="rumah">Rumah</option>
+                <option value="apartemen">Apartemen</option>
+                <option value="tanah">Tanah</option>
+                <option value="ruko">Ruko</option>
+            </select>
+            <select class="pilih-filter" id="pilihHarga">
+                <option value="">Semua Harga</option>
+                <option value="0-500">Di bawah 500 Juta</option>
+                <option value="500-1000">500 Juta - 1 Miliar</option>
+                <option value="1000-2500">1 - 2,5 Miliar</option>
+                <option value="2500-999999">Di atas 2,5 Miliar</option>
+            </select>
+        </div>
+
+        <!-- DAFTAR PROPERTI -->
+        <div class="grid-kartu-properti" style="margin-top: 20px;">
+            <!-- KARTU 1 -->
+            <div class="kartu-properti">
+                <div class="gambar-properti" style="background: #e2e8f0;">
+                    <span class="label-unggulan">⭐ Unggulan</span>
+                </div>
+                <div class="isi-kartu">
+                    <div class="harga">Rp 950 Juta</div>
+                    <h4>Rumah Modern Siap Huni di Cibinong</h4>
+                    <p class="lokasi">📍 Bogor, Jawa Barat</p>
+                    <div class="spesifikasi">
+                        <span>🛏️ 3 KT</span>
+                        <span>🛁 2 KM</span>
+                        <span>📏 108 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU 2 -->
+            <div class="kartu-properti">
+                <div class="gambar-properti" style="background: #cbd5e1;">
+                    <span class="label-baru">Baru</span>
+                </div>
+                <div class="isi-kartu">
+                    <div class="harga">Rp 2,8 Miliar</div>
+                    <h4>Rumah Cluster Elite di BSD City</h4>
+                    <p class="lokasi">📍 Tangerang Selatan, Banten</p>
+                    <div class="spesifikasi">
+                        <span>🛏️ 4 KT</span>
+                        <span>🛁 3 KM</span>
+                        <span>📏 150 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU 3 -->
+            <div class="kartu-properti">
+                <div class="gambar-properti" style="background: #e2e8f0;">
+                    <span class="label-sewa">Sewa</span>
+                </div>
+                <div class="isi-kartu">
+                    <div class="harga">Rp 3,5 Juta / bulan</div>
+                    <h4>Apartemen Dekat Stasiun Tebet</h4>
+                    <p class="lokasi">📍 Jakarta Selatan, DKI Jakarta</p>
+                    <div class="spesifikasi">
+                        <span>🛏️ 2 KT</span>
+                        <span>🛁 1 KM</span>
+                        <span>📏 45 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU 4 -->
+            <div class="kartu-properti">
+                <div class="gambar-properti" style="background: #cbd5e1;">
+                    <span class="label-baru">Baru</span>
+                </div>
+                <div class="isi-kartu">
+                    <div class="harga">Rp 1,2 Miliar</div>
+                    <h4>Tanah Kavling Siap Bangun di Depok</h4>
+                    <p class="lokasi">📍 Depok, Jawa Barat</p>
+                    <div class="spesifikasi">
+                        <span>📏 250 m²</span>
+                        <span>📄 SHM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- FOOTER SAMA PERSIS -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-baris">
+            <div class="footer-kolom">
+                <h3 class="footer-logo">TERAVIA</h3>
+                <p class="footer-desc">Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia.</p>
+                <div class="footer-kontak">
+                    <p>📍 Bogor, Jawa Barat</p>
+                    <p>📞 +62 812-xxxx-xxxx</p>
+                    <p>📧 halo@teravia.id</p>
+                </div>
+            </div>
+            <div class="footer-kolom">
+                <h4>Layanan</h4>
+                <a href="daftar-properti.html">Cari Properti</a>
+                <a href="pasang-iklan.html">Pasang Iklan</a>
+                <a href="membership.html">Keanggotaan</a>
+                <a href="mitra-notaris.html">Mitra Notaris/PPAT</a>
+            </div>
+            <div class="footer-kolom">
+                <h4>Bantuan</h4>
+                <a href="tentang-kami.html">Tentang Kami</a>
+                <a href="blog.html">Blog Properti</a>
+                <a href="helpdesk.html">Pusat Bantuan</a>
+                <a href="#">Kebijakan Privasi</a>
+                <a href="#">Syarat & Ketentuan</a>
+            </div>
+            <div class="footer-kolom">
+                <h4>Ikuti Kami</h4>
+                <div class="footer-sosmed">
+                    <a href="#" target="_blank">📘 Facebook</a>
+                    <a href="#" target="_blank">📸 Instagram</a>
+                    <a href="#" target="_blank">🐦 Twitter/X</a>
+                    <a href="#" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bawah">
+            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+
+<!-- SCRIPT KHUSUS HALAMAN INI -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // BACA PARAMETER DARI BERANDA
+    const urlParams = new URLSearchParams(window.location.search);
+    const tujuan = urlParams.get('tujuan') || 'beli';
+    const lokasi = urlParams.get('lokasi') || 'Seluruh Indonesia';
+
+    // TAMPILKAN INFORMASI
+    const judul = document.getElementById('judulHasil');
+    const lokasiEl = document.getElementById('lokasiHasil');
+    const btnBeli = document.getElementById('btnFilterBeli');
+    const btnSewa = document.getElementById('btnFilterSewa');
+
+    judul.textContent = tujuan === 'beli' ? 'Properti Dijual' : 'Properti Disewa';
+    lokasiEl.textContent = `Lokasi: ${lokasi}`;
+
+    // TANDAI TOMBOL YANG DIPILIH
+    if (tujuan === 'beli') {
+        btnBeli.classList.add('aktif');
+        btnSewa.classList.remove('aktif');
+    } else {
+        btnSewa.classList.add('aktif');
+        btnBeli.classList.remove('aktif');
+    }
+
+    // FUNGSI PILIH FILTER BELI/SEWA
+    btnBeli.addEventListener('click', () => {
+        btnBeli.classList.add('aktif');
+        btnSewa.classList.remove('aktif');
+        judul.textContent = 'Properti Dijual';
+    });
+    btnSewa.addEventListener('click', () => {
+        btnSewa.classList.add('aktif');
+        btnBeli.classList.remove('aktif');
+        judul.textContent = 'Properti Disewa';
+    });
+});
+</script>
+
+</body>
+  </html>
+  
