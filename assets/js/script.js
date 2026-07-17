@@ -9,33 +9,26 @@ let dataKecamatan = [];
 let dataDesa = [];
 
 document.addEventListener('DOMContentLoaded', function(){
-    console.log("✅ Script Teravia Berjalan!");
-
-   // Menu Hamburger
-const tombolMenu = document.getElementById('tombolMenu');
-const menuMobile = document.getElementById('menuMobile');
-const latarGelap = document.getElementById('latarGelap');
-
-if(tombolMenu && menuMobile && latarGelap){
-    tombolMenu.addEventListener('click', () => {
-        menuMobile.classList.toggle('buka');
-        latarGelap.classList.toggle('aktif');
-    });
-
-    // Tutup kalau klik area gelap di luar menu
-    latarGelap.addEventListener('click', () => {
-        menuMobile.classList.remove('buka');
-        latarGelap.classList.remove('aktif');
-    });
-
-    // Tutup otomatis setelah pilih menu
-    document.querySelectorAll('.tautan-menu, .btn-pasang-menu').forEach(link => {
-        link.addEventListener('click', () => {
-            menuMobile.classList.remove('buka');
-            latarGelap.classList.remove('aktif');
-        });
-    });
-}
+     console.log("✅ Script Teravia Berjalan!");
+     // ✅ MENU HAMBURGER LENGKAP DENGAN TOMBOL TUTUP
+     const tombolMenu = document.getElementById('tombolMenu');
+     const tombolTutup = document.getElementById('tombolTutup');
+     const menuMobile = document.getElementById('menuMobile');
+     const latarGelap = document.getElementById('latarGelap');
+     function tutupMenu(){
+         menuMobile.classList.remove('buka');
+         latarGelap.classList.remove('aktif');
+     }
+     if(tombolMenu && menuMobile && latarGelap){
+         tombolMenu.addEventListener('click', () => {
+             menuMobile.classList.toggle('buka');
+             latarGelap.classList.toggle('aktif');
+         });
+         tombolTutup?.addEventListener('click', tutupMenu);
+         latarGelap.addEventListener('click', tutupMenu);
+         document.querySelectorAll('.tautan-menu, .btn-pasang-menu').forEach(link => {
+             link.addEventListener('click', tutupMenu);
+         });
 
 
     // Mulai muat data wilayah (FUNGSI LAMA TETAP DIPAKAI, DIPERBAIKI SAJA)
