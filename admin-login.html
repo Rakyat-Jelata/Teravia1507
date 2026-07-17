@@ -126,7 +126,7 @@
 </div>
 
 <script>
-// === AKUN ADMIN SUDAH DISETTING SESUAI PERMINTAANMU ===
+// === AKUN ADMIN ===
 const DAFTAR_ADMIN = [
   { 
     email: "teravia.admin@gmail.com", 
@@ -144,23 +144,26 @@ document.getElementById('formLogin').addEventListener('submit', function(e){
 
     const akun = DAFTAR_ADMIN.find(a => a.email === email && a.sandi === sandi);
     if(akun){
-        // Simpan sesi login admin
-        sessionStorage.setItem('adminTeravia', JSON.stringify({
+        // PAKAI localStorage AGAR LEBIH STABIL, BUKAN sessionStorage
+        localStorage.setItem('adminTeravia', JSON.stringify({
             nama: akun.nama,
             level: akun.level,
             email: akun.email
         }));
-        // Langsung buka dashboard
-        window.location.href = 'admin-dashboard.html';
+        // Beri waktu simpan sebelum pindah halaman
+        setTimeout(() => {
+            window.location.href = 'admin-dashboard.html';
+        }, 200);
     } else {
         pesan.style.display = 'block';
     }
 });
 
-// Cek jika sudah login, langsung loncat ke dashboard
-if(sessionStorage.getItem('adminTeravia')){
+// Cek jika sudah login
+if(localStorage.getItem('adminTeravia')){
     window.location.href = 'admin-dashboard.html';
 }
 </script>
+
 </body>
 </html>
