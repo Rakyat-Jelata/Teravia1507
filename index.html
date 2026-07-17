@@ -155,7 +155,7 @@
     </div>
 </section>
 <!-- ==============================================
-   BAGIAN TESTIMONI
+   BAGIAN TESTIMONI - SLIDER OTOMATIS
 ============================================== -->
 <section class="daftar-properti-beranda">
     <div class="beranda-konten">
@@ -166,48 +166,85 @@
             </div>
         </div>
 
-        <div class="grid-kartu-properti" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-            <!-- Kartu Testimoni 1 -->
-            <div class="kartu-properti" style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                    <div style="width:45px;height:45px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--utama);">AR</div>
-                    <div>
-                        <h4 style="margin:0;">Ahmad Rizky</h4>
-                        <p style="margin:0;font-size:12px;color:var(--abu);">Pembeli Rumah, Bogor</p>
+        <div class="wadah-slider-testimoni" style="position:relative;overflow:hidden;border-radius:16px;">
+            <div class="baris-slider" id="barisTestimoni" style="display:flex;transition:transform 0.5s ease;">
+                
+                <!-- SLIDE 1 -->
+                <div class="item-slider" style="min-width:100%;padding:0 8px;">
+                    <div class="kartu-properti" style="padding:24px;margin:0;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                            <div style="width:48px;height:48px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--utama);font-size:18px;">AR</div>
+                            <div>
+                                <h4 style="margin:0;">Ahmad Rizky</h4>
+                                <p style="margin:0;font-size:13px;color:var(--abu);">Pembeli Rumah, Bogor</p>
+                            </div>
+                        </div>
+                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Sangat terbantu dengan Teravia, proses cari rumah jadi lebih mudah dan informasinya jelas. Akhirnya dapat rumah impian di lokasi yang pas!"</p>
+                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
                     </div>
                 </div>
-                <p style="font-size:14px;color:#475569;line-height:1.6;">"Sangat terbantu dengan Teravia, proses cari rumah jadi lebih mudah dan informasinya jelas. Akhirnya dapat rumah impian di lokasi yang pas!"</p>
-                <div style="margin-top:12px;color:#f59e0b;">⭐⭐⭐⭐⭐</div>
+
+                <!-- SLIDE 2 -->
+                <div class="item-slider" style="min-width:100%;padding:0 8px;">
+                    <div class="kartu-properti" style="padding:24px;margin:0;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                            <div style="width:48px;height:48px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#16a34a;font-size:18px;">SD</div>
+                            <div>
+                                <h4 style="margin:0;">Siti Dewi</h4>
+                                <p style="margin:0;font-size:13px;color:var(--abu);">Penyewa Apartemen, Jakarta</p>
+                            </div>
+                        </div>
+                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Respon cepat dan verifikasi data terjamin. Saya menemukan apartemen dekat kantor dalam waktu kurang dari 3 hari!"</p>
+                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="item-slider" style="min-width:100%;padding:0 8px;">
+                    <div class="kartu-properti" style="padding:24px;margin:0;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                            <div style="width:48px;height:48px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#9333ea;font-size:18px;">BP</div>
+                            <div>
+                                <h4 style="margin:0;">Budi Pratama</h4>
+                                <p style="margin:0;font-size:13px;color:var(--abu);">Pemilik Iklan, Tangerang</p>
+                            </div>
+                        </div>
+                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Iklan saya cepat dilihat banyak orang, dalam seminggu sudah ada yang berminat serius. Platform yang sangat tepat untuk pasar Indonesia."</p>
+                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 4 (TAMBAHAN AGAR PUTAR LANCAR) -->
+                <div class="item-slider" style="min-width:100%;padding:0 8px;">
+                    <div class="kartu-properti" style="padding:24px;margin:0;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                            <div style="width:48px;height:48px;border-radius:50%;background:#fff3cd;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#d97706;font-size:18px;">LR</div>
+                            <div>
+                                <h4 style="margin:0;">Lina Rosita</h4>
+                                <p style="margin:0;font-size:13px;color:var(--abu);">Agen Properti, Bandung</p>
+                            </div>
+                        </div>
+                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Sistem verifikasi akun membuat saya lebih percaya bertransaksi di sini. Pelanggan juga lebih yakin dengan listing Teravia!"</p>
+                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Kartu Testimoni 2 -->
-            <div class="kartu-properti" style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                    <div style="width:45px;height:45px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#16a34a;">SD</div>
-                    <div>
-                        <h4 style="margin:0;">Siti Dewi</h4>
-                        <p style="margin:0;font-size:12px;color:var(--abu);">Penyewa Apartemen, Jakarta</p>
-                    </div>
-                </div>
-                <p style="font-size:14px;color:#475569;line-height:1.6;">"Respon cepat dan verifikasi data terjamin. Saya menemukan apartemen dekat kantor dalam waktu kurang dari 3 hari!"</p>
-                <div style="margin-top:12px;color:#f59e0b;">⭐⭐⭐⭐⭐</div>
-            </div>
+            <!-- TOMBOL NAVIGASI -->
+            <button id="tombolKiri" style="position:absolute;top:50%;left:8px;transform:translateY(-50%);background:white;border:none;width:36px;height:36px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer;font-size:18px;z-index:2;">‹</button>
+            <button id="tombolKanan" style="position:absolute;top:50%;right:8px;transform:translateY(-50%);background:white;border:none;width:36px;height:36px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer;font-size:18px;z-index:2;">›</button>
 
-            <!-- Kartu Testimoni 3 -->
-            <div class="kartu-properti" style="padding:20px;">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                    <div style="width:45px;height:45px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#9333ea;">BP</div>
-                    <div>
-                        <h4 style="margin:0;">Budi Pratama</h4>
-                        <p style="margin:0;font-size:12px;color:var(--abu);">Pemilik Iklan, Tangerang</p>
-                    </div>
-                </div>
-                <p style="font-size:14px;color:#475569;line-height:1.6;">"Iklan saya cepat dilihat banyak orang, dalam seminggu sudah ada yang berminat serius. Platform yang sangat tepat untuk pasar Indonesia."</p>
-                <div style="margin-top:12px;color:#f59e0b;">⭐⭐⭐⭐⭐</div>
+            <!-- TITIK INDIKATOR -->
+            <div class="titik-slider" style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:8px;">
+                <span class="titik-aktif" data-slide="0" style="width:10px;height:10px;border-radius:50%;background:var(--utama);cursor:pointer;"></span>
+                <span data-slide="1" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
+                <span data-slide="2" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
+                <span data-slide="3" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
             </div>
         </div>
     </div>
-    </section>
+</section>
+
 <!-- FOOTER (POSISI PASTI DI LUAR SEMUA BAGIAN LAIN) -->
 <footer class="footer">
     <div class="container">
