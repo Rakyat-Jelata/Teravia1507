@@ -11,51 +11,37 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-// INISIALISASI EMAILJS DENGAN KODENYA
-(function(){
-    emailjs.init("_hrxleOeaGYuM0ay1");
-})();
-
 document.getElementById('formRegistrasi').addEventListener('submit', function(e){
   e.preventDefault();
   const nama = document.getElementById('nama').value.trim();
   const email = document.getElementById('email').value.trim();
   const sandi = document.getElementById('sandi').value.trim();
 
+  // Cek email sudah terdaftar
   const semuaUser = JSON.parse(localStorage.getItem('teravia_users') || '[]');
-  const ada = semuaUser.find(u => u.email === email);
-  if(ada) return alert('❌ Email ini sudah terdaftar!');
+  const sudahAda = semuaUser.find(u => u.email === email);
+  if(sudahAda) return alert('❌ Email ini sudah terdaftar!');
 
-  // Simpan akun DENGAN STATUS BELUM VERIFIKASI
+  // Simpan akun baru
   const akunBaru = {
     id: Date.now(),
     nama: nama,
     email: email,
     sandi: sandi,
     tier: 'Kaveling',
-    terverifikasi: false, // ⭐ TANDAI BELUM AKTIF
     tanggal_berlaku: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
     kuota_terpakai: 0
   };
 
   semuaUser.push(akunBaru);
   localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
-
-  // === KIRIM EMAIL VERIFIKASI ASLI ===
-  emailjs.send("service_nkaf4um", "template_xuz82mj", {
-    nama: nama,
-  email: email
-})
-.then((hasil) => {
-  console.log("BERHASIL:", hasil);
-  alert('✅ Pendaftaran berhasil! Cek email (' + email + ') untuk verifikasi.');
-  window.location.href = '/login.html';
-})
-.catch((error) => {
-  console.error("GAGAL KIRIM:", error);
-  alert('⚠️ Pendaftaran tersimpan, tapi gagal kirim: ' + error.text + '\nLihat F12 Console untuk detail.');
+  
+  // Langsung masuk & loncat ke BERANDA
+  localStorage.setItem('teravia_sesi', JSON.stringify({id: akunBaru.id, nama: akunBaru.nama}));
+  alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
+  window.location.href = '/index.html'; // <-- LANGSUNG KE BERANDA
 });
-   
+
 </script>
 </head>
 <body class="halaman-login halaman-daftar">
