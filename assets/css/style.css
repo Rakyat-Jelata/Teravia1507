@@ -421,3 +421,82 @@ a {
    
     }
 }
+
+/* ==============================================
+   FOOTER - SESUAI TEMA TERAVIA
+============================================== */
+.footer {
+    background: var(--gelap);
+    color: var(--putih);
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.footer-baris {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-kolom h3 {
+    font-size: 20px;
+    color: var(--utama);
+    margin-bottom: 12px;
+}
+
+.footer-kolom h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+.footer-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.footer-kontak p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.footer-kolom a {
+    display: block;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+}
+
+.footer-kolom a:hover {
+    color: var(--utama);
+}
+
+.footer-sosmed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-bawah {
+    border-top: 1px solid #334155;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* RESPONSIF HP */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 0 15px;
+    }
+    .footer-baris {
+        gap: 20px;
+    }
+}
+
