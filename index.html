@@ -10,16 +10,13 @@
 <body>
 
 <!-- ==============================================
-    NAVBAR & HAMBURGER MENU - TERAVIA (SATU-SATUNYA)
+    NAVBAR & HAMBURGER MENU - TERAVIA
 ============================================== -->
 <nav class="navbar">
     <div class="wadah-nav">
-        <!-- Logo -->
         <a href="index.html" class="logo">
             <span style="color:#165DFF; font-weight:800; font-size:20px;">TERAVIA</span>
         </a>
-
-        <!-- Menu Desktop -->
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav aktif">Beranda</a>
             <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
@@ -27,18 +24,16 @@
             <a href="tentang-kami.html" class="tautan-nav">Tentang Kami</a>
             <a href="pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
         </div>
-
-        <!-- Tombol Hamburger (Hanya Tampil di HP) -->
         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
     </div>
 </nav>
 
-<!-- Menu Muncul dari Samping (Mobile) -->
 <div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu">
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
+    </div>
     <div class="isi-menu">
         <a href="index.html" class="tautan-menu aktif">🏠 Beranda</a>
         <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
@@ -52,25 +47,18 @@
 </div>
 <div id="latarGelap" class="latar-gelap"></div>
 
-
 <!-- ==============================================
-    BAGIAN HERO / SAMBUTAN
+    BAGIAN HERO - SERAGAM HP & DEKSTOP
 ============================================== -->
-<section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; margin-top: 0;">
-    <div class="container beranda-konten" style="padding: 20px 15px; max-width: 1200px; margin: 0 auto;">
-        <div class="kotak-sambutan">
-            <h1 style="font-size: 32px; margin-bottom: 8px; color: #111;">Selamat Datang di Teravia</h1>
-            <p style="font-size: 16px; color: #444;">Marketplace Properti Berbasis AI dan Ads</p>
-        </div>
+<section class="hero">
+    <div class="wadah-hero">
+        <h1>Selamat Datang di Teravia</h1>
+        <p>Marketplace Properti Berbasis AI dan Ads</p>
     </div>
 </section>
 
-<main class="beranda">
-    <!-- Isi konten beranda lainnya taruh di sini nanti -->
-</main>
+<main class="beranda"></main>
 
 <script src="assets/js/script.js"></script>
-    
 </body>
-
 </html>
