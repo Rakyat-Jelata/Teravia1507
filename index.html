@@ -9,7 +9,48 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<!-- ==============================================
+    NAVBAR & HAMBURGER MENU - TERAVIA
+============================================== -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <span style="color:#165DFF; font-weight:800; font-size:20px;">TERAVIA</span>
+        </a>
 
+        <!-- Menu Desktop -->
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav aktif">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="tentang-kami.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+        </div>
+
+        <!-- Tombol Hamburger (Hanya Tampil di HP) -->
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Menu Muncul dari Samping (Mobile) -->
+<div id="menuMobile" class="menu-samping">
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu aktif">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
+        <a href="tentang-kami.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pasang-iklan.html" class="btn-pasang-menu">+ Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk / Daftar</a>
+    </div>
+</div>
+<div id="latarGelap" class="latar-gelap"></div>
 <header class="navbar">
     <div class="container">
         <div class="nav-brand">
