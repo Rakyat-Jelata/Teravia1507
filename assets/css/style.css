@@ -250,3 +250,132 @@ a {
         min-height: 440px;
     }
 }
+
+/* ==============================================
+   HALAMAN LOGIN - GLASSMORPHISM & TENGAH LAYAR
+============================================== */
+.halaman-login {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: url('assets/img/hero-bg.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Latar gelap tipis agar teks jelas */
+.halaman-login::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+}
+
+.wadah-login {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.kotak-login {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.logo-login {
+    height: 45px;
+    margin-bottom: 15px;
+}
+
+.kotak-login h2 {
+    color: #1E293B;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.grup-input {
+    margin-bottom: 18px;
+}
+
+.grup-input input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.7);
+    font-size: 15px;
+    color: #1E293B;
+    outline: none;
+}
+
+.grup-input input::placeholder {
+    color: #64748B;
+}
+
+.opsi-bawah {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+
+.ingat-saya {
+    color: #1E293B;
+    cursor: pointer;
+}
+
+.lupa-sandi {
+    color: var(--utama);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-masuk {
+    width: 100%;
+    padding: 13px;
+    background: var(--utama);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-masuk:hover {
+    background: var(--sekunder);
+}
+
+.tautan-daftar {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #1E293B;
+}
+
+.tautan-daftar a {
+    color: var(--utama);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tautan-kembali {
+    margin-top: 12px;
+}
+
+.tautan-kembali a {
+    font-size: 13px;
+    color: #475569;
+    text-decoration: none;
+}
