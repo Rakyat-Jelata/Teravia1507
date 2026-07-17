@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teravia</title>
-    <!-- Hapus tanda ../ di depan -->
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
 <!-- ==============================================
-    NAVBAR & HAMBURGER MENU - TERAVIA
+    NAVBAR & HAMBURGER MENU - TERAVIA (SATU-SATUNYA)
 ============================================== -->
 <nav class="navbar">
     <div class="wadah-nav">
@@ -51,44 +51,25 @@
     </div>
 </div>
 <div id="latarGelap" class="latar-gelap"></div>
-<header class="navbar">
-    <div class="container">
-        <div class="nav-brand">
-            <img src="assets/img/logo.png" alt="Teravia" height="36">
+
+
+<!-- ==============================================
+    BAGIAN HERO / SAMBUTAN
+============================================== -->
+<section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; margin-top: 0;">
+    <div class="container beranda-konten" style="padding: 20px 15px; max-width: 1200px; margin: 0 auto;">
+        <div class="kotak-sambutan">
+            <h1 style="font-size: 32px; margin-bottom: 8px; color: #111;">Selamat Datang di Teravia</h1>
+            <p style="font-size: 16px; color: #444;">Marketplace Properti Berbasis AI dan Ads</p>
         </div>
-
-        <nav class="nav-menu">
-            <a href="pages/masuk.html">Masuk</a>
-            <a href="pages/daftar.html" class="btn-utama">Daftar</a>
-            <a href="pages/pasang-iklan.html">Pasang Iklan</a>
-        </nav>
-
-        <button class="hamburger" id="tombolMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
     </div>
-</header>
-    
-<section class="hero" style="background-image: url('assets/img/hero-bg.png'); background-size: cover; background-position: center;">
-
-<div class="menu-mobile" id="menuMobile">
-    <a href="pages/masuk.html">Masuk</a>
-    <a href="pages/daftar.html" class="btn-utama">Daftar</a>
-    <a href="pages/pasang-iklan.html">Pasang Iklan</a>
-</div>
+</section>
 
 <main class="beranda">
-    <div class="container beranda-konten">
-        <div class="kotak-sambutan">
-            <h1>Selamat Datang di Teravia</h1>
-            <p>Marketplace Properti Berbasis AI dan Ads</p>
-        </div>
-    </div>
+    <!-- Isi konten beranda lainnya taruh di sini nanti -->
 </main>
 
-<script src="assets/js/script.js" type="module"></script>
+<script src="assets/js/script.js"></script>
     
 </body>
 </html>
