@@ -232,3 +232,260 @@ document.addEventListener('DOMContentLoaded', function(){
     pasangFormatHarga('hargaJual', 'formatHargaJual', 'terbilangJual');
     pasangFormatHarga('hargaSewa', 'formatHargaSewa', 'terbilangSewa');
 });
+
+// ==============================================
+// FITUR 1: SIMPAN DRAF OTOMATIS & PULIHKAN
+// ==============================================
+const KUNCI_DRAFT = "teravia_draf_pasang_iklan";
+let otomatisSimpan;
+
+document.addEventListener("DOMContentLoaded", function(){
+    pulihkanDraf();
+    pantauPerubahanForm();
+});
+
+function pantauPerubahanForm(){
+    const semuaInput = document.querySelectorAll("input, select, textarea");
+    semuaInput.forEach(el => {
+        el.addEventListener("input", simpanDraf);
+        el.addEventListener("change", simpanDraf);
+    });
+}
+
+function simpanDraf(){
+    clearTimeout(otomatisSimpan);
+    otomatisSimpan = setTimeout(() => {
+        const data = {};
+        document.querySelectorAll("input, select, textarea").forEach(el => {
+            if(el.type === "checkbox" || el.type === "radio"){
+                data[el.name] = data[el.name] || [];
+                if(el.checked) data[el.name].push(el.value);
+            } else {
+                data[el.id] = el.value;
+            }
+        });
+        localStorage.setItem(KUNCI_DRAFT, JSON.stringify(data));
+        console.log("✅ Draf tersimpan otomatis");
+    }, 800);
+}
+
+function pulihkanDraf(){
+    const data = localStorage.getItem(KUNCI_DRAFT);
+    if(!data) return;
+    const draf = JSON.parse(data);
+    Object.keys(draf).forEach(kunci => {
+        const el = document.getElementById(kunci);
+        if(el) el.value = draf[kunci];
+        document.querySelectorAll(`input[name="${kunci}"]`).forEach(cb => {
+            cb.checked = draf[kunci]?.includes(cb.value) || false;
+        });
+    });
+}
+
+// Hapus draf setelah berhasil kirim
+document.querySelector('button[type="submit"]')?.addEventListener("click", () => {
+    localStorage.removeItem(KUNCI_DRAFT);
+});
+
+// ==============================================
+// FITUR 2: FASILITAS OTOMATIS KE DESKRIPSI
+// ==============================================
+document.addEventListener("change", function(e){
+    if(e.target.name === "fasilitas") updateDeskripsiFasilitas();
+});
+
+function updateDeskripsiFasilitas(){
+    const desk = document.getElementById("deskripsiIklan");
+    if(!desk) return;
+    const terpilih = Array.from(document.querySelectorAll('input[name="fasilitas"]:checked')).map(c => c.value);
+    let teksDasar = desk.value.replace(/\n?--- Keunggulan ---\n[\s\S]*/g, "").trim();
+    if(terpilih.length > 0){
+        teksDasar += `\n\n--- Keunggulan ---\n${terpilih.join("\n")}`;
+    }
+    desk.value = teksDasar.trim();
+}
+
+// ==============================================
+// FITUR 3: SIMULASI KPR & SARAN HARGA
+// ==============================================
+document.addEventListener("input", hitungKPR);
+document.getElementById("lamaKpr")?.addEventListener("change", hitungKPR);
+
+function hitungKPR(){
+    const harga = parseInt(document.getElementById("hargaJual")?.value || 0);
+    const tahun = parseInt(document.getElementById("lamaKpr")?.value || 10);
+    const bunga = parseFloat(document.getElementById("bungaKpr")?.value || 6.25) / 100;
+    const wadah = document.getElementById("hasilKpr");
+
+    if(harga < 1000000){
+        wadah.style.display = "none";
+        return;
+    }
+
+    const bulan = tahun * 12;
+    const bungaBulan = bunga / 12;
+    const angsuran = harga * bungaBulan / (1 - Math.pow(1 + bungaBulan, -bulan));
+    const total = angsuran * bulan;
+    const totalBunga = total - harga;
+    const saranMaks = Math.round((angsuran / 0.3) / 1000000) * 1000000;
+
+    document.getElementById("angsuranKpr").textContent = "Rp " + Math.round(angsuran).toLocaleString("id-ID");
+    document.getElementById("totalKpr").textContent = "Rp " + Math.round(total).toLocaleString("id-ID");
+    document.getElementById("totalBunga").textContent = "Rp " + Math.round(totalBunga).toLocaleString("id-ID");
+    document.getElementById("saranHarga").textContent = `💡 Saran: Cicilan ini sekitar 30% dari penghasilan Rp ${saranMaks.toLocaleString("id-ID")}/bulan`;
+    wadah.style.display = "block";
+}
+
+// ==============================================
+// FITUR: UPLOAD FOTO, PREVIEW GAMBAR, ATUR URUTAN
+// ==============================================
+let daftarFoto = [];
+const inputFoto = document.getElementById("inputFoto");
+const wadahFoto = document.getElementById("wadahPreviewFoto");
+
+inputFoto?.addEventListener("change", function(e){
+    const fileBaru = Array.from(e.target.files);
+    fileBaru.forEach(f => {
+        if(f.type.startsWith("image/")) daftarFoto.push(f);
+    });
+    tampilkanPreviewFoto();
+});
+
+function tampilkanPreviewFoto(){
+    wadahFoto.innerHTML = "";
+    daftarFoto.forEach((file, i) => {
+        const baca = new FileReader();
+        baca.onload = function(e){
+            const div = document.createElement("div");
+            div.style.cssText = "position:relative; border-radius:8px; overflow:hidden; border:2px solid #ddd; cursor:grab; background:#f9f9f9;";
+            div.innerHTML = `
+                <img src="${e.target.result}" style="width:100%; height:90px; object-fit:cover;">
+                <div style="position:absolute; top:4px; right:4px; display:flex; gap:4px;">
+                    <span onclick="jadikanSampul(${i})" style="background:rgba(0,0,0,0.6); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">⭐</span>
+                    <span onclick="hapusFoto(${i})" style="background:rgba(239,68,68,0.8); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">✕</span>
+                </div>
+                ${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:#165DFF;color:white;font-size:10px;text-align:center;padding:2px;">📸 Sampul Utama</div>':''}
+            `;
+            wadahFoto.appendChild(div);
+        };
+        baca.readAsDataURL(file);
+    });
+}
+
+function hapusFoto(i){
+    daftarFoto.splice(i, 1);
+    tampilkanPreviewFoto();
+}
+
+function jadikanSampul(i){
+    const [pertama] = daftarFoto.splice(i, 1);
+    daftarFoto.unshift(pertama);
+    tampilkanPreviewFoto();
+}
+
+// ==============================================
+// FITUR: UPLOAD FOTO, PREVIEW GAMBAR, ATUR URUTAN
+// ==============================================
+let daftarFoto = [];
+const inputFoto = document.getElementById("inputFoto");
+const wadahFoto = document.getElementById("wadahPreviewFoto");
+
+inputFoto?.addEventListener("change", function(e){
+    const fileBaru = Array.from(e.target.files);
+    fileBaru.forEach(f => {
+        if(f.type.startsWith("image/")) daftarFoto.push(f);
+    });
+    tampilkanPreviewFoto();
+});
+
+function tampilkanPreviewFoto(){
+    wadahFoto.innerHTML = "";
+    daftarFoto.forEach((file, i) => {
+        const baca = new FileReader();
+        baca.onload = function(e){
+            const div = document.createElement("div");
+            div.style.cssText = "position:relative; border-radius:8px; overflow:hidden; border:2px solid #ddd; cursor:grab; background:#f9f9f9;";
+            div.innerHTML = `
+                <img src="${e.target.result}" style="width:100%; height:90px; object-fit:cover;">
+                <div style="position:absolute; top:4px; right:4px; display:flex; gap:4px;">
+                    <span onclick="jadikanSampul(${i})" style="background:rgba(0,0,0,0.6); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">⭐</span>
+                    <span onclick="hapusFoto(${i})" style="background:rgba(239,68,68,0.8); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">✕</span>
+                </div>
+                ${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:#165DFF;color:white;font-size:10px;text-align:center;padding:2px;">📸 Sampul Utama</div>':''}
+            `;
+            wadahFoto.appendChild(div);
+        };
+        baca.readAsDataURL(file);
+    });
+}
+
+function hapusFoto(i){
+    daftarFoto.splice(i, 1);
+    tampilkanPreviewFoto();
+}
+
+function jadikanSampul(i){
+    const [pertama] = daftarFoto.splice(i, 1);
+    daftarFoto.unshift(pertama);
+    tampilkanPreviewFoto();
+}
+
+// ==============================================
+// FITUR: PREVIEW HALAMAN IKLAN PENUH
+// ==============================================
+document.getElementById("btnLihatPratinjau")?.addEventListener("click", bukaPratinjauIklan);
+
+function bukaPratinjauIklan(){
+    // Ambil semua data dari form
+    const judul = document.getElementById("judulIklan")?.value || "Judul Iklan Properti Anda";
+    const deskripsi = document.getElementById("deskripsiIklan")?.value || "Deskripsi properti akan tampil di sini...";
+    const lokasi = [
+        document.getElementById("pilihKecamatan")?.selectedOptions[0]?.text,
+        document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text
+    ].filter(Boolean).join(", ");
+    const harga = document.getElementById("hargaJual")?.value || document.getElementById("hargaSewa")?.value || "0";
+    const hargaFormat = "Rp " + parseInt(harga).toLocaleString("id-ID");
+    const sampul = daftarFoto[0] ? URL.createObjectURL(daftarFoto[0]) : "https://via.placeholder.com/800x400?text=Foto+Properti";
+
+    // Buka jendela baru tampilan iklan
+    const jendela = window.open("", "_blank", "width=400,height=700");
+    jendela.document.write(`
+    <!DOCTYPE html>
+    <html style="margin:0; padding:0; font-family:system-ui;">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PRATINJAU IKLAN - Teravia</title>
+        <style>
+            *{box-sizing:border-box; margin:0; padding:0;}
+            body{background:#f5f7fa; padding:15px;}
+            .kartu{background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+            .foto{width:100%; height:220px; object-fit:cover; background:#eee;}
+            .isi{padding:15px;}
+            .judul{font-size:18px; font-weight:700; color:#111; margin-bottom:5px;}
+            .harga{font-size:20px; font-weight:700; color:#165DFF; margin:8px 0;}
+            .lokasi{font-size:13px; color:#666; display:flex; align-items:center; gap:5px;}
+            .deskripsi{margin-top:12px; font-size:14px; line-height:1.6; color:#333; white-space:pre-wrap;}
+            .label{display:inline-block; background:#e8f3ff; color:#165DFF; padding:3px 8px; border-radius:4px; font-size:11px; margin:3px;}
+            .catatan{margin-top:20px; text-align:center; font-size:12px; color:#888;}
+        </style>
+    </head>
+    <body>
+        <div class="kartu">
+            <img src="${sampul}" class="foto" alt="Foto Properti">
+            <div class="isi">
+                <div class="judul">${judul}</div>
+                <div class="harga">${hargaFormat}</div>
+                <div class="lokasi">📍 ${lokasi || "Lokasi belum dipilih"}</div>
+                <div class="deskripsi">${deskripsi}</div>
+                <div style="margin-top:15px;">
+                    <span class="label">Dipasang lewat Teravia</span>
+                    <span class="label">Pratinjau Saja</span>
+                </div>
+            </div>
+        </div>
+        <p class="catatan">✅ Ini adalah tampilan iklan asli yang akan dilihat pembeli</p>
+    </body>
+    </html>
+    `);
+    jendela.document.close();
+}
