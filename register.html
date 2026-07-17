@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="halaman-login halaman-daftar">
+
+<div class="wadah-login">
+    <div class="kotak-login kotak-daftar">
+        <img src="assets/img/logo.png" alt="Teravia" class="logo-login">
+        <h2>Daftar Akun</h2>
+
+        <form class="form-login form-daftar">
+            <div class="grup-input">
+                <input type="text" placeholder="Username (Ditampilkan di listingan)" required>
+            </div>
+            <div class="grup-input">
+                <input type="text" placeholder="Nama Lengkap Penjual" required>
+            </div>
+            <div class="grup-input">
+                <input type="tel" placeholder="Nomor WhatsApp" required>
+            </div>
+            <div class="grup-input">
+                <input type="email" placeholder="Alamat Email (Aktivasi akun dikirim ke sini)" required>
+            </div>
+
+            <!-- Kolom Password dengan tombol sembunyi/tampil -->
+            <div class="grup-input sandi-grup">
+                <input type="password" id="kataSandi" placeholder="Kata Sandi" required>
+                <button type="button" class="tombol-mata" onclick="toggleSandi('kataSandi', this)">👁️</button>
+            </div>
+
+            <!-- Kolom Konfirmasi Password -->
+            <div class="grup-input sandi-grup">
+                <input type="password" id="konfirmasiSandi" placeholder="Ketik Ulang Kata Sandi" required>
+                <button type="button" class="tombol-mata" onclick="toggleSandi('konfirmasiSandi', this)">👁️</button>
+            </div>
+
+            <button type="submit" class="btn-masuk">Daftar Akun</button>
+
+            <div class="tautan-daftar">
+                Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
+            </div>
+            <div class="tautan-kembali">
+                <a href="index.html">← Kembali ke Beranda</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// Fungsi sembunyikan/tampilkan sandi
+function toggleSandi(idInput, tombol) {
+    const input = document.getElementById(idInput);
+    if (input.type === "password") {
+        input.type = "text";
+        tombol.textContent = "🙈";
+    } else {
+        input.type = "password";
+        tombol.textContent = "👁️";
+    }
+}
+
+// Validasi konfirmasi sandi sebelum kirim
+document.querySelector('.form-daftar').addEventListener('submit', function(e) {
+    const sandi = document.getElementById('kataSandi').value;
+    const ulangSandi = document.getElementById('konfirmasiSandi').value;
+    
+    if (sandi !== ulangSandi) {
+        alert("⚠️ Kata sandi dan konfirmasi tidak sama! Silakan ketik ulang dengan benar.");
+        e.preventDefault();
+        return false;
+    }
+    if (sandi.length < 8) {
+        alert("⚠️ Kata sandi minimal harus 8 karakter!");
+        e.preventDefault();
+        return false;
+    }
+    alert("✅ Pendaftaran berhasil! Silakan cek email untuk aktivasi akun.");
+});
+</script>
+
+</body
+    >
+</html>
