@@ -197,13 +197,18 @@ a {
 ============================================== */
 .hero {
     background-image: url('assets/img/hero-bg.png');
-    background-size: cover;
-    background-position: center center;
+    background-size: 100% auto;
+    background-position: center top;
     background-repeat: no-repeat;
-    min-height: 420px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     width: 100%;
+}
+@media (max-width: 768px) {
+     .hero {
+         min-height: 400px; /* Tetap aman untuk layar HP */
+     }
 }
 
 .wadah-hero {
