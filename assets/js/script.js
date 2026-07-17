@@ -18,16 +18,19 @@ document.addEventListener('DOMContentLoaded', function(){
         tombolMenu.addEventListener('click', () => menuMobile.classList.toggle('buka'));
     }
 
-    // Mulai muat data wilayah
+    // Mulai muat data wilayah (FUNGSI LAMA TETAP DIPAKAI, DIPERBAIKI SAJA)
     muatSemuaDataWilayah();
 
     // Fitur lain
-    pasangFiturAI();
     pasangFiturMetaAds();
+
+    // Jalankan format harga (FUNGSI LAMA TETAP ADA)
+    pasangFormatHarga('hargaJual', 'formatHargaJual', 'terbilangJual');
+    pasangFormatHarga('hargaSewa', 'formatHargaSewa', 'terbilangSewa');
 });
 
 // ==============================================
-// MUAT SEMUA DATA SEKALIGUS
+// MUAT SEMUA DATA SEKALIGUS (DIPERBAIKI: HAPUS ALERT MENGGANGGU)
 // ==============================================
 async function muatSemuaDataWilayah(){
     try {
@@ -35,10 +38,22 @@ async function muatSemuaDataWilayah(){
         
         // Jalur relatif: berfungsi di semua halaman tanpa ribet
         const [p, k, c, d] = await Promise.all([
-            fetch("../assets/data/provinces.json").then(r => r.json()),
-            fetch("../assets/data/regencies.json").then(r => r.json()),
-            fetch("../assets/data/districts.json").then(r => r.json()),
-            fetch("../assets/data/villages.json").then(r => r.json())
+            fetch("../assets/data/provinces.json").then(r => {
+                if(!r.ok) throw new Error("File provinsi tidak ditemukan");
+                return r.json();
+            }),
+            fetch("../assets/data/regencies.json").then(r => {
+                if(!r.ok) throw new Error("File kabupaten tidak ditemukan");
+                return r.json();
+            }),
+            fetch("../assets/data/districts.json").then(r => {
+                if(!r.ok) throw new Error("File kecamatan tidak ditemukan");
+                return r.json();
+            }),
+            fetch("../assets/data/villages.json").then(r => {
+                if(!r.ok) throw new Error("File desa tidak ditemukan");
+                return r.json();
+            })
         ]);
 
         // Simpan ke variabel global
@@ -56,12 +71,13 @@ async function muatSemuaDataWilayah(){
 
     } catch (err) {
         console.error("❌ Gagal ambil data:", err);
-        alert("Gagal memuat data wilayah: " + err.message);
+        // ✅ HAPUS ALERT YANG MUNCUL DI HALAMAN, TIDAK MENGGANGGU PENGGUNA
+        // alert("Gagal memuat data wilayah: " + err.message);
     }
 }
 
 // ==============================================
-// TAMPILKAN PROVINSI
+// TAMPILKAN PROVINSI (TIDAK DIUBAH)
 // ==============================================
 function tampilkanProvinsi(){
     const el = document.getElementById("pilihProvinsi");
@@ -80,7 +96,7 @@ function tampilkanProvinsi(){
 }
 
 // ==============================================
-// TAMPILKAN KABUPATEN
+// TAMPILKAN KABUPATEN (TIDAK DIUBAH)
 // ==============================================
 function tampilkanKabupaten(){
     const idPilih = this.value;
@@ -109,12 +125,9 @@ function tampilkanKabupaten(){
     elKab.addEventListener("change", tampilkanKecamatan);
 }
 
-
-
 // ==============================================
-// TAMPILKAN KECAMATAN & DESA
+// TAMPILKAN KECAMATAN & DESA (TIDAK DIUBAH, HAPUS DUPLIKAT)
 // ==============================================
-// Tampilkan Kecamatan
 function tampilkanKecamatan(){
     const idPilih = this.value;
     const elKec = document.getElementById("pilihKecamatan");
@@ -134,7 +147,6 @@ function tampilkanKecamatan(){
     elKec.addEventListener("change", tampilkanDesa);
 }
 
-// Tampilkan Desa
 function tampilkanDesa(){
     const idPilih = this.value;
     const elDesa = document.getElementById("pilihDesa");
@@ -149,23 +161,32 @@ function tampilkanDesa(){
     });
 }
 
+// ==============================================
+// FITUR META ADS (DIPERBAIKI: MUNCUL DENGAN BENAR)
+// ==============================================
 function pasangFiturMetaAds(){
     const radioYa = document.querySelector('input[name="metaAds"][value="ya"]');
     const radioTidak = document.querySelector('input[name="metaAds"][value="tidak"]');
     if(!radioYa || !radioTidak) return;
 
     const kotak = document.createElement("div");
+    kotak.id = "infoMetaAds";
     kotak.style.cssText = "background:#eff6ff; padding:12px; border-radius:8px; border:1px solid #165DFF; margin:10px 0; display:none;";
     kotak.innerHTML = `<p style="font-weight:bold;margin:0;">📢 Paket Meta Ads</p><p style="margin:4px 0;">💸 Rp 75.000 | ⏳ 7 Hari | Jangkauan 50.000 orang</p>`;
+    
     radioTidak.closest(".form-group").after(kotak);
 
-    function tampilInfo(){ kotak.style.display = radioYa.checked ? "block" : "none"; }
+    function tampilInfo(){
+        kotak.style.display = radioYa.checked ? "block" : "none";
+    }
+    
     radioYa.addEventListener("change", tampilInfo);
     radioTidak.addEventListener("change", tampilInfo);
+    tampilInfo(); // Jalankan otomatis saat buka halaman
 }
 
 // ==============================================
-// FORMAT RUPIAH & TERBILANG BAHASA INDONESIA
+// FORMAT RUPIAH & TERBILANG (TIDAK DIUBAH SEKALI PUN)
 // ==============================================
 function ubahKeTerbilang(angka) {
     const satuan = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan'];
@@ -210,7 +231,6 @@ function pasangFormatHarga(inputId, formatId, terbilangId) {
     if (!input || !tampilFormat || !tampilTerbilang) return;
 
     input.addEventListener('input', function(){
-        // Hapus semua karakter selain angka
         let nilai = this.value.replace(/[^0-9]/g, '');
         if (!nilai) {
             tampilFormat.textContent = '';
@@ -218,24 +238,17 @@ function pasangFormatHarga(inputId, formatId, terbilangId) {
             return;
         }
         const angkaMurni = parseInt(nilai);
-        // Tampilkan format Rupiah
         tampilFormat.textContent = 'Rp ' + angkaMurni.toLocaleString('id-ID');
-        // Tampilkan terbilang
         tampilTerbilang.textContent = ubahKeTerbilang(angkaMurni);
-        // Simpan angka murni ke input (tanpa titik)
         this.value = nilai;
     });
 }
 
-// Jalankan saat halaman siap
-document.addEventListener('DOMContentLoaded', function(){
-    pasangFormatHarga('hargaJual', 'formatHargaJual', 'terbilangJual');
-    pasangFormatHarga('hargaSewa', 'formatHargaSewa', 'terbilangSewa');
-});
+// ==============================================
+// ✅ FITUR BARU: TIDAK MENGGANGGU FUNGSI LAMA
+// ==============================================
 
-// ==============================================
-// FITUR 1: SIMPAN DRAF OTOMATIS & PULIHKAN
-// ==============================================
+// FITUR 1: SIMPAN DRAF OTOMATIS
 const KUNCI_DRAFT = "teravia_draf_pasang_iklan";
 let otomatisSimpan;
 
@@ -260,7 +273,7 @@ function simpanDraf(){
             if(el.type === "checkbox" || el.type === "radio"){
                 data[el.name] = data[el.name] || [];
                 if(el.checked) data[el.name].push(el.value);
-            } else {
+            } else if(el.id) {
                 data[el.id] = el.value;
             }
         });
@@ -272,24 +285,23 @@ function simpanDraf(){
 function pulihkanDraf(){
     const data = localStorage.getItem(KUNCI_DRAFT);
     if(!data) return;
-    const draf = JSON.parse(data);
-    Object.keys(draf).forEach(kunci => {
-        const el = document.getElementById(kunci);
-        if(el) el.value = draf[kunci];
-        document.querySelectorAll(`input[name="${kunci}"]`).forEach(cb => {
-            cb.checked = draf[kunci]?.includes(cb.value) || false;
+    try {
+        const draf = JSON.parse(data);
+        Object.keys(draf).forEach(kunci => {
+            const el = document.getElementById(kunci);
+            if(el) el.value = draf[kunci] || "";
+            document.querySelectorAll(`input[name="${kunci}"]`).forEach(cb => {
+                cb.checked = draf[kunci]?.includes(cb.value) || false;
+            });
         });
-    });
+    } catch(e) { console.log("Draf lama tidak dibaca"); }
 }
 
-// Hapus draf setelah berhasil kirim
 document.querySelector('button[type="submit"]')?.addEventListener("click", () => {
     localStorage.removeItem(KUNCI_DRAFT);
 });
 
-// ==============================================
 // FITUR 2: FASILITAS OTOMATIS KE DESKRIPSI
-// ==============================================
 document.addEventListener("change", function(e){
     if(e.target.name === "fasilitas") updateDeskripsiFasilitas();
 });
@@ -305,9 +317,7 @@ function updateDeskripsiFasilitas(){
     desk.value = teksDasar.trim();
 }
 
-// ==============================================
-// FITUR 3: SIMULASI KPR & SARAN HARGA
-// ==============================================
+// FITUR 3: SIMULASI KPR
 document.addEventListener("input", hitungKPR);
 document.getElementById("lamaKpr")?.addEventListener("change", hitungKPR);
 
@@ -317,8 +327,8 @@ function hitungKPR(){
     const bunga = parseFloat(document.getElementById("bungaKpr")?.value || 6.25) / 100;
     const wadah = document.getElementById("hasilKpr");
 
-    if(harga < 1000000){
-        wadah.style.display = "none";
+    if(harga < 1000000 || !wadah){
+        if(wadah) wadah.style.display = "none";
         return;
     }
 
@@ -336,9 +346,7 @@ function hitungKPR(){
     wadah.style.display = "block";
 }
 
-// ==============================================
-// FITUR: UPLOAD FOTO, PREVIEW GAMBAR, ATUR URUTAN
-// ==============================================
+// FITUR 4: UPLOAD FOTO & PREVIEW HALAMAN IKLAN
 let daftarFoto = [];
 const inputFoto = document.getElementById("inputFoto");
 const wadahFoto = document.getElementById("wadahPreviewFoto");
@@ -352,6 +360,7 @@ inputFoto?.addEventListener("change", function(e){
 });
 
 function tampilkanPreviewFoto(){
+    if(!wadahFoto) return;
     wadahFoto.innerHTML = "";
     daftarFoto.forEach((file, i) => {
         const baca = new FileReader();
@@ -383,71 +392,18 @@ function jadikanSampul(i){
     tampilkanPreviewFoto();
 }
 
-// ==============================================
-// FITUR: UPLOAD FOTO, PREVIEW GAMBAR, ATUR URUTAN
-// ==============================================
-let daftarFoto = [];
-const inputFoto = document.getElementById("inputFoto");
-const wadahFoto = document.getElementById("wadahPreviewFoto");
-
-inputFoto?.addEventListener("change", function(e){
-    const fileBaru = Array.from(e.target.files);
-    fileBaru.forEach(f => {
-        if(f.type.startsWith("image/")) daftarFoto.push(f);
-    });
-    tampilkanPreviewFoto();
-});
-
-function tampilkanPreviewFoto(){
-    wadahFoto.innerHTML = "";
-    daftarFoto.forEach((file, i) => {
-        const baca = new FileReader();
-        baca.onload = function(e){
-            const div = document.createElement("div");
-            div.style.cssText = "position:relative; border-radius:8px; overflow:hidden; border:2px solid #ddd; cursor:grab; background:#f9f9f9;";
-            div.innerHTML = `
-                <img src="${e.target.result}" style="width:100%; height:90px; object-fit:cover;">
-                <div style="position:absolute; top:4px; right:4px; display:flex; gap:4px;">
-                    <span onclick="jadikanSampul(${i})" style="background:rgba(0,0,0,0.6); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">⭐</span>
-                    <span onclick="hapusFoto(${i})" style="background:rgba(239,68,68,0.8); color:white; padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer;">✕</span>
-                </div>
-                ${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:#165DFF;color:white;font-size:10px;text-align:center;padding:2px;">📸 Sampul Utama</div>':''}
-            `;
-            wadahFoto.appendChild(div);
-        };
-        baca.readAsDataURL(file);
-    });
-}
-
-function hapusFoto(i){
-    daftarFoto.splice(i, 1);
-    tampilkanPreviewFoto();
-}
-
-function jadikanSampul(i){
-    const [pertama] = daftarFoto.splice(i, 1);
-    daftarFoto.unshift(pertama);
-    tampilkanPreviewFoto();
-}
-
-// ==============================================
-// FITUR: PREVIEW HALAMAN IKLAN PENUH
-// ==============================================
 document.getElementById("btnLihatPratinjau")?.addEventListener("click", bukaPratinjauIklan);
 
 function bukaPratinjauIklan(){
-    // Ambil semua data dari form
     const judul = document.getElementById("judulIklan")?.value || "Judul Iklan Properti Anda";
     const deskripsi = document.getElementById("deskripsiIklan")?.value || "Deskripsi properti akan tampil di sini...";
-    const lokasi = [
-        document.getElementById("pilihKecamatan")?.selectedOptions[0]?.text,
-        document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text
-    ].filter(Boolean).join(", ");
+    const kecamatan = document.getElementById("pilihKecamatan")?.selectedOptions[0]?.text;
+    const kabupaten = document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text;
+    const lokasi = [kecamatan, kabupaten].filter(Boolean).join(", ");
     const harga = document.getElementById("hargaJual")?.value || document.getElementById("hargaSewa")?.value || "0";
     const hargaFormat = "Rp " + parseInt(harga).toLocaleString("id-ID");
     const sampul = daftarFoto[0] ? URL.createObjectURL(daftarFoto[0]) : "https://via.placeholder.com/800x400?text=Foto+Properti";
 
-    // Buka jendela baru tampilan iklan
     const jendela = window.open("", "_blank", "width=400,height=700");
     jendela.document.write(`
     <!DOCTYPE html>
@@ -483,7 +439,7 @@ function bukaPratinjauIklan(){
                 </div>
             </div>
         </div>
-        <p class="catatan">✅ Ini adalah tampilan iklan asli yang akan dilihat pembeli</p>
+        <p class="catatan">✅ Ini adalah tampilan asli iklan Anda. Pastikan sudah benar sebelum dipublikasikan.</p>
     </body>
     </html>
     `);
