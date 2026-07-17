@@ -101,13 +101,14 @@
 
 <script>
 // === 1. CEK KEAMANAN: HARUS SUDAH LOGIN ===
-const sesiAdmin = localStorage.getItem('adminTeravia');
- if(!sesiAdmin) {
-     alert('Silakan masuk terlebih dahulu!');
-     window.location.href = '/admin-login.html';
- }
- const dataAdmin = JSON.parse(sesiAdmin);
- document.getElementById('infoAdmin').textContent = `Masuk sebagai: ${dataAdmin.nama} (${dataAdmin.level})`;
+// === CEK SANGAT SEDERHANA & PASTI ===
+if(localStorage.getItem('adminLogin') !== 'YA_SUDAH_MASUK'){
+    window.location.replace('/admin-login.html');
+}
+
+// Tampilkan info admin
+document.getElementById('infoAdmin').textContent = 'Masuk sebagai: Admin Utama Teravia (Owner)';
+
 // === 2. FUNGSI MENGAMBIL DATA DAN MENAMPILKAN ===
 function muatData() {
     // Ambil permintaan paket yang menunggu
@@ -191,13 +192,10 @@ document.querySelectorAll('.tombol-tab').forEach(tombol => {
 
 // === 5. FUNGSI KELUAR ===
 document.getElementById('btnKeluar').addEventListener('click', function() {
-     if(confirm('Yakin ingin keluar dari panel admin?')) {
-         localStorage.removeItem('adminTeravia');
-         setTimeout(() => {
-             window.location.href = '/admin-login.html';
-         }, 100);
-     }
- });
+    localStorage.removeItem('adminLogin');
+    window.location.replace('/admin-login.html');
+});
+
 // === JALANKAN SAAT HALAMAN DIBUKA ===
 muatData();
 </script>
