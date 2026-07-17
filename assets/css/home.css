@@ -1,1 +1,162 @@
+/* ==============================================
+   HERO - POSISI SAMA PERSIS DI SEMUA LAYAR
+============================================== */
+.hero {
+    background-image: url('/assets/img/hero-bg.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    min-height: 520px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 80px;
+}
+
+.beranda-konten {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.kotak-sambutan h1 {
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.kotak-sambutan p {
+    font-size: clamp(14px, 3vw, 16px);
+    color: #333;
+    line-height: 1.5;
+}
+
+@media (max-width: 991px) {
+    .hero {
+        min-height: 440px;
+    }
+}
+
+/* ==============================================
+   KOTAK PENCARIAN UTAMA
+============================================== */
+.pencarian-utama {
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+}
+
+.kotak-pencarian {
+    background: white;
+    padding: 24px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.kotak-pencarian h3 {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #1e293b;
+    font-size: 20px;
+}
+
+.grup-pencarian {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-lokasi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 15px;
+    background: #f8fafc;
+}
+
+.input-lokasi input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+}
+
+.tombol-tujuan {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-tujuan {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-tujuan.aktif {
+    background: var(--utama);
+    color: white;
+    border-color: var(--utama);
+}
+
+.btn-cari-biru {
+    width: 100%;
+    padding: 13px;
+    background: var(--utama);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cari-biru:hover {
+    background: #0b4cdb;
+}
+
+@media (min-width: 768px) {
+    .grup-pencarian {
+        flex-direction: row;
+        align-items: center;
+    }
+    .input-lokasi { flex: 2; }
+    .tombol-tujuan { flex: 1; }
+    .btn-cari-biru { flex: 1; }
+}
+
+/* ==============================================
+   DAFTAR PROPERTI DI BERANDA
+============================================== */
+.daftar-properti-beranda {
+    margin-top: 60px;
+}
+
+.judul-bagian {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.judul-bagian h2 {
+    font-size: 22px;
+    color: #1e293b;
+}
+
+.lihat-semua {
+    color: var(--utama);
+    font-weight: 500;
+    text-decoration: none;
+  }
 
