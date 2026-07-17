@@ -379,3 +379,45 @@ a {
     color: #475569;
     text-decoration: none;
 }
+
+/* ==============================================
+   PENYESUAIAN KHUSUS HALAMAN DAFTAR (SENADA LOGIN)
+============================================== */
+.kotak-daftar {
+    max-width: 420px;
+    width: 90%;
+}
+
+.form-daftar .grup-input {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+/* Tombol mata untuk sembunyi sandi */
+.tombol-mata {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Sesuaikan jarak agar tidak menabrak tombol mata */
+.sandi-grup input {
+    padding-right: 45px;
+}
+
+/* Pastikan tampilan di HP tetap pas */
+@media (max-width: 480px) {
+    .kotak-login {
+        padding: 30px 20px;
+    }
+    .kotak-login h2 {
+        font-size: 24px;
+   
+    }
+}
