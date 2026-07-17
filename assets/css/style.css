@@ -197,47 +197,53 @@ a {
 ============================================== */
 .hero {
     background-image: url('assets/img/hero-bg.png');
-    background-size: 100% auto;
-    background-position: center top;
+    /* Biar gambar tarik penuh ke bawah di desktop */
+    background-size: cover;
+    background-position: center bottom; /* Fokus ke bagian bawah gambar */
     background-repeat: no-repeat;
-    min-height: 500px;
+    /* Tinggikan agar tidak terlalu sempit di desktop */
+    min-height: 520px;
     display: flex;
     align-items: center;
     width: 100%;
 }
-@media (max-width: 768px) {
-     .hero {
-         min-height: 400px; /* Tetap aman untuk layar HP */
-     }
-}
 
-.wadah-hero {
+/* Wadah teks sambutan */
+.beranda-konten {
     max-width: 1200px;
     width: 100%;
-    padding: 0 20px;
     margin: 0 auto;
+    /* Jarak aman dari pinggir, tidak mepet */
+    padding: 0 20px;
 }
 
-.wadah-hero h1 {
-    font-size: clamp(28px, 6vw, 36px);
+.kotak-sambutan h1 {
+    font-size: clamp(28px, 5vw, 36px);
     font-weight: 700;
     color: #111;
     margin-bottom: 8px;
     line-height: 1.2;
 }
 
-.wadah-hero p {
+.kotak-sambutan p {
     font-size: clamp(14px, 3vw, 16px);
     color: #333;
     line-height: 1.5;
 }
 
-/* LAYAR BESAR */
-@media (min-width: 768px) {
-    .menu-desktop { display: flex; }
-    .tombol-hamburger { display: none; }
-    .menu-samping, .latar-gelap { display: none !important; }
-   }
+/* Khusus layar HP */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 440px;
+        /* Posisi teks di HP tetap rapi, tidak mepet atas */
+        align-items: flex-start;
+        padding-top: 80px;
+    }
+    .beranda-konten {
+        padding: 0 16px;
+    }
+}
+
 
 /* ✅ HANYA TAMBAHAN TOMBOL TUTUP, LAINNYA TIDAK DIUBAH */
 .tutup-menu {
