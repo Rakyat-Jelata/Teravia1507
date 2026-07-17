@@ -15,6 +15,21 @@ tombolTujuan.forEach(tombol => {
 const tombolCari = document.querySelector('.btn-cari-biru');
 const inputLokasi = document.querySelector('.input-lokasi input');
 
+// ✅ PERINTAH KLIK TOMBOL (DITAMBAHKAN)
+if (tombolCari && inputLokasi) {
+    tombolCari.addEventListener('click', function() {
+        const lokasiDicari = inputLokasi.value.trim() || 'Seluruh Indonesia';
+        window.location.href = `daftar-properti.html?tujuan=${jenisTujuan}&lokasi=${encodeURIComponent(lokasiDicari)}`;
+    });
+
+    // Bisa cari pakai tombol Enter di keyboard
+    inputLokasi.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            tombolCari.click();
+        }
+    });
+}
+
 // ==============================================
 // BUAT KARTU PROPERTI OTOMATIS + TAUTAN KE DETAIL
 // ==============================================
@@ -84,6 +99,5 @@ document.addEventListener("DOMContentLoaded", function() {
     const wadah = document.getElementById("wadahProperti");
     if (wadah) {
         wadah.innerHTML = daftarProperti.map(buatKartuProperti).join("");
-   
     }
 });
