@@ -101,3 +101,70 @@ document.addEventListener("DOMContentLoaded", function() {
         wadah.innerHTML = daftarProperti.map(buatKartuProperti).join("");
     }
 });
+
+// ==============================================
+// SLIDER TESTIMONI OTOMATIS
+// ==============================================
+document.addEventListener('DOMContentLoaded', function(){
+    const baris = document.getElementById('barisTestimoni');
+    const tombolKiri = document.getElementById('tombolKiri');
+    const tombolKanan = document.getElementById('tombolKanan');
+    const titik = document.querySelectorAll('.titik-slider span');
+    let slideSekarang = 0;
+    const totalSlide = 4;
+
+    // Geser ke slide tertentu
+    function geserKeSlide(indeks){
+        slideSekarang = indeks;
+        baris.style.transform = `translateX(-${slideSekarang * 100}%)`;
+        // Ubah warna titik
+        titik.forEach((t, i) => {
+            t.classList.toggle('titik-aktif', i === slideSekarang);
+            t.style.background = i === slideSekarang ? 'var(--utama)' : '#cbd5e1';
+        });
+    }
+
+    // Tombol geser
+    tombolKanan.addEventListener('click', () => {
+        geserKeSlide((slideSekarang + 1) % totalSlide);
+        resetTimer();
+    });
+    tombolKiri.addEventListener('click', () => {
+        geserKeSlide((slideSekarang - 1 + totalSlide) % totalSlide);
+        resetTimer();
+    });
+
+    // Klik titik langsung
+    titik.forEach(t => {
+        t.addEventListener('click', () => {
+            geserKeSlide(parseInt(t.dataset.slide));
+            resetTimer();
+        });
+    });
+
+    // Jalur otomatis tiap 4 detik
+    let timer = setInterval(() => {
+        geserKeSlide((slideSekarang + 1) % totalSlide);
+    }, 4000);
+
+    // Hentikan sementara kalau diklik
+    function resetTimer(){
+        clearInterval(timer);
+        timer = setInterval(() => {
+            geserKeSlide((slideSekarang + 1) % totalSlide);
+        }, 4000);
+    }
+
+    // Bisa digeser pakai jari di HP
+    let sentuhAwal = 0;
+    baris.addEventListener('touchstart', e => {
+        sentuhAwal = e.touches[0].clientX;
+    });
+    baris.addEventListener('touchend', e => {
+        const sentuhAkhir = e.changedTouches[0].clientX;
+        const selisih = sentuhAwal - sentuhAkhir;
+        if(selisih > 50) tombolKanan.click();
+        if(selisih < -50) tombolKiri.click();
+    }
+                          );
+});
