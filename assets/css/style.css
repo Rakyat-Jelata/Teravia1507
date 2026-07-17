@@ -1,5 +1,5 @@
 /* ==============================================
-   NAVBAR & HAMBURGER MENU
+   DASAR & NAVBAR
 ============================================== */
 * {
     box-sizing: border-box;
@@ -8,13 +8,32 @@
     font-family: system-ui, -apple-system, sans-serif;
 }
 
+:root {
+    --utama: #165DFF;
+    --sekunder: #0E42CC;
+    --gelap: #1E293B;
+    --putih: #FFFFFF;
+    --abu: #64748B;
+    --bayangan: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+    padding-top: 55px;
+    background: #f8fafc;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: var(--putih);
+    box-shadow: var(--bayangan);
     z-index: 999;
 }
 
@@ -46,11 +65,11 @@
 }
 
 .tautan-nav:hover, .tautan-nav.aktif {
-    color: #165DFF;
+    color: var(--utama);
 }
 
 .btn-pasang {
-    background: #165DFF;
+    background: var(--utama);
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -78,7 +97,7 @@
     transition: all 0.3s ease;
 }
 
-/* MENU MOBILE */
+/* MENU SAMPING + TOMBOL TUTUP */
 .menu-samping {
     position: fixed;
     top: 0;
@@ -89,11 +108,33 @@
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
     z-index: 1001;
     transition: right 0.3s ease;
-    padding: 60px 20px 20px;
+    padding: 20px;
 }
 
 .menu-samping.buka {
     right: 0;
+}
+
+.tutup-menu {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.tutup-menu button {
+    background: #f3f4f6;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    color: #555;
+    transition: background 0.2s;
+}
+
+.tutup-menu button:hover {
+    background: #e5e7eb;
+    color: #111;
 }
 
 .latar-gelap {
@@ -131,7 +172,7 @@
 
 .tautan-menu:hover, .tautan-menu.aktif {
     background: #f0f7ff;
-    color: #165DFF;
+    color: var(--utama);
 }
 
 .garis-pemisah {
@@ -141,7 +182,7 @@
 }
 
 .btn-pasang-menu {
-    background: #165DFF;
+    background: var(--utama);
     color: white;
     text-align: center;
     padding: 12px;
@@ -151,179 +192,44 @@
     margin-top: 5px;
 }
 
-/* SESUAIKAN TAMPILAN DI LAYAR BESAR */
-@media (min-width: 768px) {
-    .menu-desktop {
-        display: flex;
-    }
-    .tombol-hamburger {
-        display: none;
-    }
-    .menu-samping {
-        display: none;
-    }
-    .latar-gelap {
-        display: none;
-    }
+/* ==============================================
+   HERO - SERAGAM HP & DEKSTOP
+============================================== */
+.hero {
+    background-image: url('assets/img/hero-bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-/* BERI JARAK KONTEN AGAR TIDAK TERTUTUP NAVBAR */
-body {
-    padding-top: 55px;
-}
-
-:root {
-    --utama: #165DFF;
-    --sekunder: #0E42CC;
-    --gelap: #1E293B;
-    --putih: #FFFFFF;
-    --bayangan: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.container {
-    width: 92%;
+.wadah-hero {
     max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
     margin: 0 auto;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.wadah-hero h1 {
+    font-size: clamp(28px, 6vw, 36px);
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+    line-height: 1.2;
 }
 
-/* NAVBAR */
-.navbar {
-    background: var(--putih);
-    box-shadow: var(--bayangan);
-    position: sticky;
-    top: 0;
-    z-index: 999;
+.wadah-hero p {
+    font-size: clamp(14px, 3vw, 16px);
+    color: #333;
+    line-height: 1.5;
 }
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.btn-utama {
-    padding: 10px 20px;
-    background: var(--utama);
-    color: white;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-/* HAMBURGER */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: transparent;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 26px;
-    height: 3px;
-    background: var(--gelap);
-    border-radius: 2px;
-}
-
-/* MENU MOBILE */
-.menu-mobile {
-    display: none;
-    position: fixed;
-    top: 58px;
-    left: 0;
-    width: 100%;
-    background: white;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    z-index: 998;
-}
-
-.menu-mobile.buka {
-    display: flex;
-}
-
-.menu-mobile a {
-    padding: 10px 0;
-    font-weight: 500;
-}
-
-/* BERANDA SETENGAH LAYAR */
-.beranda {
-    min-height: 55vh; /* 55% tinggi layar (sedikit lebih dari setengah biar enak dilihat) */
-    background-image: url('assets/img/hero-bg.png');
-    background-size: 100% auto; /* Lebar penuh, tinggi menyesuaikan gambar */
-    background-position: center top;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 100px; /* Jarak tulisan dari atas */
-}
-
-.teks-sambutan {
-    max-width: 550px;
-    text-align: left;
-    color: var(--gelap);
-}
-
-.teks-sambutan h1 {
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #1E293B;
-}
-
-.teks-sambutan p {
-    font-size: 18px;
-    color: #334155;
-    font-weight: 500;
-}
-
-/* RESPONSIF HP */
-@media (max-width: 768px) {
-    .beranda {
-        padding-top: 90px;
-    }
-    .teks-sambutan {
-        margin: 0 16px;
-    }
-    .teks-sambutan h1 {
-        font-size: 30px;
-    }
-    .teks-sambutan p {
-        font-size: 16px;
-    }
-}
-
-/* FOOTER */
-.footer {
-    background: var(--gelap);
-    color: var(--abu);
-    padding: 24px 0;
-    text-align: center;
-    font-size: 14px;
-    margin-top: 0; /* Tempel rapi di bawah hero */
-}
-
+/* LAYAR BESAR */
+@media (min-width: 768px) {
+    .menu-desktop { display: flex; }
+    .tombol-hamburger { display: none; }
+    .menu-samping, .latar-gelap { display: none !important; }
+   }
