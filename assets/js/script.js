@@ -489,6 +489,15 @@ tombolTujuan.forEach(tombol => {
 const tombolCari = document.querySelector('.btn-cari-biru');
 const inputLokasi = document.querySelector('.input-lokasi input');
 
+// Update tampilan tombol bahasa (HANYA BENDERA)
+const bendera = bahasa === "id" ? "🇮🇩" : "🇺🇸";
+
+if (document.getElementById("tombolBahasa")) 
+    document.getElementById("tombolBahasa").textContent = bendera;
+
+if (document.getElementById("tombolBahasaMobile")) 
+    document.getElementById("tombolBahasaMobile").textContent = bender
+         a;
 tombolCari.addEventListener('click', function() {
     const lokasi = inputLokasi.value.trim();
     window.location.href = `daftar-properti.html?tujuan=${jenisTujuan}&lokasi=${encodeURIComponent(lokasi)}`;
