@@ -766,4 +766,84 @@ a {
        ite;
 }
 
+/* HALAMAN DETAIL PROPERTI */
+.kembali {
+    display: inline-block;
+    color: var(--utama);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.harga-besar {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--utama);
+    margin-bottom: 8px;
+}
+
+.info-properti h1 {
+    font-size: 22px;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.lokasi-detail {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+.spesifikasi-penuh {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.item-spesifikasi {
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.tombol-aksi {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-hubungi {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px;
+    background: var(--utama);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-bagikan {
+    padding: 14px 20px;
+    background: white;
+    color: var(--utama);
+    border: 1px solid var(--utama);
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deskripsi-properti {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.deskripsi-properti h3 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
 
