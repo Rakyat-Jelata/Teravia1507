@@ -164,22 +164,6 @@ function tampilkanDesa(){
     });
 }
 
-// ==============================================
-// FITUR AI & META ADS (TETAP SAMA)
-// ==============================================
-function pasangFiturAI(){
-    const btn = document.getElementById("tombolAI");
-    const judul = document.getElementById("judulIklan");
-    const desk = document.getElementById("deskripsiIklan");
-    if(!btn || !judul || !desk) return;
-
-    btn.addEventListener("click", function(){
-        const lokasi = document.getElementById("pilihKabupaten")?.selectedOptions[0]?.text || "lokasi bagus";
-        if(!judul.value.trim()) judul.value = `Properti di ${lokasi} - Harga Terbaik`;
-        if(!desk.value.trim()) desk.value = `Properti strategis di ${lokasi}, aman dan nyaman. Cocok hunian/investasi!`;
-        alert("✅ Judul & deskripsi sudah diisi!");
-    });
-}
 
 function pasangFiturMetaAds(){
     const radioYa = document.querySelector('input[name="metaAds"][value="ya"]');
