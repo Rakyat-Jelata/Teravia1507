@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Properti - Teravia</title>
+    <link rel="icon" href="/assets/img/logo.png">
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <style>
+        .wadah-isi {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+        .judul-halaman {
+            font-size: 28px;
+            color: #1E293B;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .garis-pendek {
+            width: 80px;
+            height: 3px;
+            background: var(--utama);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+        .grid-blog {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .kartu-blog {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+        .kartu-blog:hover {
+            transform: translateY(-3px);
+        }
+        .gambar-blog {
+            height: 160px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .isi-blog {
+            padding: 18px;
+        }
+        .tanggal-blog {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+        .judul-blog {
+            font-size: 18px;
+            color: #1E293B;
+            margin-bottom: 8px;
+        }
+        .ringkas-blog {
+            font-size: 14px;
+            color: #64748B;
+            line-height: 1.6;
+        }
+        @media (min-width: 768px) {
+            .grid-blog {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR SAMA PERSIS -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
+            <h2 style="color:var(--utama)">TERAVIA</h2>
+        </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="blog.html" class="tautan-nav aktif">Blog</a>
+            <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pasang-iklan.html" class="btn-pasang">Pasang Iklan</a>
+        </div>
+        <button class="tombol-hamburger" id="bukaMenu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="latar-gelap" id="latarGelap"></div>
+<div class="menu-samping" id="menuSamping">
+    <div class="tutup-menu">
+        <button id="tutupMenu">×</button>
+    </div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">Cari Properti</a>
+        <a href="blog.html" class="tautan-menu aktif">Blog</a>
+        <a href="tentang.html" class="tautan-menu">Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">Masuk</a>
+        <a href="register.html" class="btn-pasang-menu">Pasang Iklan Sekarang</a>
+    </div>
+</div>
+
+<!-- ISI HALAMAN -->
+<div class="wadah-isi">
+    <h1 class="judul-halaman">Blog & Tips Properti</h1>
+    <div class="garis-pendek"></div>
+
+    <div class="grid-blog">
+        <div class="kartu-blog">
+            <div class="gambar-blog">Gambar Ilustrasi</div>
+            <div class="isi-blog">
+                <div class="tanggal-blog">17 Juli 2026</div>
+                <h3 class="judul-blog">7 Hal Wajib Dicek Sebelum Membeli Rumah Pertama</h3>
+                <p class="ringkas-blog">Panduan lengkap bagi pemula agar tidak salah beli dan menghindari kerugian di kemudian hari...</p>
+            </div>
+        </div>
+
+        <div class="kartu-blog">
+            <div class="gambar-blog">Gambar Ilustrasi</div>
+            <div class="isi-blog">
+                <div class="tanggal-blog">15 Juli 2026</div>
+                <h3 class="judul-blog">Tren Harga Tanah di Jabodetabek 2026</h3>
+                <p class="ringkas-blog">Wilayah mana yang masih terjangkau dan berpotensi naik nilainya dalam 1-2 tahun ke depan...</p>
+            </div>
+        </div>
+
+        <div class="kartu-blog">
+            <div class="gambar-blog">Gambar Ilustrasi</div>
+            <div class="isi-blog">
+                <div class="tanggal-blog">10 Juli 2026</div>
+                <h3 class="judul-blog">Cara Memasang Iklan Properti Agar Cepat Dilirik</h3>
+                <p class="ringkas-blog">Trik menulis judul, memilih foto, dan menentukan harga agar iklan Anda tampil di halaman teratas...</p>
+            </div>
+        </div>
+
+        <div class="kartu-blog">
+            <div class="gambar-blog">Gambar Ilustrasi</div>
+            <div class="isi-blog">
+                <div class="tanggal-blog">5 Juli 2026</div>
+                <h3 class="judul-blog">Panduan Sewa Rumah Jangka Panjang yang Aman</h3>
+                <p class="ringkas-blog">Syarat perjanjian, uang jaminan, dan hal yang harus disepakati bersama pemilik rumah...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-baris">
+            <div class="footer-kolom">
+                <h3 class="footer-logo">TERAVIA</h3>
+                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa di seluruh Indonesia.</p>
+            </div>
+            <div class="footer-kolom">
+                <h4>Layanan</h4>
+                <a href="daftar-properti.html">Cari Properti</a>
+                <a href="pasang-iklan.html">Pasang Iklan</a>
+                <a href="membership.html">Keanggotaan</a>
+                <a href="mitra-notaris.html">Mitra Notaris</a>
+            </div>
+            <div class="footer-kolom">
+                <h4>Bantuan</h4>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="blog.html">Blog Properti</a>
+                <a href="helpdesk.html">Pusat Bantuan</a>
+            </div>
+        </div>
+        <div class="footer-bawah">
+            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/assets/js/general.js"></script>
+</body>
+  </html>
+  
