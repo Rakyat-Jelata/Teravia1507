@@ -847,3 +847,14 @@ a {
     color: #1e293b;
 }
 
+.tautan-kartu {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.tautan-kartu:hover {
+    transform: translateY(-3px);
+
+}
