@@ -149,22 +149,6 @@ function tampilkanDesa(){
     });
 }
 
-
-function tampilkanDesa(){
-    const idPilih = this.value;
-    const elDesa = document.getElementById("pilihDesa");
-    elDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
-    if(!idPilih) return;
-
-    dataDesa.filter(d => d.district_id == idPilih).forEach(item => {
-        const opt = document.createElement("option");
-        opt.value = item.id;
-        opt.textContent = item.name;
-        elDesa.appendChild(opt);
-    });
-}
-
-
 function pasangFiturMetaAds(){
     const radioYa = document.querySelector('input[name="metaAds"][value="ya"]');
     const radioTidak = document.querySelector('input[name="metaAds"][value="tidak"]');
