@@ -388,11 +388,72 @@ document.addEventListener('DOMContentLoaded', function(){
              infoAds.classList.toggle('sembunyi', r.value !== 'ya');
          });
      });
-     // ✅ DATA WILAYAH SEMENTARA (SIAP DIGANTI API NANTI)
-     const provinsi = ['Jawa Barat','Jawa Tengah','Jawa Timur','DKI Jakarta','Banten'];
-     const pilihProv = document.getElementById('pilihProvinsi');
-     provinsi.forEach(p => pilihProv.innerHTML += `<option value="${p}">${p}</option>`);
- });
+    // === AMBIL DATA LENGKAP DARI FILE DI assets/data/ ===
+async function muatDataWilayah() {
+  try {
+    // Ubah nama file sesuai yang kamu simpan di folder assets/data/
+    const res = await fetch('/assets/data/wilayah.json');
+    const dataWilayah = await res.json();
+
+    const pilihProv = document.getElementById('pilihProvinsi');
+    const pilihKab = document.getElementById('pilihKabupaten');
+    const pilihKec = document.getElementById('pilihKecamatan');
+    const pilihDesa = document.getElementById('pilihDesa');
+
+    // Isi SEMUA provinsi lengkap
+    pilihProv.innerHTML = '<option value="">-- Pilih Provinsi --</option>';
+    dataWilayah.provinsi.forEach(p => {
+      pilihProv.innerHTML += `<option value="${p.id}">${p.nama}</option>`;
+    });
+
+    // Saat provinsi berubah
+    pilihProv.addEventListener('change', function(){
+      const idProv = this.value;
+      pilihKab.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
+      pilihKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+      pilihDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
+      
+      if(idProv && dataWilayah.kabupaten[idProv]){
+        dataWilayah.kabupaten[idProv].forEach(k => {
+          pilihKab.innerHTML += `<option value="${k.id}">${k.nama}</option>`;
+        });
+      }
+    });
+
+    // Saat kabupaten berubah
+    pilihKab.addEventListener('change', function(){
+      const idKab = this.value;
+      pilihKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+      pilihDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
+      
+      if(idKab && dataWilayah.kecamatan[idKab]){
+        dataWilayah.kecamatan[idKab].forEach(k => {
+          pilihKec.innerHTML += `<option value="${k.id}">${k.nama}</option>`;
+        });
+      }
+    });
+
+    // Saat kecamatan berubah
+    pilihKec.addEventListener('change', function(){
+      const idKec = this.value;
+      pilihDesa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
+      
+      if(idKec && dataWilayah.desa[idKec]){
+        dataWilayah.desa[idKec].forEach(d => {
+          pilihDesa.innerHTML += `<option value="${d.id}">${d.nama}</option>`;
+        });
+      }
+    });
+
+  } catch (err) {
+    console.error("Gagal memuat data wilayah:", err);
+    alert("Data wilayah sedang diperbarui, coba lagi sebentar ya!");
+  }
+}
+
+// Jalankan saat halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', muatDataWilayah);
+
  </script>
  </body>
  </html>
