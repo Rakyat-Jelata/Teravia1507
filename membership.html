@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Keanggotaan - Teravia</title>
+    <link rel="icon" href="/assets/img/logo.png">
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <style>
+        .wadah {max-width:1000px;margin:40px auto;padding:0 16px;}
+        .judul-utama {text-align:center;margin-bottom:30px;}
+        .judul-utama h1 {color:var(--utama);margin-bottom:8px;}
+        .grid-paket {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+        .kartu-paket {background:white;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);position:relative;overflow:hidden;}
+        .kartu-paket.unggulan {border:2px solid var(--utama);transform:scale(1.03);}
+        .label-paket {position:absolute;top:16px;right:-30px;background:var(--utama);color:white;padding:4px 32px;font-size:12px;transform:rotate(45deg);}
+        .nama-paket {font-size:20px;font-weight:700;color:var(--gelap);margin-bottom:6px;}
+        .harga-paket {font-size:24px;font-weight:700;color:var(--utama);margin-bottom:16px;}
+        .harga-paket span {font-size:13px;font-weight:normal;color:var(--abu);}
+        .daftar-fitur {list-style:none;margin-bottom:20px;}
+        .daftar-fitur li {padding:6px 0;font-size:14px;border-bottom:1px solid #f1f5f9;}
+        .daftar-fitur li:last-child {border:none;}
+        .daftar-fitur li.tdk-ada {color:#cbd5e1;text-decoration:line-through;}
+        .btn-pilih {display:block;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;}
+        .btn-pilih.biasa {border:1px solid var(--utama);color:var(--utama);}
+        .btn-pilih.premium {background:var(--utama);color:white;}
+        @media (max-width:768px) {
+            .kartu-paket.unggulan {transform:none;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo"><img src="/assets/img/logo.png" alt="Teravia" style="height:36px;"></a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="membership.html" class="tautan-nav aktif">Keanggotaan</a>
+            <a href="login.html" class="btn-pasang">Masuk</a>
+        </div>
+        <button class="tombol-hamburger" id="bukaMenu"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="latar-gelap" id="latarGelap"></div>
+<div class="menu-samping" id="menuSamping">
+    <div class="tutup-menu"><button id="tutupMenu">×</button></div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">Cari Properti</a>
+        <a href="membership.html" class="tautan-menu aktif">Keanggotaan</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">Masuk</a>
+        <a href="register.html" class="btn-pasang-menu">Daftar</a>
+    </div>
+</div>
+
+<div class="wadah">
+    <div class="judul-utama">
+        <h1>Pilih Paket Keanggotaan</h1>
+        <p style="color:var(--abu);">Jangkau pembeli lebih luas, promosi otomatis, dan tampil di urutan teratas</p>
+    </div>
+
+    <div class="grid-paket">
+        <!-- PAKET 1: KAVELING -->
+        <div class="kartu-paket">
+            <div class="nama-paket">Kaveling</div>
+            <div class="harga-paket">Rp 150.000 <span>/ bulan</span></div>
+            <ul class="daftar-fitur">
+                <li>✅ Maksimal 5 Listing Aktif</li>
+                <li>✅ Lencana Standar</li>
+                <li class="tdk-ada">❌ Otomatisasi Iklan Medsos</li>
+                <li class="tdk-ada">❌ Budget Promo Tambahan</li>
+                <li>📊 Jangkauan ~15% (Hanya di Situs)</li>
+            </ul>
+            <a href="#" class="btn-pilih biasa">Pilih Paket Ini</a>
+        </div>
+
+        <!-- PAKET 2: CLUSTER -->
+        <div class="kartu-paket">
+            <div class="nama-paket">Cluster</div>
+            <div class="harga-paket">Rp 500.000 <span>/ bulan</span></div>
+            <ul class="daftar-fitur">
+                <li>✅ Maksimal 20 Listing Aktif</li>
+                <li>✅ Lencana Silver</li>
+                <li class="tdk-ada">❌ Otomatisasi Iklan Medsos</li>
+                <li class="tdk-ada">❌ Budget Promo Tambahan</li>
+                <li>📊 Jangkauan ~35%</li>
+            </ul>
+            <a href="#" class="btn-pilih biasa">Pilih Paket Ini</a>
+        </div>
+
+        <!-- PAKET 3: RESIDENCE -->
+        <div class="kartu-paket unggulan">
+            <div class="label-paket">POPULER</div>
+            <div class="nama-paket">Residence</div>
+            <div class="harga-paket">Rp 1.500.000 <span>/ bulan</span></div>
+            <ul class="daftar-fitur">
+                <li>✅ Maksimal 50 Listing Aktif</li>
+                <li>✅ Lencana Gold</li>
+                <li>✅ Otomatisasi Meta Ads</li>
+                <li>✅ Budget Rp 200.000 / Iklan</li>
+                <li>📊 Jangkauan ~75%</li>
+            </ul>
+            <a href="#" class="btn-pilih premium">Pilih Paket Ini</a>
+        </div>
+
+        <!-- PAKET 4: ESTATE -->
+        <div class="kartu-paket">
+            <div class="nama-paket">Estate (Premium)</div>
+            <div class="harga-paket">Rp 3.500.000 <span>/ bulan</span></div>
+            <ul class="daftar-fitur">
+                <li>✅ Listing TANPA BATAS</li>
+                <li>✅ Lencana Emerald Elite</li>
+                <li>✅ Meta Ads + TikTok Ads</li>
+                <li>✅ Budget Rp 600.000 / Iklan</li>
+                <li>📊 Jangkauan 100% Maksimal</li>
+            </ul>
+            <a href="#" class="btn-pilih biasa">Pilih Paket Ini</a>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-baris">
+            <div class="footer-kolom">
+                <h3>TERAVIA</h3>
+                <p class="footer-desc">Pasar properti terpercaya dengan sistem promosi otomatis.</p>
+            </div>
+            <div class="footer-kolom">
+                <h4>Layanan</h4>
+                <a href="daftar-properti.html">Cari Properti</a>
+                <a href="pasang-iklan.html">Pasang Iklan</a>
+                <a href="membership.html">Keanggotaan</a>
+            </div>
+        </div>
+        <div class="footer-bawah"><p>&copy; 2026 Teravia. Hak Cipta Dilindungi.</p></div>
+    </div>
+</footer>
+
+<script src="/assets/js/general.js"></script>
+</body>
+  </html>
+  
