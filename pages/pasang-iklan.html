@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pasang Iklan Properti - Teravia</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/general.css">
     <style>
         * { box-sizing: border-box; margin:0; padding:0; font-family: system-ui, sans-serif; }
+        body { padding-top: 0; background: #f8fafc; }
         .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
-        .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-        .bagian-judul { font-size: 19px; font-weight: 700; margin: 25px 0 15px; color: #165DFF; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .bagian-judul { font-size: 18px; font-weight: 700; margin: 25px 0 15px; color: #165DFF; border-bottom: 1px solid #eee; padding-bottom: 8px; }
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 14px; }
         input, select, textarea { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; background: #fff; }
@@ -20,8 +21,21 @@
         .sembunyi { display: none !important; }
         .panel-detail { transition: all 0.4s ease; opacity: 1; transform: translateY(0); }
         .panel-detail.sembunyi { opacity: 0; transform: translateY(10px); }
-        .opsi-pilihan { display: flex; gap: 18px; padding: 5px 0; flex-wrap: wrap; }
-        .opsi-pilihan label { font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        
+        /* ✅ PERBAIKAN TAMPILAN OPSI DI HP */
+        .opsi-pilihan { display: flex; gap: 10px; padding: 5px 0; flex-wrap: wrap; }
+        .opsi-pilihan label { 
+            font-weight: normal; cursor: pointer; display: flex; align-items: flex-start; gap: 8px; 
+            width: 100%; margin: 0; line-height: 1.5;
+        }
+        .opsi-pilihan input[type="radio"], 
+        .opsi-pilihan input[type="checkbox"] { 
+            width: auto; margin-top: 3px; flex-shrink: 0; 
+        }
+        @media (min-width: 768px) {
+            .opsi-pilihan label { width: auto; }
+        }
+
         .btn { padding: 13px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 15px; transition: background 0.2s; }
         .btn:hover { opacity: 0.95; }
         .btn-primary { background: #165DFF; color: white; width: 100%; margin-top: 10px; }
@@ -29,18 +43,20 @@
         .keterangan { font-size: 12px; color: #888; margin-top: 4px; }
         .error { border-color: #ef4444 !important; }
         .txt-error { font-size: 12px; color: #ef4444; margin-top: 2px; display: none; }
+        .info-ads { background: #f0fdf4; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 13px; color: #166534; }
     </style>
 </head>
 <body>
 
 <!-- NAVBAR KHUSUS PASANG IKLAN -->
 <header style="text-align:center; padding:20px 15px; border-bottom:1px solid #eee; background:#fff;">
-    <img src="../assets/img/logo.png" alt="TERAVIA" style="height:40px; margin-bottom:10px;">
+    <a href="/index.html" style="display:inline-block; margin-bottom:10px;">
+        <img src="/assets/img/logo.png" alt="TERAVIA" style="height:40px;">
+    </a>
     <div>
-        <a href="../index.html" style="color:#165DFF; text-decoration:none; font-size:14px;">← Kembali ke Beranda</a>
+        <a href="/index.html" style="color:#165DFF; text-decoration:none; font-size:14px;">← Kembali ke Beranda</a>
     </div>
 </header>
-
 
 <main class="container">
     <div class="card">
@@ -89,129 +105,119 @@
         </div>
 
         <!-- HARGA DINAMIS -->
-<div id="kolomHargaJual" class="form-group">
-    <label>Harga Total <span style="color:red">*</span></label>
-    <input type="text" id="hargaJual" placeholder="Masukkan angka" inputmode="numeric">
-    <p id="formatHargaJual" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
-    <p id="terbilangJual" class="keterangan"></p>
-</div>
-<div id="kolomHargaSewa" class="form-group sembunyi">
-    <label>Harga Sewa <span style="color:red">*</span></label>
-    <div class="grid-2">
-        <input type="text" id="hargaSewa" placeholder="Nominal" inputmode="numeric">
-        <select id="masaSewa">
-            <option value="bulan">Per Bulan</option>
-            <option value="tahun">Per Tahun</option>
-            <option value="hari">Per Hari</option>
-        </select>
-    </div>
-    <p id="formatHargaSewa" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
-    <p id="terbilangSewa" class="keterangan"></p>
-</div>
-
-<!-- ==============================================
-    FITUR BARU: TIPE HARGA & LEGALITAS
-============================================== -->
-<div class="bagian-judul">💰 Penawaran & Legalitas</div>
-
-<div class="form-group">
-    <label>Tipe Penawaran Harga</label>
-    <div class="opsi-pilihan">
-        <label><input type="radio" name="tipeHarga" value="nett" checked> Harga Nett (Pasti)</label>
-        <label><input type="radio" name="tipeHarga" value="nego"> Bisa Dinegosiasikan</label>
-        <label><input type="radio" name="tipeHarga" value="tawar"> Ajukan Penawaran Saya</label>
-    </div>
-</div>
-
-<div class="form-group">
-    <label>Dokumen & Legalitas <span style="color:#888; font-weight:normal">(bisa pilih lebih dari satu)</span></label>
-    <div class="opsi-pilihan" style="flex-direction:column; gap:8px;">
-        <label><input type="checkbox" name="legalitas" value="SHM - Sertifikat Hak Milik"> SHM - Sertifikat Hak Milik</label>
-        <label><input type="checkbox" name="legalitas" value="SHGB - Sertifikat Hak Guna Bangunan"> SHGB - Sertifikat Hak Guna Bangunan</label>
-        <label><input type="checkbox" name="legalitas" value="AJB - Akta Jual Beli"> AJB - Akta Jual Beli</label>
-        <label><input type="checkbox" name="legalitas" value="Masih Sertifikat Induk"> Masih Sertifikat Induk</label>
-        <label><input type="checkbox" name="legalitas" value="Girik"> Girik</label>
-        <label><input type="checkbox" name="legalitas" value="PBB / SPPT Terbayar"> PBB / SPPT Terbayar</label>
-    </div>
-</div>
-
-<div class="form-group">
-    <label>Ketersediaan Properti</label>
-    <div class="opsi-pilihan" style="flex-direction:column; gap:8px;">
-        <label><input type="radio" name="ketersediaan" value="siap" checked> ✅ Siap Serah Terima Sekarang</label>
-        <label><input type="radio" name="ketersediaan" value="belum"> 🏗️ Belum Selesai Dibangun</label>
-        <label><input type="radio" name="ketersediaan" value="jadwal"> 📅 Tersedia Mulai Tanggal: <input type="date" id="tglTersedia" style="width:auto; padding:4px; margin-left:5px;"></label>
-        <label><input type="radio" name="ketersediaan" value="mendesak"> ⚠️ Dijual Cepat / Mendesak</label>
-    </div>
-</div>
-
-<div class="form-group">
-    <label>Tampilkan Kontak</label>
-    <div class="opsi-pilihan">
-        <label><input type="radio" name="tampilKontak" value="ya" checked> Tampilkan Nomor HP di Iklan</label>
-        <label><input type="radio" name="tampilKontak" value="tidak"> Sembunyikan, Hubungi Lewat Pesan</label>
-    </div>
-</div>
-
-<!-- ==============================================
-    FITUR BARU: FASILITAS CEPAT
-============================================== -->
-<div class="bagian-judul">⭐ Fasilitas & Keunggulan</div>
-<div class="form-group">
-    <label>Centang yang sesuai (otomatis masuk ke deskripsi)</label>
-    <div class="opsi-pilihan" style="flex-wrap:wrap; gap:10px;">
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Dekat Sekolah & Pendidikan"> Dekat Sekolah</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Dekat Rumah Sakit & Puskesmas"> Dekat RS</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Bebas Banjir"> Bebas Banjir</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Akses Jalan Lebar & Mudah Dilalui Mobil"> Jalan Lebar</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Menghadap Selatan"> Hadap Selatan</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Dekat Pusat Perbelanjaan"> Dekat Pasar/Mall</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Lingkungan Aman & Tenang"> Lingkungan Aman</label>
-        <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="✅ Dekat Stasiun/Terminal"> Dekat Transportasi</label>
-    </div>
-</div>
-
-<!-- ==============================================
-    FITUR BARU: SIMULASI KPR
-============================================== -->
-<div class="bagian-judul">🏦 Simulasi Cicilan KPR</div>
-<div class="form-group" style="background:#f0f7ff; padding:15px; border-radius:10px;">
-    <div class="grid-2">
-        <div>
-            <label>Jangka Waktu KPR</label>
-            <select id="lamaKpr">
-                <option value="5">5 Tahun</option>
-                <option value="10" selected>10 Tahun</option>
-                <option value="15">15 Tahun</option>
-                <option value="20">20 Tahun</option>
-            </select>
+        <div id="kolomHargaJual" class="form-group">
+            <label>Harga Total <span style="color:red">*</span></label>
+            <input type="text" id="hargaJual" placeholder="Masukkan angka tanpa titik/koma" inputmode="numeric">
+            <p id="formatHargaJual" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
+            <p id="terbilangJual" class="keterangan"></p>
         </div>
-        <div>
-            <label>Suku Bunga Per Tahun</label>
-            <input type="text" id="bungaKpr" value="6.25" placeholder="Contoh: 6.25">
+        <div id="kolomHargaSewa" class="form-group sembunyi">
+            <label>Harga Sewa <span style="color:red">*</span></label>
+            <div class="grid-2">
+                <input type="text" id="hargaSewa" placeholder="Nominal" inputmode="numeric">
+                <select id="masaSewa">
+                    <option value="bulan">Per Bulan</option>
+                    <option value="tahun">Per Tahun</option>
+                    <option value="hari">Per Hari</option>
+                </select>
+            </div>
+            <p id="formatHargaSewa" class="keterangan" style="font-weight:600; color:#165DFF;"></p>
+            <p id="terbilangSewa" class="keterangan"></p>
         </div>
-    </div>
-    <div id="hasilKpr" style="margin-top:12px; padding:10px; background:white; border-radius:8px; display:none;">
-        <p style="margin:4px 0; font-size:14px;">Angsuran per bulan: <strong id="angsuranKpr" style="color:#165DFF; font-size:16px;"></strong></p>
-        <p style="margin:4px 0; font-size:13px; color:#666;">Total dibayar: <span id="totalKpr"></span> | Bunga: <span id="totalBunga"></span></p>
-        <p id="saranHarga" style="margin-top:8px; font-size:13px; color:#059669; font-weight:500;"></p>
-    </div>
-</div>
 
-<!-- ==============================================
-    FITUR BARU: UPLOAD FOTO & PREVIEW
-============================================== -->
-<div class="bagian-judul">📸 Unggah Foto & Tampilan Iklan</div>
-<div class="form-group">
-    <input type="file" id="inputFoto" accept="image/*" multiple>
-    <p class="keterangan">Maksimal 10 foto. Geser untuk urutan, klik bintang untuk jadikan sampul utama.</p>
-</div>
-<div id="wadahPreviewFoto" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(100px,1fr)); gap:10px; margin-bottom:15px;"></div>
+        <!-- ============================================== PENAWARAN & LEGALITAS -->
+        <div class="bagian-judul">💰 Penawaran & Legalitas</div>
+        <div class="form-group">
+            <label>Tipe Penawaran Harga</label>
+            <div class="opsi-pilihan">
+                <label><input type="radio" name="tipeHarga" value="nett" checked> Harga Nett (Pasti)</label>
+                <label><input type="radio" name="tipeHarga" value="nego"> Bisa Dinegosiasikan</label>
+                <label><input type="radio" name="tipeHarga" value="tawar"> Ajukan Penawaran Saya</label>
+            </div>
+        </div>
 
-<div class="form-group">
-    <button type="button" id="btnLihatPratinjau" class="btn" style="background:#f59e0b; color:white;">👁️ Lihat Tampilan Iklan</button>
-</div>
-        <!-- BAGIAN 2: LOKASI -->
+        <div class="form-group">
+            <label>Dokumen & Legalitas <span style="color:#888; font-weight:normal">(bisa pilih lebih dari satu)</span></label>
+            <div class="opsi-pilihan">
+                <label><input type="checkbox" name="legalitas" value="SHM"> SHM - Sertifikat Hak Milik</label>
+                <label><input type="checkbox" name="legalitas" value="SHGB"> SHGB - Sertifikat Hak Guna Bangunan</label>
+                <label><input type="checkbox" name="legalitas" value="AJB"> AJB - Akta Jual Beli</label>
+                <label><input type="checkbox" name="legalitas" value="INDUK"> Masih Sertifikat Induk</label>
+                <label><input type="checkbox" name="legalitas" value="GIRIK"> Girik</label>
+                <label><input type="checkbox" name="legalitas" value="PBB"> PBB / SPPT Terbayar</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Ketersediaan Properti</label>
+            <div class="opsi-pilihan">
+                <label><input type="radio" name="ketersediaan" value="siap" checked> ✅ Siap Serah Terima Sekarang</label>
+                <label><input type="radio" name="ketersediaan" value="belum"> 🏗️ Belum Selesai Dibangun</label>
+                <label><input type="radio" name="ketersediaan" value="jadwal"> 📅 Tersedia Mulai Tanggal: <input type="date" id="tglTersedia" style="width:auto; padding:4px; margin-left:5px;"></label>
+                <label><input type="radio" name="ketersediaan" value="mendesak"> ⚠️ Dijual Cepat / Mendesak</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tampilkan Kontak</label>
+            <div class="opsi-pilihan">
+                <label><input type="radio" name="tampilKontak" value="ya" checked> Tampilkan Nomor HP di Iklan</label>
+                <label><input type="radio" name="tampilKontak" value="tidak"> Sembunyikan, Hubungi Lewat Pesan</label>
+            </div>
+        </div>
+
+        <!-- ============================================== FASILITAS -->
+        <div class="bagian-judul">⭐ Fasilitas & Keunggulan</div>
+        <div class="form-group">
+            <label>Centang yang sesuai (otomatis masuk ke deskripsi)</label>
+            <div class="opsi-pilihan">
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Dekat Sekolah"> Dekat Sekolah</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Dekat RS"> Dekat RS</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Bebas Banjir"> Bebas Banjir</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Jalan Lebar"> Jalan Lebar</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Hadap Selatan"> Hadap Selatan</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Dekat Pasar/Mall"> Dekat Pasar/Mall</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Lingkungan Aman"> Lingkungan Aman</label>
+                <label style="background:#f8f9fa; padding:6px 10px; border-radius:20px; font-size:13px;"><input type="checkbox" name="fasilitas" value="Dekat Transportasi"> Dekat Transportasi</label>
+            </div>
+        </div>
+
+        <!-- ============================================== SIMULASI KPR -->
+        <div class="bagian-judul">🏦 Simulasi Cicilan KPR</div>
+        <div class="form-group" style="background:#f0f7ff; padding:15px; border-radius:10px;">
+            <div class="grid-2">
+                <div>
+                    <label>Jangka Waktu KPR</label>
+                    <select id="lamaKpr">
+                        <option value="5">5 Tahun</option>
+                        <option value="10" selected>10 Tahun</option>
+                        <option value="15">15 Tahun</option>
+                        <option value="20">20 Tahun</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Suku Bunga Per Tahun (%)</label>
+                    <input type="number" id="bungaKpr" value="6.25" step="0.01" min="1" max="15">
+                </div>
+            </div>
+            <div id="hasilKpr" style="margin-top:12px; padding:10px; background:white; border-radius:8px; display:none;">
+                <p style="margin:4px 0; font-size:14px;">Angsuran per bulan: <strong id="angsuranKpr" style="color:#165DFF; font-size:16px;"></strong></p>
+                <p style="margin:4px 0; font-size:13px; color:#666;">Total dibayar: <span id="totalKpr"></span> | Bunga: <span id="totalBunga"></span></p>
+            </div>
+        </div>
+
+        <!-- ============================================== UPLOAD FOTO (HANYA SATU KALI) -->
+        <div class="bagian-judul">📸 Unggah Foto & Tampilan Iklan</div>
+        <div class="form-group">
+            <input type="file" id="inputFoto" accept="image/*" multiple>
+            <p class="keterangan">Maksimal 10 foto. Geser untuk urutan, klik bintang untuk jadikan sampul utama.</p>
+        </div>
+        <div id="wadahPreviewFoto" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(100px,1fr)); gap:10px; margin-bottom:15px;"></div>
+        <div class="form-group">
+            <button type="button" id="btnLihatPratinjau" class="btn" style="background:#f59e0b; color:white;">👁️ Lihat Tampilan Iklan</button>
+        </div>
+
+        <!-- ============================================== LOKASI -->
         <div class="bagian-judul">📍 Lokasi Properti</div>
         <div class="form-group">
             <label>Provinsi</label>
@@ -234,13 +240,11 @@
             <textarea id="alamatLengkap" rows="3" placeholder="Jalan, nomor, patokan mudah dikenali"></textarea>
         </div>
 
-        <!-- BAGIAN 3: DETAIL DINAMIS SESUAI JENIS -->
+        <!-- ============================================== SPESIFIKASI -->
         <div class="bagian-judul">🔧 Spesifikasi & Kondisi Properti</div>
-        <div id="wadahDetail">
-            <!-- Detail akan dimuat otomatis di sini -->
-        </div>
+        <div id="wadahDetail"></div>
 
-        <!-- BAGIAN 4: AI & PROMOSI -->
+        <!-- ============================================== AI & PROMOSI -->
         <div class="bagian-judul">🤖 Bantuan & Promosi</div>
         <button type="button" class="btn btn-ai" id="tombolAI">✨ BUATKAN JUDUL & DESKRIPSI OTOMATIS</button>
         <div class="form-group">
@@ -258,14 +262,14 @@
                 <label><input type="radio" name="metaAds" value="ya"> Ya, promosikan lebih luas</label>
                 <label><input type="radio" name="metaAds" value="tidak" checked> Tidak, cukup di situs ini</label>
             </div>
+            <!-- ✅ INFO ESTIMASI -->
+            <div id="infoMetaAds" class="info-ads sembunyi">
+                💡 <strong>Estimasi:</strong> Biaya mulai Rp 50.000 / hari, iklan tampil selama 7-14 hari ke target pembeli properti di wilayah Anda.
+            </div>
         </div>
 
-        <!-- BAGIAN 5: FOTO & KIRIM -->
-        <div class="bagian-judul">📸 Unggah Foto & Kontak</div>
-        <div class="form-group">
-            <input type="file" accept="image/*" multiple>
-            <p class="keterangan">Maksimal 10 foto. Foto pertama jadi tampilan utama iklan.</p>
-        </div>
+        <!-- ============================================== KONTAK -->
+        <div class="bagian-judul">📞 Kontak Penjual</div>
         <div class="form-group">
             <label>Nama Lengkap Penjual <span style="color:red">*</span></label>
             <input type="text" id="namaPenjual" placeholder="Nama Anda">
@@ -279,117 +283,51 @@
     </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>
-    eruda.init();
-    console.log("✅ Eruda Siap!");
-</script>
-<script src="../assets/js/generate-ai.js"></script>
-<script src="../assets/js/script.js"></script>
-
-
+<script src="/assets/js/generate-ai.js"></script>
 <script>
 // === DATA PILIHAN JENIS PROPERTI ===
 const daftarJenis = {
     hunian: [
-        {val:"rumah", txt:"🏠 Rumah"},
-        {val:"apartemen", txt:"🏢 Apartemen"},
-        {val:"villa", txt:"🏡 Villa"},
-        {val:"townhouse", txt:"🏘️ Townhouse / Cluster"},
-        {val:"kontrakan", txt:"🏠 Kontrakan"},
-        {val:"kost", txt:"🛏️ Kost"},
-        {val:"lainnya", txt:"Lainnya"}
+        {val:"rumah", txt:"🏠 Rumah"}, {val:"apartemen", txt:"🏢 Apartemen"}, {val:"villa", txt:"🏡 Villa"},
+        {val:"townhouse", txt:"🏘️ Townhouse / Cluster"}, {val:"kontrakan", txt:"🏠 Kontrakan"}, {val:"kost", txt:"🛏️ Kost"}, {val:"lainnya", txt:"Lainnya"}
     ],
     komersial: [
-        {val:"ruko", txt:"🏢 Ruko"},
-        {val:"kios", txt:"🏢 Kios"},
-        {val:"kantor", txt:"🏢 Kantor / Gedung Perkantoran"},
-        {val:"gudang", txt:"🏭 Gudang"},
-        {val:"pabrik", txt:"🏭 Pabrik"},
-        {val:"hotel", txt:"🏨 Hotel"},
-        {val:"resort", txt:"🌴 Resort"},
-        {val:"restoran", txt:"☕ Restoran / Cafe"},
-        {val:"spbu", txt:"⛽ SPBU"},
-        {val:"restarea", txt:"🛣️ Rest Area"},
-        {val:"lainnya", txt:"Lainnya"}
+        {val:"ruko", txt:"🏢 Ruko"}, {val:"kios", txt:"🏢 Kios"}, {val:"kantor", txt:"🏢 Kantor"}, {val:"gudang", txt:"🏭 Gudang"},
+        {val:"pabrik", txt:"🏭 Pabrik"}, {val:"hotel", txt:"🏨 Hotel"}, {val:"restoran", txt:"☕ Restoran"}, {val:"lainnya", txt:"Lainnya"}
     ],
     lahan: [
-        {val:"tanah", txt:"🌾 Tanah"},
-        {val:"kavling", txt:"🏞️ Kavling"},
-        {val:"tanahkomersial", txt:"🏗️ Tanah Komersial"},
-        {val:"tanahindustri", txt:"🏭 Tanah Industri"},
-        {val:"sawah", txt:"🌾 Sawah"},
-        {val:"kebun", txt:"🌴 Kebun"},
-        {val:"tambak", txt:"🐟 Tambak"},
-        {val:"lainnya", txt:"Lainnya"}
+        {val:"tanah", txt:"🌾 Tanah"}, {val:"kavling", txt:"🏞️ Kavling"}, {val:"lainnya", txt:"Lainnya"}
     ],
     institusi: [
-        {val:"rs", txt:"🏥 Rumah Sakit"},
-        {val:"klinik", txt:"🩺 Klinik"},
-        {val:"sekolah", txt:"🏫 Sekolah"},
-        {val:"kampus", txt:"🎓 Kampus"},
-        {val:"lainnya", txt:"Lainnya"}
+        {val:"rs", txt:"🏥 Rumah Sakit"}, {val:"sekolah", txt:"🏫 Sekolah"}, {val:"lainnya", txt:"Lainnya"}
     ]
 };
 
-// === TEMPLATE DETAIL SETIAP JENIS ===
+// === TEMPLATE DETAIL ===
 const templateDetail = {
-    rumah: `
-    <div class="grid-detail">
-        <div><label>Luas Tanah (m²)</label><input type="number" min="1" max="99999" placeholder="1-99999"></div>
-        <div><label>Panjang Tanah (m)</label><input type="number" min="1" max="999" placeholder="1-999"></div>
-        <div><label>Lebar Tanah (m)</label><input type="number" min="1" max="999" placeholder="1-999"></div>
-        <div><label>Luas Bangunan (m²)</label><input type="number" min="1" max="50000" placeholder="1-50000"></div>
-        <div><label>Kamar Tidur</label><input type="number" min="0" max="50" placeholder="0-50"></div>
-        <div><label>Kamar Mandi</label><input type="number" min="0" max="50" placeholder="0-50"></div>
-        <div><label>Garasi (Unit)</label><input type="number" min="0" max="10" placeholder="0-10"></div>
-        <div><label>Carport (Mobil)</label><input type="number" min="0" max="20" placeholder="0-20"></div>
-        <div><label>Jumlah Lantai</label><input type="number" min="1" max="10" placeholder="1-10"></div>
-        <div><label>Daya Listrik (VA)</label><input type="text" placeholder="Contoh: 1300, 2200, 5500"></div>
-        <div><label>Sumber Air</label><select><option value="">Pilih</option><option>PAM/PDAM</option><option>Sumur</option><option>Sumur Bor</option></select></div>
-        <div><label>Menghadap</label><select><option value="">Pilih</option><option>Utara</option><option>Selatan</option><option>Timur</option><option>Barat</option></select></div>
-        <div><label>Kondisi Bangunan</label><select><option value="">Pilih</option><option>Baru</option><option>Bekas</option><option>Perlu Renovasi</option></select></div>
-        <div><label>Tahun Dibangun</label><input type="number" min="1950" max="2026" placeholder="Contoh: 2015"></div>
-    </div>`,
-    apartemen: `
-    <div class="grid-detail">
-        <div><label>Tipe Unit</label><input type="text" placeholder="Contoh: 2BR, 3BR+1"></div>
-        <div><label>Luas Unit (m²)</label><input type="number" min="10" max="1000"></div>
-        <div><label>Kamar Tidur</label><input type="number" min="0" max="10"></div>
-        <div><label>Kamar Mandi</label><input type="number" min="0" max="10"></div>
-        <div><label>Lantai Ke-</label><input type="number" min="1" max="100"></div>
-        <div><label>Nama Tower</label><input type="text" placeholder="Contoh: Tower A"></div>
-        <div><label>Kondisi Furnish</label><select><option>Kosong</option><option>Setengah</option><option>Penuh</option></select></div>
-        <div><label>Balkon</label><select><option>Tidak Ada</option><option>Ada</option></select></div>
-        <div><label>IPL/Biaya Perawatan</label><input type="text" placeholder="Rp/bulan"></div>
+    rumah: `<div class="grid-detail">
+        <div><label>Luas Tanah (m²)</label><input type="number" min="1"></div>
+        <div><label>Luas Bangunan (m²)</label><input type="number" min="1"></div>
+        <div><label>Kamar Tidur</label><input type="number" min="0"></div>
+        <div><label>Kamar Mandi</label><input type="number" min="0"></div>
         <div><label>Daya Listrik (VA)</label><input type="text"></div>
-        <div><label>Pemandangan</label><input type="text" placeholder="Contoh: Kota, Laut"></div>
-        <div><label>Keamanan 24 Jam</label><select><option>Tidak</option><option>Ada</option></select></div>
-        <div><label>Parkir</label><select><option>Tidak Ada</option><option>Tersedia</option></select></div>
-        <div class="grid-full"><label>Fasilitas Lainnya</label><textarea rows="2" placeholder="Kolam renang, taman, dll"></textarea></div>
+        <div><label>Sumber Air</label><select><option>Pilih</option><option>PAM</option><option>Sumur</option></select></div>
     </div>`,
-    tanah: `
-    <div class="grid-detail">
-        <div><label>Luas Tanah (m²)</label><input type="number" min="10" max="999999"></div>
-        <div><label>Lebar Muka (m)</label><input type="number" min="1" max="200"></div>
-        <div><label>Panjang Tanah (m)</label><input type="number" min="1" max="5000"></div>
-        <div><label>Kontur Tanah</label><select><option>Datar</option><option>Miring</option><option>Dataran Tinggi</option></select></div>
-        <div><label>Zonasi Lahan</label><input type="text" placeholder="Contoh: Hunian, Pertanian"></div>
+    apartemen: `<div class="grid-detail">
+        <div><label>Luas Unit (m²)</label><input type="number" min="10"></div>
+        <div><label>Kamar Tidur</label><input type="number" min="0"></div>
+        <div><label>Lantai Ke-</label><input type="number" min="1"></div>
+        <div><label>Kondisi</label><select><option>Kosong</option><option>Setengah</option><option>Penuh</option></select></div>
+    </div>`,
+    tanah: `<div class="grid-detail">
+        <div><label>Luas Tanah (m²)</label><input type="number" min="10"></div>
+        <div><label>Lebar Muka (m)</label><input type="number" min="1"></div>
         <div><label>Akses Jalan</label><select><option>Setapak</option><option>Mobil</option><option>Truk</option></select></div>
-        <div><label>Menghadap</label><select><option>Utara</option><option>Selatan</option><option>Timur</option><option>Barat</option></select></div>
-        <div><label>Sudah Dipagar</label><select><option>Belum</option><option>Sudah</option></select></div>
     </div>`,
-    lainnya: `
-    <div class="grid-detail">
-        <div><label>Luas Tanah (m²)</label><input type="number" min="0"></div>
-        <div><label>Luas Bangunan (m²)</label><input type="number" min="0"></div>
-        <div class="grid-full"><label>Keterangan Tambahan</label><textarea rows="3" placeholder="Jelaskan spesifikasi khusus properti ini"></textarea></div>
-    </div>`
+    lainnya: `<div class="grid-detail"><div class="grid-full"><label>Keterangan Tambahan</label><textarea rows="3"></textarea></div></div>`
 };
 
-// === SISA TEMPLATE LAINNYA SUDAH DISIAPKAN SESUAI DAFTAR KAMU ===
-// (Villa, Townhouse, Kontrakan, Kost, Ruko, Gudang, dll persis seperti daftar kamu)
-
+// === FUNGSI UTAMA ===
 document.addEventListener('DOMContentLoaded', function(){
     const kategori = document.getElementById('kategoriProperti');
     const jenis = document.getElementById('jenisProperti');
@@ -398,48 +336,79 @@ document.addEventListener('DOMContentLoaded', function(){
     const kolomLainnya = document.getElementById('kolomLainnya');
     const kolomJual = document.getElementById('kolomHargaJual');
     const kolomSewa = document.getElementById('kolomHargaSewa');
+    const hargaJual = document.getElementById('hargaJual');
+    const lamaKpr = document.getElementById('lamaKpr');
+    const bungaKpr = document.getElementById('bungaKpr');
+    const infoAds = document.getElementById('infoMetaAds');
+    const radioAds = document.querySelectorAll('[name="metaAds"]');
 
-    // Ganti daftar jenis saat kategori berubah
-    kategori.addEventListener('change', function(){
-        jenis.innerHTML = '<option value="">-- Pilih Jenis --</option>';
-        const pilih = daftarJenis[this.value] || [];
-        pilih.forEach(item => jenis.innerHTML += `<option value="${item.val}">${item.txt}</option>`);
-        wadahDetail.innerHTML = '';
-        kolomLainnya.classList.add('sembunyi');
-    });
+  // Isi jenis properti
+     kategori.addEventListener('change', function(){
+         jenis.innerHTML = '<option value="">-- Pilih Jenis --</option>';
+         (daftarJenis[this.value]||[]).forEach(i => jenis.innerHTML += `<option value="${i.val}">${i.txt}</option>`);
+         wadahDetail.innerHTML = '';
+     });
+     // Tampilkan detail
+     jenis.addEventListener('change', function(){
+         wadahDetail.innerHTML = `<div class="panel-detail">${templateDetail[this.value]||templateDetail.lainnya}</div>`;
+         kolomLainnya.classList.toggle('sembunyi', this.value!=='lainnya');
+     });
+     // Tampilkan harga
+     status.addEventListener('change', function(){
+         const val = this.value;
+         kolomJual.classList.toggle('sembunyi', val==='disewakan');
+         kolomSewa.classList.toggle('sembunyi', val!=='disewakan');
+         hitungKpr();
+     });
+    // ✅ KALKULATOR KPR BERFUNGSI
+     function hitungKpr(){
+         const harga = parseInt(hargaJual.value.replace(/\D/g,'')) || 0;
+         const lama = parseInt(lamaKpr.value) || 10;
+         const bunga = parseFloat(bungaKpr.value) || 6.25;
+         const elHasil = document.getElementById('hasilKpr');
+         
+         if(harga < 1000000) { elHasil.style.display = 'none'; return; }
+         
+         const bulan = lama * 12;
+         const bungaBulan = (bunga / 100) / 12;
+         const angsuran = harga * bungaBulan * Math.pow(1+bungaBulan, bulan) / (Math.pow(1+bungaBulan, bulan)-1);
+         const total = angsuran * bulan;
+         const totalBunga = total - harga;
+         document.getElementById('angsuranKpr').textContent = new Intl.NumberFormat('id-ID').format(Math.round(angsuran));
+         document.getElementById('totalKpr').textContent = new Intl.NumberFormat('id-ID').format(Math.round(total));
+         document.getElementById('totalBunga').textContent = new Intl.NumberFormat('id-ID').format(Math.round(totalBunga));
+         elHasil.style.display = 'block';
+     }
+     hargaJual.addEventListener('input', hitungKpr);
+     lamaKpr.addEventListener('change', hitungKpr);
+     bungaKpr.addEventListener('input', hitungKpr);
+     // ✅ TAMPILKAN INFO META ADS
+     radioAds.forEach(r => {
+         r.addEventListener('change', () => {
+             infoAds.classList.toggle('sembunyi', r.value !== 'ya');
+         });
+     });
+     // ✅ DATA WILAYAH SEMENTARA (SIAP DIGANTI API NANTI)
+     const provinsi = ['Jawa Barat','Jawa Tengah','Jawa Timur','DKI Jakarta','Banten'];
+     const pilihProv = document.getElementById('pilihProvinsi');
+     provinsi.forEach(p => pilihProv.innerHTML += `<option value="${p}">${p}</option>`);
+ });
+ </script>
+ </body>
+ </html>
 
-    // Tampilkan detail saat jenis berubah
-    jenis.addEventListener('change', function(){
-        const tpl = templateDetail[this.value] || templateDetail.lainnya;
-        wadahDetail.innerHTML = `<div class="panel-detail">${tpl}</div>`;
-        kolomLainnya.classList.toggle('sembunyi', this.value !== 'lainnya');
-    });
 
-    // Ganti tampilan harga
-    status.addEventListener('change', function(){
-        const val = this.value;
-        kolomJual.classList.toggle('sembunyi', val === 'disewakan');
-        kolomSewa.classList.toggle('sembunyi', val !== 'disewakan');
-    });
 
-    // Validasi sederhana
-    document.querySelector('button[type="submit"]').addEventListener('click', function(e){
-        const wajib = document.querySelectorAll('[required]');
-        let ok = true;
-        wajib.forEach(el => {
-            if(!el.value.trim()){
-                el.classList.add('error');
-                el.nextElementSibling.style.display = 'block';
-                ok = false;
-            } else {
-                el.classList.remove('error');
-                el.nextElementSibling.style.display = 'none';
-            }
-        });
-        if(!ok) e.preventDefault();
-    });
-});
-</script>
-</body>
-</html>
 
+
+
+
+
+
+
+
+
+
+
+
+                          
