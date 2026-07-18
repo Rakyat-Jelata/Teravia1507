@@ -142,6 +142,40 @@
 </footer>
 
 <script src="/assets/js/general.js"></script>
+    <script>
+// Cek apakah pengguna sudah login
+const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+
+// Ubah tautan "Pilih Paket Ini" jadi berfungsi
+document.querySelectorAll('.btn-pilih').forEach((tombol, indeks) => {
+    const daftarPaket = ['Kaveling', 'Cluster', 'Residence', 'Estate'];
+    tombol.setAttribute('href', 'javascript:void(0)');
+    tombol.addEventListener('click', () => ajukanUpgrade(daftarPaket[indeks]));
+});
+
+function ajukanUpgrade(namaPaket) {
+    if (!sesi) {
+        alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // Simpan permintaan ke daftar antrian admin
+    const antrian = JSON.parse(localStorage.getItem('permintaanUpgrade') || '[]');
+    antrian.push({
+        id: Date.now(),
+        userId: sesi.id,
+        paketTujuan: namaPaket,
+        status: 'menunggu',
+        tanggal: new Date().toLocaleString('id-ID')
+    });
+    localStorage.setItem('permintaanUpgrade', JSON.stringify(antrian));
+
+    alert(`✅ Permintaan Upgrade ke Paket ${namaPaket} Berhasil Dikirim!\n\nAdmin akan memverifikasi pembayaranmu maksimal 1x24 jam.`);
+    window.location.href = 'profile-member.html';
+}
+    </script>
+    
 </body>
   </html>
   
