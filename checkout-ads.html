@@ -114,6 +114,9 @@ function lanjutBayar(){
     alert(`✅ Pesanan promosi tercatat!\n\nSilakan lakukan pembayaran sebesar Rp ${hargaTerpilih.toLocaleString('id-ID')} ke rekening berikut:\n\nBCA: 1234567890 a.n Teravia\nKonfirmasi akan dikirim setelah pembayaran diverifikasi.`);
     location.href = 'iklan-saya.html';
 }
+    alert(`✅ Pesanan promosi tercatat! Ini bukti pembayarannya.`);
+window.location.href = `invoice.html?jenis=ads&id=${pesananBaru.id}`;
+    
 </script>
 </body>
 </html>
