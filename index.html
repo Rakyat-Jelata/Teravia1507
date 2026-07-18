@@ -86,7 +86,7 @@
 </head>
 <body>
 
-<!-- NAVBAR (STRUKTUR ASLI TETAP SAMA PENUH) -->
+<!-- NAVBAR -->
 <nav class="navbar">
      <div class="wadah-nav">
          <a href="index.html" class="logo">
@@ -101,7 +101,8 @@
              <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
              <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
          </div>
-         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+         <!-- PERBAIKAN: ID SESUAI & PASTI MUNCUL -->
+         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu" style="display:flex !important; z-index:99999 !important; pointer-events:all !important;">
              <span></span><span></span><span></span>
          </button>
      </div>
@@ -368,8 +369,34 @@
     </div>
 </footer>
 
-<!-- SCRIPT SEMUA DIPERTAHANKAN & DIPERBAIKI UNTUK APK -->
 <script>
+ document.addEventListener('DOMContentLoaded', function() {
+     const buka = document.getElementById('tombolMenu');
+     const tutup = document.getElementById('tombolTutup');
+     const menu = document.getElementById('menuMobile');
+     const latar = document.getElementById('latarGelap');
+     if(buka && tutup && menu && latar) {
+         buka.onclick = () => {
+             menu.classList.add('buka');
+             latar.classList.add('tampil');
+             document.body.style.overflow = 'hidden';
+         };
+         tutup.onclick = () => {
+             menu.classList.remove('buka');
+             latar.classList.remove('tampil');
+             document.body.style.overflow = '';
+         };
+         latar.onclick = () => {
+             menu.classList.remove('buka');
+             latar.classList.remove('tampil');
+             document.body.style.overflow = '';
+         };
+     }
+ });
+ </script>
+<script>
+    <!-- SCRIPT HAMBURGER CADANGAN (PASTI JALAN DI APK) -->
+    
 // Perbaiki fungsi hamburger agar lebih stabil di WebView APK
 document.addEventListener('DOMContentLoaded', function() {
     const tombolBuka = document.getElementById('tombolMenu');
