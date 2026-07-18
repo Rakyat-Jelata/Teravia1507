@@ -105,12 +105,21 @@ document.getElementById('formRegistrasi').addEventListener('submit', function(e)
     localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
     
     // Langsung login & langsung ke beranda
-    localStorage.setItem('teravia_sesi', JSON.stringify({id: akunBaru.id, nama: akunBaru.nama}));
-    alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
-    window.location.href = '/index.html';
-});
+    // === SIMPAN SESI DENGAN BENAR ===
+ const dataSesi = {
+   id: akunBaru.id,
+   nama: akunBaru.nama,
+   username: akunBaru.username,
+   email: akunBaru.email,
+   tier: akunBaru.tier
+ };
+ localStorage.setItem('teravia_sesi', JSON.stringify(dataSesi));
+ alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
+ // Beri waktu sedikit sebelum pindah halaman
+ setTimeout(() => {
+   window.location.href = '/index.html';
+ }, 300);
 </script>
 
-</
-    body>
+</body>
 </html>
