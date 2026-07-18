@@ -508,3 +508,30 @@ a {
     color: var(--utama);
     font-weight: 600;
 }
+/* PERBAIKAN KHUSUS KELOMPOK KATA SANDI */
+.grup-input.sandi-grup {
+    position: relative !important;
+    width: 100%;
+}
+
+.grup-input.sandi-grup input {
+    width: 100%;
+    padding: 12px 45px 12px 14px !important; /* Ruang kanan buat ikon */
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.grup-input.sandi-grup button {
+    position: absolute !important;
+    right: 14px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 2;
+}
