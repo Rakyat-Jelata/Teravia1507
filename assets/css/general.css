@@ -1,5 +1,5 @@
 /* ==============================================
-   DASAR & NAVBAR
+   DASAR & NAVBAR - VERSI SUDAH DIPERBAIKI
 ============================================== */
 * {
     box-sizing: border-box;
@@ -50,8 +50,9 @@ a {
     text-decoration: none;
 }
 
+/* === PERBAIKAN UTAMA: MENU DESKTOP === */
 .menu-desktop {
-    display: none;
+    display: flex; /* MUNCUL SECARA DEFAULT */
     align-items: center;
     gap: 20px;
 }
@@ -78,9 +79,9 @@ a {
     font-weight: 600;
 }
 
-/* TOMBOL HAMBURGER */
+/* === TOMBOL HAMBURGER: TIDAK MUNCUL DI DEKSTOP === */
 .tombol-hamburger {
-    display: flex;
+    display: none; /* DISEMBUNYIKAN AWALNYA */
     flex-direction: column;
     gap: 4px;
     background: none;
@@ -97,7 +98,7 @@ a {
     transition: all 0.3s ease;
 }
 
-/* MENU SAMPING + TOMBOL TUTUP */
+/* === MENU SAMPING HP === */
 .menu-samping {
     position: fixed;
     top: 0;
@@ -193,13 +194,22 @@ a {
     margin-top: 5px;
 }
 
-/* TAMPILAN MENU DEKSTOP */
-@media (min-width: 992px) {
+/* === BATASAN LAYAR: HANYA HP < 992px PAKAI HAMBURGER === */
+@media (max-width: 991px) {
     .menu-desktop {
-        display: flex;
+        display: none !important;
     }
     .tombol-hamburger {
-        display: none;
+        display: flex !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .menu-desktop {
+        display: flex !important;
+    }
+    .tombol-hamburger {
+        display: none !important;
     }
     .menu-samping, .latar-gelap {
         display: none !important;
@@ -207,7 +217,7 @@ a {
 }
 
 /* ==============================================
-   KARTU & TAUTAN KARTU (DIPAKAI DI SEMUA HALAMAN)
+   KARTU & TAUTAN KARTU
 ============================================== */
 .grid-kartu-properti {
     display: grid;
@@ -304,7 +314,7 @@ a {
     transform: translateY(-3px);
 }
 
-/* RESPONSIF UMUM */
+/* RESPONSIF GRID */
 @media (min-width: 768px) {
     .grid-kartu-properti {
         grid-template-columns: repeat(2, 1fr);
@@ -318,7 +328,7 @@ a {
 }
 
 /* ==============================================
-   FOOTER - SESUAI TEMA TERAVIA
+   FOOTER
 ============================================== */
 .footer {
     background: var(--gelap);
@@ -393,5 +403,5 @@ a {
     .footer-baris {
         gap: 20px;
     }
-  }
-
+   }
+   
