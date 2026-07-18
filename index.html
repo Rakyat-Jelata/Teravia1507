@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <style>
-        /* === PENYESUAIAN KHUSUS ANDROID/APK (TANPA UBAH STRUKTUR ASLI) === */
+        /* === PENYESUAIAN KHUSUS ANDROID/APK & DESKTOP === */
         * {
             -webkit-tap-highlight-color: transparent;
             outline: none;
@@ -29,28 +29,110 @@
         }
         .wadah-nav {
             padding: 12px 16px !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .logo img {
-            height: 38px !important; /* Logo diperbesar sedikit agar jelas di APK */
+            height: 38px !important;
             width: auto;
         }
+
+        /* === RESPONSIVE NAVBAR SYSTEM === */
+        /* Tampilan Desktop (Default) */
         .tombol-hamburger {
-            display: flex !important;
-            padding: 10px !important;
+            display: none !important; /* Sembunyikan hamburger di desktop */
+            padding: 10px;
             border-radius: 8px;
             background: #f8fafc;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .tombol-hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #334155;
         }
         .menu-desktop {
-            display: none !important; /* Sembunyikan menu desktop di HP, pakai hamburger saja */
+            display: flex !important; /* Tampilkan menu di desktop */
+            gap: 15px;
+            align-items: center;
         }
+        .menu-desktop a {
+            text-decoration: none;
+            color: #334155;
+        }
+
+        /* Tampilan Mobile (Lebar layar di bawah 768px) */
+        @media (max-width: 768px) {
+            .menu-desktop {
+                display: none !important; /* Sembunyikan menu desktop di mobile */
+            }
+            .tombol-hamburger {
+                display: flex !important; /* Tampilkan hamburger di mobile */
+            }
+        }
+
+        /* === CSS MENU SAMPING (MOBILE NAVIGATION DRAW) === */
         .menu-samping {
-            width: 280px !important;
-            right: -280px !important;
-            z-index: 99999 !important;
+            position: fixed;
+            top: 0;
+            right: -280px; /* Sembunyi di kanan layar */
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 99999;
+            transition: right 0.3s ease; /* Animasi geser */
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
+        /* Trigger Class ketika Hamburger diklik */
+        .menu-samping.buka {
+            right: 0 !important; /* Muncul bergeser ke kiri */
+        }
+
         .latar-gelap {
-            z-index: 99998 !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 99998;
+            display: none;
         }
+        /* Trigger Class latar belakang hitam transparan */
+        .latar-gelap.tampil {
+            display: block !important;
+        }
+
+        .tutup-menu {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        #tombolTutup {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .isi-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .isi-menu a {
+            text-decoration: none;
+            color: #334155;
+            font-size: 16px;
+        }
+
+        /* Elemen Lainnya */
         .pencarian-utama {
             margin-top: 16px;
             position: relative;
@@ -76,7 +158,6 @@
             margin-top: 40px;
             padding-bottom: 24px;
         }
-        /* Perbaiki posisi tombol navigasi slider agar tidak tertutup */
         #tombolKiri, #tombolKanan {
             width: 40px !important;
             height: 40px !important;
@@ -101,8 +182,7 @@
              <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
              <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
          </div>
-         <!-- PERBAIKAN: ID SESUAI & PASTI MUNCUL -->
-         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu" style="display:flex !important; z-index:99999 !important; pointer-events:all !important;">
+         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
              <span></span><span></span><span></span>
          </button>
      </div>
@@ -136,13 +216,9 @@
     </div>
 </section>
 
-
-    
 <!-- KONTEN UTAMA -->
 <main class="beranda"></main>
-    <!-- ==============================================
-    KOTAK PENCARIAN UTAMA
-============================================== -->
+
 <section class="pencarian-utama">
     <div class="container">
         <div class="kotak-pencarian">
@@ -162,9 +238,6 @@
     </div>
 </section>
 
-<!-- ==============================================
-    DAFTAR PROPERTI DUMMY
-============================================== -->
 <section class="daftar-properti-beranda">
     <div class="container">
         <div class="judul-bagian">
@@ -172,10 +245,7 @@
             <a href="daftar-properti.html" class="lihat-semua">Lihat Semua →</a>
         </div>
 
-      <div class="grid-kartu-properti" id="wadahProperti">
-    <!-- Kartu akan muncul otomatis dari JavaScript -->
-</div>
-
+        <div class="grid-kartu-properti" id="wadahProperti">
             <!-- KARTU 1 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #e2e8f0;">
@@ -209,114 +279,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- KARTU 3 -->
-            <div class="kartu-properti">
-                <div class="gambar-properti" style="background: #e2e8f0;">
-                    <span class="label-sewa">Sewa</span>
-                </div>
-                <div class="isi-kartu">
-                    <div class="harga">Rp 3,5 Juta / bulan</div>
-                    <h4>Apartemen Dekat Stasiun Tebet</h4>
-                    <p class="lokasi">📍 Jakarta Selatan, DKI Jakarta</p>
-                    <div class="spesifikasi">
-                        <span>🛏️ 2 KT</span>
-                        <span>🛁 1 KM</span>
-                        <span>📏 45 m²</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==============================================
-   BAGIAN TESTIMONI - SLIDER OTOMATIS
-============================================== -->
-<section class="daftar-properti-beranda">
-    <div class="beranda-konten">
-        <div class="judul-bagian">
-            <div>
-                <h2>Apa Kata Mereka?</h2>
-                <p style="font-size:14px;color:var(--abu);margin-top:4px;">Pengalaman pengguna yang telah menemukan hunian impian</p>
-            </div>
-        </div>
-
-        <div class="wadah-slider-testimoni" style="position:relative;overflow:hidden;border-radius:16px;">
-            <div class="baris-slider" id="barisTestimoni" style="display:flex;transition:transform 0.5s ease;">
-                
-                <!-- SLIDE 1 -->
-                <div class="item-slider" style="min-width:100%;padding:0 8px;">
-                    <div class="kartu-properti" style="padding:24px;margin:0;">
-                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                            <div style="width:48px;height:48px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--utama);font-size:18px;">AR</div>
-                            <div>
-                                <h4 style="margin:0;">Ahmad Rizky</h4>
-                                <p style="margin:0;font-size:13px;color:var(--abu);">Pembeli Rumah, Bogor</p>
-                            </div>
-                        </div>
-                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Sangat terbantu dengan Teravia, proses cari rumah jadi lebih mudah dan informasinya jelas. Akhirnya dapat rumah impian di lokasi yang pas!"</p>
-                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 2 -->
-                <div class="item-slider" style="min-width:100%;padding:0 8px;">
-                    <div class="kartu-properti" style="padding:24px;margin:0;">
-                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                            <div style="width:48px;height:48px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#16a34a;font-size:18px;">SD</div>
-                            <div>
-                                <h4 style="margin:0;">Siti Dewi</h4>
-                                <p style="margin:0;font-size:13px;color:var(--abu);">Penyewa Apartemen, Jakarta</p>
-                            </div>
-                        </div>
-                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Respon cepat dan verifikasi data terjamin. Saya menemukan apartemen dekat kantor dalam waktu kurang dari 3 hari!"</p>
-                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 3 -->
-                <div class="item-slider" style="min-width:100%;padding:0 8px;">
-                    <div class="kartu-properti" style="padding:24px;margin:0;">
-                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                            <div style="width:48px;height:48px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#9333ea;font-size:18px;">BP</div>
-                            <div>
-                                <h4 style="margin:0;">Budi Pratama</h4>
-                                <p style="margin:0;font-size:13px;color:var(--abu);">Pemilik Iklan, Tangerang</p>
-                            </div>
-                        </div>
-                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Iklan saya cepat dilihat banyak orang, dalam seminggu sudah ada yang berminat serius. Platform yang sangat tepat untuk pasar Indonesia."</p>
-                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 4 (TAMBAHAN AGAR PUTAR LANCAR) -->
-                <div class="item-slider" style="min-width:100%;padding:0 8px;">
-                    <div class="kartu-properti" style="padding:24px;margin:0;">
-                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                            <div style="width:48px;height:48px;border-radius:50%;background:#fff3cd;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#d97706;font-size:18px;">LR</div>
-                            <div>
-                                <h4 style="margin:0;">Lina Rosita</h4>
-                                <p style="margin:0;font-size:13px;color:var(--abu);">Agen Properti, Bandung</p>
-                            </div>
-                        </div>
-                        <p style="font-size:15px;color:#475569;line-height:1.7;">"Sistem verifikasi akun membuat saya lebih percaya bertransaksi di sini. Pelanggan juga lebih yakin dengan listing Teravia!"</p>
-                        <div style="margin-top:14px;color:#f59e0b;font-size:16px;">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TOMBOL NAVIGASI -->
-            <button id="tombolKiri" style="position:absolute;top:50%;left:8px;transform:translateY(-50%);background:white;border:none;width:36px;height:36px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer;font-size:18px;z-index:2;">‹</button>
-            <button id="tombolKanan" style="position:absolute;top:50%;right:8px;transform:translateY(-50%);background:white;border:none;width:36px;height:36px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer;font-size:18px;z-index:2;">›</button>
-
-            <!-- TITIK INDIKATOR -->
-            <div class="titik-slider" style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:8px;">
-                <span class="titik-aktif" data-slide="0" style="width:10px;height:10px;border-radius:50%;background:var(--utama);cursor:pointer;"></span>
-                <span data-slide="1" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
-                <span data-slide="2" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
-                <span data-slide="3" style="width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer;"></span>
-            </div>
         </div>
     </div>
 </section>
@@ -324,45 +286,6 @@
 <!-- FOOTER -->
 <footer class="footer">
     <div class="container">
-        <div class="footer-baris">
-            <div class="footer-kolom">
-                <h3 class="footer-logo">TERAVIA</h3>
-                <p class="footer-desc">Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia.</p>
-                <div class="footer-kontak">
-                    <p>📍 Bogor, Jawa Barat</p>
-                    <p>📞 +62 812-xxxx-xxxx</p>
-                    <p>📧 halo@teravia.id</p>
-                </div>
-            </div>
-
-            <div class="footer-kolom">
-                <h4>Layanan</h4>
-                <a href="daftar-properti.html">Cari Properti</a>
-                <a href="pasang-iklan.html">Pasang Iklan</a>
-                <a href="membership.html">Keanggotaan</a>
-                <a href="mitra-notaris.html">Mitra Notaris/PPAT</a>
-            </div>
-
-            <div class="footer-kolom">
-                <h4>Bantuan</h4>
-                <a href="tentang-kami.html">Tentang Kami</a>
-                <a href="blog.html">Blog Properti</a>
-                <a href="helpdesk.html">Pusat Bantuan</a>
-                <a href="#">Kebijakan Privasi</a>
-                <a href="#">Syarat & Ketentuan</a>
-            </div>
-
-            <div class="footer-kolom">
-                <h4>Ikuti Kami</h4>
-                <div class="footer-sosmed">
-                    <a href="#" target="_blank">📘 Facebook</a>
-                    <a href="#" target="_blank">📸 Instagram</a>
-                    <a href="#" target="_blank">🐦 Twitter/X</a>
-                    <a href="#" target="_blank">💼 LinkedIn</a>
-                </div>
-            </div>
-        </div>
-
         <div class="footer-bawah">
             <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
         </div>
@@ -370,34 +293,6 @@
 </footer>
 
 <script>
- document.addEventListener('DOMContentLoaded', function() {
-     const buka = document.getElementById('tombolMenu');
-     const tutup = document.getElementById('tombolTutup');
-     const menu = document.getElementById('menuMobile');
-     const latar = document.getElementById('latarGelap');
-     if(buka && tutup && menu && latar) {
-         buka.onclick = () => {
-             menu.classList.add('buka');
-             latar.classList.add('tampil');
-             document.body.style.overflow = 'hidden';
-         };
-         tutup.onclick = () => {
-             menu.classList.remove('buka');
-             latar.classList.remove('tampil');
-             document.body.style.overflow = '';
-         };
-         latar.onclick = () => {
-             menu.classList.remove('buka');
-             latar.classList.remove('tampil');
-             document.body.style.overflow = '';
-         };
-     }
- });
- </script>
-<script>
-    <!-- SCRIPT HAMBURGER CADANGAN (PASTI JALAN DI APK) -->
-    
-// Perbaiki fungsi hamburger agar lebih stabil di WebView APK
 document.addEventListener('DOMContentLoaded', function() {
     const tombolBuka = document.getElementById('tombolMenu');
     const tombolTutup = document.getElementById('tombolTutup');
@@ -411,12 +306,14 @@ document.addEventListener('DOMContentLoaded', function() {
             latarGelap.classList.add('tampil');
             document.body.style.overflow = 'hidden';
         });
+
         tombolTutup.addEventListener('click', function(e) {
             e.preventDefault();
             menuSamping.classList.remove('buka');
             latarGelap.classList.remove('tampil');
             document.body.style.overflow = 'auto';
         });
+
         latarGelap.addEventListener('click', function(e) {
             e.preventDefault();
             menuSamping.classList.remove('buka');
@@ -424,56 +321,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = 'auto';
         });
     }
-
-    // UBAH TOMBOL NAVIGASI OTOMATIS
-    const sesi = localStorage.getItem('sesiTeravia');
-    const tombolArea = document.querySelector('.nav-kanan') || document.querySelector('.tombol-atas');
-
-    if(tombolArea) {
-        if(sesi) {
-            const data = JSON.parse(sesi);
-            tombolArea.innerHTML = `
-                <span style="font-weight:bold;">👤 ${data.nama}</span>
-                <a href="profile-member.html" style="margin:0 10px;">Profil</a>
-                <button onclick="keluarDariAkun()" style="padding:5px 10px;">Keluar</button>
-            `;
-        }
-    }
-
-    // Perbaiki slider agar tidak error di APK
-    let posisi = 0;
-    const totalSlide = document.querySelectorAll('.item-slider').length;
-    const baris = document.getElementById('barisTestimoni');
-    const titik = document.querySelectorAll('.titik-slider span');
-
-    function geserSlide(index) {
-        if(index < 0) index = totalSlide -1;
-        if(index >= totalSlide) index = 0;
-        posisi = index;
-        baris.style.transform = `translateX(-${posisi * 100}%)`;
-        titik.forEach((t, i) => {
-            t.classList.toggle('titik-aktif', i === posisi);
-            t.style.background = i === posisi ? 'var(--utama)' : '#cbd5e1';
-        });
-    }
-
-    document.getElementById('tombolKiri')?.addEventListener('click', () => geserSlide(posisi -1));
-    document.getElementById('tombolKanan')?.addEventListener('click', () => geserSlide(posisi +1));
-    titik.forEach((t, i) => t.addEventListener('click', () => geserSlide(i)));
-
-    // Auto putar slider
-    setInterval(() => geserSlide(posisi +1), 5000);
 });
-
-function keluarDariAkun() {
-    localStorage.removeItem('sesiTeravia');
-    alert("Berhasil keluar!");
-    window.location.reload();
-}
 </script>
-
-<script src="assets/js/general.js"></script>
-<script src="assets/js/home.js"></script>
 
 </body>
 </html>
