@@ -7,42 +7,7 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/auth.css">
-    <!-- TAMBAHKAN BARIS INI DI BAGIAN <head> -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script>
-document.getElementById('formRegistrasi').addEventListener('submit', function(e){
-  e.preventDefault();
-  const nama = document.getElementById('nama').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const sandi = document.getElementById('sandi').value.trim();
-
-  // Cek email sudah terdaftar
-  const semuaUser = JSON.parse(localStorage.getItem('teravia_users') || '[]');
-  const sudahAda = semuaUser.find(u => u.email === email);
-  if(sudahAda) return alert('❌ Email ini sudah terdaftar!');
-
-  // Simpan akun baru
-  const akunBaru = {
-    id: Date.now(),
-    nama: nama,
-    email: email,
-    sandi: sandi,
-    tier: 'Kaveling',
-    tanggal_berlaku: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    kuota_terpakai: 0
-  };
-
-  semuaUser.push(akunBaru);
-  localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
-  
-  // Langsung masuk & loncat ke BERANDA
-  localStorage.setItem('teravia_sesi', JSON.stringify({id: akunBaru.id, nama: akunBaru.nama}));
-  alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
-  window.location.href = '/index.html'; // <-- LANGSUNG KE BERANDA
-});
-
-</script>
+    <!-- HAPUS BARIS EMAILJS YANG TIDAK DIPAKAI -->
 </head>
 <body class="halaman-login halaman-daftar">
 
@@ -51,27 +16,26 @@ document.getElementById('formRegistrasi').addEventListener('submit', function(e)
         <img src="assets/img/logo.png" alt="Teravia" class="logo-login">
         <h2>Daftar Akun</h2>
 
-        <form class="form-login form-daftar">
+        <!-- ✅ FORM DENGAN ID YANG BENAR -->
+        <form id="formRegistrasi" class="form-login form-daftar">
             <div class="grup-input">
-                <input type="text" placeholder="Username (Ditampilkan di listingan)" required>
+                <input type="text" id="username" placeholder="Username (Ditampilkan di listingan)" required>
             </div>
             <div class="grup-input">
-                <input type="text" placeholder="Nama Lengkap Penjual" required>
+                <input type="text" id="nama" placeholder="Nama Lengkap Penjual" required>
             </div>
             <div class="grup-input">
-                <input type="tel" placeholder="Nomor WhatsApp" required>
+                <input type="tel" id="nohp" placeholder="Nomor WhatsApp" required>
             </div>
             <div class="grup-input">
-                <input type="email" placeholder="Alamat Email (Aktivasi akun dikirim ke sini)" required>
+                <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
 
-            <!-- Kolom Password dengan tombol sembunyi/tampil -->
             <div class="grup-input sandi-grup">
                 <input type="password" id="kataSandi" placeholder="Kata Sandi" required>
                 <button type="button" class="tombol-mata" onclick="toggleSandi('kataSandi', this)">👁️</button>
             </div>
 
-            <!-- Kolom Konfirmasi Password -->
             <div class="grup-input sandi-grup">
                 <input type="password" id="konfirmasiSandi" placeholder="Ketik Ulang Kata Sandi" required>
                 <button type="button" class="tombol-mata" onclick="toggleSandi('konfirmasiSandi', this)">👁️</button>
@@ -93,34 +57,60 @@ document.getElementById('formRegistrasi').addEventListener('submit', function(e)
 // Fungsi sembunyikan/tampilkan sandi
 function toggleSandi(idInput, tombol) {
     const input = document.getElementById(idInput);
-    if (input.type === "password") {
-        input.type = "text";
-        tombol.textContent = "🙈";
-    } else {
-        input.type = "password";
-        tombol.textContent = "👁️";
-    }
+    input.type = input.type === "password" ? "text" : "password";
+    tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// Validasi konfirmasi sandi sebelum kirim
-document.querySelector('.form-daftar').addEventListener('submit', function(e) {
+// === PROSES PENDAFTARAN YANG BENAR ===
+document.getElementById('formRegistrasi').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Ambil semua nilai
+    const username = document.getElementById('username').value.trim();
+    const nama = document.getElementById('nama').value.trim();
+    const nohp = document.getElementById('nohp').value.trim();
+    const email = document.getElementById('email').value.trim();
     const sandi = document.getElementById('kataSandi').value;
     const ulangSandi = document.getElementById('konfirmasiSandi').value;
-    
+
+    // Validasi dasar
     if (sandi !== ulangSandi) {
-        alert("⚠️ Kata sandi dan konfirmasi tidak sama! Silakan ketik ulang dengan benar.");
-        e.preventDefault();
-        return false;
+        return alert("⚠️ Kata sandi dan konfirmasi tidak sama!");
     }
     if (sandi.length < 8) {
-        alert("⚠️ Kata sandi minimal harus 8 karakter!");
-        e.preventDefault();
-        return false;
+        return alert("⚠️ Kata sandi minimal 8 karakter!");
     }
-    alert("✅ Pendaftaran berhasil! Silakan cek email untuk aktivasi akun.");
+
+    // Cek email sudah terdaftar
+    const semuaUser = JSON.parse(localStorage.getItem('teravia_users') || '[]');
+    const sudahAda = semuaUser.find(u => u.email === email);
+    if (sudahAda) {
+        return alert('❌ Email ini sudah terdaftar!');
+    }
+
+    // Simpan akun baru
+    const akunBaru = {
+        id: Date.now(),
+        username: username,
+        nama: nama,
+        email: email,
+        nohp: nohp,
+        sandi: sandi,
+        tier: 'Kaveling',
+        tanggal_berlaku: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
+        kuota_terpakai: 0
+    };
+
+    semuaUser.push(akunBaru);
+    localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
+    
+    // Langsung login & langsung ke beranda
+    localStorage.setItem('teravia_sesi', JSON.stringify({id: akunBaru.id, nama: akunBaru.nama}));
+    alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
+    window.location.href = '/index.html';
 });
 </script>
 
-</body
-    >
+</
+    body>
 </html>
