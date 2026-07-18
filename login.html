@@ -3,39 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk - Teravia</title>
-    <link rel="icon" href="/assets/img/logo.png">
-<link rel="stylesheet" href="/assets/css/general.css">
-<link rel="stylesheet" href="/assets/css/auth.css">
-
+    <title>Masuk Akun - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
 </head>
 <body class="halaman-login">
 
-<!-- HANYA SATU LOGO DI ATAS FORM, TIDAK ADA DI NAVBAR -->
 <div class="wadah-login">
     <div class="kotak-login">
         <img src="assets/img/logo.png" alt="Teravia" class="logo-login">
-        <h2>Masuk</h2>
+        <h2>Masuk Akun</h2>
 
-        <form class="form-login">
+        <form id="formLogin" class="form-login">
             <div class="grup-input">
-                <input type="email" placeholder="Email" required>
+                <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
-            <div class="grup-input">
-                <input type="password" placeholder="Kata Sandi" required>
-            </div>
-
-            <div class="opsi-bawah">
-                <label class="ingat-saya">
-                    <input type="checkbox"> Ingat Saya
-                </label>
-                <a href="#" class="lupa-sandi">Lupa Kata Sandi?</a>
+            <div class="grup-input sandi-grup">
+                <input type="password" id="sandi" placeholder="Kata Sandi" required>
+                <button type="button" class="tombol-mata" onclick="ubahSandi('sandi', this)">👁️</button>
             </div>
 
-            <button type="submit" class="btn-masuk">Masuk</button>
+            <button type="submit" class="btn-masuk">Masuk Sekarang</button>
 
             <div class="tautan-daftar">
-                Belum punya akun? <a href="register.html">Daftar Sekarang</a>
+                Belum punya akun? <a href="registrasi.html">Daftar Baru</a>
             </div>
             <div class="tautan-kembali">
                 <a href="index.html">← Kembali ke Beranda</a>
@@ -43,11 +35,63 @@
         </form>
     </div>
 </div>
+
+<!-- ==============================================
+✅ BAGIAN INI ADALAH SCRIPT SUPABASE UNTUK LOGIN
+============================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    // Setelah cocokkan email & sandi:
-if(user.terverifikasi === false){
-  return alert('⚠️ Akun belum aktif! Silakan cek email untuk verifikasi dulu.');
+// 1. KONEKSI KE DATABASE
+const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Fungsi sembunyi/tampil sandi
+function ubahSandi(id, tombol) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+    tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
+
+// 2. PROSES LOGIN KE SUPABASE
+document.getElementById('formLogin').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Ambil nilai dari form
+    const email = document.getElementById('email').value.trim();
+    const sandi = document.getElementById('sandi').value;
+
+    try {
+        // Cari data pengguna di database
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .eq('sandi', sandi)
+            .single();
+
+        if(error || !data) {
+            return alert("❌ Email atau kata sandi salah!");
+        }
+
+        // Simpan sesi login
+        localStorage.setItem('sesiTeravia', JSON.stringify({
+            id: data.id,
+            username: data.username,
+            nama: data.nama_lengkap,
+            is_admin: data.is_admin
+        }));
+
+        alert("✅ Berhasil masuk!");
+        // Arahkan ke halaman yang sesuai
+        window.location.href = data.is_admin ? "admin-dashboard.html" : "index.html";
+
+    } catch (err) {
+        console.error("Error login:", err);
+        alert("❌ Terjadi kesalahan: " + err.message);
+    }
+});
 </script>
+
 </body>
 </html>
