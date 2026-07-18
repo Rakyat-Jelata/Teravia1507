@@ -29,14 +29,18 @@
                 <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
 
-            <div class="grup-input sandi-grup">
-                <input type="password" id="sandi1" placeholder="Kata Sandi (min 8 karakter)" required>
-                <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
-            </div>
-            <div class="grup-input sandi-grup">
-                <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
-                <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
-            </div>
+            <!-- Kata Sandi Pertama -->
+<div class="grup-input sandi-grup">
+    <input type="password" id="sandi1" placeholder="Kata Sandi (min 8 karakter)" required>
+    <button type="button" onclick="ubahSandi('sandi1', this)">👁️</button>
+</div>
+
+<!-- Ulangi Kata Sandi (ID & FUNGSI DIPERBAIKI) -->
+<div class="grup-input sandi-grup">
+    <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
+    <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
+</div>
+
 
             <button type="submit" class="btn-masuk">Daftar Sekarang</button>
 
