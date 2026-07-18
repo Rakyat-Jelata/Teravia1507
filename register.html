@@ -3,86 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar - Teravia</title>
+    <title>Daftar Akun - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/auth.css">
+
+    
+
+<!-- Pustaka Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// Inisialisasi koneksi (Ganti dengan milikmu)
+const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
+
 </head>
-<body>
+<body class="halaman-login halaman-daftar">
 
 <div class="wadah-login">
-    <div class="kotak-login">
-        <h2>Daftar Akun Baru</h2>
+    <div class="kotak-login kotak-daftar">
+        <img src="assets/img/logo.png" alt="Teravia" class="logo-login">
+        <h2>Daftar Akun</h2>
 
-        <!-- ✅ FORM DENGAN ID YANG PASTI BENAR -->
-        <form id="formDaftarBaru">
+        <form id="formDaftar" class="form-login form-daftar">
             <div class="grup-input">
-                <input type="text" id="inputUser" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required>
             </div>
             <div class="grup-input">
-                <input type="email" id="inputEmail" placeholder="Email" required>
+                <input type="text" id="nama" placeholder="Nama Lengkap" required>
             </div>
             <div class="grup-input">
-                <input type="password" id="inputSandi" placeholder="Kata Sandi (min 8 huruf)" required>
+                <input type="tel" id="nohp" placeholder="Nomor WhatsApp" required>
+            </div>
+            <div class="grup-input">
+                <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
 
-            <button type="submit" class="btn-masuk">Daftar & Masuk</button>
-            <p style="text-align:center;margin-top:10px;">
-                <a href="login.html">Sudah punya akun?</a> | 
-                <a href="index.html">Kembali</a>
-            </p>
+            <div class="grup-input sandi-grup">
+                <input type="password" id="sandi1" placeholder="Kata Sandi (min 8 karakter)" required>
+                <button type="button" onclick="ubahSandi('sandi1', this)">👁️</button>
+            </div>
+            <div class="grup-input sandi-grup">
+                <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
+                <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
+            </div>
+
+            <button type="submit" class="btn-masuk">Daftar Sekarang</button>
+
+            <div class="tautan-daftar">
+                Sudah punya akun? <a href="login.html">Masuk</a>
+            </div>
+            <div class="tautan-kembali">
+                <a href="index.html">← Kembali ke Beranda</a>
+            </div>
         </form>
     </div>
 </div>
 
 <script>
-// TUNGGU SAMPAI HALAMAN SELESAI DIMUAT BARU JALANKAN
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('formDaftarBaru');
-    
-    if(!form) {
-        alert("Form tidak ditemukan!");
-        return;
-    }
+// FUNGSI TAMPIL/SEMBUNYI SANDI
+function ubahSandi(id, tombol) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+    tombol.textContent = input.type === "password" ? "👁️" : "🙈";
+}
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+// PROSES DAFTAR KE SUPABASE
+document.getElementById('formDaftar').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        // Ambil data
-        const user = document.getElementById('inputUser').value.trim();
-        const email = document.getElementById('inputEmail').value.trim();
-        const sandi = document.getElementById('inputSandi').value;
+    // AMBIL DATA DARI FORM
+    const username = document.getElementById('username').value.trim();
+    const nama_lengkap = document.getElementById('nama').value.trim();
+    const nohp = document.getElementById('nohp').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const sandi1 = document.getElementById('sandi1').value;
+    const sandi2 = document.getElementById('sandi2').value;
 
-        // Cek sederhana
-        if(sandi.length < 8) return alert("Sandi minimal 8 karakter!");
+    // VALIDASI DASAR
+    if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
+    if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
 
-        // Cek email sudah ada
-        const dataUser = JSON.parse(localStorage.getItem('dataAkunTeravia') || '[]');
-        if(dataUser.find(a => a.email === email)) return alert("Email sudah terdaftar!");
+    try {
+        // SIMPAN KE TABEL USERS SUPABASE
+        const { data, error } = await supabase
+            .from('users')
+            .insert([
+                { 
+                    username: username,
+                    nama_lengkap: nama_lengkap,
+                    nohp: nohp,
+                    email: email,
+                    sandi: sandi1
+                }
+            ])
+            .select()
+            .single();
 
-        // Simpan akun baru
-        const akunBaru = {
-            id: Date.now(),
-            username: user,
-            email: email,
-            sandi: sandi,
-            paket: 'Kaveling'
-        };
-        dataUser.push(akunBaru);
-        localStorage.setItem('dataAkunTeravia', JSON.stringify(dataUser));
+        if(error) {
+            if(error.code === '23505') {
+                return alert("❌ Email ini sudah terdaftar!");
+            }
+            throw error;
+        }
 
-        // ✅ SIMPAN SESI LOGIN DENGAN NAMA BARU AGAR TIDAK BENTROK
+        // SIMPAN SESI LOGIN DI BROWSER
         localStorage.setItem('sesiTeravia', JSON.stringify({
-            id: akunBaru.id,
-            nama: akunBaru.username
+            id: data.id,
+            username: data.username,
+            nama: data.nama_lengkap,
+            is_admin: data.is_admin
         }));
 
-        alert("✅ Berhasil! Selamat datang " + user);
-        // Pindah ke beranda
-        window.location.href = "index.html";
-    });
+        alert("✅ Pendaftaran berhasil! Selamat datang, " + username);
+        window.location.href = "/index.html";
+
+    } catch (err) {
+        console.error("Error daftar:", err);
+        alert("❌ Gagal mendaftar: " + err.message);
+    }
 });
 </script>
 
 </body>
 </html>
+
