@@ -293,31 +293,28 @@
     </div>
 </footer>
 <script>
-// === CEK STATUS LOGIN & UBAH TAMPILAN ===
-<script>
-// CEK OTOMATIS SAAT BERANDA DIBUKA
-function cekLoginNav() {
-    const sesi = localStorage.getItem('teravia_sesi');
-    // Ganti ".nav-kanan" dengan kelas wadah tombol di navigasi kamu
-    const wadah = document.querySelector('.nav-kanan'); 
-    if(!wadah) return;
+// UBAH TOMBOL NAVIGASI OTOMATIS
+document.addEventListener('DOMContentLoaded', function() {
+    const sesi = localStorage.getItem('sesiTeravia');
+    const tombolArea = document.querySelector('.nav-kanan') || document.querySelector('.tombol-atas');
+
+    if(!tombolArea) return;
 
     if(sesi) {
         const data = JSON.parse(sesi);
-        wadah.innerHTML = `
-            <span style="font-weight:600;">👤 ${data.username}</span>
-            <a href="profile-member.html" style="margin-left:10px;">Profil</a>
-            <button onclick="keluarAkun()" style="margin-left:10px;padding:6px 12px;">Keluar</button>
+        tombolArea.innerHTML = `
+            <span style="font-weight:bold;">👤 ${data.nama}</span>
+            <a href="profile-member.html" style="margin:0 10px;">Profil</a>
+            <button onclick="keluarDariAkun()" style="padding:5px 10px;">Keluar</button>
         `;
     }
-}
+});
 
-function keluarAkun() {
-    localStorage.removeItem('teravia_sesi');
-    location.reload();
+function keluarDariAkun() {
+    localStorage.removeItem('sesiTeravia');
+    alert("Berhasil keluar!");
+    window.location.reload();
 }
-
-document.addEventListener('DOMContentLoaded', cekLoginNav);
 </script>
 
 <!-- SCRIPT DI PALING BAWAH -->
