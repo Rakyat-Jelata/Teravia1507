@@ -6,24 +6,23 @@
     <title>Cari Properti - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-<link rel="stylesheet" href="assets/css/list-property.css">
+    <link rel="stylesheet" href="assets/css/list-property.css">
 </head>
 <body>
 
-<!-- NAVBAR SAMA PERSIS DENGAN BERANDA -->
+<!-- NAVBAR SERAGAM STANDAR -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
-            <img src="assets/img/logo.png" alt="Teravia" style="height: 32px; width: auto; display: block;">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
         </a>
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav">Beranda</a>
             <a href="daftar-properti.html" class="tautan-nav aktif">Cari Properti</a>
             <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
             <a href="blog.html" class="tautan-nav">Blog Properti</a>
-            <a href="tentang-kami.html" class="tautan-nav">Tentang Kami</a>
-            <a href="pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <button class="btn-bahasa" id="tombolBahasa" title="Ganti Bahasa">🇮🇩</button>
+            <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
             <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
         </div>
         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
@@ -32,7 +31,8 @@
     </div>
 </nav>
 
-<!-- MENU SAMPING -->
+<!-- MENU SAMPING LENGKAP & BENAR -->
+<div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
     <div class="tutup-menu">
         <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
@@ -40,16 +40,16 @@
     <div class="isi-menu">
         <a href="index.html" class="tautan-menu">🏠 Beranda</a>
         <a href="daftar-properti.html" class="tautan-menu aktif">🔍 Cari Properti</a>
+        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
         <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
         <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
-        <a href="tentang-kami.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
         <div class="garis-pemisah"></div>
-        <a href="pasang-iklan.html" class="btn-pasang-menu">+ Pasang Iklan Sekarang</a>
-        <a href="login.html" class="tautan-menu">👤 Masuk / Daftar</a>
-        <button class="btn-bahasa-menu" id="tombolBahasaMobile" title="Ganti Bahasa">🇮🇩</button>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+        <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
     </div>
 </div>
-<div id="latarGelap" class="latar-gelap"></div>
 
 <!-- KONTEN UTAMA -->
 <main class="beranda">
@@ -63,7 +63,7 @@
 
         <!-- FILTER LANJUTAN -->
         <div class="baris-filter">
-            <button class="btn-filter" id="btnFilterBeli">Beli</button>
+            <button class="btn-filter aktif" id="btnFilterBeli">Beli</button>
             <button class="btn-filter" id="btnFilterSewa">Sewa</button>
             <select class="pilih-filter" id="pilihTipe">
                 <option value="">Semua Tipe</option>
@@ -82,10 +82,8 @@
         </div>
 
         <!-- DAFTAR PROPERTI -->
-        <div class="grid-kartu-properti" id="wadahPropertiDaftar">
-    <!-- Kartu akan muncul otomatis di sini -->
-</div>
-            <!-- KARTU 1 -->
+        <div class="grid-kartu-properti" id="wadahIklan">
+            <!-- KARTU CONTOH 1 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #e2e8f0;">
                     <span class="label-unggulan">⭐ Unggulan</span>
@@ -102,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- KARTU 2 -->
+            <!-- KARTU CONTOH 2 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #cbd5e1;">
                     <span class="label-baru">Baru</span>
@@ -119,7 +117,7 @@
                 </div>
             </div>
 
-            <!-- KARTU 3 -->
+            <!-- KARTU CONTOH 3 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #e2e8f0;">
                     <span class="label-sewa">Sewa</span>
@@ -136,7 +134,7 @@
                 </div>
             </div>
 
-            <!-- KARTU 4 -->
+            <!-- KARTU CONTOH 4 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #cbd5e1;">
                     <span class="label-baru">Baru</span>
@@ -152,46 +150,29 @@
                 </div>
             </div>
         </div>
-
     </div>
 </main>
 
-<!-- FOOTER SAMA PERSIS -->
+<!-- FOOTER SERAGAM -->
 <footer class="footer">
     <div class="container">
         <div class="footer-baris">
             <div class="footer-kolom">
                 <h3 class="footer-logo">TERAVIA</h3>
-                <p class="footer-desc">Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia.</p>
-                <div class="footer-kontak">
-                    <p>📍 Bogor, Jawa Barat</p>
-                    <p>📞 +62 812-xxxx-xxxx</p>
-                    <p>📧 halo@teravia.id</p>
-                </div>
+                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa di seluruh Indonesia.</p>
             </div>
             <div class="footer-kolom">
                 <h4>Layanan</h4>
-                <a href="daftar-properti.html">Cari Properti</a>
-                <a href="pasang-iklan.html">Pasang Iklan</a>
+                <a href="daftar-properti.html" class="aktif">Cari Properti</a>
+                <a href="pages/pasang-iklan.html">Pasang Iklan</a>
                 <a href="membership.html">Keanggotaan</a>
-                <a href="mitra-notaris.html">Mitra Notaris/PPAT</a>
+                <a href="mitra-notaris.html">Mitra Notaris</a>
             </div>
             <div class="footer-kolom">
                 <h4>Bantuan</h4>
-                <a href="tentang-kami.html">Tentang Kami</a>
+                <a href="tentang.html">Tentang Kami</a>
                 <a href="blog.html">Blog Properti</a>
                 <a href="helpdesk.html">Pusat Bantuan</a>
-                <a href="#">Kebijakan Privasi</a>
-                <a href="#">Syarat & Ketentuan</a>
-            </div>
-            <div class="footer-kolom">
-                <h4>Ikuti Kami</h4>
-                <div class="footer-sosmed">
-                    <a href="#" target="_blank">📘 Facebook</a>
-                    <a href="#" target="_blank">📸 Instagram</a>
-                    <a href="#" target="_blank">🐦 Twitter/X</a>
-                    <a href="#" target="_blank">💼 LinkedIn</a>
-                </div>
             </div>
         </div>
         <div class="footer-bawah">
@@ -200,33 +181,19 @@
     </div>
 </footer>
 
+<!-- SCRIPT PENTING -->
+<script src="assets/js/navbar.js"></script>
 <script src="assets/js/general.js"></script>
 <script src="assets/js/list-property.js"></script>
 
-<!-- SCRIPT KHUSUS HALAMAN INI -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // === 1. BACA PARAMETER DARI BERANDA ===
     const urlParams = new URLSearchParams(window.location.search);
     let tujuan = urlParams.get('tujuan') || 'beli';
-    let lokasi = urlParams.get('lokasi') || 'Seluruh Indonesia';
-    const kataKunci = urlParams.get('q') || '';
-
-    // === 2. ELEMEN YANG DIPAKAI ===
     const judul = document.getElementById('judulHasil');
-    const lokasiEl = document.getElementById('lokasiHasil');
     const btnBeli = document.getElementById('btnFilterBeli');
     const btnSewa = document.getElementById('btnFilterSewa');
-    const wadahIklan = document.getElementById('wadahIklan');
-    const tombolCari = document.getElementById('tombolCari');
-    const inputLokasi = document.getElementById('inputLokasi');
 
-    // === 3. TAMPILKAN INFORMASI AWAL ===
-    judul.textContent = tujuan === 'beli' ? 'Properti Dijual' : 'Properti Disewa';
-    lokasiEl.textContent = `Lokasi: ${lokasi}`;
-    inputLokasi.value = lokasi;
-
-    // TANDAI TOMBOL AKTIF
     function tandaiTombol() {
         if (tujuan === 'beli') {
             btnBeli.classList.add('aktif');
@@ -240,108 +207,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     tandaiTombol();
 
-    // === 4. FUNGSI PILIH BELI/SEWA ===
     btnBeli.addEventListener('click', () => {
         tujuan = 'beli';
         tandaiTombol();
-        tampilkanHasil();
     });
     btnSewa.addEventListener('click', () => {
         tujuan = 'sewa';
         tandaiTombol();
-        tampilkanHasil();
     });
-
-    // === 5. FUNGSI URUTKAN IKLAN SESUAI PAKET ===
-    const urutkanIklan = (a, b) => {
-        const prioritas = {'Estate':4, 'Residence':3, 'Cluster':2, 'Kaveling':1};
-        const paketA = prioritas[a.pemilikPaket || 'Kaveling'];
-        const paketB = prioritas[b.pemilikPaket || 'Kaveling'];
-        
-        // Utamakan paket lebih tinggi dulu
-        if (paketB !== paketA) return paketB - paketA;
-        // Kalau paket sama: yang baru disundul / terbaru duluan
-        const waktuA = new Date(a.waktuSundul || a.createdAt || 0);
-        const waktuB = new Date(b.waktuSundul || b.createdAt || 0);
-        return waktuB - waktuA;
-    };
-
-    // === 6. FUNGSI TAMPILKAN HASIL FILTER ===
-    function tampilkanHasil() {
-        // Ambil semua data iklan
-        let semuaIklan = JSON.parse(localStorage.getItem('daftarIklan') || '[]');
-
-        // Filter berdasarkan tujuan (jual/sewa)
-        semuaIklan = semuaIklan.filter(i => i.tujuan === tujuan);
-
-        // Filter berdasarkan lokasi
-        if (lokasi !== 'Seluruh Indonesia') {
-            semuaIklan = semuaIklan.filter(i => 
-                i.provinsi?.includes(lokasi) || 
-                i.kabupaten?.includes(lokasi) ||
-                i.kecamatan?.includes(lokasi)
-            );
-        }
-
-        // Filter kata kunci jika ada
-        if (kataKunci) {
-            semuaIklan = semuaIklan.filter(i => 
-                i.judul?.toLowerCase().includes(kataKunci.toLowerCase()) ||
-                i.deskripsi?.toLowerCase().includes(kataKunci.toLowerCase())
-            );
-        }
-
-        // Urutkan sesuai prioritas paket
-        semuaIklan.sort(urutkanIklan);
-
-        // Tampilkan ke halaman
-        if (semuaIklan.length === 0) {
-            wadahIklan.innerHTML = `
-                <div style="text-align:center;padding:60px 20px;color:#888;">
-                    <h3>Belum ada properti yang cocok</h3>
-                    <p>Coba ubah lokasi atau jenis pencarian ya</p>
-                </div>`;
-            return;
-        }
-
-        wadahIklan.innerHTML = '';
-        semuaIklan.forEach(iklan => {
-            wadahIklan.innerHTML += `
-                <div class="kartu-properti" onclick="window.location.href='detail.html?id=${iklan.id}'">
-                    <div class="gambar-properti">
-                        ${iklan.foto?.length ? `<img src="${iklan.foto[0]}" alt="${iklan.judul}">` : '<div class="tanpa-gambar">Tidak ada foto</div>'}
-                        <span class="label-paket ${iklan.pemilikPaket || 'Kaveling'}">${iklan.pemilikPaket || 'Standar'}</span>
-                    </div>
-                    <div class="info-properti">
-                        <h3 class="judul-properti">${iklan.judul}</h3>
-                        <div class="harga-properti">Rp ${Number(iklan.harga).toLocaleString('id-ID')}</div>
-                        <div class="lokasi-properti">${iklan.kecamatan || ''}, ${iklan.kabupaten || ''}</div>
-                        <div class="spesifikasi">
-                            ${iklan.luas_tanah ? `L. Tanah: ${iklan.luas_tanah}m²` : ''}
-                            ${iklan.luas_bangunan ? ` | L. Bangun: ${iklan.luas_bangunan}m²` : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-
-    // === 7. FUNGSI CARI BERDASARKAN LOKASI BARU ===
-    tombolCari?.addEventListener('click', () => {
-        lokasi = inputLokasi.value.trim() || 'Seluruh Indonesia';
-        lokasiEl.textContent = `Lokasi: ${lokasi}`;
-        tampilkanHasil();
-    });
-    inputLokasi?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') tombolCari.click();
-    });
-
-    // === MULAI TAMPILKAN SAAT HALAMAN SIAP ===
-    tampilkanHasil();
 });
-
 </script>
 
 </body>
-  </html>
-  
+                    </html>
+
