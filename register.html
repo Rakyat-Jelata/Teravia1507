@@ -66,46 +66,51 @@ function ubahSandi(id, tombol) {
 }
 
 // PROSES DAFTAR
-document.getElementById('formDaftar').addEventListener('submit', async function(e) {
-    e.preventDefault();
+// ✅ TUNGGU HALAMAN SIAP BARU PASANG TOMBOL
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formDaftar').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-    const username = document.getElementById('username').value.trim();
-    const nama_lengkap = document.getElementById('nama').value.trim();
-    const nohp = document.getElementById('nohp').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const sandi1 = document.getElementById('sandi1').value;
-    const sandi2 = document.getElementById('sandi2').value;
+        const username = document.getElementById('username').value.trim();
+        const nama_lengkap = document.getElementById('nama').value.trim();
+        const nohp = document.getElementById('nohp').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const sandi1 = document.getElementById('sandi1').value;
+        const sandi2 = document.getElementById('sandi2').value;
 
-    if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
-    if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
+        if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
+        if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
 
-    try {
-        const { data, error } = await supabase
-            .from('users')
-            .insert([{ username, nama_lengkap, nohp, email, sandi: sandi1 }])
-            .select()
-            .single();
+        try {
+            const { data, error } = await supabase
+                .from('users')
+                .insert([{ username, nama_lengkap, nohp, email, sandi: sandi1 }])
+                .select()
+                .single();
 
-        if(error) {
-            if(error.code === '23505') return alert("❌ Email ini sudah terdaftar!");
-            throw error;
+            if(error) {
+                if(error.code === '23505') return alert("❌ Email ini sudah terdaftar!");
+                throw error;
+            }
+
+            localStorage.setItem('sesiTeravia', JSON.stringify({
+                id: data.id,
+                username: data.username,
+                nama: data.nama_lengkap,
+                is_admin: data.is_admin
+            }));
+
+            alert("✅ Pendaftaran berhasil! Selamat datang " + username);
+            // ✅ Hilangkan garis miring depan
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error(err);
+            alert("❌ Gagal: " + err.message);
         }
-
-        localStorage.setItem('sesiTeravia', JSON.stringify({
-            id: data.id,
-            username: data.username,
-            nama: data.nama_lengkap,
-            is_admin: data.is_admin
-        }));
-
-        alert("✅ Pendaftaran berhasil! Selamat datang " + username);
-        window.location.href = "/index.html";
-
-    } catch (err) {
-        console.error(err);
-        alert("❌ Gagal: " + err.message);
-    }
+    });
 });
+
 </script>
 
 </body>
