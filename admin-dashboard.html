@@ -81,6 +81,7 @@
         <button class="tombol-tab aktif" data-tab="membership">💳 Membership</button>
         <button class="tombol-tab" data-tab="listing">📋 Listing</button>
         <button class="tombol-tab" data-tab="helpdesk">💬 Helpdesk</button>
+        <button class="tombol-tab" data-tab="helpdesk">💬 Helpdesk</button> <!-- BARU DITAMBAH -->
     </div>
 
     <!-- Konten: Permintaan Membership -->
@@ -196,6 +197,55 @@ document.getElementById('btnKeluar').addEventListener('click', function() {
     window.location.replace('/admin-login.html');
 });
 
+    // ... kode fungsi lain tetap ada di sini ...
+
+// === TARUH SCRIPT HELPDESK DI SINI ===
+function muatPesanBantuan(){
+    const daftar = document.getElementById('daftarPesan');
+    const semuaPesan = JSON.parse(localStorage.getItem('pesanBantuan') || '[]').reverse();
+
+    if(semuaPesan.length === 0){
+        daftar.innerHTML = `<div class="kosong">✅ Belum ada pesan masuk</div>`;
+        return;
+    }
+
+    daftar.innerHTML = '';
+    semuaPesan.forEach(p => {
+        const warna = p.status === 'baru' ? '#fef3c7' : '#f0fdf4';
+        const teks = p.status === 'baru' ? 'Baru' : 'Sudah Dibaca';
+        daftar.innerHTML += `
+        <div class="kartu-antrean" style="background:${warna};">
+            <div class="info-baris">
+                <div class="judul-item">${p.subjek}</div>
+                <span class="badge">${teks}</span>
+            </div>
+            <p style="font-size:13px;color:#666;">Dari: ${p.pengirim} | ${p.tanggal}</p>
+            <p style="font-size:14px;margin:8px 0;">${p.pesan}</p>
+            <div class="aksi">
+                ${p.status === 'baru' ? `<button class="btn-aksi btn-setuju" onclick="tandaiSelesai(${p.id})">Tandai Selesai</button>` : ''}
+                <button class="btn-aksi btn-detail" onclick="balasPesan('${p.pengirim}')">Balas via WA</button>
+            </div>
+        </div>`;
+    });
+}
+
+function tandaiSelesai(id){
+    const semua = JSON.parse(localStorage.getItem('pesanBantuan'));
+    const target = semua.find(p => p.id === id);
+    target.status = 'selesai';
+    localStorage.setItem('pesanBantuan', JSON.stringify(semua));
+    muatPesanBantuan();
+}
+
+function balasPesan(nama){
+    const teks = `Halo ${nama}, terima kasih sudah menghubungi Teravia. Ada yang bisa kami bantu?`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(teks)}`, '_blank');
+}
+
+// Jalankan saat tab diklik
+document.querySelector('[data-tab="helpdesk"]').addEventListener('click', muatPesanBantuan);
+</script>
+    
 // === JALANKAN SAAT HALAMAN DIBUKA ===
 muatData();
 </script>
