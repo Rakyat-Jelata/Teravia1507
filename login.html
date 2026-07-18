@@ -41,23 +41,24 @@
 ============================================== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// 1. KONEKSI KE DATABASE
+// Koneksi Supabase
 const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."; // biarkan kunci yang sudah ada
+const SUPABASE_KEY = "GUNAKAN_KUNCI_YANG_SUDAH_KAMU_SALIN";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Fungsi sembunyi/tampil sandi
 function ubahSandi(id, tombol) {
     const input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// 2. TUNGGU HALAMAN SIAP BARU PASANG TOMBOL
+// ✅ Bungkus SEMUA kode pendengar di sini
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('formLogin').addEventListener('submit', async function(e) {
-        e.preventDefault();
+    const form = document.getElementById('formLogin');
+    if(!form) return console.error("Form tidak ditemukan!");
 
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         const email = document.getElementById('email').value.trim();
         const sandi = document.getElementById('sandi').value;
 
@@ -67,11 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 .select('*')
                 .eq('email', email)
                 .eq('sandi', sandi)
+                .limit(1)
                 .single();
 
-            if(error || !data) {
-                return alert("❌ Email atau sandi salah!");
-            }
+            if(error) throw new Error("Email atau sandi salah!");
 
             localStorage.setItem('sesiTeravia', JSON.stringify({
                 id: data.id,
@@ -80,15 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 is_admin: data.is_admin
             }));
 
-            alert("✅ Berhasil masuk!");
+            alert("✅ Berhasil Masuk!");
             window.location.href = data.is_admin ? "admin-dashboard.html" : "index.html";
 
         } catch (err) {
-            alert("❌ Kesalahan: " + err.message);
+            console.error(err);
+            alert("❌ " + (err.message || "Terjadi kesalahan"));
         }
     });
 });
 </script>
-
 </body>
 </html>
