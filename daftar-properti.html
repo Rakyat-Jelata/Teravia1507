@@ -206,41 +206,140 @@
 <!-- SCRIPT KHUSUS HALAMAN INI -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // BACA PARAMETER DARI BERANDA
+    // === 1. BACA PARAMETER DARI BERANDA ===
     const urlParams = new URLSearchParams(window.location.search);
-    const tujuan = urlParams.get('tujuan') || 'beli';
-    const lokasi = urlParams.get('lokasi') || 'Seluruh Indonesia';
+    let tujuan = urlParams.get('tujuan') || 'beli';
+    let lokasi = urlParams.get('lokasi') || 'Seluruh Indonesia';
+    const kataKunci = urlParams.get('q') || '';
 
-    // TAMPILKAN INFORMASI
+    // === 2. ELEMEN YANG DIPAKAI ===
     const judul = document.getElementById('judulHasil');
     const lokasiEl = document.getElementById('lokasiHasil');
     const btnBeli = document.getElementById('btnFilterBeli');
     const btnSewa = document.getElementById('btnFilterSewa');
+    const wadahIklan = document.getElementById('wadahIklan');
+    const tombolCari = document.getElementById('tombolCari');
+    const inputLokasi = document.getElementById('inputLokasi');
 
+    // === 3. TAMPILKAN INFORMASI AWAL ===
     judul.textContent = tujuan === 'beli' ? 'Properti Dijual' : 'Properti Disewa';
     lokasiEl.textContent = `Lokasi: ${lokasi}`;
+    inputLokasi.value = lokasi;
 
-    // TANDAI TOMBOL YANG DIPILIH
-    if (tujuan === 'beli') {
-        btnBeli.classList.add('aktif');
-        btnSewa.classList.remove('aktif');
-    } else {
-        btnSewa.classList.add('aktif');
-        btnBeli.classList.remove('aktif');
+    // TANDAI TOMBOL AKTIF
+    function tandaiTombol() {
+        if (tujuan === 'beli') {
+            btnBeli.classList.add('aktif');
+            btnSewa.classList.remove('aktif');
+            judul.textContent = 'Properti Dijual';
+        } else {
+            btnSewa.classList.add('aktif');
+            btnBeli.classList.remove('aktif');
+            judul.textContent = 'Properti Disewa';
+        }
     }
+    tandaiTombol();
 
-    // FUNGSI PILIH FILTER BELI/SEWA
+    // === 4. FUNGSI PILIH BELI/SEWA ===
     btnBeli.addEventListener('click', () => {
-        btnBeli.classList.add('aktif');
-        btnSewa.classList.remove('aktif');
-        judul.textContent = 'Properti Dijual';
+        tujuan = 'beli';
+        tandaiTombol();
+        tampilkanHasil();
     });
     btnSewa.addEventListener('click', () => {
-        btnSewa.classList.add('aktif');
-        btnBeli.classList.remove('aktif');
-        judul.textContent = 'Properti Disewa';
+        tujuan = 'sewa';
+        tandaiTombol();
+        tampilkanHasil();
     });
+
+    // === 5. FUNGSI URUTKAN IKLAN SESUAI PAKET ===
+    const urutkanIklan = (a, b) => {
+        const prioritas = {'Estate':4, 'Residence':3, 'Cluster':2, 'Kaveling':1};
+        const paketA = prioritas[a.pemilikPaket || 'Kaveling'];
+        const paketB = prioritas[b.pemilikPaket || 'Kaveling'];
+        
+        // Utamakan paket lebih tinggi dulu
+        if (paketB !== paketA) return paketB - paketA;
+        // Kalau paket sama: yang baru disundul / terbaru duluan
+        const waktuA = new Date(a.waktuSundul || a.createdAt || 0);
+        const waktuB = new Date(b.waktuSundul || b.createdAt || 0);
+        return waktuB - waktuA;
+    };
+
+    // === 6. FUNGSI TAMPILKAN HASIL FILTER ===
+    function tampilkanHasil() {
+        // Ambil semua data iklan
+        let semuaIklan = JSON.parse(localStorage.getItem('daftarIklan') || '[]');
+
+        // Filter berdasarkan tujuan (jual/sewa)
+        semuaIklan = semuaIklan.filter(i => i.tujuan === tujuan);
+
+        // Filter berdasarkan lokasi
+        if (lokasi !== 'Seluruh Indonesia') {
+            semuaIklan = semuaIklan.filter(i => 
+                i.provinsi?.includes(lokasi) || 
+                i.kabupaten?.includes(lokasi) ||
+                i.kecamatan?.includes(lokasi)
+            );
+        }
+
+        // Filter kata kunci jika ada
+        if (kataKunci) {
+            semuaIklan = semuaIklan.filter(i => 
+                i.judul?.toLowerCase().includes(kataKunci.toLowerCase()) ||
+                i.deskripsi?.toLowerCase().includes(kataKunci.toLowerCase())
+            );
+        }
+
+        // Urutkan sesuai prioritas paket
+        semuaIklan.sort(urutkanIklan);
+
+        // Tampilkan ke halaman
+        if (semuaIklan.length === 0) {
+            wadahIklan.innerHTML = `
+                <div style="text-align:center;padding:60px 20px;color:#888;">
+                    <h3>Belum ada properti yang cocok</h3>
+                    <p>Coba ubah lokasi atau jenis pencarian ya</p>
+                </div>`;
+            return;
+        }
+
+        wadahIklan.innerHTML = '';
+        semuaIklan.forEach(iklan => {
+            wadahIklan.innerHTML += `
+                <div class="kartu-properti" onclick="window.location.href='detail.html?id=${iklan.id}'">
+                    <div class="gambar-properti">
+                        ${iklan.foto?.length ? `<img src="${iklan.foto[0]}" alt="${iklan.judul}">` : '<div class="tanpa-gambar">Tidak ada foto</div>'}
+                        <span class="label-paket ${iklan.pemilikPaket || 'Kaveling'}">${iklan.pemilikPaket || 'Standar'}</span>
+                    </div>
+                    <div class="info-properti">
+                        <h3 class="judul-properti">${iklan.judul}</h3>
+                        <div class="harga-properti">Rp ${Number(iklan.harga).toLocaleString('id-ID')}</div>
+                        <div class="lokasi-properti">${iklan.kecamatan || ''}, ${iklan.kabupaten || ''}</div>
+                        <div class="spesifikasi">
+                            ${iklan.luas_tanah ? `L. Tanah: ${iklan.luas_tanah}m²` : ''}
+                            ${iklan.luas_bangunan ? ` | L. Bangun: ${iklan.luas_bangunan}m²` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // === 7. FUNGSI CARI BERDASARKAN LOKASI BARU ===
+    tombolCari?.addEventListener('click', () => {
+        lokasi = inputLokasi.value.trim() || 'Seluruh Indonesia';
+        lokasiEl.textContent = `Lokasi: ${lokasi}`;
+        tampilkanHasil();
+    });
+    inputLokasi?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') tombolCari.click();
+    });
+
+    // === MULAI TAMPILKAN SAAT HALAMAN SIAP ===
+    tampilkanHasil();
 });
+
 </script>
 
 </body>
