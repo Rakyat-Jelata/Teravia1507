@@ -7,19 +7,6 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/auth.css">
-
-    
-
-<!-- Pustaka Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-// Inisialisasi koneksi (Ganti dengan milikmu)
-const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-</script>
-
 </head>
 <body class="halaman-login halaman-daftar">
 
@@ -48,7 +35,7 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             </div>
             <div class="grup-input sandi-grup">
                 <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
-                <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
+                <button type="button" onclick="ubahSandi('konfirmasiSandi', this)">👁️</button>
             </div>
 
             <button type="submit" class="btn-masuk">Daftar Sekarang</button>
@@ -63,62 +50,64 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     </div>
 </div>
 
+<!-- ✅ PUSTAKA DENGAN CARA YANG PASTI BENAR -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// FUNGSI TAMPIL/SEMBUNYI SANDI
+// KONEKSI DENGAN FORMAT RESMI SUPABASE
+const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// FUNGSI SANDI
 function ubahSandi(id, tombol) {
     const input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// TUNGGU HALAMAN SIAP
-document.addEventListener('DOMContentLoaded', async function(){
-    // PROSES DAFTAR
-    document.getElementById('formDaftar').addEventListener('submit', async function(e) {
-        e.preventDefault();
+// PROSES DAFTAR
+document.getElementById('formDaftar').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        const username = document.getElementById('username').value.trim();
-        const nama_lengkap = document.getElementById('nama').value.trim();
-        const nohp = document.getElementById('nohp').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const sandi1 = document.getElementById('sandi1').value;
-        const sandi2 = document.getElementById('sandi2').value;
+    const username = document.getElementById('username').value.trim();
+    const nama_lengkap = document.getElementById('nama').value.trim();
+    const nohp = document.getElementById('nohp').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const sandi1 = document.getElementById('sandi1').value;
+    const sandi2 = document.getElementById('sandi2').value;
 
-        if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
-        if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
+    if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
+    if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
 
-        try {
-            const { data, error } = await supabase
-                .from('users')
-                .insert([
-                    { username, nama_lengkap, nohp, email, sandi: sandi1 }
-                ])
-                .select()
-                .single();
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .insert([{ username, nama_lengkap, nohp, email, sandi: sandi1 }])
+            .select()
+            .single();
 
-            if(error) {
-                if(error.code === '23505') return alert("❌ Email sudah terdaftar!");
-                throw error;
-            }
-
-            localStorage.setItem('sesiTeravia', JSON.stringify({
-                id: data.id,
-                username: data.username,
-                nama: data.nama_lengkap,
-                is_admin: data.is_admin
-            }));
-
-            alert("✅ Berhasil! Selamat datang " + username);
-            window.location.href = "/index.html";
-
-        } catch (err) {
-            console.error(err);
-            alert("❌ Gagal: " + err.message);
+        if(error) {
+            if(error.code === '23505') return alert("❌ Email ini sudah terdaftar!");
+            throw error;
         }
-    });
+
+        localStorage.setItem('sesiTeravia', JSON.stringify({
+            id: data.id,
+            username: data.username,
+            nama: data.nama_lengkap,
+            is_admin: data.is_admin
+        }));
+
+        alert("✅ Pendaftaran berhasil! Selamat datang " + username);
+        window.location.href = "/index.html";
+
+    } catch (err) {
+        console.error(err);
+        alert("❌ Gagal: " + err.message);
+    }
 });
 </script>
-    
+
 </body>
 </html>
 
