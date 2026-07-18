@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
+    <style>
+        .wadah{max-width:600px;margin:20px auto;padding:0 16px;}
+        .kartu{background:white;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+        .nama{font-size:20px;font-weight:bold;margin-bottom:4px;}
+        .email{color:#666;margin-bottom:12px;}
+        .paket{display:inline-block;padding:6px 12px;border-radius:20px;font-weight:bold;}
+        .paket.kaveling{background:#f0fdf4;color:#166534;}
+        .paket.rumah{background:#eff6ff;color:#1e40af;}
+        .paket.komersial{background:#fef3c7;color:#92400e;}
+        .menu{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+        .menu a{display:block;padding:12px;border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;color:#1f2937;}
+        .menu a:hover{background:#f9fafb;}
+        .keluar{background:#fef2f2;color:#dc2626;border:none;}
+    </style>
+</head>
+<body>
+
+<div class="wadah">
+    <div class="kartu">
+        <h2>👤 Profil Saya</h2>
+        <div id="infoProfil"></div>
+    </div>
+
+    <div class="kartu">
+        <h3>Menu Cepat</h3>
+        <div class="menu">
+            <a href="pasang-iklan.html">📢 Pasang Iklan Properti</a>
+            <a href="daftar-properti.html">📋 Iklan Saya</a>
+            <a href="membership.html">⭐ Upgrade Paket</a>
+            <a href="helpdesk.html">💬 Bantuan / Helpdesk</a>
+            <button class="menu keluar" onclick="keluarAkun()">🚪 Keluar dari Akun</button>
+        </div>
+    </div>
+
+    <p style="text-align:center;margin-top:20px;"><a href="index.html">← Kembali ke Beranda</a></p>
+</div>
+
+<script>
+// Cek sudah login
+const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+if(!sesi) {
+    alert('Silakan masuk dulu!');
+    window.location.href = 'login.html';
+}
+
+// Tampilkan data
+const dataAkun = JSON.parse(localStorage.getItem('dataAkunTeravia') || '[]');
+const akun = dataAkun.find(a => a.id === sesi.id) || sesi;
+
+// Warna paket
+let kelasPaket = 'kaveling';
+if(akun.paket === 'Rumah') kelasPaket = 'rumah';
+if(akun.paket === 'Komersial') kelasPaket = 'komersial';
+
+document.getElementById('infoProfil').innerHTML = `
+    <div class="nama">${akun.nama || akun.username}</div>
+    <div class="email">${akun.email || '-'}</div>
+    <span class="paket ${kelasPaket}">Paket: ${akun.paket || 'Kaveling'}</span>
+`;
+
+// Fungsi keluar
+function keluarAkun() {
+    localStorage.removeItem('sesiTeravia');
+    alert('Berhasil keluar!');
+    window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>
+
