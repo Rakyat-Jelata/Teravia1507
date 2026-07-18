@@ -3,21 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bantuan - Teravia</title>
+    <title>Pusat Bantuan - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
         .wadah{max-width:600px;margin:30px auto;padding:0 16px;}
         .kartu{background:white;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
-        h2{color:#165DFF;margin-bottom:16px;}
+        h2{color:var(--utama);margin-bottom:16px;}
         .grup{margin-bottom:12px;}
         label{display:block;font-weight:600;margin-bottom:6px;font-size:14px;}
         input, textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px;box-sizing:border-box;}
+        input:focus, textarea:focus{outline:none;border-color:var(--utama);box-shadow:0 0 0 3px rgba(22,93,255,0.1);}
         textarea{min-height:120px;resize:vertical;}
-        button{width:100%;padding:13px;background:#165DFF;color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;}
+        button{width:100%;padding:13px;background:var(--utama);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:opacity 0.2s;}
+        button:hover{opacity:0.95;}
         .info{margin-top:12px;font-size:13px;color:#666;text-align:center;}
     </style>
 </head>
 <body>
+
+<!-- NAVBAR SERAGAM STANDAR -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+        </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="blog.html" class="tautan-nav">Blog Properti</a>
+            <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING LENGKAP -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu">
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
+    </div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
+        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+        <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
+    </div>
+</div>
+
+<!-- KONTEN UTAMA -->
 <div class="wadah">
     <div class="kartu">
         <h2>💬 Hubungi Bantuan</h2>
@@ -25,37 +71,66 @@
         
         <form id="formBantuan">
             <div class="grup">
-                <label>Subjek Masalah</label>
+                <label>Subjek Masalah <span style="color:red">*</span></label>
                 <input type="text" id="subjek" placeholder="Contoh: Masalah Pembayaran / Login" required>
             </div>
             <div class="grup">
-                <label>Isi Pesan</label>
+                <label>Isi Pesan <span style="color:red">*</span></label>
                 <textarea id="pesan" placeholder="Jelaskan secara rinci kendala yang kamu alami..." required></textarea>
             </div>
             <button type="submit">Kirim Pesan</button>
         </form>
-
-        <div class="info">
-            <a href="index.html">← Kembali ke Beranda</a>
-        </div>
     </div>
 </div>
 
+<!-- FOOTER SERAGAM -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-baris">
+            <div class="footer-kolom">
+                <h3 class="footer-logo">TERAVIA</h3>
+                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa di seluruh Indonesia.</p>
+            </div>
+            <div class="footer-kolom">
+                <h4>Layanan</h4>
+                <a href="daftar-properti.html">Cari Properti</a>
+                <a href="pages/pasang-iklan.html">Pasang Iklan</a>
+                <a href="membership.html">Keanggotaan</a>
+                <a href="mitra-notaris.html">Mitra Notaris</a>
+            </div>
+            <div class="footer-kolom">
+                <h4>Bantuan</h4>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="blog.html">Blog Properti</a>
+                <a href="helpdesk.html" class="aktif">Pusat Bantuan</a>
+            </div>
+        </div>
+        <div class="footer-bawah">
+            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/navbar.js"></script>
 <script>
 // Cek apakah sudah login
 const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-if(!sesi) return alert('Silakan masuk dulu!') && (window.location.href = 'login.html');
+if(!sesi) {
+    alert('⚠️ Silakan masuk dulu untuk menghubungi bantuan!');
+    window.location.href = 'login.html';
+}
 
 document.getElementById('formBantuan').addEventListener('submit', function(e){
     e.preventDefault();
     const subjek = document.getElementById('subjek').value.trim();
     const pesan = document.getElementById('pesan').value.trim();
 
-    // Simpan pesan
+    // Simpan pesan ke penyimpanan lokal
     const semuaPesan = JSON.parse(localStorage.getItem('pesanBantuan') || '[]');
     semuaPesan.push({
         id: Date.now(),
         pengirim: sesi.nama,
+        userId: sesi.id,
         email: sesi.email || '-',
         subjek: subjek,
         pesan: pesan,
@@ -64,9 +139,10 @@ document.getElementById('formBantuan').addEventListener('submit', function(e){
     });
     localStorage.setItem('pesanBantuan', JSON.stringify(semuaPesan));
 
-    alert('✅ Pesan berhasil dikirim! Admin akan segera merespons.');
-    window.location.reload();
+    alert('✅ Pesan berhasil dikirim! Admin akan segera merespons maksimal 1x24 jam.');
+    this.reset();
 });
 </script>
 </body>
 </html>
+
