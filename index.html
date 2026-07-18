@@ -292,7 +292,56 @@
         </div>
     </div>
 </footer>
+<script>
+// === CEK STATUS LOGIN & UBAH TAMPILAN ===
+function cekStatusLogin() {
+  const sesi = localStorage.getItem('teravia_sesi');
+  const wadahTombol = document.querySelector('.tombol-auth'); // Sesuaikan dengan kelas di navigasi kamu
+  const wadahSeluler = document.querySelector('.tombol-auth-mobile'); // Kalau ada menu HP
 
+  if(sesi) {
+    const data = JSON.parse(sesi);
+    // Tampilkan nama username
+    const tampilan = `👤 ${data.username || data.nama}`;
+    
+    // Ganti tombol di tampilan desktop
+    if(wadahTombol) {
+      wadahTombol.innerHTML = `
+        <div class="menu-pengguna">
+          <span>${tampilan}</span>
+          <a href="profile-member.html" class="btn-profil">Profil</a>
+          <button onclick="keluarAkun()" class="btn-keluar">Keluar</button>
+        </div>
+      `;
+    }
+
+    // Ganti tombol di tampilan HP
+    if(wadahSeluler) {
+      wadahSeluler.innerHTML = tampilan;
+    }
+
+  } else {
+    // Belum login: tampilkan tombol biasa
+    if(wadahTombol) {
+      wadahTombol.innerHTML = `
+        <a href="registrasi.html" class="btn-daftar">Daftar</a>
+        <a href="login.html" class="btn-masuk">Masuk</a>
+      `;
+    }
+  }
+}
+
+// Fungsi keluar akun
+function keluarAkun() {
+  localStorage.removeItem('teravia_sesi');
+  alert('✅ Berhasil keluar dari akun');
+  window.location.reload();
+}
+
+// Jalankan saat beranda selesai dimuat
+document.addEventListener('DOMContentLoaded', cekStatusLogin);
+</sc
+    ript>
 <!-- SCRIPT DI PALING BAWAH -->
 <script src="assets/js/general.js"></script>
 <script src="assets/js/home.js"></script>
