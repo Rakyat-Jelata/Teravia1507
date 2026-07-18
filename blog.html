@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Properti - Teravia</title>
-    <link rel="icon" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
     <style>
         .wadah-isi {
             max-width: 1000px;
@@ -76,48 +76,56 @@
 </head>
 <body>
 
-<!-- NAVBAR SAMA PERSIS -->
+<!-- ==============================================
+NAVBAR SERAGAM & SUDAH DIPERBAIKI
+============================================== -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
-    <img src="/assets/img/logo.png" alt="Teravia" style="height:36px;">
-</a>
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+        </a>
 
+        <!-- MENU DEKSTOP LENGKAP -->
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav">Beranda</a>
             <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
-            <a href="blog.html" class="tautan-nav aktif">Blog</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="blog.html" class="tautan-nav aktif">Blog Properti</a>
             <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
-            <a href="pasang-iklan.html" class="btn-pasang">Pasang Iklan</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
         </div>
-        <button class="tombol-hamburger" id="bukaMenu">
+
+        <!-- TOMBOL HAMBURGER DENGAN ID BENAR -->
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
             <span></span><span></span><span></span>
         </button>
     </div>
 </nav>
 
-<div class="latar-gelap" id="latarGelap"></div>
-<div class="menu-samping" id="menuSamping">
+<!-- MENU SAMPING HP DENGAN ID SESUAI -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
     <div class="tutup-menu">
-        <button id="tutupMenu">×</button>
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
     </div>
     <div class="isi-menu">
-    <a href="index.html" class="tautan-menu">🏠 Beranda</a>
-    <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
-    <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
-    <a href="mitra-notaris.html" class="tautan-menu">📜 Mitra Notaris/PPAT</a>
-    <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
-    <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
-
-    <div class="garis-pemisah"></div>
-
-    <a href="pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
-    <a href="login.html" class="tautan-menu">🔑 Masuk Akun</a>
-    <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu aktif">📰 Blog Properti</a>
+        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk / Daftar</a>
+        <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
+    </div>
 </div>
 
-
-<!-- ISI HALAMAN -->
+<!-- ==============================================
+ISI HALAMAN BLOG
+============================================== -->
 <div class="wadah-isi">
     <h1 class="judul-halaman">Blog & Tips Properti</h1>
     <div class="garis-pendek"></div>
@@ -161,7 +169,9 @@
     </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ==============================================
+FOOTER SERAGAM
+============================================== -->
 <footer class="footer">
     <div class="container">
         <div class="footer-baris">
@@ -172,14 +182,14 @@
             <div class="footer-kolom">
                 <h4>Layanan</h4>
                 <a href="daftar-properti.html">Cari Properti</a>
-                <a href="pasang-iklan.html">Pasang Iklan</a>
+                <a href="pages/pasang-iklan.html">Pasang Iklan</a>
                 <a href="membership.html">Keanggotaan</a>
                 <a href="mitra-notaris.html">Mitra Notaris</a>
             </div>
             <div class="footer-kolom">
                 <h4>Bantuan</h4>
                 <a href="tentang.html">Tentang Kami</a>
-                <a href="blog.html">Blog Properti</a>
+                <a href="blog.html" class="aktif">Blog Properti</a>
                 <a href="helpdesk.html">Pusat Bantuan</a>
             </div>
         </div>
@@ -189,8 +199,11 @@
     </div>
 </footer>
 
+<!-- ==============================================
+LOGIKA MENU DARI SATU SUMBER SAJA
+============================================== -->
 <script src="assets/js/navbar.js"></script>
-<script src="/assets/js/general.js"></script>
+<script src="assets/js/general.js"></script>
+
 </body>
-  </html>
-  
+</html>
