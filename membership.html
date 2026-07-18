@@ -174,6 +174,9 @@ function ajukanUpgrade(namaPaket) {
     alert(`✅ Permintaan Upgrade ke Paket ${namaPaket} Berhasil Dikirim!\n\nAdmin akan memverifikasi pembayaranmu maksimal 1x24 jam.`);
     window.location.href = 'profile-member.html';
 }
+        alert(`✅ Permintaan terkirim! Sekarang buka bukti pembayaranmu.`);
+window.location.href = `invoice.html?jenis=upgrade&id=${Date.now()}`;
+        
     </script>
     
 </body>
