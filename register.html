@@ -7,7 +7,6 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/auth.css">
-    <!-- HAPUS BARIS EMAILJS YANG TIDAK DIPAKAI -->
 </head>
 <body class="halaman-login halaman-daftar">
 
@@ -16,13 +15,12 @@
         <img src="assets/img/logo.png" alt="Teravia" class="logo-login">
         <h2>Daftar Akun</h2>
 
-        <!-- ✅ FORM DENGAN ID YANG BENAR -->
-        <form id="formRegistrasi" class="form-login form-daftar">
+        <form id="formDaftar" class="form-login form-daftar">
             <div class="grup-input">
-                <input type="text" id="username" placeholder="Username (Ditampilkan di listingan)" required>
+                <input type="text" id="username" placeholder="Username" required>
             </div>
             <div class="grup-input">
-                <input type="text" id="nama" placeholder="Nama Lengkap Penjual" required>
+                <input type="text" id="nama" placeholder="Nama Lengkap" required>
             </div>
             <div class="grup-input">
                 <input type="tel" id="nohp" placeholder="Nomor WhatsApp" required>
@@ -32,94 +30,79 @@
             </div>
 
             <div class="grup-input sandi-grup">
-                <input type="password" id="kataSandi" placeholder="Kata Sandi" required>
-                <button type="button" class="tombol-mata" onclick="toggleSandi('kataSandi', this)">👁️</button>
+                <input type="password" id="sandi1" placeholder="Kata Sandi" required>
+                <button type="button" onclick="ubahSandi('sandi1', this)">👁️</button>
             </div>
-
             <div class="grup-input sandi-grup">
-                <input type="password" id="konfirmasiSandi" placeholder="Ketik Ulang Kata Sandi" required>
-                <button type="button" class="tombol-mata" onclick="toggleSandi('konfirmasiSandi', this)">👁️</button>
+                <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
+                <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
             </div>
 
-            <button type="submit" class="btn-masuk">Daftar Akun</button>
+            <button type="submit" class="btn-masuk">Daftar Sekarang</button>
 
             <div class="tautan-daftar">
-                Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
+                Sudah punya akun? <a href="login.html">Masuk</a>
             </div>
             <div class="tautan-kembali">
-                <a href="index.html">← Kembali ke Beranda</a>
+                <a href="index.html">← Kembali</a>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-// Fungsi sembunyikan/tampilkan sandi
-function toggleSandi(idInput, tombol) {
-    const input = document.getElementById(idInput);
+// Fungsi tampil/sembunyi sandi
+function ubahSandi(id, tombol) {
+    const input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// === PROSES PENDAFTARAN YANG BENAR ===
-document.getElementById('formRegistrasi').addEventListener('submit', function(e) {
+// === PROSES DAFTAR UTAMA ===
+document.getElementById('formDaftar').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Ambil semua nilai
+    // Ambil data
     const username = document.getElementById('username').value.trim();
     const nama = document.getElementById('nama').value.trim();
     const nohp = document.getElementById('nohp').value.trim();
     const email = document.getElementById('email').value.trim();
-    const sandi = document.getElementById('kataSandi').value;
-    const ulangSandi = document.getElementById('konfirmasiSandi').value;
+    const sandi1 = document.getElementById('sandi1').value;
+    const sandi2 = document.getElementById('sandi2').value;
 
-    // Validasi dasar
-    if (sandi !== ulangSandi) {
-        return alert("⚠️ Kata sandi dan konfirmasi tidak sama!");
-    }
-    if (sandi.length < 8) {
-        return alert("⚠️ Kata sandi minimal 8 karakter!");
-    }
+    // Cek sederhana
+    if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
+    if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
 
-    // Cek email sudah terdaftar
+    // Cek email sudah ada
     const semuaUser = JSON.parse(localStorage.getItem('teravia_users') || '[]');
-    const sudahAda = semuaUser.find(u => u.email === email);
-    if (sudahAda) {
-        return alert('❌ Email ini sudah terdaftar!');
-    }
+    if(semuaUser.find(u => u.email === email)) return alert("❌ Email sudah terdaftar!");
 
-    // Simpan akun baru
-    const akunBaru = {
+    // Simpan akun BARU
+    const akun = {
         id: Date.now(),
         username: username,
         nama: nama,
         email: email,
         nohp: nohp,
-        sandi: sandi,
-        tier: 'Kaveling',
-        tanggal_berlaku: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-        kuota_terpakai: 0
+        sandi: sandi1,
+        tier: 'Kaveling'
     };
-
-    semuaUser.push(akunBaru);
+    semuaUser.push(akun);
     localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
-    
-    // Langsung login & langsung ke beranda
-    // === SIMPAN SESI DENGAN BENAR ===
- const dataSesi = {
-   id: akunBaru.id,
-   nama: akunBaru.nama,
-   username: akunBaru.username,
-   email: akunBaru.email,
-   tier: akunBaru.tier
- };
- localStorage.setItem('teravia_sesi', JSON.stringify(dataSesi));
- alert('✅ Pendaftaran berhasil! Selamat datang di Teravia, ' + nama);
- // Beri waktu sedikit sebelum pindah halaman
- setTimeout(() => {
-   window.location.href = '/index.html';
- }, 300);
+
+    // ✅ SIMPAN SESI LOGIN DENGAN BENAR
+    localStorage.setItem('teravia_sesi', JSON.stringify({
+        id: akun.id,
+        username: akun.username,
+        nama: akun.nama
+    }));
+
+    alert("✅ Berhasil! Selamat datang, " + username);
+    window.location.href = "/index.html";
+});
 </script>
 
-</body>
+<
+    /body>
 </html>
