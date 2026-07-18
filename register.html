@@ -17,35 +17,34 @@
 
         <form id="formDaftar" class="form-login form-daftar">
             <div class="grup-input">
-                <input type="text" id="username" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Nama Pengguna" required>
             </div>
             <div class="grup-input">
                 <input type="text" id="nama" placeholder="Nama Lengkap" required>
             </div>
             <div class="grup-input">
-                <input type="tel" id="nohp" placeholder="Nomor WhatsApp" required>
+                <input type="tel" id="nohp" placeholder="Nomor WhatsApp Aktif" required>
             </div>
             <div class="grup-input">
                 <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
 
             <!-- Kata Sandi Pertama -->
-<div class="grup-input sandi-grup">
-    <input type="password" id="sandi1" placeholder="Kata Sandi (min 8 karakter)" required>
-    <button type="button" onclick="ubahSandi('sandi1', this)">👁️</button>
-</div>
+            <div class="grup-input sandi-grup">
+                <input type="password" id="sandi1" placeholder="Kata Sandi (min 8 karakter)" required>
+                <button type="button" class="tombol-mata" onclick="ubahSandi('sandi1', this)">👁️</button>
+            </div>
 
-<!-- Ulangi Kata Sandi (ID & FUNGSI DIPERBAIKI) -->
-<div class="grup-input sandi-grup">
-    <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
-    <button type="button" onclick="ubahSandi('sandi2', this)">👁️</button>
-</div>
-
+            <!-- Ulangi Kata Sandi -->
+            <div class="grup-input sandi-grup">
+                <input type="password" id="sandi2" placeholder="Ulangi Kata Sandi" required>
+                <button type="button" class="tombol-mata" onclick="ubahSandi('sandi2', this)">👁️</button>
+            </div>
 
             <button type="submit" class="btn-masuk">Daftar Sekarang</button>
 
             <div class="tautan-daftar">
-                Sudah punya akun? <a href="login.html">Masuk</a>
+                Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
             </div>
             <div class="tautan-kembali">
                 <a href="index.html">← Kembali ke Beranda</a>
@@ -54,67 +53,82 @@
     </div>
 </div>
 
-<!-- ✅ PUSTAKA DENGAN CARA YANG PASTI BENAR -->
+<!-- KONEKSI SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// KONEKSI DENGAN FORMAT RESMI SUPABASE
+// Inisialisasi Koneksi Supabase
 const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// FUNGSI SANDI
+// Fungsi Lihat/Sembunyikan Kata Sandi
 function ubahSandi(id, tombol) {
     const input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// PROSES DAFTAR
-// ✅ TUNGGU HALAMAN SIAP BARU PASANG TOMBOL
+// Proses Pendaftaran
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('formDaftar').addEventListener('submit', async function(e) {
+    const form = document.getElementById('formDaftar');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const username = document.getElementById('username').value.trim();
-        const nama_lengkap = document.getElementById('nama').value.trim();
-        const nohp = document.getElementById('nohp').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const sandi1 = document.getElementById('sandi1').value;
-        const sandi2 = document.getElementById('sandi2').value;
+        // Ambil semua nilai input
+        const dataPengguna = {
+            username: document.getElementById('username').value.trim(),
+            nama_lengkap: document.getElementById('nama').value.trim(),
+            nohp: document.getElementById('nohp').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            sandi: document.getElementById('sandi1').value,
+            paket_aktif: 'Kaveling', // Paket awal semua pengguna baru
+            is_admin: false
+        };
+        const sandiUlang = document.getElementById('sandi2').value;
 
-        if(sandi1 !== sandi2) return alert("⚠️ Sandi tidak cocok!");
-        if(sandi1.length < 8) return alert("⚠️ Sandi minimal 8 karakter!");
+        // Validasi
+        if (dataPengguna.sandi !== sandiUlang) {
+            return alert("⚠️ Kata sandi tidak cocok! Pastikan kedua kolom sama.");
+        }
+        if (dataPengguna.sandi.length < 8) {
+            return alert("⚠️ Kata sandi minimal harus 8 karakter!");
+        }
 
         try {
+            // Simpan ke database Supabase
             const { data, error } = await supabase
                 .from('users')
-                .insert([{ username, nama_lengkap, nohp, email, sandi: sandi1 }])
+                .insert([dataPengguna])
                 .select()
                 .single();
 
-            if(error) {
-                if(error.code === '23505') return alert("❌ Email ini sudah terdaftar!");
-                throw error;
+            if (error) {
+                if (error.code === '23505') {
+                    return alert("❌ Alamat email ini sudah terdaftar! Silakan gunakan email lain atau masuk.");
+                }
+                throw new Error(error.message);
             }
 
+            // Simpan sesi login otomatis
             localStorage.setItem('sesiTeravia', JSON.stringify({
                 id: data.id,
                 username: data.username,
                 nama: data.nama_lengkap,
+                paket: data.paket_aktif,
                 is_admin: data.is_admin
             }));
 
-            alert("✅ Pendaftaran berhasil! Selamat datang " + username);
-            // ✅ Hilangkan garis miring depan
+            alert(`✅ Pendaftaran Berhasil!\nSelamat datang, ${data.nama_lengkap}!`);
             window.location.href = "index.html";
 
         } catch (err) {
-            console.error(err);
-            alert("❌ Gagal: " + err.message);
+            console.error("Kesalahan daftar:", err);
+            alert("❌ Gagal mendaftar: " + (err.message || "Terjadi kesalahan tidak diketahui"));
         }
     });
 });
-
 </script>
 
 </body>
