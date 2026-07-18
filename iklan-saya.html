@@ -62,9 +62,43 @@ if(iklanSaya.length === 0){
 }
 
 // Fungsi dasar
+// Aturan batas sundul per paket
+const aturanPaket = {
+  'Kaveling': {maks:1},
+  'Cluster': {maks:4},
+  'Residence': {maks:999},
+  'Estate': {maks:999}
+};
+
 function sundulIklan(id){
-    alert('Fitur sundul akan aktif nanti setelah pengaturan paket selesai!');
+  const dataAkun = JSON.parse(localStorage.getItem('dataAkunTeravia')||'[]');
+  const akun = dataAkun.find(a=>a.id===sesi.id) || {paket:'Kaveling'};
+  const batas = aturanPaket[akun.paket].maks;
+
+  // Cek hitungan hari ini
+  const hariIni = new Date().toDateString();
+  const catatan = JSON.parse(localStorage.getItem('catatanSundul')||'{}');
+  const jumlahHariIni = (catatan[sesi.id]?.tanggal === hariIni) ? catatan[sesi.id].jumlah : 0;
+
+  if(jumlahHariIni >= batas){
+    return alert(`❌ Batas sundul hari ini sudah habis!\nPaket ${akun.paket} maksimal ${batas}x sehari.`);
+  }
+
+  // Lakukan sundul: ubah waktu jadi paling baru
+  const index = semuaIklan.findIndex(i=>i.id===id);
+  if(index > -1){
+    semuaIklan[index].waktuSundul = new Date().toISOString();
+    localStorage.setItem('daftarIklan', JSON.stringify(semuaIklan));
+    
+    // Simpan catatan
+    catatan[sesi.id] = {tanggal: hariIni, jumlah: jumlahHariIni+1};
+    localStorage.setItem('catatanSundul', JSON.stringify(catatan));
+    
+    alert(`✅ Berhasil disundul!\nSisa hari ini: ${batas - jumlahHariIni -1} kali lagi.`);
+    location.reload();
+  }
 }
+
 function hapusIklan(id){
     if(confirm('Yakin hapus iklan ini?')){
         const sisa = semuaIklan.filter(i => i.id !== id);
