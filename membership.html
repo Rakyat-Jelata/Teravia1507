@@ -393,20 +393,19 @@ document.querySelectorAll('.pilih-paket').forEach(tombol => {
         const kartu = tombol.closest('.kartu-tingkatan');
         kartu.style.outline = '3px solid #165DFF';
         paketTerpilih = kartu.dataset.paket;
-        cekTombolLanjut();
     });
 });
 
-// Aktifkan tombol jika sudah centang & pilih paket
+// ✅ DIUBAH: Tombol aktif HANYA jika dicentang saja (tanpa syarat pilih paket)
 function cekTombolLanjut() {
-    tombolLanjut.disabled = !(kotakSetuju.checked && paketTerpilih);
+    tombolLanjut.disabled = !kotakSetuju.checked;
 }
 kotakSetuju.addEventListener('change', cekTombolLanjut);
 
 // Aksi lanjut pembayaran
 tombolLanjut.addEventListener('click', () => {
-    if (!paketTerpilih) return alert('Pilih paket terlebih dahulu!');
     if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
+    if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
 
     // Cek login
     const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
