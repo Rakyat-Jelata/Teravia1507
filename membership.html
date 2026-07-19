@@ -397,11 +397,16 @@ document.querySelectorAll('.pilih-paket').forEach(tombol => {
 });
 
 // ✅ DIUBAH: Tombol aktif HANYA jika dicentang saja (tanpa syarat pilih paket)
-function cekTombolLanjut() {
-    tombolLanjut.disabled = !kotakSetuju.checked;
-}
-kotakSetuju.addEventListener('change', cekTombolLanjut);
+tombolLanjut.addEventListener('click', () => {
+    if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
+    if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
 
+    // Simpan paket yang dipilih untuk proses selanjutnya
+    localStorage.setItem('paketAkanDibayar', paketTerpilih);
+    
+    // Langsung arahkan ke halaman pembayaran
+    window.location.href = 'payment.html';
+});
 // Aksi lanjut pembayaran
 tombolLanjut.addEventListener('click', () => {
     if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
