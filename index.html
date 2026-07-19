@@ -15,22 +15,22 @@
             -webkit-tap-highlight-color: transparent;
             outline: none;
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
         body {
             overflow-x: hidden;
             background-color: #f8fafc;
             color: #1e293b;
-            padding-bottom: 80px; /* Jarak agar konten tidak tertutup bottom nav di HP */
         }
 
-        /* === NAVBAR UTAMA (DESKTOP) === */
+        /* === 1. NAVBAR SYSTEM (DESKTOP) === */
         .navbar {
             position: sticky;
             top: 0;
             width: 100%;
             z-index: 9999;
-            background: #ffffff;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid #e2e8f0;
         }
         .wadah-nav {
@@ -41,24 +41,30 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        .logo img { height: 34px; width: auto; }
+        .logo img { height: 38px; width: auto; }
         .menu-desktop { display: flex; gap: 24px; align-items: center; }
         .menu-desktop a { 
             text-decoration: none; 
             color: #475569; 
             font-size: 14px; 
             font-weight: 500;
-            transition: color 0.2s;
         }
-        .menu-desktop a.aktif, .menu-desktop a:hover { color: #165DFF; }
+        .menu-desktop a.aktif { color: #165DFF; font-weight: 600; }
+        .btn-pasang {
+            background: #165DFF;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
         
-        /* === BOTTOM NAVIGATION (MOBILE) === */
+        /* === 2. NAVIGATION BAWAH (MOBILE ONLY) === */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
             height: 65px;
             background: #ffffff;
-            display: none; /* Tersembunyi di desktop */
+            display: none; /* Sembunyikan total di desktop */
             justify-content: space-around;
             align-items: center;
             box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
@@ -79,109 +85,80 @@
         .nav-item.aktif { color: #165DFF; font-weight: 600; }
         .nav-item .icon { font-size: 20px; }
 
-        /* === SECTION CONTAINER === */
-        .kontainer-app {
-            max-width: 600px; /* Membuat layout terpusat rapi mirip view HP di desktop */
-            margin: 0 auto;
-            padding: 0 16px;
+        /* === 3. LAYOUT KONTEN UTAMA WEBPAGE === */
+        .kontainer-section { 
+            max-width: 1200px; /* Di desktop akan melebar normal sesuai standard web */
+            margin: 0 auto; 
+            padding: 40px 24px; 
         }
 
-        /* === KONSEP 1: SEARCH BAR PROPERTI === */
-        .section-pencarian { padding: 20px 0 10px 0; }
-        .search-bar-container {
-            display: flex;
-            background: white;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            padding: 10px 14px;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        /* Tampilan Desktop Hero Section */
+        .hero {
+            background-image: url('assets/img/hero-bg.png'); 
+            background-size: cover; 
+            background-position: center top; 
+            background-repeat: no-repeat;
+            padding: 120px 24px;
+            text-align: center;
+            color: white;
+            background-color: #165DFF; /* Fallback warna jika gambar belum load */
         }
-        .search-bar-container select { 
-            border: none; 
-            background: transparent; 
-            font-weight: 600; 
-            color: #165DFF; 
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .search-bar-container input { border: none; width: 100%; font-size: 14px; color: #334155; }
-        .btn-kaca-pembesar { color: #64748b; cursor: pointer; font-size: 16px; user-select: none; }
+        .kotak-sambutan h1 { font-size: 42px; margin-bottom: 12px; font-weight: 800; }
+        .kotak-sambutan p { font-size: 18px; opacity: 0.9; }
 
-        /* === KONSEP 2: KATEGORI LOKASI POPULER === */
-        .section-populer { padding: 20px 0; }
-        .section-populer h3 { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 14px; }
-        .grid-lokasi {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-        .item-lokasi {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            gap: 6px;
-        }
-        .img-wrapper {
-            width: 100%;
-            aspect-ratio: 1 / 1; /* Menjaga rasio kotak sempurna */
-            border-radius: 16px;
-            overflow: hidden;
-            background: #e2e8f0;
-        }
+        /* Tampilan Kotak Pencarian Besar (Desktop) */
+        .pencarian-utama { margin: -50px auto 40px auto; max-width: 850px; padding: 0 24px; position: relative; z-index: 10; }
+        .kotak-pencarian { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 30px rgba(22,93,255,0.15); }
+        .grup-pencarian { display: flex; gap: 12px; margin-top: 14px; }
+        .input-lokasi { flex: 1; display: flex; align-items: center; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px; gap: 8px; }
+        .input-lokasi input { border: none; width: 100%; font-size: 14px; }
+        .tombol-tujuan { display: flex; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; }
+        .btn-tujuan { padding: 0 20px; border: none; background: white; cursor: pointer; font-weight: 500; }
+        .btn-tujuan.aktif { background: #165DFF; color: white; }
+        .btn-cari-biru { background: #165DFF; color: white; border: none; padding: 0 28px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
+
+        /* Grid Katalog Properti Umum */
+        .judul-bagian { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .grid-kartu-properti { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .kartu-properti { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
+        .gambar-properti { height: 220px; background: #e2e8f0; position: relative; }
+        .isi-kartu { padding: 20px; }
+        .harga { font-size: 22px; font-weight: 700; color: #165DFF; margin-bottom: 8px; }
+        .spesifikasi { display: flex; gap: 16px; margin-top: 16px; font-size: 13px; color: #64748b; }
+
+        /* === 4. ELEMEN UTILITY TAMPILAN MOBILE LAINNYA === */
+        .mobile-only { display: none; }
+        .search-bar-container { display: flex; background: white; border: 1px solid #cbd5e1; border-radius: 12px; padding: 10px 14px; align-items: center; gap: 10px; }
+        .search-bar-container select { border: none; background: transparent; font-weight: 600; color: #165DFF; }
+        .search-bar-container input { border: none; width: 100%; }
+        .grid-lokasi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+        .item-lokasi { display: flex; flex-direction: column; align-items: center; text-decoration: none; gap: 6px; }
+        .img-wrapper { width: 100%; aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; background: #cbd5e1; }
         .img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .item-lokasi span { font-size: 11px; color: #475569; text-align: center; font-weight: 500; }
+        .item-lokasi span { font-size: 11px; color: #475569; text-align: center; }
+        .banner-kpr { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+        .kpr-info { display: flex; align-items: center; gap: 12px; }
 
-        /* === KONSEP 3: BANNER SIMULASI KPR === */
-        .banner-kpr {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.01);
-            cursor: pointer;
+        /* =========================================================
+           BREAKPOINT RWD: BERUBAH MENJADI MODUL HP DI BAWAH 1024PX
+           ========================================================= */
+        @media (max-width: 1024px) {
+            body { padding-bottom: 80px; }
+            .menu-desktop, .hero, .pencarian-utama { display: none !important; } /* Matikan komponen web desktop */
+            .mobile-only { display: block; } /* Hidupkan komponen aplikasi mobile */
+            .bottom-nav { display: flex; }
+            .navbar { position: static; }
+            .wadah-nav { justify-content: center; } 
+            
+            /* Penyesuaian Grid Properti agar pas di layar kecil */
+            .grid-kartu-properti { grid-template-columns: 1fr; gap: 16px; }
+            .kontainer-section { padding: 20px 16px; }
         }
-        .kpr-info { display: flex; align-items: center; gap: 14px; }
-        .kpr-icon { font-size: 30px; }
-        .kpr-text h4 { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
-        .kpr-text p { font-size: 12px; color: #64748b; }
-        .btn-kpr-panah {
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            border: 1px solid #cbd5e1;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #165DFF;
-            font-weight: bold;
-        }
-
-        /* === RESPONSIVE BREAKPOINT FOR MOBILE & TABLET VIEW === */
-     @media (max-width: 1024px) {
-    .menu-desktop { display: none; }
-    .bottom-nav { display: flex; }
-    .navbar { position: static; }
-    .wadah-nav { justify-content: center; } /* Logo di tengah ala aplikasi native */
-    
-    /* Tambahan opsional: Di tablet, grid lokasi diubah jadi 4 kolom agar pas */
-    .grid-lokasi { grid-template-columns: repeat(4, 1fr); } 
-     }
-
-     @media (min-width: 1025px) {
-    .kontainer-app { max-width: 1200px; } /* Lebarkan konten kembali jika di desktop */
-    .grid-lokasi { grid-template-columns: repeat(8, 1fr); } /* Tampilan grid lebih luas di PC */
-     }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR UTAMA -->
+<!-- NAVBAR UTAMA (NORMAL DI DESKTOP) -->
 <nav class="navbar">
      <div class="wadah-nav">
          <a href="index.html" class="logo">
@@ -191,32 +168,34 @@
              <a href="index.html" class="aktif">Beranda</a>
              <a href="daftar-properti.html">Cari Properti</a>
              <a href="mitra-notaris.html">Mitra Notaris</a>
-             <a href="blog.html">Blog</a>
+             <a href="blog.html">Blog Properti</a>
              <a href="tentang.html">Tentang Kami</a>
+             <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
              <a href="login.html">👤 Masuk</a>
          </div>
      </div>
  </nav>
 
-<!-- MAIN APP WRAPPER -->
-<main class="kontainer-app">
-
-    <!-- 1. KOTAK PENCARIAN MINIMALIS -->
-    <section class="section-pencarian">
+<!-- ==========================================
+     MODUL MOBILE (HANYA AKTIF SAAT DIBUKA DI HP/APK)
+     ========================================== -->
+<div class="mobile-only" style="padding: 0 16px; max-width: 600px; margin: 0 auto;">
+    <!-- Search Bar Mobile -->
+    <section style="padding: 16px 0 8px 0;">
         <div class="search-bar-container">
-            <select id="selectTipe">
+            <select id="selectTipeMob">
                 <option value="Dijual">Dijual</option>
                 <option value="Disewa">Sewa</option>
             </select>
             <span style="color: #cbd5e1;">|</span>
-            <input type="text" id="inputCari" placeholder="Cari Lokasi atau area...">
-            <span class="btn-kaca-pembesar" id="btnCari">🔍</span>
+            <input type="text" id="inputCariMob" placeholder="Cari Lokasi atau area...">
+            <span id="btnCariMob" style="cursor:pointer;">🔍</span>
         </div>
     </section>
 
-    <!-- 2. KATEGORI LOKASI TERPOPULER -->
-    <section class="section-populer">
-        <h3>Cari di Lokasi Terpopuler</h3>
+    <!-- Kategori Lokasi Terpopuler -->
+    <section style="padding: 16px 0;">
+        <h3 style="font-size: 14px; font-weight:700;">Cari di Lokasi Terpopuler</h3>
         <div class="grid-lokasi">
             <a href="daftar-properti.html?q=Tangerang" class="item-lokasi">
                 <div class="img-wrapper"><img src="assets/img/tangerang.jpg" alt="Tangerang"></div>
@@ -224,11 +203,11 @@
             </a>
             <a href="daftar-properti.html?q=Bandung" class="item-lokasi">
                 <div class="img-wrapper"><img src="assets/img/bandung.jpg" alt="Bandung"></div>
-                <span>Kab. Bandung</span>
+                <span>Bandung</span>
             </a>
             <a href="daftar-properti.html?q=Jakarta%20Selatan" class="item-lokasi">
-                <div class="img-wrapper"><img src="assets/img/jaksel.jpg" alt="Jakarta Selatan"></div>
-                <span>Jakarta Selatan</span>
+                <div class="img-wrapper"><img src="assets/img/jaksel.jpg" alt="Jaksel"></div>
+                <span>Jaksel</span>
             </a>
             <a href="daftar-properti.html?q=Surabaya" class="item-lokasi">
                 <div class="img-wrapper"><img src="assets/img/surabaya.jpg" alt="Surabaya"></div>
@@ -237,97 +216,115 @@
         </div>
     </section>
 
-    <!-- 3. BANNER SIMULASI KPR -->
-    <section style="margin-top: 10px;">
-        <div class="banner-kpr" id="cardKpr">
+    <!-- Banner KPR Mobile -->
+    <section style="margin-bottom: 16px;">
+        <div class="banner-kpr" id="cardKprMob" style="cursor:pointer;">
             <div class="kpr-info">
-                <div class="kpr-icon">🧮</div>
-                <div class="kpr-text">
-                    <h4>Simulasi KPR</h4>
-                    <p>Hitung pembayaran bulanan untuk setiap properti</p>
+                <div style="font-size: 28px;">🧮</div>
+                <div>
+                    <h4 style="font-size: 13px; font-weight:600;">Simulasi KPR</h4>
+                    <p style="font-size: 11px; color:#64748b;">Hitung pembayaran bulanan Anda</p>
                 </div>
             </div>
-            <button class="btn-kpr-panah">→</button>
+            <span style="color:#165DFF; font-weight:bold;">→</span>
         </div>
     </section>
+</div>
 
+<!-- ==========================================
+     MODUL DESKTOP (HANYA AKTIF SAAT DIBUKA DI LAPTOP / SITUS DESKTOP)
+     ========================================== -->
+<section class="hero">
+    <div class="kotak-sambutan">
+        <h1>Selamat Datang di Teravia</h1>
+        <p>Marketplace Properti Berbasis AI dan Ads untuk seluruh Indonesia</p>
+    </div>
+</section>
+
+<section class="pencarian-utama">
+    <div class="kotak-pencarian">
+        <h3 style="font-size: 16px; font-weight: 700;">Cari Properti Impianmu</h3>
+        <div class="grup-pencarian">
+            <div class="input-lokasi">
+                <span>📍</span>
+                <input type="text" id="inputCariDesk" placeholder="Kota, Kecamatan, atau Lokasi..." value="Seluruh Indonesia">
+            </div>
+            <div class="tombol-tujuan">
+                <button class="btn-tujuan aktif" id="btnBeliDesk">Beli</button>
+                <button class="btn-tujuan" id="btnSewaDesk">Sewa</button>
+            </div>
+            <button class="btn-cari-biru" id="btnCariDesk">🔍 Cari Properti</button>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     KONTEN BERSAMA (LEBAR MENYESUAIKAN DI PC & HP)
+     ========================================== -->
+<main class="kontainer-section">
+    <div class="judul-bagian">
+        <h2 style="font-size: 24px; font-weight: 700;">Properti Unggulan</h2>
+        <a href="daftar-properti.html" style="color:#165DFF; text-decoration:none; font-size:14px; font-weight:600;">Lihat Semua →</a>
+    </div>
+
+    <div class="grid-kartu-properti">
+        <!-- KARTU 1 -->
+        <div class="kartu-properti">
+            <div class="gambar-properti"></div>
+            <div class="isi-kartu">
+                <div class="harga">Rp 950 Juta</div>
+                <h4 style="font-size: 16px; font-weight: 600;">Rumah Modern Siap Huni di Cibinong</h4>
+                <p style="font-size: 13px; color:#64748b; margin: 6px 0;">📍 Bogor, Jawa Barat</p>
+                <div class="spesifikasi">
+                    <span>🛏️ 3 KT</span><span>🛁 2 KM</span><span>📏 108 m²</span>
+                </div>
+            </div>
+        </div>
+        <!-- KARTU 2 -->
+        <div class="kartu-properti">
+            <div class="gambar-properti"></div>
+            <div class="isi-kartu">
+                <div class="harga">Rp 2,8 Miliar</div>
+                <h4 style="font-size: 16px; font-weight: 600;">Rumah Cluster Elite di BSD City</h4>
+                <p style="font-size: 13px; color:#64748b; margin: 6px 0;">📍 Tangerang, Banten</p>
+                <div class="spesifikasi">
+                    <span>🛏️ 4 KT</span><span>🛁 3 KM</span><span>📏 150 m²</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
-<!-- === BOTTOM NAVIGATION (KHUSUS MOBILE VIEW) === -->
+<!-- === BOTTOM NAVIGATION (MOBILE ONLY) === -->
 <div class="bottom-nav" id="bottomNav">
-    <a href="index.html" class="nav-item aktif" data-page="beranda">
-        <span class="icon">🏠</span>
-        <span>Beranda</span>
-    </a>
-    <a href="daftar-properti.html" class="nav-item" data-page="cari">
-        <span class="icon">🔍</span>
-        <span>Cari</span>
-    </a>
-    <a href="aktivitas.html" class="nav-item" data-page="aktivitas">
-        <span class="icon">⏱️</span>
-        <span>Aktivitas</span>
-    </a>
-    <a href="login.html" class="nav-item" data-page="profil">
-        <span class="icon">👤</span>
-        <span>Profil</span>
-    </a>
+    <a href="index.html" class="nav-item aktif"><span class="icon">🏠</span><span>Beranda</span></a>
+    <a href="daftar-properti.html" class="nav-item"><span class="icon">🔍</span><span>Cari</span></a>
+    <a href="aktivitas.html" class="nav-item"><span class="icon">⏱️</span><span>Aktivitas</span></a>
+    <a href="login.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a>
 </div>
 
 <!-- === LOGIKA JAVASCRIPT === -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // 1. LOGIKA INTERAKSI BOTTOM NAVIGATION
-    const navItems = document.querySelectorAll('#bottomNav .nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            navItems.forEach(nav => nav.classList.remove('aktif'));
-            this.classList.add('aktif');
-            // Catatan: Karena menggunakan href link fisik, kelas 'aktif' akan reset saat pindah halaman.
-            // Di level kelanjutan, status aktif ini idealnya dicocokkan berdasarkan `window.location.pathname`.
+    // Logika Pencarian Mobile
+    const inputCariMob = document.getElementById('inputCariMob');
+    const selectTipeMob = document.getElementById('selectTipeMob');
+    const btnCariMob = document.getElementById('btnCariMob');
+
+    if(btnCariMob) {
+        btnCariMob.addEventListener('click', function() {
+            window.location.href = `daftar-properti.html?tipe=${selectTipeMob.value}&q=${encodeURIComponent(inputCariMob.value)}`;
         });
-    });
-
-    // 2. LOGIKA ENGINE PENCARIAN (SEARCH FILTER)
-    const inputCari = document.getElementById('inputCari');
-    const selectTipe = document.getElementById('selectTipe');
-    const btnCari = document.getElementById('btnCari');
-
-    function jalankanPencarian() {
-        const kataKunci = inputCari.value.trim();
-        const tipeProperti = selectTipe.value;
-
-        if (kataKunci === "") {
-            alert("Masukkan nama kota atau area tujuan cari!");
-            inputCari.focus();
-            return;
-        }
-
-        // Redirect ke halaman katalog dengan melempar parameter Query String URL
-        window.location.href = `daftar-properti.html?tipe=${tipeProperti}&q=${encodeURIComponent(kataKunci)}`;
     }
 
-    // Trigger klik ikon kaca pembesar
-    btnCari.addEventListener('click', jalankanPencarian);
-
-    // Trigger enter pada keyboard virtual HP / PC
-    inputCari.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            jalankanPencarian();
-        }
-    });
-
-    // 3. LOGIKA AKSI CARD SIMULASI KPR
-    const cardKpr = document.getElementById('cardKpr');
-    if (cardKpr) {
-        cardKpr.addEventListener('click', function() {
+    // Logika KPR Mobile
+    const cardKprMob = document.getElementById('cardKprMob');
+    if(cardKprMob) {
+        cardKprMob.addEventListener('click', function() {
             window.location.href = 'simulasi-kpr.html';
         });
     }
 });
 </script>
-
-<script src="assets/js/general.js"></script>
-<script src="assets/js/home.js"></script>
 </body>
 </html>
