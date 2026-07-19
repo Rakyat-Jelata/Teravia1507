@@ -7,32 +7,213 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
-        .wadah {max-width:1000px;margin:40px auto;padding:0 16px;}
-        .judul-utama {text-align:center;margin-bottom:30px;}
-        .judul-utama h1 {color:var(--utama);margin-bottom:8px;}
-        .judul-utama p {color:var(--abu);}
-        .grid-paket {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-        .kartu-paket {background:white;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);position:relative;overflow:hidden;}
-        .kartu-paket.unggulan {border:2px solid var(--utama);transform:scale(1.03);}
-        .label-paket {position:absolute;top:16px;right:-30px;background:var(--utama);color:white;padding:4px 32px;font-size:12px;transform:rotate(45deg);}
-        .nama-paket {font-size:20px;font-weight:700;color:var(--gelap);margin-bottom:6px;}
-        .harga-paket {font-size:24px;font-weight:700;color:var(--utama);margin-bottom:16px;}
-        .harga-paket span {font-size:13px;font-weight:normal;color:var(--abu);}
-        .daftar-fitur {list-style:none;margin-bottom:20px;padding:0;}
-        .daftar-fitur li {padding:6px 0;font-size:14px;border-bottom:1px solid #f1f5f9;}
-        .daftar-fitur li:last-child {border:none;}
-        .daftar-fitur li.tdk-ada {color:#cbd5e1;text-decoration:line-through;}
-        .btn-pilih {display:block;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;border:none;cursor:pointer;}
-        .btn-pilih.biasa {border:1px solid var(--utama);color:var(--utama);background:white;}
-        .btn-pilih.premium {background:var(--utama);color:white;}
-        @media (max-width:768px) {
-            .kartu-paket.unggulan {transform:none;}
+        /* === HEADER HALAMAN === */
+        .header-paket {
+            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
+            color: white;
+            padding: 40px 16px;
+            text-align: center;
+        }
+        .header-paket h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .header-paket p {
+            font-size: 15px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === WADAH UTAMA === */
+        .wadah-paket {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        /* === GRID PAKET SEJAJAR === */
+        .grid-tingkatan {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kartu-tingkatan {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .kartu-tingkatan:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(22, 93, 255, 0.12);
+        }
+        .kartu-tingkatan.populer {
+            border-color: #F59E0B;
+            transform: scale(1.03);
+            z-index: 2;
+            background: linear-gradient(to bottom, #FFFBEB, white);
+        }
+        .label-populer {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F59E0B;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* === ISI KARTU === */
+        .ikon-paket {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .nama-tingkatan {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1E293B;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .desk-paket {
+            font-size: 12px;
+            color: #64748B;
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .isi-fitur {
+            flex-grow: 1;
+            margin-bottom: 16px;
+        }
+        .baris-fitur {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: #475569;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .baris-fitur:last-child { border: none; }
+        .baris-fitur .cek { color: #10B981; font-weight: bold; }
+        .baris-fitur .silang { color: #EF4444; font-weight: bold; }
+        .harga-paket {
+            font-size: 20px;
+            font-weight: 700;
+            color: #165DFF;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .harga-paket span {
+            font-size: 12px;
+            font-weight: normal;
+            color: #94A3B8;
+        }
+        .pilih-paket {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .pilih-paket.biasa {
+            background: white;
+            border: 1px solid #165DFF;
+            color: #165DFF;
+        }
+        .pilih-paket.utama {
+            background: #165DFF;
+            color: white;
+        }
+        .pilih-paket:hover { opacity: 0.9; }
+
+        /* === PERSETUJUAN === */
+        .kotak-syarat {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .cek-syarat {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .cek-syarat input {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            accent-color: #165DFF;
+        }
+        .cek-syarat a {
+            color: #165DFF;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .cek-syarat a:hover { text-decoration: underline; }
+        .catatan-harga {
+            font-size: 12px;
+            color: #94A3B8;
+            line-height: 1.5;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #E2E8F0;
+        }
+        .btn-lanjut {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            padding: 12px;
+            background: #165DFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-lanjut:disabled {
+            background: #94A3B8;
+            cursor: not-allowed;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 992px) {
+            .grid-tingkatan { grid-template-columns: repeat(2, 1fr); }
+            .kartu-tingkatan.populer { transform: none; }
+        }
+        @media (max-width: 576px) {
+            .grid-tingkatan { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM STANDAR -->
+<!-- NAVBAR SERAGAM -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
@@ -41,6 +222,7 @@
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav">Beranda</a>
             <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="kalkulator-kpr.html" class="tautan-nav">🧮 Kalkulator KPR</a>
             <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
             <a href="blog.html" class="tautan-nav">Blog Properti</a>
             <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
@@ -62,6 +244,7 @@
     <div class="isi-menu">
         <a href="index.html" class="tautan-menu">🏠 Beranda</a>
         <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
         <a href="membership.html" class="tautan-menu aktif">💎 Keanggotaan</a>
         <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
         <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
@@ -73,72 +256,97 @@
     </div>
 </div>
 
-<!-- KONTEN UTAMA -->
-<div class="wadah">
-    <div class="judul-utama">
-        <h1>Pilih Paket Keanggotaan</h1>
-        <p>Jangkau pembeli lebih luas, promosi otomatis, dan tampil di urutan teratas pencarian</p>
+<!-- ISI HALAMAN -->
+<main>
+    <div class="header-paket">
+        <h1>💎 Pilih Paket Keanggotaan</h1>
+        <p>Tingkatkan jangkauan iklan dan tampil lebih unggul di pencarian Teravia</p>
     </div>
 
-    <div class="grid-paket">
-        <!-- PAKET 1: KAVELING -->
-        <div class="kartu-paket">
-            <div class="nama-paket">Kaveling</div>
-            <div class="harga-paket">Rp 150.000 <span>/ bulan</span></div>
-            <ul class="daftar-fitur">
-                <li>✅ Maksimal 5 Listing Aktif</li>
-                <li>✅ Lencana Standar</li>
-                <li class="tdk-ada">❌ Otomatisasi Iklan Medsos</li>
-                <li class="tdk-ada">❌ Budget Promo Tambahan</li>
-                <li>📊 Jangkauan ~15% (Hanya di Situs)</li>
-            </ul>
-            <button class="btn-pilih biasa" data-paket="Kaveling">Pilih Paket Ini</button>
+    <div class="wadah-paket">
+        <div class="grid-tingkatan">
+            <!-- PAKET 1: KAVELING -->
+            <div class="kartu-tingkatan" data-paket="Kaveling">
+                <div class="ikon-paket">🧱</div>
+                <div class="nama-tingkatan">Kaveling</div>
+                <div class="desk-paket">Pemula yang baru mulai menjual</div>
+                <div class="isi-fitur">
+                    <div class="baris-fitur"><span class="cek">✅</span> 5 Iklan Aktif</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Lencana Anggota Standar</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Masa aktif 30 hari</div>
+                    <div class="baris-fitur"><span class="silang">❌</span> Fitur Unggulan</div>
+                    <div class="baris-fitur"><span class="silang">❌</span> Prioritas Pencarian</div>
+                </div>
+                <div class="harga-paket">Rp 150.000 <span>/ bulan</span></div>
+                <button class="pilih-paket biasa">Pilih Paket</button>
+            </div>
+
+            <!-- PAKET 2: CLUSTER -->
+            <div class="kartu-tingkatan" data-paket="Cluster">
+                <div class="ikon-paket">🏡</div>
+                <div class="nama-tingkatan">Cluster</div>
+                <div class="desk-paket">Penjual rutin dengan kebutuhan lebih</div>
+                <div class="isi-fitur">
+                    <div class="baris-fitur"><span class="cek">✅</span> 20 Iklan Aktif</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Lencana Anggota Silver</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Masa aktif 30 hari</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Tampil di halaman 2</div>
+                    <div class="baris-fitur"><span class="silang">❌</span> Iklan Otomatis Medsos</div>
+                </div>
+                <div class="harga-paket">Rp 500.000 <span>/ bulan</span></div>
+                <button class="pilih-paket biasa">Pilih Paket</button>
+            </div>
+
+            <!-- PAKET 3: RESIDENCE (POPULER) -->
+            <div class="kartu-tingkatan populer" data-paket="Residence">
+                <div class="label-populer">Paling Populer</div>
+                <div class="ikon-paket">🏢</div>
+                <div class="nama-tingkatan">Residence</div>
+                <div class="desk-paket">Fitur lengkap untuk hasil maksimal</div>
+                <div class="isi-fitur">
+                    <div class="baris-fitur"><span class="cek">✅</span> 50 Iklan Aktif</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Lencana Anggota Gold</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Masa aktif 90 hari</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Tampil di halaman 1</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Boost Iklan Otomatis</div>
+                </div>
+                <div class="harga-paket">Rp 1.500.000 <span>/ bulan</span></div>
+                <button class="pilih-paket utama">Pilih Paket</button>
+            </div>
+
+            <!-- PAKET 4: ESTATE -->
+            <div class="kartu-tingkatan" data-paket="Estate">
+                <div class="ikon-paket">🏰</div>
+                <div class="nama-tingkatan">Estate Premium</div>
+                <div class="desk-paket">Tanpa batas untuk profesional</div>
+                <div class="isi-fitur">
+                    <div class="baris-fitur"><span class="cek">✅</span> Iklan TANPA BATAS</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Lencana Emerald Elite</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Masa aktif 365 hari</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Peringkat Utama Pencarian</div>
+                    <div class="baris-fitur"><span class="cek">✅</span> Dukungan Prioritas</div>
+                </div>
+                <div class="harga-paket">Rp 3.500.000 <span>/ bulan</span></div>
+                <button class="pilih-paket biasa">Pilih Paket</button>
+            </div>
         </div>
 
-        <!-- PAKET 2: CLUSTER -->
-        <div class="kartu-paket">
-            <div class="nama-paket">Cluster</div>
-            <div class="harga-paket">Rp 500.000 <span>/ bulan</span></div>
-            <ul class="daftar-fitur">
-                <li>✅ Maksimal 20 Listing Aktif</li>
-                <li>✅ Lencana Silver</li>
-                <li class="tdk-ada">❌ Otomatisasi Iklan Medsos</li>
-                <li class="tdk-ada">❌ Budget Promo Tambahan</li>
-                <li>📊 Jangkauan ~35%</li>
-            </ul>
-            <button class="btn-pilih biasa" data-paket="Cluster">Pilih Paket Ini</button>
+        <!-- PERSETUJUAN -->
+        <div class="kotak-syarat">
+            <div class="cek-syarat">
+                <input type="checkbox" id="setujuSyarat">
+                <label for="setujuSyarat">
+                    Dengan mendaftar, saya menyetujui <a href="ketentuan-pengguna.html">Ketentuan Pengguna</a> dan <a href="kebijakan-listing.html">Kebijakan Listing</a> Teravia, serta memahami bahwa semua data yang saya berikan akan diproses sesuai dengan aturan perlindungan data yang berlaku.
+                </label>
+            </div>
+            <div class="catatan-harga">
+                * Harga belum termasuk PPN 11%. Pembayaran dapat dilakukan melalui Transfer Bank, Virtual Account, Kartu Kredit, dan E-Wallet.
+            </div>
         </div>
 
-        <!-- PAKET 3: RESIDENCE -->
-        <div class="kartu-paket unggulan">
-            <div class="label-paket">POPULER</div>
-            <div class="nama-paket">Residence</div>
-            <div class="harga-paket">Rp 1.500.000 <span>/ bulan</span></div>
-            <ul class="daftar-fitur">
-                <li>✅ Maksimal 50 Listing Aktif</li>
-                <li>✅ Lencana Gold</li>
-                <li>✅ Otomatisasi Meta Ads</li>
-                <li>✅ Budget Rp 200.000 / Iklan</li>
-                <li>📊 Jangkauan ~75%</li>
-            </ul>
-            <button class="btn-pilih premium" data-paket="Residence">Pilih Paket Ini</button>
-        </div>
-
-        <!-- PAKET 4: ESTATE -->
-        <div class="kartu-paket">
-            <div class="nama-paket">Estate (Premium)</div>
-            <div class="harga-paket">Rp 3.500.000 <span>/ bulan</span></div>
-            <ul class="daftar-fitur">
-                <li>✅ Listing TANPA BATAS</li>
-                <li>✅ Lencana Emerald Elite</li>
-                <li>✅ Meta Ads + TikTok Ads</li>
-                <li>✅ Budget Rp 600.000 / Iklan</li>
-                <li>📊 Jangkauan 100% Maksimal</li>
-            </ul>
-            <button class="btn-pilih biasa" data-paket="Estate">Pilih Paket Ini</button>
-        </div>
+        <button id="lanjutBayar" class="btn-lanjut" disabled>Lanjut ke Metode Pembayaran</button>
     </div>
-</div>
+</main>
 
 <!-- FOOTER SERAGAM -->
 <footer class="footer">
@@ -146,12 +354,13 @@
         <div class="footer-baris">
             <div class="footer-kolom">
                 <h3 class="footer-logo">TERAVIA</h3>
-                <p class="footer-desc">Pasar properti terpercaya dengan sistem promosi otomatis.</p>
+                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa di seluruh Indonesia.</p>
             </div>
             <div class="footer-kolom">
                 <h4>Layanan</h4>
                 <a href="daftar-properti.html">Cari Properti</a>
                 <a href="pages/pasang-iklan.html">Pasang Iklan</a>
+                <a href="kalkulator-kpr.html">Kalkulator KPR</a>
                 <a href="membership.html" class="aktif">Keanggotaan</a>
                 <a href="mitra-notaris.html">Mitra Notaris</a>
             </div>
@@ -170,40 +379,69 @@
 
 <!-- SCRIPT -->
 <script src="assets/js/navbar.js"></script>
-<script src="assets/js/general.js"></script>
-
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Cek sesi pengguna
-    const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+let paketTerpilih = null;
+const tombolLanjut = document.getElementById('lanjutBayar');
+const kotakSetuju = document.getElementById('setujuSyarat');
 
-    // Fungsi pilih paket
-    document.querySelectorAll('.btn-pilih').forEach(tombol => {
-        tombol.addEventListener('click', () => {
-            const namaPaket = tombol.dataset.paket;
-
-            if (!sesi) {
-                alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            // Simpan permintaan upgrade
-            const antrian = JSON.parse(localStorage.getItem('permintaanUpgrade') || '[]');
-            antrian.push({
-                id: Date.now(),
-                userId: sesi.id,
-                nama: sesi.nama,
-                paketTujuan: namaPaket,
-                status: 'menunggu',
-                tanggal: new Date().toLocaleString('id-ID')
-            });
-            localStorage.setItem('permintaanUpgrade', JSON.stringify(antrian));
-
-            alert(`✅ Permintaan Upgrade ke Paket ${namaPaket} Berhasil Dikirim!\n\nSilakan unggah bukti pembayaran di halaman selanjutnya.`);
-            window.location.href = `invoice.html?jenis=upgrade&id=${Date.now()}`;
-        });
+// Pilih paket
+document.querySelectorAll('.pilih-paket').forEach(tombol => {
+    tombol.addEventListener('click', () => {
+        // Hapus tanda terpilih sebelumnya
+        document.querySelectorAll('.kartu-tingkatan').forEach(k => k.style.outline = '');
+        // Tandai paket terpilih
+        const kartu = tombol.closest('.kartu-tingkatan');
+        kartu.style.outline = '3px solid #165DFF';
+        paketTerpilih = kartu.dataset.paket;
+        cekTombolLanjut();
     });
+});
+
+// Aktifkan tombol jika sudah centang & pilih paket
+function cekTombolLanjut() {
+    tombolLanjut.disabled = !(kotakSetuju.checked && paketTerpilih);
+}
+kotakSetuju.addEventListener('change', cekTombolLanjut);
+
+// Aksi lanjut pembayaran
+tombolLanjut.addEventListener('click', () => {
+    if (!paketTerpilih) return alert('Pilih paket terlebih dahulu!');
+    if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
+
+    // Cek login
+    const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+    if (!sesi) {
+        alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
+        localStorage.setItem('tujuanSetelahLogin', 'membership.html');
+        return window.location.href = 'login.html';
+    }
+
+    // Simpan data dan lanjut
+    localStorage.setItem('paketAkanDibayar', paketTerpilih);
+    window.location.href = `invoice.html?jenis=paket&id=${Date.now()}`;
+});
+
+// Pengaman menu
+document.addEventListener('DOMContentLoaded', function () {
+    const tombolBuka = document.getElementById('tombolMenu');
+    const tombolTutup = document.getElementById('tombolTutup');
+    const menuSamping = document.getElementById('menuMobile');
+    const latarGelap = document.getElementById('latarGelap');
+
+    function bukaMenu() {
+        menuSamping.classList.add('buka');
+        latarGelap.classList.add('tampil');
+        document.body.style.overflow = 'hidden';
+    }
+    function tutupMenu() {
+        menuSamping.classList.remove('buka');
+        latarGelap.classList.remove('tampil');
+        document.body.style.overflow = 'auto';
+    }
+
+    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
+    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
+    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
 });
 </script>
 
