@@ -17,10 +17,11 @@
             background-color: #f8fafc;
             color: #1e293b;
             overflow-x: hidden;
-            padding-top: 32px; /* Ruang untuk running text */
+            /* Beri ruang aman di atas untuk running text */
+            padding-top: 44px;
         }
 
-        /* === ANIMASI RUNNING TEXT === */
+        /* === ANIMASI RUNNING TEXT (DIPERBAIKI POSISI & JELAS) === */
         @keyframes geserKananKiri {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
@@ -28,31 +29,33 @@
         .running-text {
             position: fixed;
             top: 0; left: 0; right: 0;
+            /* DITURUNKAN SUPAYA TIDAK TERTUTUP BAR STATUS HP */
+            padding: 10px 16px;
             background: #EFF6FF;
-            padding: 7px 16px;
+            border-bottom: 1px solid #BFDBFE;
             overflow: hidden;
             white-space: nowrap;
             z-index: 99999;
         }
         .running-text span {
             display: inline-block;
-            animation: geserKananKiri 22s linear infinite;
-            font-size: 11px;
-            color: #165DFF;
-            font-weight: 500;
+            animation: geserKananKiri 24s linear infinite;
+            font-size: 12px;
+            color: #1E40AF;
+            font-weight: 600;
         }
 
-        /* === NAVBAR UTAMA (TETAP DI ATAS SAAT SCROLL) === */
+        /* === NAVBAR UTAMA (TETAP DI BAWAH RUNNING TEXT) === */
         .navbar {
             position: sticky;
-            top: 32px; /* Tepat di bawah running text */
+            top: 44px; /* Tepat di bawah running text */
             width: 100%;
-            z-index: 9999;
+            z-index: 9998;
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
         }
         .wadah-nav {
-            padding: 12px 16px;
+            padding: 14px 16px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -69,7 +72,7 @@
             font-weight: 700;
             color: #165DFF;
             background: #E6EFFF;
-            padding: 7px 12px;
+            padding: 7px 14px;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -162,7 +165,7 @@
            BREAKPOINT SWITCH: AKTIF JIKA DI AKSES LEWAT HP / APK
            ========================================================= */
         @media (max-width: 768px) {
-            body { padding-bottom: 70px; padding-top: 32px; }
+            body { padding-bottom: 70px; padding-top: 44px; }
             /* Sembunyikan bagian desktop */
             .menu-desktop, .hero-desktop, .pencarian-desktop, .footer-desktop { display: none !important; }
             
@@ -176,12 +179,12 @@
 </head>
 <body>
 
-<!-- 📢 RUNNING TEXT (POSISI TETAP DI ATAS) -->
+<!-- 📢 RUNNING TEXT (SUDAH TURUN & JELAS TERLIHAT) -->
 <div class="running-text">
     <span>✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis Masa Perkenalan • 🤝 Diskon Notaris Khusus Pengguna Baru • 📞 Bantuan 24 Jam</span>
 </div>
 
-<!-- NAVBAR UTAMA (TETAP DI BAWAH RUNNING TEXT SAAT SCROLL) -->
+<!-- NAVBAR UTAMA -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
@@ -339,7 +342,7 @@
     </div>
 </footer>
 
-<!-- 📱 NAVIGASI BAWAH (TETAP DI BAWAH) -->
+<!-- 📱 NAVIGASI BAWAH -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item aktif"><span>🏠</span><span>Beranda</span></a>
     <a href="daftar-properti.html" class="nav-item"><span>🔍</span><span>Cari</span></a>
