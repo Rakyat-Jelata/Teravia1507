@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teravia - Marketplace Properti Indonesia</title>
     <style>
-        /* === 🖥️ TAMPILAN DESKTOP (TETAP UTUH TIDAK BERUBAH) === */
+        /* === 🖥️ TAMPILAN DESKTOP === */
         @media (min-width: 769px) {
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
             body { background: #F8FAFC; color: #1E293B; }
@@ -20,6 +20,7 @@
             .menu-nav a:hover { color: #165DFF; }
             .tombol-aksi { display: flex; gap: 12px; align-items: center; }
             .btn-masuk { font-size: 13px; font-weight: 600; color: #1E293B; padding: 8px 16px; border-radius: 6px; border: 1px solid #E2E8F0; }
+            .btn-daftar { font-size: 13px; font-weight: 600; color: white; padding: 8px 16px; border-radius: 6px; background: #165DFF; }
             .btn-pasang { background: #165DFF; color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; }
 
             .hero { 
@@ -90,7 +91,7 @@
             .navbar-mob, .menu-hamburger, .menu-mob, .bagian-berita, .bottom-nav { display: none !important; }
         }
 
-        /* === 📱 TAMPILAN MOBILE (DENGAN MENU HAMBURGER) === */
+        /* === 📱 TAMPILAN MOBILE === */
         @media (max-width: 768px) {
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
             body { background: #F8FAFC; color: #1E293B; padding-bottom: 24px; }
@@ -102,15 +103,14 @@
             .logo { width: 90px; height: auto; display: block; margin-right: auto; }
             .btn-pasang { background: #165DFF; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
 
-            /* MENU SLIDE TURUNAN */
             .menu-mob { position: fixed; top: 60px; left: 0; width: 100%; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-150%); transition: transform 0.3s ease-in-out; z-index: 998; padding: 16px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
             .menu-mob.buka { transform: translateY(0); }
             .menu-mob a { display: block; padding: 12px 16px; border-radius: 8px; margin-bottom: 4px; font-size: 14px; font-weight: 500; color: #1E293B; }
             .menu-mob a:hover { background: #EFF6FF; color: #165DFF; }
             .menu-mob .pisah { border-top: 1px solid #F1F5F9; margin: 12px 0; padding-top: 12px; }
             .menu-mob .tombol-masuk { background: #F8FAFC; text-align: center; font-weight: 600; }
+            .menu-mob .tombol-daftar { background: #165DFF; color: white; text-align: center; font-weight: 600; margin-top: 4px; }
 
-            /* SLIDER UNGGULAN DI PALING ATAS */
             .bagian-slider { margin: 16px; }
             .kepala-slider { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
             .kepala-slider h3 { font-size: 16px; font-weight: 700; }
@@ -164,15 +164,16 @@
     <div class="wadah-nav">
         <img src="assets/img/logo.png" alt="Teravia" class="logo">
         <ul class="menu-nav">
-            <li><a href="#">Beranda</a></li>
-            <li><a href="#">Cari Properti</a></li>
-            <li><a href="#">Mitra Notaris</a></li>
-            <li><a href="#">Blog Properti</a></li>
-            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="daftar-properti.html">Cari Properti</a></li>
+            <li><a href="mitra-notaris.html">Mitra Notaris</a></li>
+            <li><a href="blog.html">Blog Properti</a></li>
+            <li><a href="tentang.html">Tentang Kami</a></li>
         </ul>
         <div class="tombol-aksi">
             <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <a href="#" class="btn-masuk">Masuk / Daftar</a>
+            <a href="login.html" class="btn-masuk">Masuk</a>
+            <a href="register.html" class="btn-daftar">Daftar</a>
         </div>
     </div>
 </nav>
@@ -186,13 +187,14 @@
 
 <!-- 📱 MENU SLIDE -->
 <div class="menu-mob" id="menuMobile">
-    <a href="#">🏠 Beranda</a>
-    <a href="#">🔍 Cari Properti</a>
-    <a href="#">📜 Mitra Notaris</a>
-    <a href="#">📰 Blog Properti</a>
-    <a href="#">ℹ️ Tentang Kami</a>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="daftar-properti.html">🔍 Cari Properti</a>
+    <a href="mitra-notaris.html">📜 Mitra Notaris</a>
+    <a href="blog.html">📰 Blog Properti</a>
+    <a href="tentang.html">ℹ️ Tentang Kami</a>
     <div class="pisah"></div>
-    <a href="#" class="tombol-masuk">👤 Masuk / Daftar</a>
+    <a href="login.html" class="tombol-masuk">👤 Masuk</a>
+    <a href="register.html" class="tombol-daftar">📝 Daftar Akun</a>
 </div>
 
 <!-- ✅ SLIDER UNGGULAN DI ATAS KHUSUS MOBILE -->
@@ -226,7 +228,7 @@
     <div class="kolom-lokasi">📍 Seluruh Indonesia</div>
     <button class="tombol-beli">Beli</button>
     <button class="tombol-sewa">Sewa</button>
-    <button class="tombol-cari">🔍 Cari Properti</button>
+    <button class="tombol-cari" onclick="window.location.href='daftar-properti.html'">🔍 Cari Properti</button>
 </section>
 
 <!-- 📱 PENCARIAN MOBILE -->
@@ -236,7 +238,7 @@
         <button class="btn-beli">Beli</button>
         <button class="btn-sewa">Sewa</button>
     </div>
-    <button class="btn-cari">🔍 Cari Properti</button>
+    <button class="btn-cari" onclick="window.location.href='daftar-properti.html'">🔍 Cari Properti</button>
 </section>
 
 <!-- 📍 LOKASI POPULER -->
@@ -278,118 +280,72 @@
     </div>
 </section>
 
-<!-- 🖥️ SLIDER PROPERTI DESKTOP -->
-<section class="bagian-slider-prop">
-    <div class="kepala-slider">
-        <h2>Properti Terbaru & Unggulan</h2>
-        <a href="#">Lihat Semua →</a>
-    </div>
-    <div class="wadah-slider-prop">
-        <div class="isi-slider-prop" id="isiSliderProp">
-            <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label unggul">Unggulan</span></div><div class="isi-kartu"><div class="harga">Rp 950 Juta</div><h4 class="judul-prop">Rumah Modern Siap Huni di Cibinong</h4><div class="meta-prop"><span>📍 Bogor</span><span>🛏️ 3 KT</span><span>📐 108 m²</span></div></div></div></div>
-            <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label baru">Baru</span></div><div class="isi-kartu"><div class="harga">Rp 2,8 Miliar</div><h4 class="judul-prop">Rumah Cluster Elite di BSD City</h4><div class="meta-prop"><span>📍 Tangerang Selatan</span><span>🛏️ 4 KT</span><span>📐 150 m²</span></div></div></div></div>
-            <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label sewa">Sewa</span></div><div class="isi-kartu"><div class="harga">Rp 3,5 Juta / bulan</div><h4 class="judul-prop">Apartemen Dekat Stasiun Tebet</h4><div class="meta-prop"><span>📍 Jakarta Selatan</span><span>🛏️ 2 KT</span><span>📐 45 m²</span></div></div></div></div>
-            <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label unggul">Unggulan</span></div><div class="isi-kartu"><div class="harga">Rp 1,2 Miliar</div><h4 class="judul-prop">Rumah Minimalis di Depok</h4><div class="meta-prop"><span>📍 Depok</span><span>🛏️ 3 KT</span><span>📐 120 m²</span></div></div></div></div>
-        </div>
-    </div>
-    <div class="nav-slider" id="navProp">
-        <button class="tombol-nav aktif"></button>
-        <button class="tombol-nav"></button>
-    </div>
-</section>
-
 <!-- 🖥️ SLIDER TESTIMONI -->
-<section class="bagian-testi">
-    <div class="wadah-testi">
-        <h2 class="judul-testi">Apa Kata Mereka</h2>
-        <div class="wadah-slider-testi">
-            <div class="isi-slider-testi" id="isiSliderTesti">
-                <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨</div><div class="nama-user">Budi Santoso</div><div class="peran-user">Pembeli Rumah di BSD</div><div class="teks-testi">Sangat terbantu dengan fitur lokasi terperinci, proses beli rumah jadi jauh lebih cepat dan aman!</div></div></div>
-                <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👩</div><div class="nama-user">Siti Aisyah</div><div class="peran-user">Penjual Properti</div><div class="teks-testi">Setelah jadi member premium, listingan saya langsung banyak dilihat dan cepat laku!</div></div></div>
-                <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨‍💼</div><div class="nama-user">Ahmad Rizki</div><div class="peran-user">Agen Properti</div><div class="teks-testi">Platform paling lengkap untuk cari properti di seluruh Indonesia, antarmukanya mudah dipahami.</div></div></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 📰 BERITA KHUSUS MOBILE -->
-<section class="bagian-berita">
-    <h3 class="judul-bagian">📰 Berita & Tips Properti</h3>
-    <div class="grid-berita">
-        <a href="#" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">Cara Cek Sertifikat Tanah Resmi Secara Online</h4><div class="tgl-berita">17 Juli 2026</div></div></a>
-        <a href="#" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">5 Lokasi Properti Paling Cepat Naik Harga 2026</h4><div class="tgl-berita">15 Juli 2026</div></div></a>
-    </div>
-</section>
-
-<!-- 📄 FOOTER DESKTOP -->
-<footer>
-    <div class="wadah-footer">
-        <div class="kolom-footer"><h4>TERAVIA</h4><p>Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia</p><p style="margin-top:12px;">📍 Bogor, Jawa Barat, Indonesia</p><p>📞 +62 812-xxxx-xxxx</p><p>📧 halo@teravia.id</p></div>
-        <div class="kolom-footer"><h4>Layanan</h4><ul><li><a href="#">Cari Properti</a></li><li><a href="#">Pasang Iklan</a></li><li><a href="#">Keanggotaan</a></li><li><a href="#">Mitra Notaris/PPAT</a></li></ul></div>
-        <div class="kolom-footer"><h4>Bantuan</h4><ul><li><a href="#">Tentang Kami</a></li><li><a href="#">Blog Properti</a></li><li><a href="#">Pusat Bantuan</a></li><li><a href="#">Kebijakan Privasi</a></li><li><a href="#">Syarat & Ketentuan</a></li></ul></div>
-        <div class="kolom-footer"><h4>Ikuti Kami</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Twitter/X</a></li><li><a href="#">LinkedIn</a></li></ul></div>
-    </div>
-    <div class="hak-cipta">© 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</div>
-</footer>
-
-<script>
-// === FUNGSI MENU HAMBURGER ===
-const tombolMenu = document.getElementById('tombolMenu');
-const menuMobile = document.getElementById('menuMobile');
-tombolMenu.addEventListener('click', () => {
-    menuMobile.classList.toggle('buka');
-});
-// Tutup menu jika klik tautan
-menuMobile.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        menuMobile.classList.remove('buka');
-    });
-});
-
-// === SLIDER MOBILE ===
-const sliderMob = document.getElementById('isiSliderMob');
-const dotsMob = document.querySelectorAll('#indikatorMob .dot');
-let idxMob = 0;
-const totalMob = dotsMob.length;
-function gantiSlideMob() { idxMob = (idxMob +1) % totalMob; updateMob(); }
-function updateMob() { sliderMob.style.transform = `translateX(-${idxMob * 100}%)`; dotsMob.forEach((d,i) => d.classList.toggle('aktif', i === idxMob)); }
-setInterval(gantiSlideMob, 4000);
-
-// === SLIDER PROPERTI DESKTOP ===
-const sliderProp = document.getElementById('isiSliderProp');
-const navProp = document.querySelectorAll('#navProp .tombol-nav');
-let idxProp = 0;
-const totalProp = 2;
-function gantiSlideProp() { idxProp = (idxProp +1) % totalProp; updateProp(); }
-function updateProp() { sliderProp.style.transform = `translateX(-${idxProp * 50}%)`; navProp.forEach((d,i) => d.classList.toggle('aktif', i === idxProp)); }
-setInterval(gantiSlideProp, 4500);
-
-// === SLIDER TESTIMONI DESKTOP ===
-const sliderTesti = document.getElementById('isiSliderTesti');
-let idxTesti = 0;
-const totalTesti = 3;
-function gantiSlideTesti() { idxTesti = (idxTesti +1) % totalTesti; updateTesti(); }
-function updateTesti() { sliderTesti.style.transform = `translateX(-${idxTesti * 33.333}%)`; }
-setInterval(gantiSlideTesti, 5000);
-</script>
-</body>
-</html>
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
-                                                                                                                                       
+ <section class="bagian-testi">
+     <div class="wadah-testi">
+         <h2 class="judul-testi">Apa Kata Mereka</h2>
+         <div class="wadah-slider-testi">
+             <div class="isi-slider-testi" id="isiSliderTesti">
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨</div><div class="nama-user">Budi Santoso</div><div class="peran-user">Pembeli Rumah di BSD</div><div class="teks-testi">Sangat terbantu dengan fitur lokasi terperinci, proses beli rumah jadi jauh lebih cepat dan aman!</div></div></div>
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👩</div><div class="nama-user">Siti Aisyah</div><div class="peran-user">Penjual Properti</div><div class="teks-testi">Setelah jadi member premium, listingan saya langsung banyak dilihat dan cepat laku!</div></div></div>
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨‍💼</div><div class="nama-user">Ahmad Rizki</div><div class="peran-user">Agen Properti</div><div class="teks-testi">Platform paling lengkap untuk cari properti di seluruh Indonesia, antarmukanya mudah dipahami.</div></div></div>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!-- 📰 BERITA KHUSUS MOBILE -->
+ <section class="bagian-berita">
+     <h3 class="judul-bagian">📰 Berita & Tips Properti</h3>
+     <div class="grid-berita">
+         <a href="blog.html" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">Cara Cek Sertifikat Tanah Resmi Secara Online</h4><div class="tgl-berita">17 Juli 2026</div></div></a>
+         <a href="blog.html" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">5 Lokasi Properti Paling Cepat Naik Harga 2026</h4><div class="tgl-berita">15 Juli 2026</div></div></a>
+     </div>
+ </section>
+ <!-- 📄 FOOTER DESKTOP -->
+ <footer>
+     <div class="wadah-footer">
+         <div class="kolom-footer"><h4>TERAVIA</h4><p>Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia</p><p style="margin-top:12px;">📍 Bogor, Jawa Barat, Indonesia</p><p>📞 +62 812-xxxx-xxxx</p><p>📧 halo@teravia.id</p></div>
+         <div class="kolom-footer"><h4>Layanan</h4><ul><li><a href="daftar-properti.html">Cari Properti</a></li><li><a href="pages/pasang-iklan.html">Pasang Iklan</a></li><li><a href="register.html">Keanggotaan</a></li><li><a href="mitra-notaris.html">Mitra Notaris/PPAT</a></li></ul></div>
+         <div class="kolom-footer"><h4>Bantuan</h4><ul><li><a href="tentang.html">Tentang Kami</a></li><li><a href="blog.html">Blog Properti</a></li><li><a href="#">Pusat Bantuan</a></li><li><a href="#">Kebijakan Privasi</a></li><li><a href="#">Syarat & Ketentuan</a></li></ul></div>
+         <div class="kolom-footer"><h4>Ikuti Kami</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Twitter/X</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+     </div>
+     <div class="hak-cipta">© 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</div>
+ </footer>
+ <script>
+ // === FUNGSI MENU HAMBURGER ===
+ const tombolMenu = document.getElementById('tombolMenu');
+ const menuMobile = document.getElementById('menuMobile');
+ tombolMenu.addEventListener('click', () => {
+     menuMobile.classList.toggle('buka');
+ });
+ menuMobile.querySelectorAll('a').forEach(link => {
+     link.addEventListener('click', () => {
+         menuMobile.classList.remove('buka');
+     });
+ });
+ // === SLIDER MOBILE ===
+ const sliderMob = document.getElementById('isiSliderMob');
+ const dotsMob = document.querySelectorAll('#indikatorMob .dot');
+ let idxMob = 0;
+ const totalMob = dotsMob.length;
+ function gantiSlideMob() { idxMob = (idxMob +1) % totalMob; updateMob(); }
+ function updateMob() { sliderMob.style.transform = `translateX(-${idxMob * 100}%)`; dotsMob.forEach((d,i) => d.classList.toggle('aktif', i === idxMob)); }
+ setInterval(gantiSlideMob, 4000);
+ // === SLIDER PROPERTI DESKTOP ===
+ const sliderProp = document.getElementById('isiSliderProp');
+ const navProp = document.querySelectorAll('#navProp .tombol-nav');
+ let idxProp = 0;
+ const totalProp = 2;
+ function gantiSlideProp() { idxProp = (idxProp +1) % totalProp; updateProp(); }
+ function updateProp() { sliderProp.style.transform = `translateX(-${idxProp * 50}%)`; navProp.forEach((d,i) => d.classList.toggle('aktif', i === idxProp)); }
+ setInterval(gantiSlideProp, 4500);
+ // === SLIDER TESTIMONI DESKTOP ===
+ const sliderTesti = document.getElementById('isiSliderTesti');
+ let idxTesti = 0;
+ const totalTesti = 3;
+ function gantiSlideTesti() { idxTesti = (idxTesti +1) % totalTesti; updateTesti(); }
+ function updateTesti() { sliderTesti.style.transform = `translateX(-${idxTesti * 33.333}%)`; }
+ setInterval(gantiSlideTesti, 5000);
+ </script>
+ </body>
+ </html>
