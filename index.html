@@ -162,17 +162,21 @@
             font-weight: bold;
         }
 
-        /* === RESPONSIVE BREAKPOINT FOR MOBILE VIEW === */
-        @media (max-width: 768px) {
-            .menu-desktop { display: none; }
-            .bottom-nav { display: flex; }
-            .navbar { position: static; }
-            .wadah-nav { justify-content: center; } /* Logo di tengah ala aplikasi native */
-        }
-        @media (min-width: 769px) {
-            .kontainer-app { max-width: 1200px; } /* Lebarkan konten kembali jika di desktop */
-            .grid-lokasi { grid-template-columns: repeat(8, 1fr); } /* Tampilan grid lebih luas di PC */
-        }
+        /* === RESPONSIVE BREAKPOINT FOR MOBILE & TABLET VIEW === */
+     @media (max-width: 1024px) {
+    .menu-desktop { display: none; }
+    .bottom-nav { display: flex; }
+    .navbar { position: static; }
+    .wadah-nav { justify-content: center; } /* Logo di tengah ala aplikasi native */
+    
+    /* Tambahan opsional: Di tablet, grid lokasi diubah jadi 4 kolom agar pas */
+    .grid-lokasi { grid-template-columns: repeat(4, 1fr); } 
+     }
+
+     @media (min-width: 1025px) {
+    .kontainer-app { max-width: 1200px; } /* Lebarkan konten kembali jika di desktop */
+    .grid-lokasi { grid-template-columns: repeat(8, 1fr); } /* Tampilan grid lebih luas di PC */
+     }
     </style>
 </head>
 <body>
