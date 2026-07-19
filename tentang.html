@@ -7,61 +7,101 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
+        /* === HEADER HALAMAN === */
+        .header-tentang {
+            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
+            color: white;
+            padding: 48px 16px;
+            text-align: center;
+        }
+        .header-tentang h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header-tentang p {
+            font-size: 15px;
+            opacity: 0.95;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* === WADAH UTAMA === */
         .wadah-isi {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 0 16px;
         }
-        .judul-halaman {
-            font-size: 28px;
-            color: #1E293B;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .garis-pendek {
-            width: 80px;
-            height: 3px;
-            background: var(--utama);
-            margin: 0 auto 30px;
-            border-radius: 2px;
-        }
+
+        /* === BLOK INFORMASI === */
         .blok-tentang {
             background: white;
-            padding: 24px;
+            padding: 28px;
             border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(22, 93, 255, 0.08);
+            margin-bottom: 24px;
+            border-left: 4px solid #165DFF;
+            transition: transform 0.2s;
+        }
+        .blok-tentang:hover {
+            transform: translateY(-2px);
         }
         .blok-tentang h3 {
-            color: var(--utama);
-            margin-bottom: 10px;
+            color: #165DFF;
+            margin-bottom: 12px;
             font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .blok-tentang p {
             color: #475569;
             line-height: 1.7;
             font-size: 15px;
         }
-        .daftar-nilai {
-            margin-top: 15px;
-            padding-left: 20px;
+
+        /* === NILAI & KEUNGGULAN === */
+        .grid-nilai {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 16px;
         }
-        .daftar-nilai li {
-            margin-bottom: 8px;
-            color: #475569;
+        .kartu-nilai {
+            background: #F8FAFC;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }
+        .kartu-nilai h4 {
+            color: #1E293B;
+            font-size: 16px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .kartu-nilai p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* === RESPONSIVE === */
+        @media (min-width: 768px) {
+            .header-tentang h1 { font-size: 32px; }
+            .grid-nilai { grid-template-columns: repeat(2, 1fr); }
+            .blok-tentang { padding: 32px; }
         }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM STANDAR -->
+<!-- NAVBAR SERAGAM -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
             <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
         </a>
-
-        <!-- MENU DEKSTOP LENGKAP -->
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav">Beranda</a>
             <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
@@ -71,15 +111,13 @@
             <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
             <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
         </div>
-
-        <!-- TOMBOL HAMBURGER ID SESUAI -->
         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
             <span></span><span></span><span></span>
         </button>
     </div>
 </nav>
 
-<!-- MENU SAMPING HP ID BENAR -->
+<!-- MENU SAMPING DIPERBARUI + KALKULATOR KPR -->
 <div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
     <div class="tutup-menu">
@@ -88,42 +126,64 @@
     <div class="isi-menu">
         <a href="index.html" class="tautan-menu">🏠 Beranda</a>
         <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
         <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
         <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
         <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
         <a href="tentang.html" class="tautan-menu aktif">ℹ️ Tentang Kami</a>
         <div class="garis-pemisah"></div>
         <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
-        <a href="login.html" class="tautan-menu">👤 Masuk / Daftar</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
         <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
     </div>
 </div>
 
 <!-- ISI HALAMAN -->
-<div class="wadah-isi">
-    <h1 class="judul-halaman">Tentang Teravia</h1>
-    <div class="garis-pendek"></div>
-
-    <div class="blok-tentang">
-        <h3>Apa itu Teravia?</h3>
-        <p>Teravia adalah pasar properti digital lokal Indonesia yang dirancang khusus untuk memudahkan siapa saja mencari, menjual, atau menyewakan hunian dan aset di seluruh pelosok negeri. Kami hadir untuk menghubungkan pemilik properti, agen, dan calon pembeli/penyewa dengan cara yang lebih sederhana, aman, dan terpercaya.</p>
+<main>
+    <div class="header-tentang">
+        <h1>ℹ️ Tentang Teravia</h1>
+        <p>Platform properti lokal Indonesia yang menghubungkan kebutuhan Anda dengan solusi yang tepat, aman, dan terpercaya</p>
     </div>
 
-    <div class="blok-tentang">
-        <h3>Misi Kami</h3>
-        <p>Menjadi jembatan bagi setiap keluarga dan pelaku usaha di Indonesia untuk mendapatkan akses informasi properti yang akurat, terverifikasi, dan adil tanpa batasan wilayah.</p>
-    </div>
+    <div class="wadah-isi">
+        <div class="blok-tentang">
+            <h3>🏢 Apa itu Teravia?</h3>
+            <p>Teravia adalah pasar properti digital buatan anak bangsa, dirancang khusus untuk memahami kebutuhan unik pasar Indonesia. Kami hadir untuk memudahkan siapa saja — mulai dari keluarga yang mencari hunian pertama, investor, hingga pemilik properti — untuk bertransaksi tanpa kerumitan. Kami menjembatani Anda dengan properti yang tepat, di lokasi strategis, dan dengan dukungan layanan hukum terpercaya.</p>
+        </div>
 
-    <div class="blok-tentang">
-        <h3>Nilai Utama Kami</h3>
-        <ul class="daftar-nilai">
-            <li><strong>Lokal & Mengerti Konteks:</strong> Fokus pada kebutuhan dan kondisi pasar properti Indonesia.</li>
-            <li><strong>Transparan & Terpercaya:</strong> Proses verifikasi listing dan keanggotaan yang ketat.</li>
-            <li><strong>Mudah Diakses:</strong> Tampilan ramah seluler untuk semua kalangan.</li>
-            <li><strong>Melindungi Pengguna:</strong> Bekerja sama dengan mitra notaris dan layanan hukum terpercaya.</li>
-        </ul>
+        <div class="blok-tentang">
+            <h3>🎯 Visi Kami</h3>
+            <p>Menjadi platform properti paling terpercaya dan paling banyak digunakan di Indonesia, yang membuat proses mencari, menjual, dan menyewa properti menjadi pengalaman yang menyenangkan dan bebas kekhawatiran bagi semua orang.</p>
+        </div>
+
+        <div class="blok-tentang">
+            <h3>🚀 Misi Kami</h3>
+            <p>Memberikan akses informasi properti yang akurat, terverifikasi, dan merata ke seluruh wilayah Indonesia. Menyederhanakan proses administrasi, serta menjaga keamanan setiap transaksi melalui kerja sama dengan mitra profesional seperti Notaris dan PPAT.</p>
+        </div>
+
+        <div class="blok-tentang">
+            <h3>💙 Nilai Utama Kami</h3>
+            <div class="grid-nilai">
+                <div class="kartu-nilai">
+                    <h4>🇮🇩 Berjiwa Lokal</h4>
+                    <p>Dibangun dengan pemahaman mendalam tentang kondisi, budaya, dan kebutuhan pasar properti di setiap daerah di Indonesia.</p>
+                </div>
+                <div class="kartu-nilai">
+                    <h4>✅ Terverifikasi</h4>
+                    <p>Setiap iklan dan pengguna melalui proses pengecekan agar Anda mendapatkan informasi yang benar dan dapat dipercaya.</p>
+                </div>
+                <div class="kartu-nilai">
+                    <h4>📱 Mudah Digunakan</h4>
+                    <p>Tampilan sederhana, cepat, dan bisa diakses lewat HP maupun komputer di mana saja dan kapan saja.</p>
+                </div>
+                <div class="kartu-nilai">
+                    <h4>🛡️ Aman & Adil</h4>
+                    <p>Melindungi hak penjual dan pembeli, serta menyediakan akses ke layanan hukum demi ketenangan Anda.</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</main>
 
 <!-- FOOTER SERAGAM -->
 <footer class="footer">
@@ -137,6 +197,7 @@
                 <h4>Layanan</h4>
                 <a href="daftar-properti.html">Cari Properti</a>
                 <a href="pages/pasang-iklan.html">Pasang Iklan</a>
+                <a href="kalkulator-kpr.html">Kalkulator KPR</a>
                 <a href="membership.html">Keanggotaan</a>
                 <a href="mitra-notaris.html">Mitra Notaris</a>
             </div>
@@ -153,9 +214,33 @@
     </div>
 </footer>
 
-<!-- LOGIKA MENU SATU SUMBER -->
+<!-- SCRIPT DIPASTIKAN BERFUNGSI -->
 <script src="assets/js/navbar.js"></script>
 <script src="assets/js/general.js"></script>
+<script>
+// Pengaman fungsi menu jika diperlukan
+document.addEventListener('DOMContentLoaded', function () {
+    const tombolBuka = document.getElementById('tombolMenu');
+    const tombolTutup = document.getElementById('tombolTutup');
+    const menuSamping = document.getElementById('menuMobile');
+    const latarGelap = document.getElementById('latarGelap');
+
+    function bukaMenu() {
+        menuSamping.classList.add('buka');
+        latarGelap.classList.add('tampil');
+        document.body.style.overflow = 'hidden';
+    }
+    function tutupMenu() {
+        menuSamping.classList.remove('buka');
+        latarGelap.classList.remove('tampil');
+        document.body.style.overflow = 'auto';
+    }
+
+    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
+    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
+    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
+});
+</script>
 
 </body>
 </html>
