@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#EFF6FF">
+    <title>Teravia - Pilih Wilayah</title>
+    <style>
+        /* === BASE & GLOBAL === */
+        * {
+            box-sizing: border-box; margin: 0; padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: #f8fafc; color: #1e293b; overflow-x: hidden; padding-top: 0;
+        }
+
+        /* === RUNNING TEXT === */
+        @keyframes geserKananKiri {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .running-text {
+            position: relative; width: 100%;
+            padding: 10px 16px; padding-top: calc(10px + env(safe-area-inset-top));
+            background: #EFF6FF; border-bottom: 1px solid #BFDBFE;
+            overflow: hidden; white-space: nowrap; z-index: 99999;
+        }
+        .running-text span {
+            display: inline-block; animation: geserKananKiri 24s linear infinite;
+            font-size: 12px; color: #1E40AF; font-weight: 600;
+        }
+
+        /* === NAVBAR === */
+        .navbar {
+            position: sticky; top: 0; width: 100%; z-index: 9998;
+            background: #ffffff; border-bottom: 1px solid #e2e8f0;
+        }
+        .wadah-nav {
+            padding: 14px 16px; display: flex; justify-content: center; align-items: center;
+            max-width: 1200px; margin: 0 auto; position: relative;
+        }
+        .tombol-kembali {
+            position: absolute; left: 16px; font-size: 16px; text-decoration: none; color: #475569; font-weight: 600;
+            display: none; cursor: pointer;
+        }
+        .logo { font-size: 18px; font-weight: 800; color: #165DFF; }
+        .btn-iklan-mob {
+            position: absolute; right: 16px; text-decoration: none;
+            font-size: 12px; font-weight: 700; color: #165DFF;
+            background: #E6EFFF; padding: 7px 14px; border-radius: 20px;
+            display: flex; align-items: center; gap: 3px;
+        }
+
+        /* === KONTEN WILAYAH === */
+        .konten { padding: 16px; padding-bottom: 80px; }
+        .judul-halaman { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+        .jalur-lokasi { font-size: 11px; color: #64748b; margin-bottom: 16px; }
+        .jalur-lokasi span { color: #165DFF; font-weight: 500; }
+
+        /* GRID IKON WILAYAH */
+        .grid-wilayah {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+        }
+        .kartu-wilayah {
+            background: white; border-radius: 12px; border: 1px solid #e2e8f0;
+            padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .kartu-wilayah:active { transform: scale(0.97); background: #F8FAFC; }
+        .ikon-wilayah {
+            width: 64px; height: 64px; border-radius: 50%; background: #E6EFFF;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; margin: 0 auto 10px auto; color: #165DFF;
+        }
+        .nama-wilayah { font-size: 13px; font-weight: 600; color: #1e293b; word-break: break-word; }
+        .loading { text-align: center; padding: 40px 20px; color: #64748b; font-size: 13px; }
+        .loading span { font-size: 24px; display: block; margin-bottom: 8px; }
+
+        /* HASIL PROPERTI */
+        .daftar-properti { margin-top: 20px; }
+        .kartu-properti {
+            background: white; border-radius: 12px; overflow: hidden;
+            border: 1px solid #e2e8f0; margin-bottom: 16px;
+        }
+        .gambar-properti { height: 180px; background: #e2e8f0; position: relative; }
+        .isi-kartu { padding: 14px; }
+        .harga { font-size: 16px; font-weight: 700; color: #165DFF; margin-bottom: 4px; }
+        .isi-kartu h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .lokasi { font-size: 11px; color: #64748b; }
+
+        /* === BOTTOM NAV === */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+            background: white; display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 9999; border-top: 1px solid #e2e8f0;
+            padding: 0 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; text-decoration: none;
+            color: #64748b; font-size: 10px; gap: 3px; flex: 1; text-align: center;
+            padding: 6px 2px; border-radius: 8px;
+        }
+        .nav-item.aktif { color: #165DFF; font-weight: 600; background: #EFF6FF; }
+        .nav-item span:first-child { font-size: 18px; }
+
+        /* SEMUA TINGKAT DISEMBUNYIKAN KECUALI YANG AKTIF */
+        .tingkat { display: none; }
+        .tingkat.aktif { display: block; }
+    </style>
+</head>
+<body>
+
+<!-- 📢 RUNNING TEXT -->
+<div class="running-text">
+    <span>✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis • 🤝 Diskon Notaris Pengguna Baru • 📞 Bantuan 24 Jam</span>
+</div>
+
+<!-- 🧭 NAVBAR -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <div class="tombol-kembali" id="btnKembali">← Kembali</div>
+        <div class="logo">PILIH WILAYAH</div>
+        <a href="pages/pasang-iklan.html" class="btn-iklan-mob"><span>+</span> Iklan</a>
+    </div>
+</nav>
+
+<!-- 📱 ISI SEMUA TINGKAT -->
+<div class="konten">
+
+    <!-- TINGKAT 1: SEMUA PROVINSI -->
+    <div id="hal-provinsi" class="tingkat aktif">
+        <h1 class="judul-halaman">📍 Pilih Provinsi</h1>
+        <div class="grid-wilayah" id="isiProvinsi">
+            <div class="loading"><span>⏳</span> Sedang memuat data provinsi...</div>
+        </div>
+    </div>
+
+    <!-- TINGKAT 2: KABUPATEN/KOTA -->
+    <div id="hal-kabupaten" class="tingkat">
+        <div class="jalur-lokasi">Beranda > <span id="namaProv"></span></div>
+        <h1 class="judul-halaman">Pilih Kabupaten / Kota</h1>
+        <div class="grid-wilayah" id="isiKab">
+            <div class="loading"><span>⏳</span> Memuat...</div>
+        </div>
+    </div>
+
+    <!-- TINGKAT 3: KECAMATAN -->
+    <div id="hal-kecamatan" class="tingkat">
+        <div class="jalur-lokasi">Beranda > <span id="jalurProv"></span> > <span id="jalurKab"></span></div>
+        <h1 class="judul-halaman">Pilih Kecamatan</h1>
+        <div class="grid-wilayah" id="isiKec">
+            <div class="loading"><span>⏳</span> Memuat...</div>
+        </div>
+    </div>
+
+    <!-- TINGKAT 4: KELURAHAN -->
+    <div id="hal-kelurahan" class="tingkat">
+        <div class="jalur-lokasi">Beranda > <span id="jProv"></span> > <span id="jKab"></span> > <span id="jKec"></span></div>
+        <h1 class="judul-halaman">Pilih Kelurahan / Desa</h1>
+        <div class="grid-wilayah" id="isiKel">
+            <div class="loading"><span>⏳</span> Memuat...</div>
+        </div>
+    </div>
+
+    <!-- TINGKAT 5: HASIL PROPERTI -->
+    <div id="hal-properti" class="tingkat">
+        <div class="jalur-lokasi" id="jalurLengkap"></div>
+        <h1 class="judul-halaman">Properti di Lokasi Terpilih</h1>
+        <div class="daftar-properti" id="isiProperti"></div>
+    </div>
+</div>
+
+<!-- 📱 NAVIGASI BAWAH -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item"><span>🏠</span><span>Beranda</span></a>
+    <a href="daftar-properti.html" class="nav-item aktif"><span>🔍</span><span>Cari</span></a>
+    <a href="layanan.html" class="nav-item"><span>📋</span><span>Layanan</span></a>
+    <a href="blog.html" class="nav-item"><span>📰</span><span>Blog</span></a>
+    <a href="profil.html" class="nav-item"><span>👤</span><span>Akun</span></a>
+</div>
+
+<script>
+// === ✅ API RESMI EMSIFA WILAYAH INDONESIA ===
+const API_URL = "https://www.emsifa.com/api-wilayah-indonesia/api";
+
+// === SIMPAN DATA YANG SEDANG DIPILIH ===
+let riwayat = [];
+let idProvAktif, namaProvAktif;
+let idKabAktif, namaKabAktif;
+let idKecAktif, namaKecAktif;
+const btnKembali = document.getElementById('btnKembali');
+
+// === DAFTAR IKON UNTUK PROVINSI ===
+const daftarIkon = ['🏔️','🌋','⛰️','🌲','🏝️','🌿','🚢','🏖️','🌊','🌺','🏙️','⛰️','🏝️','🏛️','🏯','🕌','🏖️','🗻','🏔️','🌳','🦜','⛏️','🏭','🛶','⛵','🌋','🏞️','🌊','🌾','🏝️','🌺','⭐','🏔️','🌄','🦋','🏞️','⛰️','🌿'];
+
+// === FUNGSI AMBIL DATA DARI EMSIFA ===
+async function ambilProvinsi() {
+    try {
+        const res = await fetch(`${API_URL}/provinces.json`);
+        if (!res.ok) throw new Error("Gagal terhubung");
+        const data = await res.json();
+        tampilkanProvinsi(data);
+    } catch (err) {
+        document.getElementById('isiProvinsi').innerHTML = `<div class="loading"><span>❌</span> Gagal memuat data, coba lagi nanti</div>`;
+        console.error("Error:", err);
+    }
+}
+
+async function ambilKabupaten(idProv) {
+    const res = await fetch(`${API_URL}/regencies/${idProv}.json`);
+    return await res.json();
+}
+
+async function ambilKecamatan(idKab) {
+    const res = await fetch(`${API_URL}/districts/${idKab}.json`);
+    return await res.json();
+}
+
+async function ambilKelurahan(idKec) {
+    const res = await fetch(`${API_URL}/villages/${idKec}.json`);
+    return await res.json();
+}
+
+// === TAMPILKAN DALAM BENTUK IKON ===
+function tampilkanProvinsi(data) {
+    let html = '';
+    data.forEach((item, i) => {
+        html += `<div class="kartu-wilayah" onclick="bukaKabupaten('${item.id}','${item.name}')">
+                    <div class="ikon-wilayah">${daftarIkon[i % daftarIkon.length]}</div>
+                    <div class="nama-wilayah">${item.name}</div>
+                </div>`;
+    });
+    document.getElementById('isiProvinsi').innerHTML = html;
+}
+
+// === NAVIGASI TINGKAT WILAYAH ===
+async function bukaKabupaten(id, nama) {
+    idProvAktif = id; namaProvAktif = nama;
+    riwayat.push('kabupaten');
+    sembunyikanSemua();
+    btnKembali.style.display = 'block';
+    document.getElementById('namaProv').textContent = nama;
+    document.getElementById('isiKab').innerHTML = `<div class="loading"><span>⏳</span> Memuat...</div>`;
+    document.getElementById('hal-kabupaten').classList.add('aktif');
+
+    const data = await ambilKabupaten(id);
+    let html = '';
+    data.forEach(item => {
+        html += `<div class="kartu-wilayah" onclick="bukaKecamatan('${item.id}','${item.name}')">
+                    <div class="ikon-wilayah">🏢</div>
+                    <div class="nama-wilayah">${item.name}</div>
+                </div>`;
+    });
+    document.getElementById('isiKab').innerHTML = html;
+}
+
+async function bukaKecamatan(id, nama) {
+    idKabAktif = id; namaKabAktif = nama;
+    riwayat.push('kecamatan');
+    sembunyikanSemua();
+    document.getElementById('jalurProv').textContent = namaProvAktif;
+    document.getElementById('jalurKab').textContent = nama;
+    document.getElementById('isiKec').innerHTML = `<div class="loading"><span>⏳</span> Memuat...</div>`;
+    document.getElementById('hal-kecamatan').classList.add('aktif');
+
+    const data = await ambilKecamatan(id);
+    let html = '';
+    data.forEach(item => {
+        html += `<div class="kartu-wilayah" onclick="bukaKelurahan('${item.id}','${item.name}')">
+                    <div class="ikon-wilayah">🏡</div>
+                    <div class="nama-wilayah">${item.name}</div>
+                </div>`;
+    });
+    document.getElementById('isiKec').innerHTML = html;
+}
+
+async function bukaKelurahan(id, nama) {
+    idKecAktif = id; namaKecAktif = nama;
+    riwayat.push('kelurahan');
+    sembunyikanSemua();
+    document.getElementById('jProv').textContent = namaProvAktif;
+    document.getElementById('jKab').textContent = namaKabAktif;
+    document.getElementById('jKec').textContent = nama;
+    document.getElementById('isiKel').innerHTML = `<div class="loading"><span>⏳</span> Memuat...</div>`;
+    document.getElementById('hal-kelurahan').classList.add('aktif');
+
+    const data = await ambilKelurahan(id);
+    let html = '';
+    data.forEach(item => {
+        html += `<div class="kartu-wilayah" onclick="tampilkanProperti('${item.name}')">
+                    <div class="ikon-wilayah">📍</div>
+                    <div class="nama-wilayah">${item.name}</div>
+                </div>`;
+    });
+    document.getElementById('isiKel').innerHTML = html;
+}
+
+function tampilkanProperti(namaKel) {
+    riwayat.push('properti');
+    sembunyikanSemua();
+    document.getElementById('jalurLengkap').innerHTML = `Beranda > ${namaProvAktif} > ${namaKabAktif} > ${namaKecAktif} > <span>${namaKel}</span>`;
+    
+    // === HUBUNGKAN KE SUPABASE DISINI ===
+    // const { data, error } = await supabase
+    //   .from('properti')
+    //   .select('*')
+    //   .eq('provinsi', namaProvAktif)
+    //   .eq('kabupaten', namaKabAktif)
+    //   .eq('kecamatan', namaKecAktif)
+    //   .eq('kelurahan', namaKel);
+    
+    document.getElementById('isiProperti').innerHTML = `
+        <div class="kartu-properti">
+            <div class="gambar-properti"></div>
+            <div class="isi-kartu">
+                <div class="harga">Rp ...</div>
+                <h4>Properti di ${namaKel}</h4>
+                <div class="lokasi">📍 ${namaKel}, ${namaKecAktif}, ${namaKabAktif}, ${namaProvAktif}</div>
+            </div>
+        </div>
+    `;
+    document.getElementById('hal-properti').classList.add('aktif');
+}
+
+// === TOMBOL KEMBALI ===
+btnKembali.addEventListener('click', () => {
+    riwayat.pop();
+    const tuju = riwayat.length ? riwayat[riwayat.length-1] : 'provinsi';
+    sembunyikanSemua();
+    
+    if(tuju === 'provinsi') {
+        document.getElementById('hal-provinsi').classList.add('aktif');
+        btnKembali.style.display = 'none';
+        riwayat = [];
+    } else {
+        document.getElementById(`hal-${tuju}`).classList.add('aktif');
+    }
+});
+
+function sembunyikanSemua() {
+    document.querySelectorAll('.tingkat').forEach(el => el.classList.remove('aktif'));
+}
+
+// === MULAI ===
+window.addEventListener('load', () => {
+    ambilProvinsi();
+});
+</script>
+</body>
+</html>
+
