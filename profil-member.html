@@ -21,6 +21,7 @@
             border-radius: 16px;
             padding: 28px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
         }
         .judul-profil {
             font-size: 22px;
@@ -53,18 +54,21 @@
         .paket-residence { background: #F59E0B; }
         .paket-estate { background: #8B5CF6; }
 
-        .tombol-keluar {
+        .menu-akun { display: flex; flex-direction: column; gap: 10px; }
+        .tombol-menu {
             width: 100%;
             padding: 12px;
-            margin-top: 24px;
-            background: #EF4444;
-            color: white;
             border: none;
             border-radius: 10px;
-            font-size: 15px; font-weight: 600;
+            font-size: 15px; font-weight: 500;
             cursor: pointer;
+            text-align: left;
+            transition: 0.2s;
         }
-        .tombol-keluar:hover { background: #DC2626; }
+        .tombol-menu.utama { background: #165DFF; color: white; }
+        .tombol-menu.biasa { background: #F1F5F9; color: #1E293B; }
+        .tombol-menu.merah { background: #FEE2E2; color: #DC2626; }
+        .tombol-menu:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -73,18 +77,22 @@
     <div class="wadah-profil">
         <div class="kartu-profil">
             <h1 class="judul-profil">👤 Profil Anggota Teravia</h1>
+            <div id="isiProfil"></div>
+        </div>
 
-            <div id="isiProfil">
-                <!-- Data dimuat otomatis -->
+        <div class="kartu-profil">
+            <h3 style="margin-bottom:16px;">Menu Akun</h3>
+            <div class="menu-akun">
+                <button class="tombol-menu biasa" onclick="window.location.href='ganti-password.html'">🔒 Ganti Kata Sandi</button>
+                <button class="tombol-menu utama" onclick="window.location.href='membership.html'">⬆️ Upgrade Keanggotaan</button>
+                <button class="tombol-menu biasa" onclick="cekBisaPasangIklan()">📢 Pasang Iklan Properti</button>
+                <button class="tombol-menu merah" onclick="keluarAkun()">🚪 Keluar dari Akun</button>
             </div>
-
-            <button id="tombolKeluar" class="tombol-keluar">Keluar dari Akun</button>
         </div>
     </div>
 </main>
 
 <script>
-// Cek status login
 const dataAkun = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
 
 if (!dataAkun) {
@@ -96,8 +104,6 @@ if (!dataAkun) {
 
 function tampilkanProfil() {
     const wadah = document.getElementById('isiProfil');
-    
-    // Warna lencana paket sesuai jenis
     let kelasLencana = 'paket-gratis';
     if (dataAkun.jenisKeanggotaan === 'Kaveling') kelasLencana = 'paket-kaveling';
     if (dataAkun.jenisKeanggotaan === 'Cluster') kelasLencana = 'paket-cluster';
@@ -105,38 +111,28 @@ function tampilkanProfil() {
     if (dataAkun.jenisKeanggotaan === 'Estate') kelasLencana = 'paket-estate';
 
     wadah.innerHTML = `
-        <div class="baris-data">
-            <span class="label">Nama Lengkap</span>
-            <span class="nilai">${dataAkun.namaLengkap}</span>
-        </div>
-        <div class="baris-data">
-            <span class="label">Nomor HP</span>
-            <span class="nilai">${dataAkun.nomorHp}</span>
-        </div>
-        <div class="baris-data">
-            <span class="label">Email</span>
-            <span class="nilai">${dataAkun.email}</span>
-        </div>
-        <div class="baris-data">
-            <span class="label">Tanggal Daftar</span>
-            <span class="nilai">${dataAkun.tanggalDaftar}</span>
-        </div>
-        <div class="baris-data">
-            <span class="label">Jenis Keanggotaan</span>
-            <span class="nilai"><span class="lencana-paket ${kelasLencana}">${dataAkun.jenisKeanggotaan}</span></span>
-        </div>
+        <div class="baris-data"><span class="label">Nama Lengkap</span><span class="nilai">${dataAkun.namaLengkap}</span></div>
+        <div class="baris-data"><span class="label">Email</span><span class="nilai">${dataAkun.email}</span></div>
+        <div class="baris-data"><span class="label">Keanggotaan</span><span class="nilai"><span class="lencana-paket ${kelasLencana}">${dataAkun.jenisKeanggotaan}</span></span></div>
     `;
 }
 
-// Logika keluar akun
-document.getElementById('tombolKeluar').addEventListener('click', () => {
+// ✅ ATURAN: HANYA BISA PASANG IKLAN JIKA SUDAH PUNYA PAKET (BUKAN GRATIS)
+function cekBisaPasangIklan() {
+    if (dataAkun.jenisKeanggotaan === 'Gratis') {
+        alert('⚠️ Silakan upgrade keanggotaan terlebih dahulu untuk bisa memasang iklan!');
+        return window.location.href = 'membership.html';
+    }
+    window.location.href = 'pages/pasang-iklan.html';
+}
+
+function keluarAkun() {
     if (confirm('Yakin ingin keluar?')) {
         localStorage.removeItem('sesiTeravia');
         window.location.href = 'index.html';
     }
-});
+}
 </script>
 
 </body>
 </html>
-
