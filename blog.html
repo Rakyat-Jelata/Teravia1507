@@ -79,13 +79,6 @@
             position: relative;
             overflow: hidden;
         }
-        .gambar-blog::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(0px);
-        }
         .isi-blog {
             padding: 20px;
         }
@@ -161,7 +154,7 @@
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM -->
+<!-- NAVBAR DENGAN ID YANG SESUAI SCRIPT -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
@@ -176,13 +169,14 @@
             <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
             <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
         </div>
+        <!-- TOMBOL HAMBURGER DENGAN ID YANG WAJIB SESUAI -->
         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
             <span></span><span></span><span></span>
         </button>
     </div>
 </nav>
 
-<!-- MENU SAMPING DIPERBARUI + KALKULATOR KPR -->
+<!-- MENU SAMPING DENGAN ID YANG SESUAI + KALKULATOR KPR -->
 <div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
     <div class="tutup-menu">
@@ -221,11 +215,10 @@
                         <span class="tanggal-blog">📅 17 Juli 2026</span>
                     </div>
                     <h3 class="judul-blog">7 Hal Wajib Dicek Sebelum Membeli Rumah Pertama</h3>
-                    <p class="ringkas-blog">Panduan lengkap bagi pemula agar tidak salah beli, mulai dari legalitas hingga kondisi bangunan untuk menghindari kerugian di kemudian hari...</p>
+                    <p class="ringkas-blog">Panduan lengkap bagi pemula agar tidak salah beli, mulai dari legalitas hingga kondisi bangunan...</p>
                     <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
                 </div>
             </div>
-
             <div class="kartu-blog">
                 <div class="gambar-blog">📷 Peta Harga Tanah Jabodetabek</div>
                 <div class="isi-blog">
@@ -234,11 +227,10 @@
                         <span class="tanggal-blog">📅 15 Juli 2026</span>
                     </div>
                     <h3 class="judul-blog">Tren Harga Tanah di Jabodetabek 2026</h3>
-                    <p class="ringkas-blog">Wilayah mana yang masih terjangkau dan berpotensi naik nilainya dalam 1-2 tahun ke depan? Simak analisis lengkapnya di sini...</p>
+                    <p class="ringkas-blog">Wilayah mana yang masih terjangkau dan berpotensi naik nilainya dalam 1-2 tahun ke depan...</p>
                     <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
                 </div>
             </div>
-
             <div class="kartu-blog">
                 <div class="gambar-blog">📷 Tips Pasang Iklan</div>
                 <div class="isi-blog">
@@ -247,46 +239,7 @@
                         <span class="tanggal-blog">📅 10 Juli 2026</span>
                     </div>
                     <h3 class="judul-blog">Cara Memasang Iklan Properti Agar Cepat Dilirik</h3>
-                    <p class="ringkas-blog">Trik menulis judul menarik, memilih foto terbaik, dan menentukan harga kompetitif agar iklan Anda tampil di halaman teratas...</p>
-                    <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
-                </div>
-            </div>
-
-            <div class="kartu-blog">
-                <div class="gambar-blog">📷 Perjanjian Sewa Rumah</div>
-                <div class="isi-blog">
-                    <div class="meta-blog">
-                        <span class="kategori-blog">Sewa Menyewa</span>
-                        <span class="tanggal-blog">📅 5 Juli 2026</span>
-                    </div>
-                    <h3 class="judul-blog">Panduan Sewa Rumah Jangka Panjang yang Aman</h3>
-                    <p class="ringkas-blog">Syarat perjanjian yang sah, besaran uang jaminan, dan hal penting yang harus disepakati bersama pemilik rumah...</p>
-                    <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
-                </div>
-            </div>
-
-            <div class="kartu-blog">
-                <div class="gambar-blog">📷 Panduan KPR</div>
-                <div class="isi-blog">
-                    <div class="meta-blog">
-                        <span class="kategori-blog">Keuangan</span>
-                        <span class="tanggal-blog">📅 2 Juli 2026</span>
-                    </div>
-                    <h3 class="judul-blog">Cara Mengajukan KPR Agar Disetujui Bank</h3>
-                    <p class="ringkas-blog">Dokumen apa saja yang wajib disiapkan, syarat penghasilan, dan trik agar pengajuan kredit rumah Anda tidak ditolak...</p>
-                    <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
-                </div>
-            </div>
-
-            <div class="kartu-blog">
-                <div class="gambar-blog">📷 Legalitas Sertifikat</div>
-                <div class="isi-blog">
-                    <div class="meta-blog">
-                        <span class="kategori-blog">Legalitas</span>
-                        <span class="tanggal-blog">📅 30 Juni 2026</span>
-                    </div>
-                    <h3 class="judul-blog">Perbedaan SHM, SHGB, dan AJB: Wajib Tahu!</h3>
-                    <p class="ringkas-blog">Jangan salah pilih dokumen! Ketahui perbedaan, kelebihan, dan risiko masing-masing bukti kepemilikan tanah...</p>
+                    <p class="ringkas-blog">Trik menulis judul menarik, memilih foto terbaik, dan menentukan harga kompetitif...</p>
                     <a href="#" class="tautan-baca">Baca Selengkapnya →</a>
                 </div>
             </div>
@@ -323,9 +276,32 @@
     </div>
 </footer>
 
-<!-- SCRIPT PENTING: Navbar sudah aktif berfungsi -->
+<!-- === SCRIPT DIPASTIKAN DIPANGGIL TERAKHIR DAN ID SESUAI === -->
 <script src="assets/js/navbar.js"></script>
-<script src="assets/js/general.js"></script>
+<script>
+// Tambahan pengaman jika navbar.js belum berjalan sempurna
+document.addEventListener('DOMContentLoaded', function () {
+    const tombolBuka = document.getElementById('tombolMenu');
+    const tombolTutup = document.getElementById('tombolTutup');
+    const menuSamping = document.getElementById('menuMobile');
+    const latarGelap = document.getElementById('latarGelap');
+
+    function bukaMenu() {
+        menuSamping.classList.add('buka');
+        latarGelap.classList.add('tampil');
+        document.body.style.overflow = 'hidden';
+    }
+    function tutupMenu() {
+        menuSamping.classList.remove('buka');
+        latarGelap.classList.remove('tampil');
+        document.body.style.overflow = 'auto';
+    }
+
+    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
+    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
+    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
+});
+</script>
 
 </body>
 </html>
