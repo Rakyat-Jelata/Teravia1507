@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#165DFF">
+    <title>Teravia - Layanan Kami</title>
+    <style>
+        /* === BASE & GLOBAL STYLE (SAMA DI SEMUA HALAMAN) === */
+        * {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+            padding-top: 44px; /* Ruang aman untuk running text di APK */
+        }
+
+        /* === RUNNING TEXT (SELALU SAMA DI SEMUA HALAMAN) === */
+        @keyframes geserKananKiri {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .running-text {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 10px 16px;
+            background: #EFF6FF;
+            border-bottom: 1px solid #BFDBFE;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 99999;
+        }
+        .running-text span {
+            display: inline-block;
+            animation: geserKananKiri 24s linear infinite;
+            font-size: 12px;
+            color: #1E40AF;
+            font-weight: 600;
+        }
+
+        /* === NAVBAR UTAMA (TETAP MENEMPEL SAAT SCROLL) === */
+        .navbar {
+            position: sticky;
+            top: 44px; /* Tepat di bawah running text */
+            width: 100%;
+            z-index: 9998;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .wadah-nav {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img { height: 34px; width: auto; }
+        .menu-desktop { display: flex; gap: 20px; align-items: center; }
+        .menu-desktop a { text-decoration: none; color: #475569; font-size: 13px; font-weight: 500; }
+        .menu-desktop a.aktif { color: #165DFF; font-weight: 600; }
+        .btn-pasang { background: #165DFF; color: white !important; padding: 6px 14px; border-radius: 6px; font-weight: 600; }
+        .btn-iklan-mob { display: none; text-decoration: none; font-size: 12px; font-weight: 700; color: #165DFF; background: #E6EFFF; padding: 7px 14px; border-radius: 20px; }
+
+        /* === KONTEN KHUSUS HALAMAN LAYANAN === */
+        .konten { max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px; }
+        .judul-halaman { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        .sub-judul { font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .grid-layanan { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .kartu-layanan { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .kartu-layanan .ikon { font-size: 32px; margin-bottom: 12px; }
+        .kartu-layanan h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .kartu-layanan p { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+        /* === FOOTER DESKTOP === */
+        .footer-desktop { background: #1e293b; color: #94a3b8; padding: 40px 24px 20px; font-size: 13px; margin-top: 40px; }
+        .footer-isi { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+        /* === BOTTOM NAV (KHUSUS MOBILE) === */
+        .bottom-nav { 
+            position: fixed; bottom: 0; left: 0; right: 0; height: 65px; 
+            background: white; display: none; justify-content: space-around; align-items: center; 
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 9999; border-top: 1px solid #e2e8f0;
+            padding: 0 8px;
+        }
+        .nav-item { 
+            display: flex; flex-direction: column; align-items: center; text-decoration: none; 
+            color: #64748b; font-size: 10px; gap: 3px; flex: 1; text-align: center; 
+            padding: 6px 2px; border-radius: 8px; transition: 0.2s;
+        }
+        .nav-item.aktif { color: #165DFF; font-weight: 600; background: #EFF6FF; }
+        .nav-item span:first-child { font-size: 18px; }
+
+        /* === PENYESUAIAN OTOMATIS MOBILE === */
+        @media (max-width: 768px) {
+            body { padding-bottom: 70px; }
+            /* Sembunyikan elemen desktop */
+            .menu-desktop, .footer-desktop { display: none !important; }
+            /* Tampilkan elemen mobile */
+            .btn-iklan-mob { display: flex; align-items: center; gap: 3px; }
+            .bottom-nav { display: flex; }
+            /* Sesuaikan konten */
+            .judul-halaman { font-size: 20px; }
+            .grid-layanan { grid-template-columns: 1fr; gap: 16px; }
+            .wadah-nav { justify-content: center; position: relative; }
+            .btn-iklan-mob { position: absolute; right: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 📢 RUNNING TEXT -->
+<div class="running-text">
+    <span>✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis Masa Perkenalan • 🤝 Diskon Notaris Khusus Pengguna Baru • 📞 Bantuan 24 Jam</span>
+</div>
+
+<!-- 🧭 NAVBAR -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia"></a>
+        <a href="pages/pasang-iklan.html" class="btn-iklan-mob"><span>+</span> Iklan</a>
+        <div class="menu-desktop">
+            <a href="index.html">Beranda</a>
+            <a href="daftar-properti.html">Cari Properti</a>
+            <a href="layanan.html" class="aktif">Layanan</a>
+            <a href="blog.html">Blog</a>
+            <a href="mitra-notaris.html">Mitra Notaris</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html">Masuk</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 📝 ISI HALAMAN -->
+<main class="konten">
+    <h1 class="judul-halaman">Layanan Teravia</h1>
+    <p class="sub-judul">Solusi lengkap untuk kebutuhan jual, beli, sewa, dan urusan legalitas properti di Indonesia</p>
+
+    <div class="grid-layanan">
+        <div class="kartu-layanan">
+            <div class="ikon">🏡</div>
+            <h3>Cari & Temukan Properti</h3>
+            <p>Akses ribuan daftar rumah, apartemen, tanah, dan ruko terpercaya di seluruh Indonesia dengan filter pencarian canggih.</p>
+        </div>
+        <div class="kartu-layanan">
+            <div class="ikon">📢</div>
+            <h3>Pasang Iklan Gratis</h3>
+            <p>Pasang iklan properti kamu secara gratis, tampil lebih menonjol dengan fitur unggulan untuk menjual lebih cepat.</p>
+        </div>
+        <div class="kartu-layanan">
+            <div class="ikon">📜</div>
+            <h3>Bantuan Legalitas & Notaris</h3>
+            <p>Bekerja sama dengan notaris & PPAT terpercaya untuk memastikan transaksi aman, sah, dan sesuai hukum.</p>
+        </div>
+        <div class="kartu-layanan">
+            <div class="ikon">💡</div>
+            <h3>Konsultasi Properti</h3>
+            <p>Dapatkan panduan harga, tips investasi, dan saran ahli sebelum kamu memutuskan membeli atau menjual.</p>
+        </div>
+        <div class="kartu-layanan">
+            <div class="ikon">🔒</div>
+            <h3>Transaksi Aman</h3>
+            <p>Sistem perlindungan data dan proses pembayaran yang terjamin keamanannya untuk kedua belah pihak.</p>
+        </div>
+        <div class="kartu-layanan">
+            <div class="ikon">📱</div>
+            <h3>Akses Dimana Saja</h3>
+            <p>Pantau iklan, balas pesan, dan kelola properti kamu kapan saja lewat web maupun aplikasi Teravia.</p>
+        </div>
+    </div>
+</main>
+
+<!-- 📄 FOOTER DESKTOP -->
+<footer class="footer-desktop">
+    <div class="footer-isi">
+        <p>© 2026 Teravia - Marketplace Properti Indonesia. Semua Hak Dilindungi.</p>
+    </div>
+</footer>
+
+<!-- 📱 NAVIGASI BAWAH MOBILE -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item"><span>🏠</span><span>Beranda</span></a>
+    <a href="daftar-properti.html" class="nav-item"><span>🔍</span><span>Cari</span></a>
+    <a href="layanan.html" class="nav-item aktif"><span>📋</span><span>Layanan</span></a>
+    <a href="blog.html" class="nav-item"><span>📰</span><span>Blog</span></a>
+    <a href="profil.html" class="nav-item"><span>👤</span><span>Akun</span></a>
+</div>
+
+</body>
+</html>
+
