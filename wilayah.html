@@ -3,123 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Wilayah - Teravia</title>
+    <title>Pilih Provinsi - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
-        /* === HEADER HALAMAN === */
-        .header-wilayah {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
+
+        /* === HEADER === */
+        .atas-halaman {
             background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
             color: white;
-            padding: 40px 16px;
+            padding: 32px 16px;
             text-align: center;
         }
-        .header-wilayah h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .header-wilayah p {
-            font-size: 15px;
-            opacity: 0.95;
-            max-width: 550px;
-            margin: 0 auto;
-        }
+        .atas-halaman h1 { font-size: 22px; margin-bottom: 4px; }
+        .atas-halaman p { font-size: 14px; opacity: 0.9; }
 
         /* === WADAH UTAMA === */
-        .wadah-wilayah {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 16px;
+        .wadah {
+            max-width: 720px;
+            margin: 24px auto;
+            padding: 0 12px;
         }
         .judul-bagian {
-            font-size: 18px;
-            color: #1E293B;
+            font-size: 16px;
+            font-weight: 600;
             margin-bottom: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding-left: 4px;
+            border-left: 3px solid #165DFF;
         }
 
-        /* === GRID DAFTAR WILAYAH === */
-        .grid-wilayah {
+        /* === GRID PROVINSI === */
+        .grid-provinsi {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
-        .kartu-wilayah {
+        .kartu-provinsi {
             background: white;
             border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 16px 12px;
+            text-align: center;
             text-decoration: none;
             color: inherit;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             transition: all 0.2s ease;
             border: 1px solid #F1F5F9;
             position: relative;
             z-index: 1;
             cursor: pointer;
         }
-        .kartu-wilayah:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(22, 93, 255, 0.12);
+        .kartu-provinsi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(22, 93, 255, 0.1);
             border-color: #165DFF;
             background: #F8FAFF;
         }
-        .ikon-wilayah {
-            font-size: 24px;
-            flex-shrink: 0;
+        .ikon-provinsi {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
         }
-        .nama-wilayah {
-            font-size: 14px;
+        .nama-provinsi {
+            font-size: 13px;
             font-weight: 500;
-            color: #1E293B;
-        }
-        .jumlah-properti {
-            font-size: 11px;
-            color: #94A3B8;
-            margin-left: auto;
-        }
-
-        /* === WILAYAH POPULER === */
-        .wilayah-populer .kartu-wilayah {
-            background: #F0F7FF;
-            border-color: #BFDBFE;
+            line-height: 1.4;
+            display: block;
         }
 
         /* === RESPONSIVE === */
-        @media (max-width: 576px) {
-            .grid-wilayah {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            .kartu-wilayah { padding: 12px; }
-            .nama-wilayah { font-size: 13px; }
+        @media (min-width: 768px) {
+            .grid-provinsi { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .kartu-provinsi { padding: 20px 16px; }
+            .nama-provinsi { font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM -->
+<!-- NAVBAR -->
 <nav class="navbar">
     <div class="wadah-nav">
-        <a href="index.html" class="logo">
-            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
-        </a>
+        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia" style="height:32px;"></a>
         <div class="menu-desktop">
             <a href="index.html" class="tautan-nav">Beranda</a>
-            <a href="daftar-properti.html" class="tautan-nav aktif">Cari Properti</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
             <a href="kalkulator-kpr.html" class="tautan-nav">🧮 Kalkulator KPR</a>
-            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
-            <a href="blog.html" class="tautan-nav">Blog Properti</a>
-            <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
+            <a href="membership.html" class="tautan-nav">💎 Keanggotaan</a>
             <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <a href="login.html" class="tautan-nav">👤 Masuk / Daftar</a>
+            <a href="login.html" class="tautan-nav">👤 Masuk</a>
         </div>
         <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
             <span></span><span></span><span></span>
@@ -127,201 +99,218 @@
     </div>
 </nav>
 
-<!-- MENU SAMPING LENGKAP -->
+<!-- MENU MOBILE -->
 <div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
-    <div class="tutup-menu">
-        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
-    </div>
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup">✕</button></div>
     <div class="isi-menu">
         <a href="index.html" class="tautan-menu">🏠 Beranda</a>
-        <a href="daftar-properti.html" class="tautan-menu aktif">🔍 Cari Properti</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
         <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
         <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
-        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
-        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
-        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
-        <div class="garis-pemisah"></div>
-        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan</a>
         <a href="login.html" class="tautan-menu">👤 Masuk</a>
-        <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
     </div>
 </div>
 
-<!-- ISI HALAMAN -->
 <main>
-    <div class="header-wilayah">
-        <h1>📍 Pilih Wilayah Properti</h1>
-        <p>Temukan properti impian di seluruh wilayah Indonesia</p>
+    <div class="atas-halaman">
+        <h1>📍 Pilih Provinsi</h1>
+        <p>Pilih wilayah untuk melihat daftar properti</p>
     </div>
 
-    <div class="wadah-wilayah">
-        <!-- WILAYAH POPULER -->
-        <h3 class="judul-bagian">🔥 Wilayah Paling Dicari</h3>
-        <div class="grid-wilayah wilayah-populer">
-            <a href="daftar-properti.html?wilayah=jabodetabek" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏙️</span>
-                <span class="nama-wilayah">Jabodetabek</span>
-                <span class="jumlah-properti">2.450+</span>
+    <div class="wadah">
+        <h2 class="judul-bagian">Semua Provinsi Indonesia</h2>
+        <div class="grid-provinsi">
+            <!-- SUMATERA -->
+            <a href="wilayah/kabupaten-aceh.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏔️</span>
+                <span class="nama-provinsi">Aceh</span>
             </a>
-            <a href="daftar-properti.html?wilayah=bandung" class="kartu-wilayah">
-                <span class="ikon-wilayah">⛰️</span>
-                <span class="nama-wilayah">Bandung Raya</span>
-                <span class="jumlah-properti">980+</span>
+            <a href="wilayah/kabupaten-sumatera-utara.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌲</span>
+                <span class="nama-provinsi">Sumatera Utara</span>
             </a>
-            <a href="daftar-properti.html?wilayah=surabaya" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌊</span>
-                <span class="nama-wilayah">Surabaya</span>
-                <span class="jumlah-properti">870+</span>
+            <a href="wilayah/kabupaten-sumatera-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⛰️</span>
+                <span class="nama-provinsi">Sumatera Barat</span>
             </a>
-            <a href="daftar-properti.html?wilayah=bali" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏖️</span>
-                <span class="nama-wilayah">Bali</span>
-                <span class="jumlah-properti">760+</span>
+            <a href="wilayah/kabupaten-riau.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🛢️</span>
+                <span class="nama-provinsi">Riau</span>
             </a>
-        </div>
+            <a href="wilayah/kabupaten-kepulauan-riau.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⛵</span>
+                <span class="nama-provinsi">Kepulauan Riau</span>
+            </a>
+            <a href="wilayah/kabupaten-jambi.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌿</span>
+                <span class="nama-provinsi">Jambi</span>
+            </a>
+            <a href="wilayah/kabupaten-sumatera-selatan.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏞️</span>
+                <span class="nama-provinsi">Sumatera Selatan</span>
+            </a>
+            <a href="wilayah/kabupaten-bangka-belitung.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌊</span>
+                <span class="nama-provinsi">Kepulauan Bangka Belitung</span>
+            </a>
+            <a href="wilayah/kabupaten-bengkulu.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌴</span>
+                <span class="nama-provinsi">Bengkulu</span>
+            </a>
+            <a href="wilayah/kabupaten-lampung.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌾</span>
+                <span class="nama-provinsi">Lampung</span>
+            </a>
 
-        <!-- DAFTAR SELURUH PROVINSI -->
-        <h3 class="judul-bagian">🇮🇩 Semua Provinsi</h3>
-        <div class="grid-wilayah">
-            <a href="daftar-properti.html?wilayah=aceh" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏔️</span>
-                <span class="nama-wilayah">Aceh</span>
+            <!-- JAWA -->
+            <a href="wilayah/kabupaten-banten.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏗️</span>
+                <span class="nama-provinsi">Banten</span>
             </a>
-            <a href="daftar-properti.html?wilayah=sumut" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌲</span>
-                <span class="nama-wilayah">Sumatera Utara</span>
+            <a href="wilayah/kabupaten-dki-jakarta.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏛️</span>
+                <span class="nama-provinsi">DKI Jakarta</span>
             </a>
-            <a href="daftar-properti.html?wilayah=sumbar" class="kartu-wilayah">
-                <span class="ikon-wilayah">⛰️</span>
-                <span class="nama-wilayah">Sumatera Barat</span>
+            <a href="wilayah/kabupaten-jawa-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏡</span>
+                <span class="nama-provinsi">Jawa Barat</span>
             </a>
-            <a href="daftar-properti.html?wilayah=riau" class="kartu-wilayah">
-                <span class="ikon-wilayah">🛢️</span>
-                <span class="nama-wilayah">Riau</span>
+            <a href="wilayah/kabupaten-jawa-tengah.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⛪</span>
+                <span class="nama-provinsi">Jawa Tengah</span>
             </a>
-            <a href="daftar-properti.html?wilayah=jambi" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌿</span>
-                <span class="nama-wilayah">Jambi</span>
+            <a href="wilayah/kabupaten-di-yogyakarta.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏰</span>
+                <span class="nama-provinsi">DI Yogyakarta</span>
             </a>
-            <a href="daftar-properti.html?wilayah=sumsel" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏞️</span>
-                <span class="nama-wilayah">Sumatera Selatan</span>
+            <a href="wilayah/kabupaten-jawa-timur.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌽</span>
+                <span class="nama-provinsi">Jawa Timur</span>
             </a>
-            <a href="daftar-properti.html?wilayah=bengkulu" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌊</span>
-                <span class="nama-wilayah">Bengkulu</span>
+
+            <!-- KALIMANTAN -->
+            <a href="wilayah/kabupaten-kalimantan-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌳</span>
+                <span class="nama-provinsi">Kalimantan Barat</span>
             </a>
-            <a href="daftar-properti.html?wilayah=lampung" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌾</span>
-                <span class="nama-wilayah">Lampung</span>
+            <a href="wilayah/kabupaten-kalimantan-tengah.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏕️</span>
+                <span class="nama-provinsi">Kalimantan Tengah</span>
             </a>
-            <a href="daftar-properti.html?wilayah=banten" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏗️</span>
-                <span class="nama-wilayah">Banten</span>
+            <a href="wilayah/kabupaten-kalimantan-selatan.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🚢</span>
+                <span class="nama-provinsi">Kalimantan Selatan</span>
             </a>
-            <a href="daftar-properti.html?wilayah=dki" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏛️</span>
-                <span class="nama-wilayah">DKI Jakarta</span>
+            <a href="wilayah/kabupaten-kalimantan-timur.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏭</span>
+                <span class="nama-provinsi">Kalimantan Timur</span>
             </a>
-            <a href="daftar-properti.html?wilayah=jabar" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏡</span>
-                <span class="nama-wilayah">Jawa Barat</span>
+            <a href="wilayah/kabupaten-kalimantan-utara.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🦅</span>
+                <span class="nama-provinsi">Kalimantan Utara</span>
             </a>
-            <a href="daftar-properti.html?wilayah=jateng" class="kartu-wilayah">
-                <span class="ikon-wilayah">⛪</span>
-                <span class="nama-wilayah">Jawa Tengah</span>
+
+            <!-- SULAWESI -->
+            <a href="wilayah/kabupaten-sulawesi-utara.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌋</span>
+                <span class="nama-provinsi">Sulawesi Utara</span>
             </a>
-            <a href="daftar-properti.html?wilayah=di" class="kartu-wilayah">
-                <span class="ikon-wilayah">🏰</span>
-                <span class="nama-wilayah">DI Yogyakarta</span>
+            <a href="wilayah/kabupaten-gorontalo.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏞️</span>
+                <span class="nama-provinsi">Gorontalo</span>
             </a>
-            <a href="daftar-properti.html?wilayah=jatim" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌽</span>
-                <span class="nama-wilayah">Jawa Timur</span>
+            <a href="wilayah/kabupaten-sulawesi-tengah.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⛰️</span>
+                <span class="nama-provinsi">Sulawesi Tengah</span>
             </a>
-            <a href="daftar-properti.html?wilayah=kalbar" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌴</span>
-                <span class="nama-wilayah">Kalimantan Barat</span>
+            <a href="wilayah/kabupaten-sulawesi-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏖️</span>
+                <span class="nama-provinsi">Sulawesi Barat</span>
             </a>
-            <a href="daftar-properti.html?wilayah=kaltim" class="kartu-wilayah">
-                <span class="ikon-wilayah">🚢</span>
-                <span class="nama-wilayah">Kalimantan Timur</span>
+            <a href="wilayah/kabupaten-sulawesi-selatan.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⛵</span>
+                <span class="nama-provinsi">Sulawesi Selatan</span>
             </a>
-            <a href="daftar-properti.html?wilayah=sulsel" class="kartu-wilayah">
-                <span class="ikon-wilayah">⛵</span>
-                <span class="nama-wilayah">Sulawesi Selatan</span>
+            <a href="wilayah/kabupaten-sulawesi-tenggara.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌊</span>
+                <span class="nama-provinsi">Sulawesi Tenggara</span>
             </a>
-            <a href="daftar-properti.html?wilayah=ntt" class="kartu-wilayah">
-                <span class="ikon-wilayah">🌋</span>
-                <span class="nama-wilayah">Nusa Tenggara Timur</span>
+
+            <!-- NUSA TENGGARA -->
+            <a href="wilayah/kabupaten-bali.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏝️</span>
+                <span class="nama-provinsi">Bali</span>
             </a>
-            <a href="daftar-properti.html?wilayah=papua" class="kartu-wilayah">
-                <span class="ikon-wilayah">🦜</span>
-                <span class="nama-wilayah">Papua</span>
+            <a href="wilayah/kabupaten-nusa-tenggara-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🐎</span>
+                <span class="nama-provinsi">Nusa Tenggara Barat</span>
             </a>
-            <!-- Tambah provinsi lain sesuai kebutuhan -->
+            <a href="wilayah/kabupaten-nusa-tenggara-timur.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌋</span>
+                <span class="nama-provinsi">Nusa Tenggara Timur</span>
+            </a>
+
+            <!-- MALUKU & PAPUA -->
+            <a href="wilayah/kabupaten-maluku.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏝️</span>
+                <span class="nama-provinsi">Maluku</span>
+            </a>
+            <a href="wilayah/kabupaten-maluku-utara.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">⚓</span>
+                <span class="nama-provinsi">Maluku Utara</span>
+            </a>
+            <a href="wilayah/kabupaten-papua.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🦜</span>
+                <span class="nama-provinsi">Papua</span>
+            </a>
+            <a href="wilayah/kabupaten-papua-barat.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌲</span>
+                <span class="nama-provinsi">Papua Barat</span>
+            </a>
+            <a href="wilayah/kabupaten-papua-selatan.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌾</span>
+                <span class="nama-provinsi">Papua Selatan</span>
+            </a>
+            <a href="wilayah/kabupaten-papua-tengah.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏔️</span>
+                <span class="nama-provinsi">Papua Tengah</span>
+            </a>
+            <a href="wilayah/kabupaten-papua-pegunungan.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🏕️</span>
+                <span class="nama-provinsi">Papua Pegunungan</span>
+            </a>
+            <a href="wilayah/kabupaten-papua-barat-daya.html" class="kartu-provinsi">
+                <span class="ikon-provinsi">🌊</span>
+                <span class="nama-provinsi">Papua Barat Daya</span>
+            </a>
         </div>
     </div>
 </main>
 
-<!-- FOOTER SERAGAM -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
-        <div class="footer-baris">
-            <div class="footer-kolom">
-                <h3 class="footer-logo">TERAVIA</h3>
-                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa di seluruh Indonesia.</p>
-            </div>
-            <div class="footer-kolom">
-                <h4>Layanan</h4>
-                <a href="daftar-properti.html" class="aktif">Cari Properti</a>
-                <a href="pages/pasang-iklan.html">Pasang Iklan</a>
-                <a href="kalkulator-kpr.html">Kalkulator KPR</a>
-                <a href="membership.html">Keanggotaan</a>
-                <a href="mitra-notaris.html">Mitra Notaris</a>
-            </div>
-            <div class="footer-kolom">
-                <h4>Bantuan</h4>
-                <a href="tentang.html">Tentang Kami</a>
-                <a href="blog.html">Blog Properti</a>
-                <a href="ketentuan-pengguna.html">Ketentuan Pengguna</a>
-                <a href="kebijakan-listing.html">Kebijakan Listing</a>
-            </div>
-        </div>
         <div class="footer-bawah">
-            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
+            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi.</p>
         </div>
     </div>
 </footer>
 
-<!-- SCRIPT -->
 <script src="assets/js/navbar.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Fungsi menu standar
     const tombolBuka = document.getElementById('tombolMenu');
     const tombolTutup = document.getElementById('tombolTutup');
     const menuSamping = document.getElementById('menuMobile');
     const latarGelap = document.getElementById('latarGelap');
-
-    function bukaMenu() {
-        menuSamping.classList.add('buka');
-        latarGelap.classList.add('tampil');
-        document.body.style.overflow = 'hidden';
-    }
-    function tutupMenu() {
-        menuSamping.classList.remove('buka');
-        latarGelap.classList.remove('tampil');
-        document.body.style.overflow = 'auto';
-    }
-
+    function bukaMenu() { menuSamping.classList.add('buka'); latarGelap.classList.add('tampil'); document.body.style.overflow='hidden'; }
+    function tutupMenu() { menuSamping.classList.remove('buka'); latarGelap.classList.remove('tampil'); document.body.style.overflow='auto'; }
     if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
     if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
     if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
 });
 </script>
-
-</body>
-                </html>
-                                                                      
+</body>   
+</html>
