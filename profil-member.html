@@ -7,454 +7,136 @@
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
-        /* === TATA LETAK UTAMA MIRIP SHOPEE === */
-        .wadah-utama {
-            max-width: 1200px;
-            margin: 24px auto;
+        /* === TEMA DIPERTAHANKAN PERSIS === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
+
+        .wadah-profil {
+            max-width: 600px;
+            margin: 32px auto;
             padding: 0 16px;
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 20px;
         }
-
-        /* SAMPING KIRI: MENU PROFIL */
-        .menu-samping {
+        .kartu-profil {
             background: white;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 28px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
         }
-        .info-akun {
-            text-align: center;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 12px;
-        }
-        .avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: var(--utama);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
+        .judul-profil {
+            font-size: 22px;
             font-weight: 700;
-            margin: 0 auto 8px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #F1F5F9;
         }
-        .nama-akun {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-        .email-akun {
-            font-size: 13px;
-            color: #888;
-            word-break: break-all;
-        }
-        .label-paket {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .paket-kaveling { background:#f0fdf4; color:#166534; }
-        .paket-cluster { background:#eff6ff; color:#1e40af; }
-        .paket-residence { background:#fef3c7; color:#92400e; }
-        .paket-estate { background:#f0e7ff; color:#7e22ce; }
-
-        .daftar-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 8px;
-        }
-        .daftar-menu a, .daftar-menu button {
-            display: block;
-            padding: 10px 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #374151;
-            font-size: 14px;
-            text-align: left;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .daftar-menu a:hover, .daftar-menu button:hover {
-            background: #f3f4f6;
-            color: var(--utama);
-            padding-left: 16px;
-        }
-        .daftar-menu a.aktif {
-            background: #eff6ff;
-            color: var(--utama);
-            font-weight: 600;
-        }
-        .tombol-keluar {
-            color: #dc2626;
-            border-top: 1px solid #eee;
-            margin-top: 8px;
-            padding-top: 12px;
-        }
-        .tombol-keluar:hover {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
-        /* KANAN: AREA KONTEN UTAMA */
-        .area-konten {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            overflow: hidden;
-        }
-        .judul-bagian {
-            padding: 16px 20px;
-            border-bottom: 1px solid #eee;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gelap);
-        }
-        .isi-konten {
-            padding: 20px;
-        }
-
-        /* DAFTAR STATUS MIRIP TAB SHOPEE */
-        .tab-status {
-            display: flex;
-            border-bottom: 1px solid #eee;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        .tab-status::-webkit-scrollbar { display: none; }
-        .tab-status button {
-            flex: 1;
-            min-width: 90px;
-            padding: 14px 10px;
-            border: none;
-            background: white;
-            font-size: 13px;
-            font-weight: 500;
-            color: #666;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            white-space: nowrap;
-        }
-        .tab-status button.aktif {
-            color: var(--utama);
-            border-bottom-color: var(--utama);
-            font-weight: 600;
-        }
-
-        /* KARTU DAFTAR IKLAN */
-        .kartu-iklan {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-        .header-iklan {
+        .baris-data {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #f3f4f6;
+            padding: 12px 0;
+            border-bottom: 1px solid #F8FAFC;
+            font-size: 15px;
         }
-        .nama-toko {
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .label-status {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--utama);
-        }
-        .isi-iklan {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .gambar-iklan {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            background: #f3f4f6;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-        }
-        .detail-iklan {
-            flex: 1;
-            min-width: 0;
-        }
-        .judul-iklan {
-            font-size: 14px;
-            font-weight: 500;
-            color: #1f2937;
-            margin-bottom: 4px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .varian-iklan {
+        .baris-data:last-child { border: none; }
+        .label { font-weight: 500; color: #64748B; }
+        .nilai { font-weight: 600; color: #1E293B; text-align: right; }
+        .lencana-paket {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 6px;
-        }
-        .harga-iklan {
-            font-size: 16px;
             font-weight: 700;
-            color: var(--utama);
-        }
-        .total-harga {
-            text-align: right;
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        .total-harga span {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--gelap);
-        }
-        .tombol-aksi {
-            display: flex;
-            gap: 8px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-        .tombol-aksi button {
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-        }
-        .tombol-aksi .primer {
-            background: var(--utama);
             color: white;
         }
-        .tombol-aksi .sekunder {
-            border: 1px solid var(--utama);
-            color: var(--utama);
-            background: white;
-        }
-        .kosong {
-            text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
-        }
+        .paket-gratis { background: #94A3B8; }
+        .paket-kaveling { background: #10B981; }
+        .paket-cluster { background: #3B82F6; }
+        .paket-residence { background: #F59E0B; }
+        .paket-estate { background: #8B5CF6; }
 
-        /* === RESPONSIVE: SESUAIKAN HP === */
-        @media (max-width: 768px) {
-            .wadah-utama {
-                grid-template-columns: 1fr;
-                margin: 16px auto;
-            }
-            .menu-samping {
-                position: static;
-            }
-            .isi-iklan {
-                flex-direction: column;
-            }
-            .gambar-iklan {
-                width: 100%;
-                height: 140px;
-            }
-            .tombol-aksi {
-                justify-content: center;
-            }
+        .tombol-keluar {
+            width: 100%;
+            padding: 12px;
+            margin-top: 24px;
+            background: #EF4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px; font-weight: 600;
+            cursor: pointer;
         }
+        .tombol-keluar:hover { background: #DC2626; }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM -->
-<nav class="navbar">
-    <div class="wadah-nav">
-        <a href="index.html" class="logo">
-            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
-        </a>
-        <div class="menu-desktop">
-            <a href="index.html" class="tautan-nav">Beranda</a>
-            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
-            <a href="membership.html" class="tautan-nav">Keanggotaan</a>
-            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <a href="profile-member.html" class="tautan-nav aktif">👤 Akun Saya</a>
-        </div>
-        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
+<main>
+    <div class="wadah-profil">
+        <div class="kartu-profil">
+            <h1 class="judul-profil">👤 Profil Anggota Teravia</h1>
 
-<div id="latarGelap" class="latar-gelap"></div>
-<div id="menuMobile" class="menu-samping">
-    <div class="tutup-menu">
-        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
-    </div>
-    <div class="isi-menu">
-        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
-        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
-        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
-        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan</a>
-        <div class="garis-pemisah"></div>
-        <a href="profile-member.html" class="tautan-menu aktif">👤 Profil Saya</a>
-        <a href="helpdesk.html" class="tautan-menu">💬 Bantuan</a>
-        <a href="#" class="tautan-menu" onclick="keluarAkun()">🚪 Keluar</a>
-    </div>
-</div>
-
-<!-- KONTEN UTAMA MIRIP SHOPEE -->
-<div class="wadah-utama">
-    <!-- SAMPING KIRI: MENU -->
-    <aside class="menu-samping">
-        <div class="info-akun">
-            <div class="avatar" id="avatarInisial">?</div>
-            <div class="nama-akun" id="namaTampil">-</div>
-            <div class="email-akun" id="emailTampil">-</div>
-            <div class="label-paket" id="labelPaket">-</div>
-        </div>
-        <div class="daftar-menu">
-            <a href="profile-member.html" class="aktif">📋 Daftar Iklan Saya</a>
-            <a href="pages/pasang-iklan.html">📢 Pasang Iklan Baru</a>
-            <a href="membership.html">⭐ Upgrade Paket Keanggotaan</a>
-            <a href="profile-pengaturan.html">⚙️ Pengaturan Akun</a>
-            <a href="helpdesk.html">💬 Pusat Bantuan</a>
-            <button class="tombol-keluar" onclick="keluarAkun()">🚪 Keluar dari Akun</button>
-        </div>
-    </aside>
-
-    <!-- KANAN: DAFTAR IKLAN -->
-    <main class="area-konten">
-        <div class="judul-bagian">📋 Daftar Iklan Properti Saya</div>
-
-        <!-- TAB STATUS MIRIP SHOPEE -->
-        <div class="tab-status">
-            <button class="aktif">Semua</button>
-            <button>Aktif</button>
-            <button>Menunggu Verifikasi</button>
-            <button>Dijual</button>
-            <button>Disewakan</button>
-            <button>Nonaktif</button>
-        </div>
-
-        <div class="isi-konten" id="wadahDaftarIklan">
-            <!-- ISI OTOMATIS DARI JS -->
-        </div>
-    </main>
-</div>
-
-<!-- FOOTER SERAGAM -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-baris">
-            <div class="footer-kolom">
-                <h3 class="footer-logo">TERAVIA</h3>
-                <p class="footer-desc">Pasar properti terpercaya untuk jual, beli, dan sewa.</p>
+            <div id="isiProfil">
+                <!-- Data dimuat otomatis -->
             </div>
-            <div class="footer-kolom">
-                <h4>Layanan</h4>
-                <a href="daftar-properti.html">Cari Properti</a>
-                <a href="pages/pasang-iklan.html">Pasang Iklan</a>
-                <a href="membership.html">Keanggotaan</a>
-            </div>
-        </div>
-        <div class="footer-bawah">
-            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi.</p>
+
+            <button id="tombolKeluar" class="tombol-keluar">Keluar dari Akun</button>
         </div>
     </div>
-</footer>
+</main>
 
-<script src="assets/js/navbar.js"></script>
 <script>
-// CEK SESI LOGIN
-const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-if(!sesi) {
-    alert('⚠️ Silakan masuk dulu!');
+// Cek status login
+const dataAkun = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+
+if (!dataAkun) {
+    alert('⚠️ Silakan masuk terlebih dahulu!');
     window.location.href = 'login.html';
-}
-
-// TAMPILKAN DATA PROFIL
-const dataAkun = JSON.parse(localStorage.getItem('dataAkunTeravia') || '[]');
-const akun = dataAkun.find(a => a.id === sesi.id) || sesi;
-const namaPenuh = akun.nama || akun.username || 'Pengguna Teravia';
-const paketAktif = akun.paket || 'Kaveling';
-
-// Inisial Avatar
-document.getElementById('avatarInisial').textContent = namaPenuh.charAt(0).toUpperCase();
-document.getElementById('namaTampil').textContent = namaPenuh;
-document.getElementById('emailTampil').textContent = akun.email || '-';
-
-// Label Paket
-const elPaket = document.getElementById('labelPaket');
-elPaket.textContent = `Paket ${paketAktif}`;
-if(paketAktif === 'Kaveling') elPaket.className = 'label-paket paket-kaveling';
-else if(paketAktif === 'Cluster') elPaket.className = 'label-paket paket-cluster';
-else if(paketAktif === 'Residence') elPaket.className = 'label-paket paket-residence';
-else if(paketAktif === 'Estate') elPaket.className = 'label-paket paket-estate';
-
-// AMBIL DAFTAR IKLAN MILIK PENGGUNA
-const semuaIklan = JSON.parse(localStorage.getItem('daftarIklanTeravia') || '[]');
-const iklanSaya = semuaIklan.filter(i => i.userId === sesi.id);
-const wadah = document.getElementById('wadahDaftarIklan');
-
-if(iklanSaya.length === 0) {
-    wadah.innerHTML = `<div class="kosong">
-        <div style="font-size:48px;margin-bottom:12px;">📭</div>
-        <p>Belum ada iklan yang dipasang.</p>
-        <a href="pages/pasang-iklan.html" style="color:var(--utama);font-weight:600;">Klik di sini untuk pasang iklan pertama!</a>
-    </div>`;
 } else {
-    wadah.innerHTML = iklanSaya.map(iklan => `
-        <div class="kartu-iklan">
-            <div class="header-iklan">
-                <div class="nama-toko">🏠 Teravia Properti</div>
-                <div class="label-status">${iklan.status || 'Aktif'}</div>
-            </div>
-            <div class="isi-iklan">
-                <div class="gambar-iklan">🏡</div>
-                <div class="detail-iklan">
-                    <div class="judul-iklan">${iklan.judul || 'Judul Belum Diisi'}</div>
-                    <div class="varian-iklan">${iklan.kategori || ''} - ${iklan.jenis || ''}</div>
-                    <div class="harga-iklan">Rp ${new Intl.NumberFormat('id-ID').format(iklan.harga || 0)}</div>
-                </div>
-            </div>
-            <div class="total-harga">Total: <span>Rp ${new Intl.NumberFormat('id-ID').format(iklan.harga || 0)}</span></div>
-            <div class="tombol-aksi">
-                <button class="sekunder">👁️ Lihat</button>
-                <button class="sekunder">✏️ Ubah</button>
-                <button class="primer">📢 Promosikan</button>
-            </div>
-        </div>
-    `).join('');
+    tampilkanProfil();
 }
 
-// FUNGSI KELUAR AKUN
-function keluarAkun() {
-    localStorage.removeItem('sesiTeravia');
-    alert('✅ Berhasil keluar dari akun!');
-    window.location.href = 'index.html';
-}
-</script>
-<script src="assets/js/navbar.js"></script>
+function tampilkanProfil() {
+    const wadah = document.getElementById('isiProfil');
     
+    // Warna lencana paket sesuai jenis
+    let kelasLencana = 'paket-gratis';
+    if (dataAkun.jenisKeanggotaan === 'Kaveling') kelasLencana = 'paket-kaveling';
+    if (dataAkun.jenisKeanggotaan === 'Cluster') kelasLencana = 'paket-cluster';
+    if (dataAkun.jenisKeanggotaan === 'Residence') kelasLencana = 'paket-residence';
+    if (dataAkun.jenisKeanggotaan === 'Estate') kelasLencana = 'paket-estate';
+
+    wadah.innerHTML = `
+        <div class="baris-data">
+            <span class="label">Nama Lengkap</span>
+            <span class="nilai">${dataAkun.namaLengkap}</span>
+        </div>
+        <div class="baris-data">
+            <span class="label">Nomor HP</span>
+            <span class="nilai">${dataAkun.nomorHp}</span>
+        </div>
+        <div class="baris-data">
+            <span class="label">Email</span>
+            <span class="nilai">${dataAkun.email}</span>
+        </div>
+        <div class="baris-data">
+            <span class="label">Tanggal Daftar</span>
+            <span class="nilai">${dataAkun.tanggalDaftar}</span>
+        </div>
+        <div class="baris-data">
+            <span class="label">Jenis Keanggotaan</span>
+            <span class="nilai"><span class="lencana-paket ${kelasLencana}">${dataAkun.jenisKeanggotaan}</span></span>
+        </div>
+    `;
+}
+
+// Logika keluar akun
+document.getElementById('tombolKeluar').addEventListener('click', () => {
+    if (confirm('Yakin ingin keluar?')) {
+        localStorage.removeItem('sesiTeravia');
+        window.location.href = 'index.html';
+    }
+});
+</script>
+
 </body>
 </html>
 
