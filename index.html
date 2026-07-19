@@ -127,23 +127,33 @@
 <body>
 
 <!-- NAVBAR UTAMA -->
-<nav class="navbar">
-    <div class="wadah-nav">
-        <a href="index.html" class="logo">
-            <!-- Gunakan logo teks/gambar asli kamu -->
-                <img src="assets/img/logo.png" alt="Teravia"> 
-        </a>
-        <div class="menu-desktop">
-            <a href="index.html" class="aktif">Beranda</a>
-            <a href="daftar-properti.html">Cari Properti</a>
-            <a href="mitra-notaris.html">Mitra Notaris</a>
-            <a href="blog.html">Blog Properti</a>
-            <a href="tentang.html">Tentang Kami</a>
-            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <a href="login.html">👤 Masuk / Daftar</a>
-        </div>
+<div class="wadah-nav">
+    <!-- Tombol Kiri (Hanya muncul di Mobile sebagai pemanis / Menu) -->
+    <div class="nav-icon-left" style="font-size: 20px; cursor: pointer; color: #475569;">
+        🔔
     </div>
-</nav>
+
+    <!-- Logo di Tengah -->
+    <a href="index.html" class="logo" style="display: flex; align-items: center; justify-content: center;">
+        <img src="assets/img/logo.png" alt="Teravia" style="height: 38px; width: auto; max-height: 100%; display: block; object-fit: contain;">
+    </a>
+
+    <!-- Tombol Kanan (Aksi Cepat Mobile: Pasang Iklan / Akun) -->
+    <a href="pages/pasang-iklan.html" class="nav-icon-right" style="text-decoration: none; font-size: 13px; font-weight: 700; color: #165DFF; background: #E6EFFF; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 4px;">
+        <span>+</span> Iklan
+    </a>
+
+    <!-- Menu Desktop (Tetap aman & tersembunyi di mobile) -->
+    <div class="menu-desktop">
+        <a href="index.html" class="aktif">Beranda</a>
+        <a href="daftar-properti.html">Cari Properti</a>
+        <a href="mitra-notaris.html">Mitra Notaris</a>
+        <a href="blog.html">Blog Properti</a>
+        <a href="tentang.html">Tentang Kami</a>
+        <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+        <a href="login.html">👤 Masuk / Daftar</a>
+    </div>
+</div>
 
 <!-- HERO DESKTOP (Persis seperti screenshot kamu) -->
 <section class="hero-desktop">
