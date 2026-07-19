@@ -17,6 +17,7 @@
             background-color: #f8fafc;
             color: #1e293b;
             overflow-x: hidden;
+            padding-top: 32px; /* Ruang untuk running text */
         }
 
         /* === ANIMASI RUNNING TEXT === */
@@ -24,23 +25,58 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        .running-text {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #EFF6FF;
+            padding: 7px 16px;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 99999;
+        }
+        .running-text span {
+            display: inline-block;
+            animation: geserKananKiri 22s linear infinite;
+            font-size: 11px;
+            color: #165DFF;
+            font-weight: 500;
+        }
 
-        /* === NAVBAR DESKTOP === */
+        /* === NAVBAR UTAMA (TETAP DI ATAS SAAT SCROLL) === */
         .navbar {
             position: sticky;
-            top: 0; width: 100%; z-index: 9999;
+            top: 32px; /* Tepat di bawah running text */
+            width: 100%;
+            z-index: 9999;
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
         }
         .wadah-nav {
-            padding: 14px 24px;
+            padding: 12px 16px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
-        .logo img { height: 32px; width: auto; }
+        .logo img { height: 34px; width: auto; }
+        .btn-iklan {
+            position: absolute;
+            right: 16px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: #165DFF;
+            background: #E6EFFF;
+            padding: 7px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* === NAVBAR DESKTOP === */
         .menu-desktop { display: flex; gap: 20px; align-items: center; }
         .menu-desktop a { text-decoration: none; color: #475569; font-size: 13px; font-weight: 500; }
         .menu-desktop a.aktif { color: #165DFF; font-weight: 600; }
@@ -72,9 +108,10 @@
         .btn-cari-desk { background: #165DFF; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
 
         /* === GRID PROPERTI UTAMA === */
-        .kontainer-section { max-width: 1200px; margin: 0 auto; padding: 20px 24px 80px 24px; }
+        .kontainer-section { max-width: 1200px; margin: 0 auto; padding: 20px 16px 80px 16px; }
         .judul-bagian { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .judul-bagian h2 { font-size: 20px; font-weight: 700; }
+        .judul-bagian h2 { font-size: 18px; font-weight: 700; }
+        .judul-bagian a { color:#165DFF; text-decoration:none; font-size:13px; font-weight:600; }
         .grid-kartu-properti { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .kartu-properti { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; position: relative; }
         .gambar-properti { height: 200px; background: #e2e8f0; background-size: cover; background-position: center; position: relative; }
@@ -100,7 +137,7 @@
         .footer-bottom { text-align: center; border-top: 1px solid #334155; margin-top: 40px; padding-top: 20px; font-size: 11px; }
 
         /* === WADAH FITUR APP MOBILE ONLY === */
-        .mobile-only-block { display: none; }
+        .mobile-only-block { display: none; padding: 16px; }
         .bottom-nav { 
             position: fixed; bottom: 0; left: 0; right: 0; height: 65px; 
             background: white; display: none; justify-content: space-around; align-items: center; 
@@ -114,9 +151,10 @@
         }
         .nav-item.aktif { color: #165DFF; font-weight: 600; background: #EFF6FF; }
         .nav-item span:first-child { font-size: 18px; }
-        .search-bar-mob { display: flex; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; align-items: center; gap: 8px; margin: 16px 0; }
-        .search-bar-mob select, .search-bar-mob input { border: none; outline: none; background: transparent; }
-        .grid-lokasi-mob { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+        .search-bar-mob { display: flex; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; align-items: center; gap: 8px; margin: 0 0 20px 0; }
+        .search-bar-mob select, .search-bar-mob input { border: none; outline: none; background: transparent; font-size: 13px; }
+        .search-bar-mob select { font-weight: 600; color: #165DFF; }
+        .grid-lokasi-mob { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
         .item-lokasi-mob { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; color: #475569; }
         .img-wrapper-mob { width: 100%; aspect-ratio: 1/1; border-radius: 12px; background: #cbd5e1; overflow: hidden; margin-bottom: 6px; }
 
@@ -124,44 +162,43 @@
            BREAKPOINT SWITCH: AKTIF JIKA DI AKSES LEWAT HP / APK
            ========================================================= */
         @media (max-width: 768px) {
-            body { padding-bottom: 70px; }
+            body { padding-bottom: 70px; padding-top: 32px; }
             /* Sembunyikan bagian desktop */
             .menu-desktop, .hero-desktop, .pencarian-desktop, .footer-desktop { display: none !important; }
             
             /* Tampilkan fitur mobile */
             .mobile-only-block { display: block; }
             .bottom-nav { display: flex; }
-            .navbar { position: static; }
-            .wadah-nav { justify-content: center; padding: 12px 16px; }
-            .logo img { height: 34px; }
-
-            /* Sesuaikan tampilan konten */
             .grid-kartu-properti { grid-template-columns: 1fr; gap: 16px; }
-            .kontainer-section { padding: 10px 16px; }
+            .kontainer-section { padding: 0 16px 20px 16px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 📢 RUNNING TEXT -->
-<div style="background: #EFF6FF; padding: 9px 16px; overflow: hidden; white-space: nowrap;">
-    <div style="display: inline-block; animation: geserKananKiri 22s linear infinite; font-size: 12px; color: #165DFF; font-weight: 500;">
-        ✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis Masa Perkenalan • 🤝 Diskon Notaris Khusus Pengguna Baru • 📞 Bantuan 24 Jam
-    </div>
+<!-- 📢 RUNNING TEXT (POSISI TETAP DI ATAS) -->
+<div class="running-text">
+    <span>✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis Masa Perkenalan • 🤝 Diskon Notaris Khusus Pengguna Baru • 📞 Bantuan 24 Jam</span>
 </div>
 
-<!-- NAVBAR UTAMA (TANPA HAMBURGER LAGI) -->
+<!-- NAVBAR UTAMA (TETAP DI BAWAH RUNNING TEXT SAAT SCROLL) -->
 <nav class="navbar">
     <div class="wadah-nav">
-        <!-- Logo di Tengah -->
         <a href="index.html" class="logo">
             <img src="assets/img/logo.png" alt="Teravia">
         </a>
-
-        <!-- Tombol Pasang Iklan (Kanan) -->
-        <a href="pages/pasang-iklan.html" style="text-decoration: none; font-size: 12px; font-weight: 700; color: #165DFF; background: #E6EFFF; padding: 7px 12px; border-radius: 20px; display: flex; align-items: center; gap: 3px; position: absolute; right: 16px;">
+        <a href="pages/pasang-iklan.html" class="btn-iklan">
             <span>+</span> Iklan
         </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="aktif">Beranda</a>
+            <a href="daftar-properti.html">Cari Properti</a>
+            <a href="mitra-notaris.html">Mitra Notaris</a>
+            <a href="blog.html">Blog Properti</a>
+            <a href="tentang.html">Tentang Kami</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html">👤 Masuk / Daftar</a>
+        </div>
     </div>
 </nav>
 
@@ -212,7 +249,7 @@
 <main class="kontainer-section">
     <div class="judul-bagian">
         <h2>Properti Terbaru & Unggulan</h2>
-        <a href="#" style="color:#165DFF; text-decoration:none; font-size:13px; font-weight:600;">Lihat Semua →</a>
+        <a href="#">Lihat Semua →</a>
     </div>
 
     <div class="grid-kartu-properti">
@@ -302,7 +339,7 @@
     </div>
 </footer>
 
-<!-- 📱 NAVIGASI UTAMA (DIPINDAH SEMUA KE SINI) -->
+<!-- 📱 NAVIGASI BAWAH (TETAP DI BAWAH) -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item aktif"><span>🏠</span><span>Beranda</span></a>
     <a href="daftar-properti.html" class="nav-item"><span>🔍</span><span>Cari</span></a>
