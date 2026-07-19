@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teravia - Marketplace Properti Indonesia</title>
+    <style>
+        /* === 🖥️ TAMPILAN DESKTOP (DIPERBAIKI) === */
+        @media (min-width: 769px) {
+            * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+            body { background: #F8FAFC; color: #1E293B; }
+            a { text-decoration: none; color: inherit; }
+            ul { list-style: none; }
+
+            .navbar { background: #FFFFFF; padding: 12px 24px; border-bottom: 1px solid #E2E8F0; position: sticky; top:0; z-index:999; }
+            .wadah-nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+            .logo { width: 120px; height: auto; display: block; }
+            .menu-nav { display: flex; gap: 24px; font-size: 13px; font-weight: 500; }
+            .menu-nav a { color: #475569; }
+            .menu-nav a:hover { color: #165DFF; }
+            .tombol-aksi { display: flex; gap: 12px; align-items: center; }
+            .btn-masuk { font-size: 13px; font-weight: 600; color: #1E293B; padding: 8px 16px; border-radius: 6px; border: 1px solid #E2E8F0; }
+            .btn-daftar { font-size: 13px; font-weight: 600; color: white; padding: 8px 16px; border-radius: 6px; background: #165DFF; }
+            .btn-pasang { background: #165DFF; color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; }
+
+            .hero { 
+                max-width: 100%; margin: 0 auto; border-radius: 0; 
+                background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 45%, transparent 100%),
+                            url('assets/img/hero-bg.png') right center/cover no-repeat; 
+                min-height: 420px; display: flex; align-items: center; padding: 40px 24px; position: relative;
+            }
+            .teks-hero { max-width: 500px; margin-left: calc((100% - 1200px)/2); position: relative; z-index: 2; }
+            .teks-hero h1 { font-size: 32px; margin-bottom: 8px; color: #1E293B; }
+            .teks-hero p { font-size: 15px; color: #64748B; }
+
+            .wadah-pencarian { max-width: 1200px; margin: -30px auto 32px auto; position: relative; z-index: 3; background: white; padding: 18px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 12px; }
+            .kolom-lokasi { flex: 1; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #64748B; }
+            .tombol-beli { background: #EFF6FF; color: #165DFF; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+            .tombol-sewa { background: white; color: #64748B; border: 1px solid #E2E8F0; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+            .tombol-cari { background: #165DFF; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+            .bagian-lokasi { max-width: 1200px; margin: 0 auto 40px auto; padding: 0 24px; }
+            .judul-lokasi { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: #1E293B; }
+            .grid-lokasi { display: grid; grid-template-columns: repeat(8, 1fr); gap: 14px; }
+            .item-lokasi { display: flex; flex-direction: column; align-items: center; text-decoration: none; transition: 0.2s; padding: 14px 8px; border-radius: 10px; }
+            .item-lokasi:hover { background: #EFF6FF; transform: translateY(-2px); }
+            .ikon-lokasi { width: 56px; height: 56px; border-radius: 50%; background: #E6EFFF; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 8px; color: #165DFF; }
+            .ikon-lainnya { background: #F1F5F9; color: #64748B; }
+            .nama-lokasi { font-size: 12px; font-weight: 600; color: #1E293B; text-align: center; }
+
+            .bagian-slider-prop { max-width: 1200px; margin: 0 auto 48px auto; padding: 0 24px; }
+            .kepala-slider { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+            .kepala-slider h2 { font-size: 18px; font-weight: 700; }
+            .kepala-slider a { font-size: 13px; color: #165DFF; font-weight: 500; }
+            .wadah-slider-prop { position: relative; overflow: hidden; }
+            .isi-slider-prop { display: flex; transition: transform 0.5s ease-in-out; gap: 20px; }
+            .slide-prop { min-width: calc(33.333% - 14px); flex-shrink: 0; } /* DIPERBAIKI: lebar pas + tidak menyusut */
+            .kartu-properti { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; height: 100%; }
+            .gambar-prop { height: 190px; background: #E2E8F0; position: relative; }
+            .label { position: absolute; top: 12px; left: 12px; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: white; }
+            .label.unggul { background: #F59E0B; }
+            .label.baru { background: #10B981; }
+            .label.sewa { background: #8B5CF6; }
+            .isi-kartu { padding: 16px; }
+            .harga { font-size: 17px; font-weight: 700; color: #165DFF; margin-bottom: 6px; }
+            .judul-prop { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+            .meta-prop { font-size: 12px; color: #64748B; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+            .nav-slider { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+            .tombol-nav { width: 10px; height: 10px; border-radius: 50%; background: #E2E8F0; border: none; cursor: pointer; transition: 0.3s; }
+            .tombol-nav.aktif { width: 24px; background: #165DFF; border-radius: 5px; }
+
+            .bagian-testi { background: #EFF6FF; padding: 48px 24px; margin-bottom: 40px; }
+            .wadah-testi { max-width: 1200px; margin: 0 auto; }
+            .judul-testi { text-align: center; font-size: 20px; font-weight: 700; margin-bottom: 32px; }
+            .wadah-slider-testi { position: relative; overflow: hidden; }
+            .isi-slider-testi { display: flex; transition: transform 0.5s ease-in-out; gap: 24px; }
+            .slide-testi { min-width: calc(33.333% - 16px); flex-shrink: 0; }
+            .kartu-testi { background: white; border-radius: 12px; padding: 24px; border: 1px solid #BFDBFE; text-align: center; height: 100%; }
+            .foto-user { width: 64px; height: 64px; border-radius: 50%; background: #DBEAFE; margin: 0 auto 12px auto; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+            .nama-user { font-weight: 700; margin-bottom: 4px; }
+            .peran-user { font-size: 12px; color: #64748B; margin-bottom: 12px; }
+            .teks-testi { font-size: 13px; line-height: 1.6; color: #475569; }
+
+            footer { background: #1E293B; color: white; padding: 48px 24px 24px 24px; margin-top: 0; }
+            .wadah-footer { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+            .kolom-footer h4 { font-size: 15px; font-weight: 700; margin-bottom: 16px; color: white; }
+            .kolom-footer p, .kolom-footer a { font-size: 13px; color: #CBD5E1; line-height: 1.7; }
+            .kolom-footer ul { display: flex; flex-direction: column; gap: 10px; }
+            .hak-cipta { text-align: center; padding-top: 24px; border-top: 1px solid #334155; font-size: 12px; color: #94A3B8; }
+
+            /* SEMUA ELEMEN KHUSUS MOBILE DISEMBUNYIKAN DI DESKTOP */
+            .navbar-mob, .menu-hamburger, .menu-mob, .bagian-slider, .wadah-pencarian-mob, .bagian-berita, .bottom-nav { display: none !important; }
+        }
+
+        /* === 📱 TAMPILAN MOBILE (TIDAK DIUBAH SEKALI PUN) === */
+        @media (max-width: 768px) {
+            * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+            body { background: #F8FAFC; color: #1E293B; padding-bottom: 24px; }
+            a { text-decoration: none; color: inherit; }
+
+            .navbar { display: none; }
+            .navbar-mob { background: #FFFFFF; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E2E8F0; position: sticky; top:0; z-index:999; gap: 12px; }
+            .menu-hamburger { background: none; border: none; font-size: 24px; cursor: pointer; padding: 4px; flex-shrink: 0; }
+            .logo { width: 90px; height: auto; display: block; margin-right: auto; }
+            .btn-pasang { background: #165DFF; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+
+            .menu-mob { position: fixed; top: 60px; left: 0; width: 100%; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-150%); transition: transform 0.3s ease-in-out; z-index: 998; padding: 16px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+            .menu-mob.buka { transform: translateY(0); }
+            .menu-mob a { display: block; padding: 12px 16px; border-radius: 8px; margin-bottom: 4px; font-size: 14px; font-weight: 500; color: #1E293B; }
+            .menu-mob a:hover { background: #EFF6FF; color: #165DFF; }
+            .menu-mob .pisah { border-top: 1px solid #F1F5F9; margin: 12px 0; padding-top: 12px; }
+            .menu-mob .tombol-masuk { background: #F8FAFC; text-align: center; font-weight: 600; }
+            .menu-mob .tombol-daftar { background: #165DFF; color: white; text-align: center; font-weight: 600; margin-top: 4px; }
+
+            .bagian-slider { margin: 16px; }
+            .kepala-slider { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+            .kepala-slider h3 { font-size: 16px; font-weight: 700; }
+            .label-premium { background: #FBBF24; color: #92400E; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+            .wadah-slider { position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+            .isi-slider { display: flex; transition: transform 0.5s ease-in-out; }
+            .slide { min-width: 100%; }
+            .kartu-slider { background: white; }
+            .gambar-slider { height: 200px; background: #DBEAFE; position: relative; }
+            .label-member { position: absolute; top:12px; left:12px; background: linear-gradient(90deg,#F59E0B,#FBBF24); color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+            .isi-slider-kartu { padding: 14px; }
+            .harga-slider { font-size: 18px; font-weight: 800; color: #165DFF; margin-bottom: 4px; }
+            .judul-slider { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+            .lokasi-slider { font-size: 12px; color: #64748B; display: flex; align-items: center; gap:4px; }
+            .indikator { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+            .dot { width: 8px; height: 8px; border-radius: 50%; background: #E2E8F0; transition: 0.3s; }
+            .dot.aktif { width: 20px; background: #165DFF; border-radius: 4px; }
+
+            .wadah-pencarian { display: none; }
+            .wadah-pencarian-mob { margin: 0 16px 24px 16px; background: white; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+            .baris-lokasi { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #64748B; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #F1F5F9; }
+            .tombol-pilih { display: flex; gap: 10px; margin-bottom: 12px; }
+            .btn-beli { flex:1; padding: 10px; border: none; border-radius: 8px; font-weight: 600; background: #EFF6FF; color: #165DFF; cursor: pointer; }
+            .btn-sewa { flex:1; padding: 10px; border: 1px solid #E2E8F0; border-radius: 8px; font-weight: 600; background: white; color: #64748B; cursor: pointer; }
+            .btn-cari { width: 100%; padding: 11px; border: none; border-radius: 8px; background: #165DFF; color: white; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; }
+
+            .hero, .bagian-properti, .bagian-slider-prop, .bagian-testi, footer { display: none; }
+            .bagian-lokasi { padding: 0 16px; margin-bottom: 24px; }
+            .judul-bagian { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+            .grid-lokasi { display: grid; grid-template-columns: repeat(4,1fr); gap:14px; }
+            .item-lokasi { text-align: center; text-decoration: none; }
+            .ikon-lokasi { width: 52px; height: 52px; border-radius: 50%; background: #E6EFFF; display: flex; align-items: center; justify-content: center; font-size: 22px; margin:0 auto 6px auto; color: #165DFF; }
+            .nama-lokasi { font-size: 11px; font-weight: 600; color: #1E293B; }
+
+            .bagian-berita { padding:0 16px; }
+            .grid-berita { display: flex; flex-direction: column; gap: 14px; }
+            .kartu-berita { display: flex; gap: 12px; background: white; border-radius: 12px; padding: 12px; border:1px solid #E2E8F0; }
+            .gambar-berita { width: 90px; height: 90px; border-radius: 8px; background: #E2E8F0; flex-shrink:0; }
+            .isi-berita { flex:1; display: flex; flex-direction: column; justify-content: space-between; }
+            .judul-berita { font-size: 13px; font-weight: 600; line-height:1.4; }
+            .tgl-berita { font-size: 11px; color: #94A3B8; margin-top: 4px; }
+
+            .bottom-nav { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🖥️ NAVBAR DESKTOP -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <img src="assets/img/logo.png" alt="Teravia" class="logo">
+        <ul class="menu-nav">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="daftar-properti.html">Cari Properti</a></li>
+            <li><a href="mitra-notaris.html">Mitra Notaris</a></li>
+            <li><a href="blog.html">Blog Properti</a></li>
+            <li><a href="tentang.html">Tentang Kami</a></li>
+        </ul>
+        <div class="tombol-aksi">
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="btn-masuk">Masuk</a>
+            <a href="register.html" class="btn-daftar">Daftar</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 📱 NAVBAR MOBILE + HAMBURGER -->
+<nav class="navbar-mob">
+    <button class="menu-hamburger" id="tombolMenu">☰</button>
+    <img src="assets/img/logo.png" alt="Teravia" class="logo">
+    <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+</nav>
+
+<!-- 📱 MENU SLIDE -->
+<div class="menu-mob" id="menuMobile">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="daftar-properti.html">🔍 Cari Properti</a>
+    <a href="mitra-notaris.html">📜 Mitra Notaris</a>
+    <a href="blog.html">📰 Blog Properti</a>
+    <a href="tentang.html">ℹ️ Tentang Kami</a>
+    <div class="pisah"></div>
+    <a href="login.html" class="tombol-masuk">👤 Masuk</a>
+    <a href="register.html" class="tombol-daftar">📝 Daftar Akun</a>
+</div>
+
+<!-- ✅ SLIDER UNGGULAN DI ATAS KHUSUS MOBILE -->
+<section class="bagian-slider">
+    <div class="kepala-slider">
+        <h3>✨ Properti Unggulan Member</h3>
+        <span class="label-premium">PREMIUM</span>
+    </div>
+    <div class="wadah-slider">
+        <div class="isi-slider" id="isiSliderMob">
+            <div class="slide"><div class="kartu-slider"><div class="gambar-slider"><span class="label-member">⭐ MEMBER PREMIUM</span></div><div class="isi-slider-kartu"><div class="harga-slider">Rp 4,5 Miliar</div><div class="judul-slider">Rumah Mewah Siap Huni di BSD City</div><div class="lokasi-slider">📍 Tangerang Selatan, Banten</div></div></div></div>
+            <div class="slide"><div class="kartu-slider"><div class="gambar-slider"><span class="label-member">⭐ MEMBER PREMIUM</span></div><div class="isi-slider-kartu"><div class="harga-slider">Rp 2,1 Miliar</div><div class="judul-slider">Apartemen Eksklusif di SCBD</div><div class="lokasi-slider">📍 Jakarta Selatan, DKI Jakarta</div></div></div></div>
+            <div class="slide"><div class="kartu-slider"><div class="gambar-slider"><span class="label-member">⭐ MEMBER PREMIUM</span></div><div class="isi-slider-kartu"><div class="harga-slider">Rp 750 Juta</div><div class="judul-slider">Tanah Kavling Strategis di Bandung</div><div class="lokasi-slider">📍 Bandung, Jawa Barat</div></div></div></div>
+        </div>
+    </div>
+    <div class="indikator" id="indikatorMob">
+        <div class="dot aktif"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+</section>
+
+<!-- 🖥️ HERO DESKTOP FULL -->
+<section class="hero">
+    <div class="teks-hero">
+        <h1>Selamat Datang di Teravia</h1>
+        <p>Marketplace Properti Berbasis AI dan Ads untuk seluruh Indonesia</p>
+    </div>
+</section>
+
+<!-- 🖥️ PENCARIAN DESKTOP -->
+<section class="wadah-pencarian">
+    <div class="kolom-lokasi">📍 Seluruh Indonesia</div>
+    <button class="tombol-beli">Beli</button>
+    <button class="tombol-sewa">Sewa</button>
+    <button class="tombol-cari" onclick="window.location.href='daftar-properti.html'">🔍 Cari Properti</button>
+</section>
+
+<!-- 📱 PENCARIAN MOBILE -->
+<section class="wadah-pencarian-mob">
+    <div class="baris-lokasi">📍 Seluruh Indonesia</div>
+    <div class="tombol-pilih">
+        <button class="btn-beli">Beli</button>
+        <button class="btn-sewa">Sewa</button>
+    </div>
+    <button class="btn-cari" onclick="window.location.href='daftar-properti.html'">🔍 Cari Properti</button>
+</section>
+
+<!-- 📍 LOKASI POPULER -->
+<section class="bagian-lokasi">
+    <h3 class="judul-lokasi">Cari di Lokasi Populer</h3>
+    <div class="grid-lokasi">
+        <a href="wilayah.html?prov=DKI Jakarta" class="item-lokasi">
+            <div class="ikon-lokasi">🏙️</div>
+            <div class="nama-lokasi">DKI Jakarta</div>
+        </a>
+        <a href="wilayah.html?prov=Jawa Barat" class="item-lokasi">
+            <div class="ikon-lokasi">⛰️</div>
+            <div class="nama-lokasi">Jawa Barat</div>
+        </a>
+        <a href="wilayah.html?prov=Banten" class="item-lokasi">
+            <div class="ikon-lokasi">🏖️</div>
+            <div class="nama-lokasi">Banten</div>
+        </a>
+        <a href="wilayah.html?prov=Jawa Timur" class="item-lokasi">
+            <div class="ikon-lokasi">🕌</div>
+            <div class="nama-lokasi">Jawa Timur</div>
+        </a>
+        <a href="wilayah.html?prov=Bali" class="item-lokasi">
+            <div class="ikon-lokasi">🏝️</div>
+            <div class="nama-lokasi">Bali</div>
+        </a>
+        <a href="wilayah.html?prov=Jawa Tengah" class="item-lokasi">
+            <div class="ikon-lokasi">🏛️</div>
+            <div class="nama-lokasi">Jawa Tengah</div>
+        </a>
+        <a href="wilayah.html?prov=Sumatera Utara" class="item-lokasi">
+            <div class="ikon-lokasi">🌋</div>
+            <div class="nama-lokasi">Sumut</div>
+        </a>
+        <a href="wilayah.html" class="item-lokasi">
+            <div class="ikon-lokasi ikon-lainnya">➕</div>
+            <div class="nama-lokasi">Lainnya</div>
+        </a>
+    </div>
+</section>
+
+<!-- 🖥️ SLIDER PROPERTI DESKTOP -->
+ <section class="bagian-slider-prop">
+     <div class="kepala-slider">
+         <h2>Properti Terbaru & Unggulan</h2>
+         <a href="daftar-properti.html">Lihat Semua →</a>
+     </div>
+     <div class="wadah-slider-prop">
+         <div class="isi-slider-prop" id="isiSliderProp">
+             <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label unggul">Unggulan</span></div><div class="isi-kartu"><div class="harga">Rp 950 Juta</div><h4 class="judul-prop">Rumah Modern Siap Huni di Cibinong</h4><div class="meta-prop"><span>📍 Bogor</span><span>🛏️ 3 KT</span><span>📐 108 m²</span></div></div></div></div>
+             <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label baru">Baru</span></div><div class="isi-kartu"><div class="harga">Rp 2,8 Miliar</div><h4 class="judul-prop">Rumah Cluster Elite di BSD City</h4><div class="meta-prop"><span>📍 Tangerang Selatan</span><span>🛏️ 4 KT</span><span>📐 150 m²</span></div></div></div></div>
+             <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label sewa">Sewa</span></div><div class="isi-kartu"><div class="harga">Rp 3,5 Juta / bulan</div><h4 class="judul-prop">Apartemen Dekat Stasiun Tebet</h4><div class="meta-prop"><span>📍 Jakarta Selatan</span><span>🛏️ 2 KT</span><span>📐 45 m²</span></div></div></div></div>
+             <div class="slide-prop"><div class="kartu-properti"><div class="gambar-prop"><span class="label unggul">Unggulan</span></div><div class="isi-kartu"><div class="harga">Rp 1,2 Miliar</div><h4 class="judul-prop">Rumah Minimalis di Depok</h4><div class="meta-prop"><span>📍 Depok</span><span>🛏️ 3 KT</span><span>📐 120 m²</span></div></div></div></div>
+         </div>
+     </div>
+     <div class="nav-slider" id="navProp">
+         <button class="tombol-nav aktif"></button>
+         <button class="tombol-nav"></button>
+     </div>
+ </section>
+ <!-- 🖥️ SLIDER TESTIMONI -->
+ <section class="bagian-testi">
+     <div class="wadah-testi">
+         <h2 class="judul-testi">Apa Kata Mereka</h2>
+         <div class="wadah-slider-testi">
+             <div class="isi-slider-testi" id="isiSliderTesti">
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨</div><div class="nama-user">Budi Santoso</div><div class="peran-user">Pembeli Rumah di BSD</div><div class="teks-testi">Sangat terbantu dengan fitur lokasi terperinci, proses beli rumah jadi jauh lebih cepat dan aman!</div></div></div>
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👩</div><div class="nama-user">Siti Aisyah</div><div class="peran-user">Penjual Properti</div><div class="teks-testi">Setelah jadi member premium, listingan saya langsung banyak dilihat dan cepat laku!</div></div></div>
+                 <div class="slide-testi"><div class="kartu-testi"><div class="foto-user">👨‍💼</div><div class="nama-user">Ahmad Rizki</div><div class="peran-user">Agen Properti</div><div class="teks-testi">Platform paling lengkap untuk cari properti di seluruh Indonesia, antarmukanya mudah dipahami.</div></div></div>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!-- 📰 BERITA KHUSUS MOBILE -->
+ <section class="bagian-berita">
+     <h3 class="judul-bagian">📰 Berita & Tips Properti</h3>
+     <div class="grid-berita">
+         <a href="blog.html" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">Cara Cek Sertifikat Tanah Resmi Secara Online</h4><div class="tgl-berita">17 Juli 2026</div></div></a>
+         <a href="blog.html" class="kartu-berita"><div class="gambar-berita"></div><div class="isi-berita"><h4 class="judul-berita">5 Lokasi Properti Paling Cepat Naik Harga 2026</h4><div class="tgl-berita">15 Juli 2026</div></div></a>
+     </div>
+ </section>
+ <!-- 📄 FOOTER DESKTOP -->
+ <footer>
+     <div class="wadah-footer">
+         <div class="kolom-footer"><h4>TERAVIA</h4><p>Marketplace Properti Berbasis AI & Ads untuk seluruh Indonesia</p><p style="margin-top:12px;">📍 Bogor, Jawa Barat, Indonesia</p><p>📞 +62 812-xxxx-xxxx</p><p>📧 halo@teravia.id</p></div>
+         <div class="kolom-footer"><h4>Layanan</h4><ul><li><a href="daftar-properti.html">Cari Properti</a></li><li><a href="pages/pasang-iklan.html">Pasang Iklan</a></li><li><a href="register.html">Keanggotaan</a></li><li><a href="mitra-notaris.html">Mitra Notaris/PPAT</a></li></ul></div>
+         <div class="kolom-footer"><h4>Bantuan</h4><ul><li><a href="tentang.html">Tentang Kami</a></li><li><a href="blog.html">Blog Properti</a></li><li><a href="#">Pusat Bantuan</a></li><li><a href="#">Kebijakan Privasi</a></li><li><a href="#">Syarat & Ketentuan</a></li></ul></div>
+         <div class="kolom-footer"><h4>Ikuti Kami</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Twitter/X</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+     </div>
+     <div class="hak-cipta">© 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</div>
+ </footer>
+ <script>
+ // === FUNGSI MENU HAMBURGER ===
+ const tombolMenu = document.getElementById('tombolMenu');
+ const menuMobile = document.getElementById('menuMobile');
+ tombolMenu.addEventListener('click', () => {
+     menuMobile.classList.toggle('buka');
+ });
+ menuMobile.querySelectorAll('a').forEach(link => {
+     link.addEventListener('click', () => {
+         menuMobile.classList.remove('buka');
+     });
+ });
+ // === SLIDER MOBILE ===
+ const sliderMob = document.getElementById('isiSliderMob');
+ const dotsMob = document.querySelectorAll('#indikatorMob .dot');
+ let idxMob = 0;
+ const totalMob = dotsMob.length;
+ function gantiSlideMob() { idxMob = (idxMob +1) % totalMob; updateMob(); }
+ function updateMob() { sliderMob.style.transform = `translateX(-${idxMob * 100}%)`; dotsMob.forEach((d,i) => d.classList.toggle('aktif', i === idxMob)); }
+ setInterval(gantiSlideMob, 4000);
+ // === SLIDER PROPERTI DESKTOP (DIPERBAIKI) ===
+ const sliderProp = document.getElementById('isiSliderProp');
+ const navProp = document.querySelectorAll('#navProp .tombol-nav');
+ let idxProp = 0;
+ // Geser 3 kartu sekaligus, total langkah 2 kali
+ const totalLangkah = 2;
+ function gantiSlideProp() { idxProp = (idxProp +1) % totalLangkah; updateProp(); }
+ function updateProp() { 
+     // Geser sebesar 100% dibagi jumlah langkah
+     sliderProp.style.transform = `translateX(-${idxProp * 100 / totalLangkah}%)`; 
+     navProp.forEach((d,i) => d.classList.toggle('aktif', i === idxProp)); 
+ }
+ // Klik tombol navigasi manual
+ navProp.forEach((btn, indeks) => {
+     btn.addEventListener('click', () => {
+         idxProp = indeks;
+         updateProp();
+     });
+ });
+ setInterval(gantiSlideProp, 4500);
+ // === SLIDER TESTIMONI DESKTOP ===
+ const sliderTesti = document.getElementById('isiSliderTesti');
+ let idxTesti = 0;
+ const totalTesti = 3;
+ function gantiSlideTesti() { idxTesti = (idxTesti +1) % totalTesti; updateTesti(); }
+ function updateTesti() { sliderTesti.style.transform = `translateX(-${idxTesti * 33.333}%)`; }
+ setInterval(gantiSlideTesti, 5000);
+ </script>
+ </body>
+    </html>
