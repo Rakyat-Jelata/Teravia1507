@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#165DFF">
     <title>Teravia - Marketplace Properti Indonesia</title>
-    <!-- Masukkan CSS eksternal asli kamu di sini jika ada -->
     <style>
         /* === BASE RESET === */
         * {
@@ -18,6 +17,12 @@
             background-color: #f8fafc;
             color: #1e293b;
             overflow-x: hidden;
+        }
+
+        /* === ANIMASI RUNNING TEXT === */
+        @keyframes geserKananKiri {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* === NAVBAR DESKTOP === */
@@ -43,7 +48,7 @@
 
         /* === HERO SECTION DESKTOP === */
         .hero-desktop {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('assets/img/hero-bg.png'); /* Ganti path sesuai asetmu */
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('assets/img/hero-bg.png');
             background-size: cover;
             background-position: center;
             height: 480px;
@@ -61,13 +66,13 @@
         .kotak-pencarian h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #1e293b; }
         .grup-pencarian { display: flex; gap: 10px; align-items: center; }
         .input-lokasi { flex: 1; display: flex; align-items: center; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 6px; gap: 8px; background: #f8fafc; }
-        .input-lokasi input { border: none; width: 100%; background: transparent; font-size: 13px; }
+        .input-lokasi input { border: none; width: 100%; background: transparent; font-size: 13px; outline: none; }
         .btn-tujuan-desk { padding: 10px 24px; border: 1px solid #e2e8f0; background: white; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
         .btn-tujuan-desk.aktif { background: #165DFF; color: white; border-color: #165DFF; }
         .btn-cari-desk { background: #165DFF; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
 
         /* === GRID PROPERTI UTAMA === */
-        .kontainer-section { max-width: 1200px; margin: 0 auto; padding: 20px 24px 60px 24px; }
+        .kontainer-section { max-width: 1200px; margin: 0 auto; padding: 20px 24px 80px 24px; }
         .judul-bagian { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .judul-bagian h2 { font-size: 20px; font-weight: 700; }
         .grid-kartu-properti { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -96,10 +101,21 @@
 
         /* === WADAH FITUR APP MOBILE ONLY === */
         .mobile-only-block { display: none; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: white; display: none; justify-content: space-around; align-items: center; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 99999; border-top: 1px solid #e2e8f0; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #64748b; font-size: 11px; gap: 4px; flex: 1; text-align: center; }
-        .nav-item.aktif { color: #165DFF; font-weight: 600; }
+        .bottom-nav { 
+            position: fixed; bottom: 0; left: 0; right: 0; height: 65px; 
+            background: white; display: none; justify-content: space-around; align-items: center; 
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 9999; border-top: 1px solid #e2e8f0;
+            padding: 0 8px;
+        }
+        .nav-item { 
+            display: flex; flex-direction: column; align-items: center; text-decoration: none; 
+            color: #64748b; font-size: 10px; gap: 3px; flex: 1; text-align: center; 
+            pointer-events: auto; padding: 6px 2px; border-radius: 8px; transition: 0.2s;
+        }
+        .nav-item.aktif { color: #165DFF; font-weight: 600; background: #EFF6FF; }
+        .nav-item span:first-child { font-size: 18px; }
         .search-bar-mob { display: flex; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; align-items: center; gap: 8px; margin: 16px 0; }
+        .search-bar-mob select, .search-bar-mob input { border: none; outline: none; background: transparent; }
         .grid-lokasi-mob { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
         .item-lokasi-mob { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; color: #475569; }
         .img-wrapper-mob { width: 100%; aspect-ratio: 1/1; border-radius: 12px; background: #cbd5e1; overflow: hidden; margin-bottom: 6px; }
@@ -108,17 +124,18 @@
            BREAKPOINT SWITCH: AKTIF JIKA DI AKSES LEWAT HP / APK
            ========================================================= */
         @media (max-width: 768px) {
-            body { padding-bottom: 65px; }
-            /* Sembunyikan bagian desktop yang besar */
+            body { padding-bottom: 70px; }
+            /* Sembunyikan bagian desktop */
             .menu-desktop, .hero-desktop, .pencarian-desktop, .footer-desktop { display: none !important; }
             
-            /* Tampilkan kerangka khusus HP */
+            /* Tampilkan fitur mobile */
             .mobile-only-block { display: block; }
             .bottom-nav { display: flex; }
             .navbar { position: static; }
-            .wadah-nav { justify-content: center; } /* Logo ketengah pas di HP */
+            .wadah-nav { justify-content: center; padding: 12px 16px; }
+            .logo img { height: 34px; }
 
-            /* Sesuaikan grid properti di HP biar vertikal 1 kolom */
+            /* Sesuaikan tampilan konten */
             .grid-kartu-properti { grid-template-columns: 1fr; gap: 16px; }
             .kontainer-section { padding: 10px 16px; }
         }
@@ -126,36 +143,29 @@
 </head>
 <body>
 
-<!-- NAVBAR UTAMA -->
-<div class="wadah-nav">
-    <!-- Tombol Kiri (Hanya muncul di Mobile sebagai pemanis / Menu) -->
-    <div class="nav-icon-left" style="font-size: 20px; cursor: pointer; color: #475569;">
-        🔔
-    </div>
-
-    <!-- Logo di Tengah -->
-    <a href="index.html" class="logo" style="display: flex; align-items: center; justify-content: center;">
-        <img src="assets/img/logo.png" alt="Teravia" style="height: 38px; width: auto; max-height: 100%; display: block; object-fit: contain;">
-    </a>
-
-    <!-- Tombol Kanan (Aksi Cepat Mobile: Pasang Iklan / Akun) -->
-    <a href="pages/pasang-iklan.html" class="nav-icon-right" style="text-decoration: none; font-size: 13px; font-weight: 700; color: #165DFF; background: #E6EFFF; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 4px;">
-        <span>+</span> Iklan
-    </a>
-
-    <!-- Menu Desktop (Tetap aman & tersembunyi di mobile) -->
-    <div class="menu-desktop">
-        <a href="index.html" class="aktif">Beranda</a>
-        <a href="daftar-properti.html">Cari Properti</a>
-        <a href="mitra-notaris.html">Mitra Notaris</a>
-        <a href="blog.html">Blog Properti</a>
-        <a href="tentang.html">Tentang Kami</a>
-        <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-        <a href="login.html">👤 Masuk / Daftar</a>
+<!-- 📢 RUNNING TEXT -->
+<div style="background: #EFF6FF; padding: 9px 16px; overflow: hidden; white-space: nowrap;">
+    <div style="display: inline-block; animation: geserKananKiri 22s linear infinite; font-size: 12px; color: #165DFF; font-weight: 500;">
+        ✨ Teravia: Jaminan Legalitas Sertifikat Properti • 📢 Pasang Iklan Gratis Masa Perkenalan • 🤝 Diskon Notaris Khusus Pengguna Baru • 📞 Bantuan 24 Jam
     </div>
 </div>
 
-<!-- HERO DESKTOP (Persis seperti screenshot kamu) -->
+<!-- NAVBAR UTAMA (TANPA HAMBURGER LAGI) -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <!-- Logo di Tengah -->
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="Teravia">
+        </a>
+
+        <!-- Tombol Pasang Iklan (Kanan) -->
+        <a href="pages/pasang-iklan.html" style="text-decoration: none; font-size: 12px; font-weight: 700; color: #165DFF; background: #E6EFFF; padding: 7px 12px; border-radius: 20px; display: flex; align-items: center; gap: 3px; position: absolute; right: 16px;">
+            <span>+</span> Iklan
+        </a>
+    </div>
+</nav>
+
+<!-- HERO DESKTOP -->
 <section class="hero-desktop">
     <div class="hero-text">
         <h1>Selamat Datang di Teravia</h1>
@@ -179,18 +189,16 @@
     </div>
 </section>
 
-<!-- LAYOUT COMPONENT KHUSUS MOBILE (HANYA MUNCUL DI HP / APK) -->
-<div class="mobile-only-block" style="padding: 0 16px;">
-    <!-- Search Mobile Ramping -->
+<!-- LAYOUT KHUSUS MOBILE -->
+<div class="mobile-only-block">
     <div class="search-bar-mob">
-        <select style="border:none; font-weight:600; color:#165DFF; background:transparent;">
+        <select>
             <option>Dijual</option><option>Disewa</option>
         </select>
         <input type="text" placeholder="Cari Lokasi atau area...">
         <span>🔍</span>
     </div>
 
-    <!-- Lokasi Terpopuler App Style -->
     <h4 style="font-size: 13px; font-weight:700; margin-bottom: 10px;">Cari di Lokasi Terpopuler</h4>
     <div class="grid-lokasi-mob">
         <a href="#" class="item-lokasi-mob"><div class="img-wrapper-mob"></div><span>Tangerang</span></a>
@@ -200,7 +208,7 @@
     </div>
 </div>
 
-<!-- KONTEN UTAMA: PROPERTI (MUNCUL DI KEDUA LAYAR NAMUN BERADAPTASI) -->
+<!-- KONTEN UTAMA -->
 <main class="kontainer-section">
     <div class="judul-bagian">
         <h2>Properti Terbaru & Unggulan</h2>
@@ -208,7 +216,6 @@
     </div>
 
     <div class="grid-kartu-properti">
-        <!-- RUMAH 1 -->
         <div class="kartu-properti">
             <div class="gambar-properti" style="background-image: url('assets/img/rumah1.png');">
                 <span class="badge unggulan">⭐ Unggulan</span>
@@ -223,7 +230,6 @@
             </div>
         </div>
 
-        <!-- RUMAH 2 -->
         <div class="kartu-properti">
             <div class="gambar-properti" style="background-image: url('assets/img/rumah2.png');">
                 <span class="badge baru">Baru</span>
@@ -238,7 +244,6 @@
             </div>
         </div>
 
-        <!-- RUMAH 3 -->
         <div class="kartu-properti">
             <div class="gambar-properti" style="background-image: url('assets/img/apart1.png');">
                 <span class="badge sewa">Sewa</span>
@@ -255,7 +260,7 @@
     </div>
 </main>
 
-<!-- FOOTER UTAMA DESKTOP -->
+<!-- FOOTER DESKTOP -->
 <footer class="footer-desktop">
     <div class="footer-grid">
         <div class="footer-col">
@@ -297,12 +302,13 @@
     </div>
 </footer>
 
-<!-- BOTTOM NAVIGATION KHUSUS MOBILE -->
+<!-- 📱 NAVIGASI UTAMA (DIPINDAH SEMUA KE SINI) -->
 <div class="bottom-nav">
-    <a href="#" class="nav-item aktif"><span>🏠</span><span>Beranda</span></a>
-    <a href="#" class="nav-item"><span>🔍</span><span>Cari</span></a>
-    <a href="#" class="nav-item"><span>⏱️</span><span>Aktivitas</span></a>
-    <a href="#" class="nav-item"><span>👤</span><span>Profil</span></a>
+    <a href="index.html" class="nav-item aktif"><span>🏠</span><span>Beranda</span></a>
+    <a href="daftar-properti.html" class="nav-item"><span>🔍</span><span>Cari</span></a>
+    <a href="layanan.html" class="nav-item"><span>📋</span><span>Layanan</span></a>
+    <a href="blog.html" class="nav-item"><span>📰</span><span>Blog</span></a>
+    <a href="profil.html" class="nav-item"><span>👤</span><span>Akun</span></a>
 </div>
 
 </body>
