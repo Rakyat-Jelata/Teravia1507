@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Paket - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <style>
+        /* === TEMA DIPERTAHANKAN PERSIS === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; min-height: 100vh; }
+
+        .wadah-bayar {
+            max-width: 520px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+        .kartu-bayar {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .judul-halaman {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        /* === RINGKASAN PESANAN === */
+        .ringkasan {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .baris-ringkas {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .baris-ringkas.total {
+            font-size: 16px;
+            font-weight: 700;
+            color: #165DFF;
+            padding-top: 8px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        /* === METODE PEMBAYARAN === */
+        .judul-metode {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .pilihan-metode {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .kotak-metode {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .kotak-metode.terpilih {
+            border-color: #165DFF;
+            background: rgba(22,93,255,0.03);
+        }
+        .kotak-metode input { accent-color: #165DFF; }
+
+        .catatan {
+            font-size: 12px;
+            color: #94A3B8;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tombol-bayar {
+            width: 100%;
+            padding: 13px;
+            background: #165DFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tombol-bayar:hover { background: #0F42C1; }
+        .tombol-bayar:disabled {
+            background: #94A3B8;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div class="wadah-bayar">
+        <div class="kartu-bayar">
+            <h1 class="judul-halaman">💳 Pembayaran Keanggotaan</h1>
+
+            <!-- Ringkasan Pesanan -->
+            <div class="ringkasan">
+                <div class="baris-ringkas">
+                    <span>Paket Keanggotaan</span>
+                    <span id="namaPaket">-</span>
+                </div>
+                <div class="baris-ringkas">
+                    <span>Harga Paket</span>
+                    <span id="hargaPaket">-</span>
+                </div>
+                <div class="baris-ringkas">
+                    <span>PPN 11%</span>
+                    <span id="ppnPaket">-</span>
+                </div>
+                <div class="baris-ringkas total">
+                    <span>Total Pembayaran</span>
+                    <span id="totalBayar">-</span>
+                </div>
+            </div>
+
+            <!-- Pilihan Metode -->
+            <h3 class="judul-metode">Pilih Metode Pembayaran</h3>
+            <div class="pilihan-metode">
+                <label class="kotak-metode terpilih">
+                    <input type="radio" name="metode" value="transfer" checked>
+                    🏦 Transfer Bank BCA / BRI / Mandiri
+                </label>
+                <label class="kotak-metode">
+                    <input type="radio" name="metode" value="va">
+                    💳 Virtual Account
+                </label>
+                <label class="kotak-metode">
+                    <input type="radio" name="metode" value="ewallet">
+                    📱 E-Wallet (DANA / OVO / GoPay)
+                </label>
+            </div>
+
+            <p class="catatan">
+                * Setelah klik bayar, data keanggotaan akan otomatis diperbarui di akun Anda.
+            </p>
+
+            <button id="btnKonfirmasi" class="tombol-bayar">Konfirmasi & Lanjut</button>
+        </div>
+    </div>
+</main>
+
+<script>
+// Daftar harga paket
+const daftarHarga = {
+    'Kaveling': 150000,
+    'Cluster': 500000,
+    'Residence': 1500000,
+    'Estate': 3500000
+};
+
+// Cek data paket
+const paketTerpilih = localStorage.getItem('paketAkanDibayar');
+const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+
+if (!sesi || !paketTerpilih || !daftarHarga[paketTerpilih]) {
+    alert('Akses tidak sah! Pilih paket terlebih dahulu.');
+    window.location.href = 'membership.html';
+}
+
+// Tampilkan ringkasan
+const hargaDasar = daftarHarga[paketTerpilih];
+const ppn = hargaDasar * 0.11;
+const total = hargaDasar + ppn;
+
+document.getElementById('namaPaket').textContent = paketTerpilih;
+document.getElementById('hargaPaket').textContent = `Rp ${hargaDasar.toLocaleString('id-ID')}`;
+document.getElementById('ppnPaket').textContent = `Rp ${ppn.toLocaleString('id-ID')}`;
+document.getElementById('totalBayar').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+// Efek pilih metode
+document.querySelectorAll('.kotak-metode').forEach(pilih => {
+    pilih.addEventListener('click', () => {
+        document.querySelectorAll('.kotak-metode').forEach(k => k.classList.remove('terpilih'));
+        pilih.classList.add('terpilih');
+        pilih.querySelector('input').checked = true;
+    });
+});
+
+// Logika tombol lanjut ke invoice
+document.getElementById('btnKonfirmasi').addEventListener('click', () => {
+    // Simpan status pembayaran & paket untuk update otomatis
+    localStorage.setItem('statusBayar', 'berhasil');
+    localStorage.setItem('paketTerbaru', paketTerpilih);
+    localStorage.setItem('totalDibayar', total);
+
+    // Arahkan ke halaman faktur
+    window.location.href = 'invoice.html';
+});
+</script>
+
+</body>
+      </html>
+              
