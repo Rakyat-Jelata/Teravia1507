@@ -1,0 +1,40 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    font-family: 'Segoe UI', Roboto, sans-serif; 
+    background: #F8FAFC; 
+    color: #1E293B; 
+}
+.wadah { 
+    max-width: 720px; 
+    width: 90%; 
+    margin: 32px auto; 
+    padding: 0 16px; 
+}
+.kartu { 
+    background: white; 
+    border-radius: 16px; 
+    padding: 24px; 
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); 
+}
+.judul { 
+    font-size: 22px; 
+    font-weight: 700; 
+    margin-bottom: 20px; 
+    padding-bottom: 12px; 
+    border-bottom: 1px solid #F1F5F9; 
+}
+.kosong { 
+    text-align: center; 
+    padding: 40px 20px; 
+    color:#94A3B8; 
+}
+.kosong p { 
+    margin: 12px 0; 
+}
+.link { 
+    color:#165DFF; 
+    font-weight:600; 
+    text-decoration:none; 
+    display: inline-block;
+    margin-top: 8px;
+}
