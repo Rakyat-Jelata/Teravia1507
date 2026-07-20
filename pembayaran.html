@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Paket - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/pembayaran.css">
+</head>
+<body>
+
+<!-- NAVBAR SERAGAM -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia" style="height:32px;"></a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="membership.html" class="tautan-nav">Keanggotaan</a>
+            <a href="login.html" class="tautan-nav">👤 Masuk</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="membership.html" class="tautan-menu aktif">💎 Keanggotaan</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+    </div>
+</div>
+
+<main class="wadah-bayar">
+    <div class="kartu-bayar">
+        <h1 class="judul-halaman">💳 Pembayaran Keanggotaan</h1>
+
+        <!-- Ringkasan Pesanan -->
+        <div class="ringkasan">
+            <div class="baris-ringkas">
+                <span>Paket Keanggotaan</span>
+                <span id="namaPaket">-</span>
+            </div>
+            <div class="baris-ringkas">
+                <span>Status Akun</span>
+                <span id="jenisAkun">-</span>
+            </div>
+            <div class="baris-ringkas">
+                <span>Harga Paket</span>
+                <span id="hargaPaket">-</span>
+            </div>
+            <div class="baris-ringkas">
+                <span>PPN 11%</span>
+                <span id="ppnPaket">-</span>
+            </div>
+            <div class="baris-ringkas total">
+                <span>Total Pembayaran</span>
+                <span id="totalBayar">-</span>
+            </div>
+        </div>
+
+        <!-- Pilihan Metode -->
+        <h3 class="judul-metode">Pilih Metode Pembayaran</h3>
+        <div class="pilihan-metode">
+            <label class="kotak-metode terpilih">
+                <input type="radio" name="metode" value="transfer" checked>
+                🏦 Transfer Bank (BCA / BRI / Mandiri / BNI)
+            </label>
+            <label class="kotak-metode">
+                <input type="radio" name="metode" value="va">
+                💳 Virtual Account
+            </label>
+            <label class="kotak-metode">
+                <input type="radio" name="metode" value="ewallet">
+                📱 E-Wallet (DANA / OVO / GoPay / ShopeePay)
+            </label>
+            <label class="kotak-metode">
+                <input type="radio" name="metode" value="kartu">
+                💳 Kartu Kredit / Debit
+            </label>
+        </div>
+
+        <p class="catatan">
+            * Setelah konfirmasi, Anda akan mendapatkan nomor faktur dan petunjuk pembayaran lengkap.
+            Keanggotaan akan aktif otomatis setelah pembayaran diverifikasi.
+        </p>
+
+        <button id="btnKonfirmasi" class="tombol-bayar">Lanjut ke Faktur</button>
+    </div>
+</main>
+
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/pembayaran.js"></script>
+</body>
+</html>
