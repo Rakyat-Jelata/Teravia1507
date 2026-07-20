@@ -6,50 +6,11 @@
     <title>Ketentuan Pengguna - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        .header-halaman {
-            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
-            color: white;
-            padding: 40px 16px;
-            text-align: center;
-        }
-        .header-halaman h1 { font-size: 28px; margin-bottom: 8px; }
-        .wadah-isi {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 16px;
-        }
-        .blok-isi {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
-        }
-        .blok-isi h3 {
-            color: #165DFF;
-            margin-bottom: 12px;
-            font-size: 18px;
-        }
-        .blok-isi p, .blok-isi li {
-            color: #475569;
-            line-height: 1.7;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-        .blok-isi ul { padding-left: 20px; }
-        .catatan-penting {
-            background: #FFFBEB;
-            border-left: 4px solid #F59E0B;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/ketentuan-pengguna.css">
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR STANDAR TERAVIA -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia" style="height:32px;"></a>
@@ -69,7 +30,7 @@
     </div>
 </nav>
 
-<!-- MENU SAMPING -->
+<!-- MENU SAMPING STANDAR -->
 <div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
     <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
@@ -137,7 +98,7 @@
     </div>
 </main>
 
-<!-- FOOTER -->
+<!-- FOOTER STANDAR -->
 <footer class="footer">
     <div class="container">
         <div class="footer-baris">
@@ -159,6 +120,7 @@
                 <a href="blog.html">Blog Properti</a>
                 <a href="ketentuan-pengguna.html" class="aktif">Ketentuan Pengguna</a>
                 <a href="kebijakan-listing.html">Kebijakan Listing</a>
+                <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
             </div>
         </div>
         <div class="footer-bawah">
@@ -168,19 +130,6 @@
 </footer>
 
 <script src="assets/js/navbar.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const tombolBuka = document.getElementById('tombolMenu');
-    const tombolTutup = document.getElementById('tombolTutup');
-    const menuSamping = document.getElementById('menuMobile');
-    const latarGelap = document.getElementById('latarGelap');
-    function bukaMenu() { menuSamping.classList.add('buka'); latarGelap.classList.add('tampil'); document.body.style.overflow = 'hidden'; }
-    function tutupMenu() { menuSamping.classList.remove('buka'); latarGelap.classList.remove('tampil'); document.body.style.overflow = 'auto'; }
-    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
-    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
-    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
-});
-</script>
+<script src="assets/js/ketentuan-pengguna.js"></script>
 </body>
-  </html>
-
+</html>
