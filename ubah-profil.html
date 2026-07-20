@@ -6,22 +6,10 @@
     <title>Ubah Profil - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
-        .wadah { max-width: 520px; width: 90%; margin: 32px auto; padding: 0 16px; }
-        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
-        .grup-input { margin-bottom: 16px; }
-        .grup-input label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #334155; }
-        .grup-input input { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 15px; }
-        .grup-input input:focus { outline: none; border-color: #165DFF; box-shadow: 0 0 0 3px rgba(22,93,255,0.1); }
-        .tombol { width: 100%; padding: 13px; background: #165DFF; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .tombol:hover { background: #0F42C1; }
-        .kembali { display: block; text-align: center; margin-top: 16px; color: #64748B; text-decoration: none; font-size: 14px; }
-    </style>
+    <link rel="stylesheet" href="assets/css/ubah-profil.css">
 </head>
 <body>
+
 <nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
     <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
         <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
@@ -59,51 +47,6 @@
     </div>
 </main>
 
-<script>
-// Hamburger Menu
-const btnHam = document.getElementById('btnHamburger');
-const menuNav = document.getElementById('menuNav');
-function aturMenu() {
-    if(window.innerWidth <= 768) {
-        btnHam.style.display = 'block';
-        menuNav.style.display = 'none';
-        menuNav.style.flexDirection = 'column';
-        menuNav.style.position = 'absolute';
-        menuNav.style.top = '100%';
-        menuNav.style.left = '0';
-        menuNav.style.width = '100%';
-        menuNav.style.background = 'white';
-        menuNav.style.padding = '16px';
-        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-    } else {
-        btnHam.style.display = 'none';
-        menuNav.style.display = 'flex';
-        menuNav.style.position = 'static';
-        menuNav.style.boxShadow = 'none';
-    }
-}
-btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
-window.addEventListener('resize', aturMenu);
-aturMenu();
-
-// Logika Data
-const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-if(!sesi) { alert('⚠️ Silakan masuk dulu!'); location.href='login.html'; }
-
-document.getElementById('namaLengkap').value = sesi.namaLengkap || '';
-document.getElementById('noHp').value = sesi.nomorHp || '';
-document.getElementById('email').value = sesi.email || '';
-
-document.getElementById('formUbahProfil').addEventListener('submit', e => {
-    e.preventDefault();
-    sesi.namaLengkap = document.getElementById('namaLengkap').value.trim();
-    sesi.nomorHp = document.getElementById('noHp').value.trim();
-    sesi.email = document.getElementById('email').value.trim();
-    localStorage.setItem('sesiTeravia', JSON.stringify(sesi));
-    alert('✅ Data profil berhasil diperbarui!');
-    location.href = 'profil-member.html';
-});
-</script>
+<script src="assets/js/ubah-profil.js"></script>
 </body>
 </html>
-
