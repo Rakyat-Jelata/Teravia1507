@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     is_admin: false,
                     status_login: true
                 };
-                localStorage.setItem('sesiTeravia', JSON.stringify(sesiTrial));
+                localStorage.setItem(TERAVIA_CONFIG.STORAGE.SESSION,JSON.stringify(sesiTrial));
                 alert('✅ BERHASIL MASUK! Selamat datang Member Estate Premium!');
                 
                 // Arahkan ke halaman tujuan atau beranda
-                const tujuan = localStorage.getItem('tujuanSetelahLogin') || 'index.html';
+                const tujuan = localStorage.getItem(TERAVIA_CONFIG.STORAGE.REDIRECT)||TERAVIA_CONFIG.ROUTE.HOME;
                 localStorage.removeItem('tujuanSetelahLogin');
                 window.location.href = tujuan;
                 return;
