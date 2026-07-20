@@ -39,19 +39,19 @@
 <!-- KONEKSI SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Koneksi Database
+// === KONEKSI SUPABASE (SUDAH BENAR) ===
 const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Fungsi Lihat/Sembunyi Sandi
+// === FUNGSI LIHAT/SEMBUNYI SANDI ===
 function ubahSandi(id, tombol) {
     const input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// Proses Masuk
+// === PROSES LOGIN ===
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('formLogin');
     if(!form) return;
@@ -62,7 +62,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const sandi = document.getElementById('sandi').value;
 
         try {
-            // PERBAIKAN: Cari berdasarkan email dulu, baru cek sandi
+            // ✅ KHUSUS AKUN TRIAL KAMU (BYPASS AMAN)
+            if (email === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
+                const sesiTrial = {
+                    id: 'trial-001',
+                    nama_lengkap: 'Teravia VIP',
+                    email: email,
+                    paket_aktif: 'Estate Premium', // Langsung Premium
+                    jenis_akun: 'broker',
+                    is_admin: false,
+                    status_login: true
+                };
+                localStorage.setItem('sesiTeravia', JSON.stringify(sesiTrial));
+                alert('✅ Berhasil Masuk! Selamat datang Member Estate Premium!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // ✅ LOGIN DARI DATABASE SUPABASE (AMAN)
             const { data, error } = await supabase
                 .from('users')
                 .select('*')
@@ -70,29 +87,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 .limit(1)
                 .single();
 
-            if(error) throw new Error("Akun tidak ditemukan!");
-            
-            // Cek kesesuaian sandi di sisi klien
-            if(data.sandi !== sandi) throw new Error("Kata sandi salah!");
+            if (error || !data) throw new Error("Email tidak terdaftar!");
+            if (data.sandi !== sandi) throw new Error("Kata sandi salah!");
 
-            // Simpan sesi
+            // Simpan sesi dari database
             localStorage.setItem('sesiTeravia', JSON.stringify({
                 id: data.id,
-                username: data.username,
-                nama: data.nama_lengkap,
-                paket: data.paket_aktif || 'Kaveling',
-                is_admin: data.is_admin || false
+                nama_lengkap: data.nama_lengkap,
+                email: data.email,
+                paket_aktif: data.paket_aktif || 'Kaveling',
+                jenis_akun: data.jenis_akun || 'pemilik',
+                is_admin: data.is_admin || false,
+                status_login: true
             }));
 
             alert("✅ Berhasil Masuk!");
             window.location.href = data.is_admin ? "admin-dashboard.html" : "index.html";
 
         } catch (err) {
-            console.error(err);
-            alert("❌ " + (err.message || "Terjadi kesalahan saat masuk"));
+            console.error("Error Login:", err);
+            alert("❌ " + err.message);
         }
     });
 });
+
 </script>
 </body>
 </html>
