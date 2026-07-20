@@ -3,304 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Provinsi - Teravia</title>
+    <title>Pilih Lokasi - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
-
-        /* === HEADER === */
-        .atas-halaman {
-            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
-            color: white;
-            padding: 32px 16px;
-            text-align: center;
-        }
-        .atas-halaman h1 { font-size: 22px; margin-bottom: 4px; }
-        .atas-halaman p { font-size: 14px; opacity: 0.9; }
-
-        /* === WADAH UTAMA === */
-        .wadah {
-            max-width: 720px;
-            margin: 24px auto;
-            padding: 0 12px;
-        }
-        .judul-bagian {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            padding-left: 4px;
-            border-left: 3px solid #165DFF;
-        }
-
-        /* === GRID PROVINSI === */
-        .grid-provinsi {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .kartu-provinsi {
-            background: white;
-            border-radius: 12px;
-            padding: 16px 12px;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s ease;
-            border: 1px solid #F1F5F9;
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
-        }
-        .kartu-provinsi:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(22, 93, 255, 0.1);
-            border-color: #165DFF;
-            background: #F8FAFF;
-        }
-        .ikon-provinsi {
-            font-size: 28px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .nama-provinsi {
-            font-size: 13px;
-            font-weight: 500;
-            line-height: 1.4;
-            display: block;
-        }
-
-        /* === RESPONSIVE === */
-        @media (min-width: 768px) {
-            .grid-provinsi { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-            .kartu-provinsi { padding: 20px 16px; }
-            .nama-provinsi { font-size: 14px; }
-        }
+        .wadah { max-width: 720px; width: 90%; margin: 32px auto; padding: 0 16px; }
+        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; display:flex; align-items:center; gap:10px; }
+        .tombol-kembali { color:#165DFF; text-decoration:none; font-size:14px; font-weight:500; }
+        .item-lokasi { padding:14px 0; border-bottom:1px solid #F1F5F9; cursor:pointer; transition:0.1s; }
+        .item-lokasi:last-child { border:none; }
+        .item-lokasi:hover { padding-left:8px; color:#165DFF; }
+        .loading { text-align:center; padding:30px; color:#64748B; }
+        .breadcrumb { font-size:13px; color:#64748B; margin-bottom:12px; }
+        .breadcrumb span { margin:0 6px; }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="wadah-nav">
-        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia" style="height:32px;"></a>
-        <div class="menu-desktop">
-            <a href="index.html" class="tautan-nav">Beranda</a>
-            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
-            <a href="kalkulator-kpr.html" class="tautan-nav">🧮 Kalkulator KPR</a>
-            <a href="membership.html" class="tautan-nav">💎 Keanggotaan</a>
-            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
-            <a href="login.html" class="tautan-nav">👤 Masuk</a>
+<!-- NAVBAR SERAGAM -->
+<nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
+    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
+        </a>
+        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
+        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
+            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
+            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Cari Properti</a>
+            <a href="peta-lokasi.html" style="text-decoration:none;color:#64748B;font-weight:500;">Peta Lokasi</a>
+            <a href="mitra-notaris.html" style="text-decoration:none;color:#64748B;font-weight:500;">Mitra Notaris</a>
+            <a href="blog.html" style="text-decoration:none;color:#64748B;font-weight:500;">Blog Properti</a>
+            <a href="tentang.html" style="text-decoration:none;color:#64748B;font-weight:500;">Tentang Kami</a>
+            <a href="pages/pasang-iklan.html" style="padding:8px 14px;background:#165DFF;color:white;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;">+ Pasang Iklan</a>
+            <a href="login.html" style="text-decoration:none;color:#64748B;font-weight:500;">Masuk</a>
+            <a href="register.html" style="padding:8px 14px;background:#EFF6FF;color:#165DFF;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;">Daftar</a>
         </div>
-        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
-            <span></span><span></span><span></span>
-        </button>
     </div>
 </nav>
 
-<!-- MENU MOBILE -->
-<div id="latarGelap" class="latar-gelap"></div>
-<div id="menuMobile" class="menu-samping">
-    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup">✕</button></div>
-    <div class="isi-menu">
-        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
-        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
-        <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
-        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
-        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan</a>
-        <a href="login.html" class="tautan-menu">👤 Masuk</a>
-    </div>
-</div>
-
-<main>
-    <div class="atas-halaman">
-        <h1>📍 Pilih Provinsi</h1>
-        <p>Pilih wilayah untuk melihat daftar properti</p>
-    </div>
-
-    <div class="wadah">
-        <h2 class="judul-bagian">Semua Provinsi Indonesia</h2>
-        <div class="grid-provinsi">
-            <!-- SUMATERA -->
-            <a href="wilayah/kabupaten-aceh.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏔️</span>
-                <span class="nama-provinsi">Aceh</span>
-            </a>
-            <a href="wilayah/kabupaten-sumatera-utara.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌲</span>
-                <span class="nama-provinsi">Sumatera Utara</span>
-            </a>
-            <a href="wilayah/kabupaten-sumatera-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⛰️</span>
-                <span class="nama-provinsi">Sumatera Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-riau.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🛢️</span>
-                <span class="nama-provinsi">Riau</span>
-            </a>
-            <a href="wilayah/kabupaten-kepulauan-riau.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⛵</span>
-                <span class="nama-provinsi">Kepulauan Riau</span>
-            </a>
-            <a href="wilayah/kabupaten-jambi.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌿</span>
-                <span class="nama-provinsi">Jambi</span>
-            </a>
-            <a href="wilayah/kabupaten-sumatera-selatan.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏞️</span>
-                <span class="nama-provinsi">Sumatera Selatan</span>
-            </a>
-            <a href="wilayah/kabupaten-bangka-belitung.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌊</span>
-                <span class="nama-provinsi">Kepulauan Bangka Belitung</span>
-            </a>
-            <a href="wilayah/kabupaten-bengkulu.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌴</span>
-                <span class="nama-provinsi">Bengkulu</span>
-            </a>
-            <a href="wilayah/kabupaten-lampung.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌾</span>
-                <span class="nama-provinsi">Lampung</span>
-            </a>
-
-            <!-- JAWA -->
-            <a href="wilayah/kabupaten-banten.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏗️</span>
-                <span class="nama-provinsi">Banten</span>
-            </a>
-            <a href="wilayah/kabupaten-dki-jakarta.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏛️</span>
-                <span class="nama-provinsi">DKI Jakarta</span>
-            </a>
-            <a href="wilayah/kabupaten-jawa-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏡</span>
-                <span class="nama-provinsi">Jawa Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-jawa-tengah.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⛪</span>
-                <span class="nama-provinsi">Jawa Tengah</span>
-            </a>
-            <a href="wilayah/kabupaten-di-yogyakarta.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏰</span>
-                <span class="nama-provinsi">DI Yogyakarta</span>
-            </a>
-            <a href="wilayah/kabupaten-jawa-timur.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌽</span>
-                <span class="nama-provinsi">Jawa Timur</span>
-            </a>
-
-            <!-- KALIMANTAN -->
-            <a href="wilayah/kabupaten-kalimantan-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌳</span>
-                <span class="nama-provinsi">Kalimantan Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-kalimantan-tengah.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏕️</span>
-                <span class="nama-provinsi">Kalimantan Tengah</span>
-            </a>
-            <a href="wilayah/kabupaten-kalimantan-selatan.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🚢</span>
-                <span class="nama-provinsi">Kalimantan Selatan</span>
-            </a>
-            <a href="wilayah/kabupaten-kalimantan-timur.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏭</span>
-                <span class="nama-provinsi">Kalimantan Timur</span>
-            </a>
-            <a href="wilayah/kabupaten-kalimantan-utara.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🦅</span>
-                <span class="nama-provinsi">Kalimantan Utara</span>
-            </a>
-
-            <!-- SULAWESI -->
-            <a href="wilayah/kabupaten-sulawesi-utara.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌋</span>
-                <span class="nama-provinsi">Sulawesi Utara</span>
-            </a>
-            <a href="wilayah/kabupaten-gorontalo.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏞️</span>
-                <span class="nama-provinsi">Gorontalo</span>
-            </a>
-            <a href="wilayah/kabupaten-sulawesi-tengah.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⛰️</span>
-                <span class="nama-provinsi">Sulawesi Tengah</span>
-            </a>
-            <a href="wilayah/kabupaten-sulawesi-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏖️</span>
-                <span class="nama-provinsi">Sulawesi Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-sulawesi-selatan.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⛵</span>
-                <span class="nama-provinsi">Sulawesi Selatan</span>
-            </a>
-            <a href="wilayah/kabupaten-sulawesi-tenggara.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌊</span>
-                <span class="nama-provinsi">Sulawesi Tenggara</span>
-            </a>
-
-            <!-- NUSA TENGGARA -->
-            <a href="wilayah/kabupaten-bali.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏝️</span>
-                <span class="nama-provinsi">Bali</span>
-            </a>
-            <a href="wilayah/kabupaten-nusa-tenggara-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🐎</span>
-                <span class="nama-provinsi">Nusa Tenggara Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-nusa-tenggara-timur.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌋</span>
-                <span class="nama-provinsi">Nusa Tenggara Timur</span>
-            </a>
-
-            <!-- MALUKU & PAPUA -->
-            <a href="wilayah/kabupaten-maluku.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏝️</span>
-                <span class="nama-provinsi">Maluku</span>
-            </a>
-            <a href="wilayah/kabupaten-maluku-utara.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">⚓</span>
-                <span class="nama-provinsi">Maluku Utara</span>
-            </a>
-            <a href="wilayah/kabupaten-papua.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🦜</span>
-                <span class="nama-provinsi">Papua</span>
-            </a>
-            <a href="wilayah/kabupaten-papua-barat.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌲</span>
-                <span class="nama-provinsi">Papua Barat</span>
-            </a>
-            <a href="wilayah/kabupaten-papua-selatan.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌾</span>
-                <span class="nama-provinsi">Papua Selatan</span>
-            </a>
-            <a href="wilayah/kabupaten-papua-tengah.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏔️</span>
-                <span class="nama-provinsi">Papua Tengah</span>
-            </a>
-            <a href="wilayah/kabupaten-papua-pegunungan.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🏕️</span>
-                <span class="nama-provinsi">Papua Pegunungan</span>
-            </a>
-            <a href="wilayah/kabupaten-papua-barat-daya.html" class="kartu-provinsi">
-                <span class="ikon-provinsi">🌊</span>
-                <span class="nama-provinsi">Papua Barat Daya</span>
-            </a>
+<main class="wadah">
+    <div class="kartu">
+        <div class="judul">
+            <a href="index.html" class="tombol-kembali">← Kembali</a>
+            <span id="judulHalaman">Pilih Lokasi</span>
+        </div>
+        <div id="jalurLokasi" class="breadcrumb"></div>
+        <div id="daftarLokasi">
+            <div class="loading">Memuat data lokasi...</div>
         </div>
     </div>
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-bawah">
-            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi.</p>
-        </div>
-    </div>
-</footer>
-
-<script src="assets/js/navbar.js"></script>
 <script>
-// === SCRIPT HAMBURGER BARU ===
+// === HAMBURGER MENU ===
 const btnHam = document.getElementById('btnHamburger');
 const menuNav = document.getElementById('menuNav');
 function aturMenu() {
@@ -322,49 +81,115 @@ function aturMenu() {
         menuNav.style.boxShadow = 'none';
     }
 }
-btnHam.addEventListener('click', () => {
-    menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex';
-});
+btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
 window.addEventListener('resize', aturMenu);
 aturMenu();
 
-// === SCRIPT DAFTAR WILAYAH (TETAP DIPERTAHANKAN) ===
-const urlParams = new URLSearchParams(window.location.search);
-const provinsiDipilih = urlParams.get('provinsi');
+// === KONFIGURASI API EMSIFA (SAMA PERSIS DENGAN pasang-iklan.html) ===
+const BASE_API = "https://api.emsifa.com/api/wilayah"; // SESUAIKAN DENGAN ALAMAT YANG KAMU PAKAI DI pasang-iklan.html
+const wadah = document.getElementById('daftarLokasi');
+const judul = document.getElementById('judulHalaman');
+const jalur = document.getElementById('jalurLokasi');
 
-const dataWilayah = {
-    "DKI Jakarta": ["Jakarta Pusat", "Jakarta Utara", "Jakarta Selatan", "Jakarta Timur", "Jakarta Barat", "Kepulauan Seribu"],
-    "Jawa Barat": ["Bandung", "Bogor", "Bekasi", "Depok", "Cirebon", "Sukabumi"],
-    "Banten": ["Serang", "Tangerang", "Tangerang Selatan", "Cilegon", "Pandeglang"],
-    "Jawa Timur": ["Surabaya", "Malang", "Sidoarjo", "Gresik", "Kediri"],
-    "Bali": ["Denpasar", "Badung", "Gianyar", "Tabanan"],
-    "Jawa Tengah": ["Semarang", "Solo", "Sukoharjo", "Klaten"],
-    "Sumatera Utara": ["Medan", "Binjai", "Deli Serdang", "Langkat"]
-};
+// Baca parameter dari URL
+const url = new URLSearchParams(window.location.search);
+const provinsiId = url.get('provinsi_id');
+const kabupatenId = url.get('kabupaten_id');
+const kecamatanId = url.get('kecamatan_id');
+const namaProv = url.get('provinsi') || '';
+const namaKab = url.get('kabupaten') || '';
+const namaKec = url.get('kecamatan') || '';
 
-const wadahDaftar = document.getElementById("daftarKabupaten");
-const judulHalaman = document.getElementById("judulWilayah");
-
-if (provinsiDipilih && dataWilayah[provinsiDipilih]) {
-    judulHalaman.textContent = `Pilih Kota/Kabupaten di ${provinsiDipilih}`;
-    dataWilayah[provinsiDipilih].forEach(kab => {
-        wadahDaftar.innerHTML += `
-        <a href="daftar-properti.html?provinsi=${encodeURIComponent(provinsiDipilih)}&kabupaten=${encodeURIComponent(kab)}" 
-           style="display:block;padding:14px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;">
-            ${kab}
-        </a>`;
-    });
-} else {
-    judulHalaman.textContent = "Pilih Provinsi";
-    Object.keys(dataWilayah).forEach(prov => {
-        wadahDaftar.innerHTML += `
-        <a href="wilayah.html?provinsi=${encodeURIComponent(prov)}" 
-           style="display:block;padding:14px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;font-weight:500;">
-            ${prov}
-        </a>`;
-    });
+// === FUNGSI AMBIL DATA DARI API EMSIFA ===
+async function ambilData(endpoint, id = '') {
+    try {
+        const res = await fetch(`${BASE_API}/${endpoint}/${id}`);
+        if(!res.ok) throw new Error('Gagal memuat');
+        return await res.json();
+    } catch (err) {
+        wadah.innerHTML = `<p style="text-align:center;color:red;">Gagal memuat data lokasi. Coba lagi nanti.</p>`;
+        return [];
+    }
 }
-</script>
 
-</body>   
+// === TAMPILKAN SESUAI TINGKAT LOKASI ===
+async function tampilkanLokasi() {
+    wadah.innerHTML = `<div class="loading">Memuat...</div>`;
+
+    if(!provinsiId) {
+        // TAMPILKAN SEMUA PROVINSI
+        judul.textContent = "Pilih Provinsi";
+        jalur.innerHTML = "";
+        const provinsi = await ambilData('provinsi');
+        wadah.innerHTML = "";
+        provinsi.forEach(item => {
+            wadah.innerHTML += `
+            <div class="item-lokasi" onclick="pilihProvinsi('${item.id}', '${item.name}')">
+                ${item.name}
+            </div>`;
+        });
+    } 
+    else if(provinsiId && !kabupatenId) {
+        // TAMPILKAN KABUPATEN/KOTA DARI PROVINSI YANG DIPILIH
+        judul.textContent = `Pilih Kabupaten/Kota di ${namaProv}`;
+        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> ${namaProv}`;
+        const kabupaten = await ambilData('kabupaten', provinsiId);
+        wadah.innerHTML = "";
+        kabupaten.forEach(item => {
+            wadah.innerHTML += `
+            <div class="item-lokasi" onclick="pilihKabupaten('${item.id}', '${item.name}')">
+                ${item.name}
+            </div>`;
+        });
+    }
+    else if(provinsiId && kabupatenId && !kecamatanId) {
+        // TAMPILKAN KECAMATAN
+        judul.textContent = `Pilih Kecamatan di ${namaKab}`;
+        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
+                          <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> ${namaKab}`;
+        const kecamatan = await ambilData('kecamatan', kabupatenId);
+        wadah.innerHTML = "";
+        kecamatan.forEach(item => {
+            wadah.innerHTML += `
+            <div class="item-lokasi" onclick="pilihKecamatan('${item.id}', '${item.name}')">
+                ${item.name}
+            </div>`;
+        });
+    }
+    else if(provinsiId && kabupatenId && kecamatanId) {
+        // TAMPILKAN KELURAHAN/DESA
+        judul.textContent = `Pilih Kelurahan/Desa di ${namaKec}`;
+        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
+                          <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> 
+                          <a href="wilayah.html?provinsi_id=${provinsiId}&kabupaten_id=${kabupatenId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}" style="color:#165DFF;text-decoration:none;">${namaKab}</a> <span>›</span> ${namaKec}`;
+        const kelurahan = await ambilData('desa', kecamatanId);
+        wadah.innerHTML = "";
+        kelurahan.forEach(item => {
+            wadah.innerHTML += `
+            <div class="item-lokasi" onclick="bukaProperti('${item.name}')">
+                ${item.name}
+            </div>`;
+        });
+    }
+}
+
+// === FUNGSI PINDAH HALAMAN ===
+function pilihProvinsi(id, nama) {
+    location.href = `wilayah.html?provinsi_id=${id}&provinsi=${encodeURIComponent(nama)}`;
+}
+function pilihKabupaten(id, nama) {
+    location.href = `wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten_id=${id}&kabupaten=${encodeURIComponent(nama)}`;
+}
+function pilihKecamatan(id, nama) {
+    location.href = `wilayah.html?provinsi_id=${provinsiId}&kabupaten_id=${kabupatenId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}&kecamatan_id=${id}&kecamatan=${encodeURIComponent(nama)}`;
+}
+function bukaProperti(namaKel) {
+    // Buka daftar properti dengan filter lengkap
+    location.href = `daftar-properti.html?provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}&kecamatan=${encodeURIComponent(namaKec)}&kelurahan=${encodeURIComponent(namaKel)}`;
+}
+
+// JALANKAN SAAT HALAMAN DIBUKA
+tampilkanLokasi();
+</script>
+</body>
 </html>
