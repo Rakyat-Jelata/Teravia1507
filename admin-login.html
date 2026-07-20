@@ -5,27 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk Admin - Teravia</title>
     <link rel="icon" href="/assets/img/logo.png">
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:system-ui, sans-serif; }
-        body { 
-            background: linear-gradient(135deg, #165DFF 0%, #0F4CD0 100%); 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
-        }
-        .kotak { background: white; border-radius: 16px; padding: 32px 24px; width: 100%; max-width: 420px; }
-        h2 { text-align:center; color:#165DFF; margin-bottom:24px; }
-        .grup { margin-bottom:16px; }
-        label { display:block; margin-bottom:6px; font-weight:600; font-size:14px; }
-        input { width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:15px; }
-        button { width:100%; padding:13px; background:#165DFF; color:white; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
-        button:hover { background:#0F4CD0; }
-        .pesan { color:#ef4444; font-size:13px; margin-top:10px; text-align:center; display:none; }
-        .kembali { text-align:center; margin-top:16px; font-size:13px; }
-        .kembali a { color:#666; text-decoration:none; }
-    </style>
+    <link rel="stylesheet" href="/assets/css/admin-login.css">
 </head>
 <body>
 
@@ -48,37 +28,7 @@
     </div>
 </div>
 
-<script>
-// DATA AKUN
-const AKUN = {
-    email: "teravia.admin@gmail.com",
-    sandi: "TeraviaAdmin@2026"
-};
-
-// JALANKAN SAAT KLIK KIRIM
-document.getElementById('formLogin').addEventListener('submit', function(e){
-    e.preventDefault();
-    
-    const emailMasuk = document.getElementById('email').value.trim();
-    const sandiMasuk = document.getElementById('sandi').value.trim();
-    const pesan = document.getElementById('pesanSalah');
-
-    // COCOKKAN DATA
-    if(emailMasuk === AKUN.email && sandiMasuk === AKUN.sandi){
-        // SIMPAN DENGAN PASTI
-        localStorage.setItem('adminLogin', 'YA_SUDAH_MASUK');
-        // PINDAH HALAMAN
-        window.location.replace('/admin-dashboard.html');
-    } else {
-        pesan.style.display = 'block';
-    }
-});
-
-// JIKA SUDAH MASUK, LANGSUNG KE DASHBOARD
-if(localStorage.getItem('adminLogin') === 'YA_SUDAH_MASUK'){
-    window.location.replace('/admin-dashboard.html');
-}
-</script>
+<script src="/assets/js/admin-login.js"></script>
 </body>
-</
-    html>
+</html>
+
