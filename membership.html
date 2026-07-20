@@ -6,210 +6,7 @@
     <title>Paket Keanggotaan - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        /* === HEADER HALAMAN === */
-        .header-paket {
-            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
-            color: white;
-            padding: 40px 16px;
-            text-align: center;
-        }
-        .header-paket h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .header-paket p {
-            font-size: 15px;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* === WADAH UTAMA === */
-        .wadah-paket {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 16px;
-        }
-
-        /* === GRID PAKET SEJAJAR === */
-        .grid-tingkatan {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        .kartu-tingkatan {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            position: relative;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .kartu-tingkatan:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(22, 93, 255, 0.12);
-        }
-        .kartu-tingkatan.populer {
-            border-color: #F59E0B;
-            transform: scale(1.03);
-            z-index: 2;
-            background: linear-gradient(to bottom, #FFFBEB, white);
-        }
-        .label-populer {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #F59E0B;
-            color: white;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        /* === ISI KARTU === */
-        .ikon-paket {
-            font-size: 36px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .nama-tingkatan {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1E293B;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        .desk-paket {
-            font-size: 12px;
-            color: #64748B;
-            text-align: center;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-        .isi-fitur {
-            flex-grow: 1;
-            margin-bottom: 16px;
-        }
-        .baris-fitur {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 0;
-            font-size: 13px;
-            color: #475569;
-            border-bottom: 1px solid #F1F5F9;
-        }
-        .baris-fitur:last-child { border: none; }
-        .baris-fitur .cek { color: #10B981; font-weight: bold; }
-        .baris-fitur .silang { color: #EF4444; font-weight: bold; }
-        .harga-paket {
-            font-size: 20px;
-            font-weight: 700;
-            color: #165DFF;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .harga-paket span {
-            font-size: 12px;
-            font-weight: normal;
-            color: #94A3B8;
-        }
-        .pilih-paket {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .pilih-paket.biasa {
-            background: white;
-            border: 1px solid #165DFF;
-            color: #165DFF;
-        }
-        .pilih-paket.utama {
-            background: #165DFF;
-            color: white;
-        }
-        .pilih-paket:hover { opacity: 0.9; }
-
-        /* === PERSETUJUAN === */
-        .kotak-syarat {
-            background: #F8FAFC;
-            border: 1px solid #E2E8F0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-        .cek-syarat {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #475569;
-            line-height: 1.6;
-        }
-        .cek-syarat input {
-            margin-top: 4px;
-            width: 16px;
-            height: 16px;
-            accent-color: #165DFF;
-        }
-        .cek-syarat a {
-            color: #165DFF;
-            font-weight: 500;
-            text-decoration: none;
-        }
-        .cek-syarat a:hover { text-decoration: underline; }
-        .catatan-harga {
-            font-size: 12px;
-            color: #94A3B8;
-            line-height: 1.5;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #E2E8F0;
-        }
-        .btn-lanjut {
-            display: block;
-            width: 100%;
-            max-width: 320px;
-            margin: 0 auto;
-            padding: 12px;
-            background: #165DFF;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-lanjut:disabled {
-            background: #94A3B8;
-            cursor: not-allowed;
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 992px) {
-            .grid-tingkatan { grid-template-columns: repeat(2, 1fr); }
-            .kartu-tingkatan.populer { transform: none; }
-        }
-        @media (max-width: 576px) {
-            .grid-tingkatan { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/membership.css">
 </head>
 <body>
 
@@ -279,8 +76,6 @@
                 </div>
                 <div class="harga-paket">Rp 150.000 <span>/ bulan</span></div>
                 <button type="button" class="pilih-paket biasa">Pilih Paket</button>
-
-
             </div>
 
             <!-- PAKET 2: CLUSTER -->
@@ -297,8 +92,6 @@
                 </div>
                 <div class="harga-paket">Rp 500.000 <span>/ bulan</span></div>
                 <button type="button" class="pilih-paket biasa">Pilih Paket</button>
-
-
             </div>
 
             <!-- PAKET 3: RESIDENCE (POPULER) -->
@@ -315,12 +108,11 @@
                     <div class="baris-fitur"><span class="cek">✅</span> Boost Iklan Otomatis</div>
                 </div>
                 <div class="harga-paket">Rp 1.500.000 <span>/ bulan</span></div>
-                <button type="button" class="pilih-paket biasa">Pilih Paket</button>
-
+                <button type="button" class="pilih-paket utama">Pilih Paket</button>
             </div>
 
             <!-- PAKET 4: ESTATE -->
-            <div class="kartu-tingkatan" data-paket="Estate">
+            <div class="kartu-tingkatan" data-paket="Estate Premium">
                 <div class="ikon-paket">🏰</div>
                 <div class="nama-tingkatan">Estate Premium</div>
                 <div class="desk-paket">Tanpa batas untuk profesional</div>
@@ -333,19 +125,18 @@
                 </div>
                 <div class="harga-paket">Rp 3.500.000 <span>/ bulan</span></div>
                 <button type="button" class="pilih-paket biasa">Pilih Paket</button>
-
             </div>
         </div>
 
-        <div class="grup-input" style="margin-top:20px;">
-    <label>Apakah Anda ingin mendaftar sebagai?</label>
-    <select id="jenisAkunUpgrade" required>
-        <option value="">Pilih salah satu</option>
-        <option value="pemilik">Pemilik Properti Pribadi</option>
-        <option value="agen">Agen Properti Terdaftar</option>
-        <option value="broker">Broker / Makelar Independen</option>
-    </select>
-    <p style="font-size:12px;color:#64748B;margin-top:4px;">Status ini akan muncul di profil Anda setelah upgrade.</p>
+        <div class="grup-input">
+            <label>Apakah Anda ingin mendaftar sebagai?</label>
+            <select id="jenisAkunUpgrade" required>
+                <option value="">Pilih salah satu</option>
+                <option value="pemilik">Pemilik Properti Pribadi</option>
+                <option value="agen">Agen Properti Terdaftar</option>
+                <option value="broker">Broker / Makelar Independen</option>
+            </select>
+            <p class="keterangan-pilih">Status ini akan muncul di profil Anda setelah upgrade.</p>
         </div>
         
         <!-- PERSETUJUAN -->
@@ -394,126 +185,10 @@
     </div>
 </footer>
 
-<!-- SCRIPT -->
 <script src="assets/js/navbar.js"></script>
-<script>
-let paketTerpilih = null;
-
-// Ambil elemen DOM
-const tombolLanjut = document.getElementById('lanjutBayar');
-const kotakSetuju = document.getElementById('setujuSyarat');
-const dropdownStatus = document.getElementById('jenisAkunUpgrade');
-
-// ==============================================
-// FUNGSI PILIH PAKET (SUDAH DIPERBAIKI)
-// ==============================================
-document.querySelectorAll('.pilih-paket').forEach(tombol => {
-    tombol.addEventListener('click', () => {
-        // Hapus tanda terpilih semua kartu
-        document.querySelectorAll('.kartu-tingkatan').forEach(kartu => {
-            kartu.style.outline = '';
-            kartu.style.boxShadow = '';
-            kartu.querySelector('.pilih-paket').textContent = 'Pilih Paket';
-        });
-
-        // Tandai kartu yang dipilih
-        const kartuAktif = tombol.closest('.kartu-tingkatan');
-        kartuAktif.style.outline = '3px solid #165DFF';
-        kartuAktif.style.boxShadow = '0 0 12px rgba(22, 93, 255, 0.2)';
-        tombol.textContent = 'Terpilih ✅';
-
-        // Simpan data paket
-        paketTerpilih = kartuAktif.dataset.paket;
-        console.log("✅ Paket dipilih:", paketTerpilih);
-
-        // Cek syarat tombol lanjut
-        cekSemuaSyarat();
-    });
-});
-
-// ==============================================
-// FUNGSI CEK SYARAT TOMBOL
-// ==============================================
-function cekSemuaSyarat() {
-    const sudahPilihPaket = paketTerpilih !== null;
-    const sudahPilihStatus = dropdownStatus.value !== '';
-    const sudahSetuju = kotakSetuju.checked;
-
-    console.log("Cek syarat:", {sudahPilihPaket, sudahPilihStatus, sudahSetuju});
-
-    if (sudahPilihPaket && sudahPilihStatus && sudahSetuju) {
-        tombolLanjut.disabled = false;
-        tombolLanjut.style.opacity = '1';
-        tombolLanjut.style.cursor = 'pointer';
-    } else {
-        tombolLanjut.disabled = true;
-        tombolLanjut.style.opacity = '0.5';
-        tombolLanjut.style.cursor = 'not-allowed';
-    }
-}
-
-// ==============================================
-// AKSI TOMBOL LANJUT
-// ==============================================
-tombolLanjut.addEventListener('click', () => {
-    if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
-    if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
-    if (!dropdownStatus.value) return alert('Silakan pilih status keanggotaan Anda!');
-
-    // Cek login
-    const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-    if (!sesi) {
-        alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
-        localStorage.setItem('tujuanSetelahLogin', 'membership.html');
-        return window.location.href = 'login.html';
-    }
-
-    // Simpan data
-    sesi.paketAkanDibayar = paketTerpilih;
-    sesi.jenisAkun = dropdownStatus.value;
-    sesi.tanggalUpgrade = new Date().toLocaleString('id-ID');
-    localStorage.setItem('sesiTeravia', JSON.stringify(sesi));
-
-    // Pindah halaman
-    window.location.href = `invoice.html?jenis=paket&id=${Date.now()}`;
-});
-
-// ==============================================
-// PERBARUI CEK SETIAP ADA PERUBAHAN
-// ==============================================
-dropdownStatus.addEventListener('change', cekSemuaSyarat);
-kotakSetuju.addEventListener('change', cekSemuaSyarat);
-cekSemuaSyarat();
-
-// ==============================================
-// SCRIPT HAMBURGER MENU
-// ==============================================
-document.addEventListener('DOMContentLoaded', function () {
-    const tombolBuka = document.getElementById('tombolMenu');
-    const tombolTutup = document.getElementById('tombolTutup');
-    const menuSamping = document.getElementById('menuMobile');
-    const latarGelap = document.getElementById('latarGelap');
-
-    if (!tombolBuka || !menuSamping) return;
-
-    function bukaMenu() {
-        menuSamping.classList.add('buka');
-        if(latarGelap) latarGelap.classList.add('tampil');
-        document.body.style.overflow = 'hidden';
-    }
-    function tutupMenu() {
-        menuSamping.classList.remove('buka');
-        if(latarGelap) latarGelap.classList.remove('tampil');
-        document.body.style.overflow = 'auto';
-    }
-
-    tombolBuka.addEventListener('click', bukaMenu);
-    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
-    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
-});
-
-</script>
+<script src="assets/js/membership.js"></script>
 <script src="assets/js/sesi.js"></script>
 
 </body>
 </html>
+    
