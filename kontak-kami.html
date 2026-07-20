@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
+        .wadah { max-width: 720px; width: 90%; margin: 32px auto; padding: 0 16px; }
+        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
+        .info-kontak { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
+        .baris-info { display:flex; align-items:center; gap:10px; font-size:15px; }
+        .baris-info span:first-child { font-size:20px; min-width:28px; }
+        .grup-input { margin-bottom: 16px; }
+        .grup-input label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #334155; }
+        .grup-input input, .grup-input textarea { 
+            width: 100%; padding: 12px; border: 1px solid #CBD5E1; 
+            border-radius: 10px; font-size: 15px; font-family: inherit;
+        }
+        .grup-input input:focus, .grup-input textarea:focus { 
+            outline: none; border-color: #165DFF; 
+            box-shadow: 0 0 0 3px rgba(22,93,255,0.1); 
+        }
+        .tombol { 
+            width: 100%; padding: 13px; background: #165DFF; color: white; 
+            border: none; border-radius: 10px; font-size: 15px; 
+            font-weight: 600; cursor: pointer; transition: 0.2s; 
+        }
+        .tombol:hover { background: #0F42C1; }
+        .kembali { display: block; text-align: center; margin-top: 16px; color: #64748B; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGASI & HAMBURGER MENU -->
+<nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
+    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
+        </a>
+        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
+        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
+            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
+            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Properti</a>
+            <a href="profil-member.html" style="text-decoration:none;color:#165DFF;font-weight:600;">Profil</a>
+        </div>
+    </div>
+</nav>
+
+<main class="wadah">
+    <div class="kartu">
+        <h1 class="judul">📞 Hubungi Kami</h1>
+
+        <div class="info-kontak">
+            <div class="baris-info">
+                <span>📍</span>
+                <span>Jakarta Timur, DKI Jakarta, Indonesia</span>
+            </div>
+            <div class="baris-info">
+                <span>📧</span>
+                <span>kontak@teravia.id</span>
+            </div>
+            <div class="baris-info">
+                <span>📱</span>
+                <span>0812-3456-7890 (WhatsApp & Telepon)</span>
+            </div>
+            <div class="baris-info">
+                <span>⏰</span>
+                <span>Senin - Jumat: 09.00 - 17.00 WIB</span>
+            </div>
+        </div>
+
+        <h3 style="font-size:17px;font-weight:600;margin-bottom:16px;">Kirim Pesan</h3>
+        <form id="formKontak">
+            <div class="grup-input">
+                <label>Nama Lengkap</label>
+                <input type="text" id="namaKontak" required>
+            </div>
+            <div class="grup-input">
+                <label>Email / Nomor HP</label>
+                <input type="text" id="kontakPengirim" required>
+            </div>
+            <div class="grup-input">
+                <label>Subjek Pesan</label>
+                <input type="text" id="subjek" required>
+            </div>
+            <div class="grup-input">
+                <label>Isi Pesan</label>
+                <textarea id="isiPesan" rows="4" placeholder="Tuliskan pertanyaan atau saran Anda..." required></textarea>
+            </div>
+            <button type="submit" class="tombol">Kirim Pesan</button>
+        </form>
+
+        <a href="index.html" class="kembali">← Kembali ke Beranda</a>
+    </div>
+</main>
+
+<script>
+// === LOGIKA HAMBURGER MENU SERAGAM ===
+const btnHam = document.getElementById('btnHamburger');
+const menuNav = document.getElementById('menuNav');
+function aturMenu() {
+    if(window.innerWidth <= 768) {
+        btnHam.style.display = 'block';
+        menuNav.style.display = 'none';
+        menuNav.style.flexDirection = 'column';
+        menuNav.style.position = 'absolute';
+        menuNav.style.top = '100%';
+        menuNav.style.left = '0';
+        menuNav.style.width = '100%';
+        menuNav.style.background = 'white';
+        menuNav.style.padding = '16px';
+        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+    } else {
+        btnHam.style.display = 'none';
+        menuNav.style.display = 'flex';
+        menuNav.style.position = 'static';
+        menuNav.style.boxShadow = 'none';
+    }
+}
+btnHam.addEventListener('click', () => {
+    menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex';
+});
+window.addEventListener('resize', aturMenu);
+aturMenu();
+
+// === LOGIKA FORM KONTAK ===
+document.getElementById('formKontak').addEventListener('submit', e => {
+    e.preventDefault();
+    
+    // Ambil nilai input
+    const nama = document.getElementById('namaKontak').value.trim();
+    const hubungi = document.getElementById('kontakPengirim').value.trim();
+    const subjek = document.getElementById('subjek').value.trim();
+    const pesan = document.getElementById('isiPesan').value.trim();
+
+    // Simpan sementara ke localStorage (bisa dihubungkan ke server nanti)
+    const daftarPesan = JSON.parse(localStorage.getItem('pesanMasuk') || '[]');
+    daftarPesan.push({
+        id: Date.now(),
+        nama,
+        hubungi,
+        subjek,
+        pesan,
+        tanggal: new Date().toLocaleString('id-ID')
+    });
+    localStorage.setItem('pesanMasuk', JSON.stringify(daftarPesan));
+
+    alert('✅ Pesan berhasil terkirim! Kami akan segera menghubungi Anda maksimal 1x24 jam.');
+    e.target.reset();
+});
+</script>
+</body>
+</html>
