@@ -79,6 +79,31 @@ async function loadDashboard(){
 
 }
 
+// LOGOUT
+
+const btnLogout = document.getElementById('btnLogout');
+
+
+if(btnLogout){
+
+    btnLogout.addEventListener('click', async function(){
+
+        try{
+
+            await logoutUser();
+
+            window.location.href = '../login.html';
+
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    });
+
+}
 
 
 loadDashboard();
