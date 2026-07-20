@@ -5,81 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cari Properti di Peta - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
-        nav { background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99; }
-        .peta { width:90%; max-width:1200px; margin:20px auto; height:550px; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-        @media (max-width:768px) { .peta { height:400px; } }
-    </style>
+    <link rel="stylesheet" href="assets/css/peta-lokasi.css">
 </head>
 <body>
-<nav>
-    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
-        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+
+<!-- NAVBAR SERAGAM TERAVIA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
             <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
-            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
         </a>
-        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
-        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
-            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
-            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Properti</a>
-            <a href="profil-member.html" style="text-decoration:none;color:#165DFF;font-weight:600;">Profil</a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="wilayah.html" class="tautan-nav">Pilih Wilayah</a>
+            <a href="peta-lokasi.html" class="tautan-nav aktif">🗺️ Peta Lokasi</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="blog.html" class="tautan-nav">Blog Properti</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="tautan-nav">Masuk</a>
         </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
-<div id="peta" class="peta"></div>
+<!-- MENU SAMPING MOBILE -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="wilayah.html" class="tautan-menu">📍 Pilih Wilayah</a>
+        <a href="peta-lokasi.html" class="tautan-menu aktif">🗺️ Peta Lokasi</a>
+        <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
+        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
+        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+    </div>
+</div>
 
-<script>
-const btnHam = document.getElementById('btnHamburger');
-const menuNav = document.getElementById('menuNav');
-function aturMenu() {
-    if(window.innerWidth <= 768) {
-        btnHam.style.display = 'block';
-        menuNav.style.display = 'none';
-        menuNav.style.flexDirection = 'column';
-        menuNav.style.position = 'absolute';
-        menuNav.style.top = '100%';
-        menuNav.style.left = '0';
-        menuNav.style.width = '100%';
-        menuNav.style.background = 'white';
-        menuNav.style.padding = '16px';
-        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-    } else {
-        btnHam.style.display = 'none';
-        menuNav.style.display = 'flex';
-        menuNav.style.position = 'static';
-        menuNav.style.boxShadow = 'none';
-    }
-}
-btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
-window.addEventListener('resize', aturMenu);
-aturMenu();
+<main class="wadah-peta">
+    <h1 class="judul-halaman">🗺️ Cari Properti di Peta</h1>
+    <p class="keterangan-peta">Geser, perbesar/perkecil peta untuk melihat lokasi properti yang tersedia</p>
+    <div id="peta" class="peta"></div>
+    <div class="petunjuk">
+        <p>💡 Klik tanda lokasi untuk melihat detail properti</p>
+        <a href="daftar-properti.html" class="tombol-kembali">← Lihat Daftar Semua Properti</a>
+    </div>
+</main>
 
-// Inisialisasi Peta - Pusat di Jakarta Timur
-const peta = L.map('peta').setView([-6.215, 106.895], 12);
-
-// Pakai peta ringan OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-}).addTo(peta);
-
-// Contoh Tanda Lokasi Properti
-const properti = [
-    {nama:"Rumah Modern Cibubur", posisi:[-6.30, 106.90], harga:"Rp 950 Juta"},
-    {nama:"Tanah Kavling Pasar Rebo", posisi:[-6.28, 106.87], harga:"Rp 450 Juta"},
-    {nama:"Apartemen Strategis", posisi:[-6.20, 106.92], harga:"Rp 1,2 Miliar"}
-];
-
-properti.forEach(item => {
-    L.marker(item.posisi)
-     .addTo(peta)
-     .bindPopup(`<b>${item.nama}</b><br>${item.harga}<br><a href="#">Lihat Detail</a>`);
-});
-</script>
+<script src="assets/js/navbar.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/peta-lokasi.js"></script>
 </body>
 </html>
-
