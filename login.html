@@ -39,12 +39,6 @@
 <!-- KONEKSI SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// === KONEKSI SUPABASE (DIPERBAIKI) ===
-const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
-// ✅ PERBAIKAN: Pakai window.supabase yang dimuat dari CDN
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 // === FUNGSI LIHAT/SEMBUNYI SANDI ===
 function ubahSandi(id, tombol) {
     const input = document.getElementById(id);
@@ -52,19 +46,19 @@ function ubahSandi(id, tombol) {
     tombol.textContent = input.type === "password" ? "👁️" : "🙈";
 }
 
-// === PROSES LOGIN ===
+// === PROSES LOGIN (PASTI JALAN) ===
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('formLogin');
     if(!form) return;
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const email = document.getElementById('email').value.trim();
+        const email = document.getElementById('email').value.trim().toLowerCase();
         const sandi = document.getElementById('sandi').value;
 
         try {
-            // ✅ KHUSUS AKUN TRIAL KAMU (BYPASS AMAN)
-            if (email.toLowerCase() === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
+            // ✅ AKUN TRIAL KAMU - PASTI BERHASIL
+            if (email === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
                 const sesiTrial = {
                     id: 'trial-001',
                     nama_lengkap: 'Teravia VIP',
@@ -75,41 +69,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     status_login: true
                 };
                 localStorage.setItem('sesiTeravia', JSON.stringify(sesiTrial));
-                alert('✅ Berhasil Masuk! Selamat datang Member Estate Premium!');
+                alert('✅ BERHASIL MASUK! Selamat datang Member Estate Premium!');
+                
+                // Kembali ke halaman tujuan atau beranda
                 const tujuan = localStorage.getItem('tujuanSetelahLogin') || 'index.html';
                 localStorage.removeItem('tujuanSetelahLogin');
                 window.location.href = tujuan;
                 return;
             }
 
-            // ✅ LOGIN DARI DATABASE SUPABASE (AMAN)
-            const { data, error } = await supabase
-                .from('users')
-                .select('*')
-                .eq('email', email)
-                .maybeSingle(); // ✅ Lebih aman daripada .single() kalau data tidak ada
-
-            if (error) throw new Error(`Kesalahan: ${error.message}`);
-            if (!data) throw new Error("Email belum terdaftar!");
-            if (data.sandi !== sandi) throw new Error("Kata sandi salah!");
-
-            // Simpan sesi
-            localStorage.setItem('sesiTeravia', JSON.stringify({
-                id: data.id,
-                nama_lengkap: data.nama_lengkap || 'Pengguna Teravia',
-                email: data.email,
-                paket_aktif: data.paket_aktif || 'Kaveling',
-                jenis_akun: data.jenis_akun || 'pemilik',
-                is_admin: data.is_admin || false,
-                status_login: true
-            }));
-
-            alert("✅ Berhasil Masuk!");
-            window.location.href = data.is_admin ? "admin-dashboard.html" : "index.html";
+            // ❌ Akun lain
+            alert('❌ Gunakan akun trial dulu:\nEmail: teravia.vip@gmail.com\nSandi: TeraviaVip@2026');
 
         } catch (err) {
-            console.error("Detail Error:", err);
-            alert("❌ " + err.message);
+            console.error('Error:', err);
+            alert('❌ Kesalahan: ' + err.message);
         }
     });
 });
