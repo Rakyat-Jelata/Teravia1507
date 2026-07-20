@@ -85,8 +85,8 @@ btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.dis
 window.addEventListener('resize', aturMenu);
 aturMenu();
 
-// === KONFIGURASI API EMSIFA (SAMA PERSIS DENGAN pasang-iklan.html) ===
-const BASE_API = "https://api.emsifa.com/api/wilayah"; // SESUAIKAN DENGAN ALAMAT YANG KAMU PAKAI DI pasang-iklan.html
+// === KONFIGURASI API EMSIFA ===
+const BASE_API = "https://www.emsifa.com/api-wilayah-indonesia/api"; 
 const wadah = document.getElementById('daftarLokasi');
 const judul = document.getElementById('judulHalaman');
 const jalur = document.getElementById('jalurLokasi');
@@ -100,27 +100,35 @@ const namaProv = url.get('provinsi') || '';
 const namaKab = url.get('kabupaten') || '';
 const namaKec = url.get('kecamatan') || '';
 
-// === FUNGSI AMBIL DATA DARI API EMSIFA ===
+// === FUNGSI AMBIL DATA YANG SUDAH DIPERBAIKI ===
 async function ambilData(endpoint, id = '') {
     try {
-        const res = await fetch(`${BASE_API}/${endpoint}/${id}`);
-        if(!res.ok) throw new Error('Gagal memuat');
+        // Format URL standar EMSIFA: /{endpoint}/{id}.json
+        const urlPanggil = id ? `${BASE_API}/${endpoint}/${id}.json` : `${BASE_API}/${endpoint}.json`;
+        console.log("Memanggil:", urlPanggil); // Untuk cek di konsol
+        const res = await fetch(urlPanggil);
+        if(!res.ok) throw new Error(`Gagal: ${res.status}`);
         return await res.json();
     } catch (err) {
-        wadah.innerHTML = `<p style="text-align:center;color:red;">Gagal memuat data lokasi. Coba lagi nanti.</p>`;
+        console.error("Error API:", err);
+        wadah.innerHTML = `
+            <div style="text-align:center;padding:30px;color:#EF4444;">
+                <p>⚠️ Gagal memuat data lokasi</p>
+                <p style="font-size:13px;margin-top:8px;">${err.message}</p>
+                <button onclick="tampilkanLokasi()" style="margin-top:12px;padding:8px 16px;background:#165DFF;color:white;border:none;border-radius:8px;">Coba Lagi</button>
+            </div>`;
         return [];
     }
 }
 
-// === TAMPILKAN SESUAI TINGKAT LOKASI ===
+// === FUNGSI TAMPILKAN LOKASI ===
 async function tampilkanLokasi() {
-    wadah.innerHTML = `<div class="loading">Memuat...</div>`;
+    wadah.innerHTML = `<div style="text-align:center;padding:30px;color:#64748B;">⏳ Memuat daftar lokasi...</div>`;
 
     if(!provinsiId) {
-        // TAMPILKAN SEMUA PROVINSI
         judul.textContent = "Pilih Provinsi";
         jalur.innerHTML = "";
-        const provinsi = await ambilData('provinsi');
+        const provinsi = await ambilData('provinces');
         wadah.innerHTML = "";
         provinsi.forEach(item => {
             wadah.innerHTML += `
@@ -130,11 +138,14 @@ async function tampilkanLokasi() {
         });
     } 
     else if(provinsiId && !kabupatenId) {
-        // TAMPILKAN KABUPATEN/KOTA DARI PROVINSI YANG DIPILIH
         judul.textContent = `Pilih Kabupaten/Kota di ${namaProv}`;
         jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> ${namaProv}`;
-        const kabupaten = await ambilData('kabupaten', provinsiId);
+        const kabupaten = await ambilData('regencies', provinsiId);
         wadah.innerHTML = "";
+        if(kabupaten.length === 0) {
+            wadah.innerHTML = `<p style="text-align:center;color:#64748B;padding:30px;">Tidak ada data kabupaten/kota</p>`;
+            return;
+        }
         kabupaten.forEach(item => {
             wadah.innerHTML += `
             <div class="item-lokasi" onclick="pilihKabupaten('${item.id}', '${item.name}')">
@@ -143,11 +154,10 @@ async function tampilkanLokasi() {
         });
     }
     else if(provinsiId && kabupatenId && !kecamatanId) {
-        // TAMPILKAN KECAMATAN
         judul.textContent = `Pilih Kecamatan di ${namaKab}`;
         jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
                           <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> ${namaKab}`;
-        const kecamatan = await ambilData('kecamatan', kabupatenId);
+        const kecamatan = await ambilData('districts', kabupatenId);
         wadah.innerHTML = "";
         kecamatan.forEach(item => {
             wadah.innerHTML += `
@@ -157,12 +167,11 @@ async function tampilkanLokasi() {
         });
     }
     else if(provinsiId && kabupatenId && kecamatanId) {
-        // TAMPILKAN KELURAHAN/DESA
         judul.textContent = `Pilih Kelurahan/Desa di ${namaKec}`;
         jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
                           <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> 
                           <a href="wilayah.html?provinsi_id=${provinsiId}&kabupaten_id=${kabupatenId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}" style="color:#165DFF;text-decoration:none;">${namaKab}</a> <span>›</span> ${namaKec}`;
-        const kelurahan = await ambilData('desa', kecamatanId);
+        const kelurahan = await ambilData('villages', kecamatanId);
         wadah.innerHTML = "";
         kelurahan.forEach(item => {
             wadah.innerHTML += `
@@ -172,6 +181,7 @@ async function tampilkanLokasi() {
         });
     }
 }
+
 
 // === FUNGSI PINDAH HALAMAN ===
 function pilihProvinsi(id, nama) {
