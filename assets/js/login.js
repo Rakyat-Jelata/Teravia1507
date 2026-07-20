@@ -13,17 +13,17 @@ document
 
 
     const email =
-    document
-    .getElementById('email')
-    .value
-    .trim();
+document
+.getElementById('email')
+.value
+.trim();
 
 
-    const password =
-    document
-    .getElementById('kataSandi')
-    .value
-    .trim();
+const password =
+document
+.getElementById('sandi')
+.value
+.trim();
 
 
 
