@@ -6,46 +6,7 @@
     <title>Kebijakan Listing - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        .header-halaman {
-            background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
-            color: white;
-            padding: 40px 16px;
-            text-align: center;
-        }
-        .header-halaman h1 { font-size: 28px; margin-bottom: 8px; }
-        .wadah-isi {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 16px;
-        }
-        .blok-isi {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
-        }
-        .blok-isi h3 {
-            color: #165DFF;
-            margin-bottom: 12px;
-            font-size: 18px;
-        }
-        .blok-isi p, .blok-isi li {
-            color: #475569;
-            line-height: 1.7;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-        .blok-isi ul { padding-left: 20px; }
-        .peringatan {
-            background: #FEF2F2;
-            border-left: 4px solid #EF4444;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/kebijakan-listing.css">
 </head>
 <body>
 
@@ -167,18 +128,6 @@
 </footer>
 
 <script src="assets/js/navbar.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const tombolBuka = document.getElementById('tombolMenu');
-    const tombolTutup = document.getElementById('tombolTutup');
-    const menuSamping = document.getElementById('menuMobile');
-    const latarGelap = document.getElementById('latarGelap');
-    function bukaMenu() { menuSamping.classList.add('buka'); latarGelap.classList.add('tampil'); document.body.style.overflow = 'hidden'; }
-    function tutupMenu() { menuSamping.classList.remove('buka'); latarGelap.classList.remove('tampil'); document.body.style.overflow = 'auto'; }
-    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
-    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
-    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
-});
-</script>
+<script src="assets/js/kebijakan-listing.js"></script>
 </body>
 </html>
