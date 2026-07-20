@@ -462,6 +462,37 @@ document.addEventListener('DOMContentLoaded', function () {
     if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
     if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
 });
+    let paketTerpilih = false;
+
+// Fungsi cek apakah semua syarat terpenuhi
+function cekBisaLanjut() {
+    const setuju = document.getElementById('setujuSyarat').checked;
+    const jenisAkun = document.getElementById('jenisAkunUpgrade').value;
+    const tombol = document.getElementById('btnLanjut');
+
+    // Aktifkan tombol jika: paket sudah dipilih + status sudah dipilih + sudah dicentang
+    if(paketTerpilih && jenisAkun !== '' && setuju) {
+        tombol.disabled = false;
+        tombol.style.opacity = '1';
+        tombol.style.cursor = 'pointer';
+    } else {
+        tombol.disabled = true;
+        tombol.style.opacity = '0.5';
+        tombol.style.cursor = 'not-allowed';
+    }
+}
+
+// Contoh: saat paket dipilih, tandai sudah terpilih
+function bukaPilihanPaket() {
+    // ... kode memilih paket kamu ...
+    paketTerpilih = true;
+    document.getElementById('btnPilihPaket').textContent = 'Paket Terpilih ✅';
+    cekBisaLanjut(); // Cek ulang syarat
+}
+
+// Tambahkan juga cek saat dropdown berubah
+document.getElementById('jenisAkunUpgrade').addEventListener('change', cekBisaLanjut);
+    
 </script>
 
 </body>
