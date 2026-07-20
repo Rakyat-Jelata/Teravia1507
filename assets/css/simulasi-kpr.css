@@ -1,0 +1,140 @@
+.wadah {
+    max-width: 720px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+.judul {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+}
+.keterangan {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 12px;
+}
+
+/* Input */
+.grup-input {
+    margin-bottom: 16px;
+}
+.grup-input label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #334155;
+}
+.grup-input input, .grup-input select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border 0.2s;
+}
+.grup-input input:focus, .grup-input select:focus {
+    outline: none;
+    border-color: #165DFF;
+    box-shadow: 0 0 0 3px rgba(22,93,255,0.1);
+}
+
+.input-ganda {
+    position: relative;
+}
+.input-ganda input {
+    padding-right: 40px;
+}
+.samping-input {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748B;
+    font-weight: 500;
+}
+
+.tombol {
+    width: 100%;
+    padding: 13px;
+    background: #165DFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.tombol:hover { background: #0F42C1; }
+
+/* Hasil Simulasi */
+.hasil {
+    margin-top: 20px;
+    padding: 16px;
+    background: #F0F7FF;
+    border-radius: 12px;
+}
+.baris-hasil {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    color: #334155;
+}
+.baris-hasil.utama {
+    font-size: 16px;
+    font-weight: 700;
+    color: #165DFF;
+    border-top: 1px solid #CBD5E1;
+    padding-top: 10px;
+    margin-top: 4px;
+}
+
+/* Bank Mitra */
+.bank-mitra { margin-top: 24px; }
+.daftar-bank {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.kotak-bank {
+    padding: 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    transition: all 0.2s;
+}
+.kotak-bank:hover {
+    border-color: #165DFF;
+    background: rgba(22,93,255,0.02);
+}
+
+.catatan {
+    font-size: 12px;
+    color: #94A3B8;
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* Responsif HP */
+@media (max-width: 480px) {
+    .wadah { margin: 20px auto; }
+    .kartu { padding: 18px; }
+    .daftar-bank { grid-template-columns: repeat(2, 1fr); }
+}
