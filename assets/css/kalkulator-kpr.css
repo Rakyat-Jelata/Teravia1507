@@ -1,0 +1,116 @@
+/* === HEADER HALAMAN === */
+.header-kpr {
+    background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
+    color: white;
+    padding: 40px 16px;
+    text-align: center;
+}
+.header-kpr h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+.header-kpr p {
+    font-size: 15px;
+    opacity: 0.95;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+/* === WADAH UTAMA === */
+.wadah-kpr {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+.kotak-kalkulator {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 3px 12px rgba(22, 93, 255, 0.08);
+    margin-bottom: 24px;
+}
+.judul-bagian {
+    font-size: 18px;
+    color: #1E293B;
+    margin-bottom: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* === FORM INPUT === */
+.grup-input {
+    margin-bottom: 16px;
+}
+.grup-input label {
+    display: block;
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.grup-input input, .grup-input select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s;
+}
+.grup-input input:focus, .grup-input select:focus {
+    border-color: #165DFF;
+    box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+}
+.baris-dua {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* === HASIL PERHITUNGAN === */
+.kotak-hasil {
+    background: #F0F7FF;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #BFDBFE;
+}
+.item-hasil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #DBEAFE;
+    font-size: 14px;
+    color: #475569;
+}
+.item-hasil:last-child {
+    border-bottom: none;
+    padding-top: 14px;
+    margin-top: 6px;
+    border-top: 2px solid #165DFF;
+    font-weight: 700;
+    font-size: 16px;
+    color: #1E293B;
+}
+.nilai-hasil {
+    font-weight: 600;
+    color: #165DFF;
+}
+
+/* === INFO TAMBAHAN === */
+.info-kpr {
+    font-size: 12px;
+    color: #94A3B8;
+    margin-top: 12px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 576px) {
+    .baris-dua { grid-template-columns: 1fr; }
+    .kotak-kalkulator { padding: 20px 16px; }
+}
