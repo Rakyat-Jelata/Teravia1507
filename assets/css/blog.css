@@ -1,0 +1,144 @@
+/* === HEADER HALAMAN === */
+.header-blog {
+    background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
+    color: white;
+    padding: 40px 16px;
+    text-align: center;
+}
+.header-blog h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+.header-blog p {
+    font-size: 15px;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* === WADAH UTAMA === */
+.wadah-isi {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+.judul-bagian {
+    font-size: 22px;
+    color: #1E293B;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.judul-bagian::before {
+    content: '';
+    width: 5px;
+    height: 22px;
+    background: #165DFF;
+    border-radius: 3px;
+}
+
+/* === GRID & KARTU BLOG === */
+.grid-blog {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+.kartu-blog {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(22, 93, 255, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #F1F5F9;
+}
+.kartu-blog:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(22, 93, 255, 0.15);
+    border-color: #165DFF;
+}
+.gambar-blog {
+    height: 180px;
+    background: linear-gradient(135deg, #DBEAFE 0%, #E0F2FE 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #165DFF;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+.isi-blog {
+    padding: 20px;
+}
+.meta-blog {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.kategori-blog {
+    background: #EFF6FF;
+    color: #165DFF;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.tanggal-blog {
+    font-size: 12px;
+    color: #94A3B8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.judul-blog {
+    font-size: 19px;
+    color: #1E293B;
+    margin-bottom: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+.kartu-blog:hover .judul-blog {
+    color: #165DFF;
+}
+.ringkas-blog {
+    font-size: 14px;
+    color: #64748B;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.tautan-baca {
+    color: #165DFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+}
+.tautan-baca:hover {
+    gap: 10px;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+    .header-blog h1 { font-size: 32px; }
+    .grid-blog { grid-template-columns: repeat(2, 1fr); }
+    .gambar-blog { height: 200px; }
+    .judul-blog { font-size: 20px; }
+}
+@media (min-width: 1024px) {
+    .grid-blog { grid-template-columns: repeat(3, 1fr); }
+  }
+
