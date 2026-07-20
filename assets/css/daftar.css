@@ -1,0 +1,124 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: #F8FAFC;
+    color: #1E293B;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.wadah-utama {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 24px 0;
+}
+
+.wadah-daftar {
+    max-width: 420px;
+    width: 90%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.logo-tengah {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.logo-tengah img { height: 40px; }
+.judul-daftar {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.subjudul {
+    text-align: center;
+    font-size: 14px;
+    color: #64748B;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.grup-input {
+    margin-bottom: 16px;
+    position: relative;
+}
+.grup-input label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #334155;
+}
+.grup-input input, .grup-input select {
+    width: 100%;
+    padding: 12px 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+    background: white;
+}
+.grup-input input:focus, .grup-input select:focus {
+    outline: none;
+    border-color: #165DFF;
+    box-shadow: 0 0 0 3px rgba(22,93,255,0.1);
+}
+.grup-input input[type="password"] {
+    padding-right: 44px;
+}
+
+/* Tombol Tampil/Sembunyi Sandi */
+.tombol-mata {
+    position: absolute;
+    right: 12px;
+    top: 38px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94A3B8;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+.tombol-mata:hover { color: #165DFF; }
+
+.tombol-daftar {
+    width: 100%;
+    padding: 13px;
+    background: #165DFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+.tombol-daftar:hover { background: #0F42C1; }
+
+.tautan-masuk {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #64748B;
+}
+.tautan-masuk a {
+    color: #165DFF;
+    font-weight: 500;
+    text-decoration: none;
+}
+.tautan-masuk a:hover { text-decoration: underline; }
+
+/* Responsif HP */
+@media (max-width: 480px) {
+    .wadah-daftar { padding: 24px 18px; }
+    .judul-daftar { font-size: 20px; }
+}
