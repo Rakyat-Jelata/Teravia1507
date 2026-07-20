@@ -6,107 +6,66 @@
     <title>Iklan Saya - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        .wadah{max-width:700px;margin:20px auto;padding:0 16px;}
-        .kartu{background:white;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
-        .judul{font-weight:bold;margin-bottom:4px;}
-        .lokasi{font-size:13px;color:#666;margin-bottom:8px;}
-        .status{display:inline-block;padding:3px 8px;border-radius:4px;font-size:12px;}
-        .status.menunggu{background:#fef3c7;color:#92400e;}
-        .status.aktif{background:#f0fdf4;color:#166534;}
-        .status.tolak{background:#fef2f2;color:#dc2626;}
-        .aksi{margin-top:10px;display:flex;gap:8px;}
-        .aksi button{padding:6px 10px;border:none;border-radius:6px;font-size:13px;cursor:pointer;}
-        .btn-sundul{background:#dbeafe;color:#1d4ed8;}
-        .btn-hapus{background:#fecaca;color:#b91c1c;}
-        .kosong{text-align:center;padding:40px;color:#888;}
-    </style>
+    <link rel="stylesheet" href="assets/css/iklan-saya.css">
 </head>
 <body>
-<div class="wadah">
-    <h2>📋 Iklan Properti Saya</h2>
-    <a href="pasang-iklan.html" style="display:inline-block;margin-bottom:12px;">+ Pasang Iklan Baru</a>
-    <div id="daftarIklan"></div>
-    <p style="margin-top:20px;"><a href="profile-member.html">← Kembali ke Profil</a></p>
+
+<!-- NAVBAR SERAGAM STANDAR -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+        </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="profil-member.html" class="tautan-nav aktif">Profil Saya</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING SERAGAM -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu">
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
+    </div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="pages/pasang-iklan.html" class="tautan-menu">📢 Pasang Iklan</a>
+        <a href="profil-member.html" class="tautan-menu aktif">👤 Profil Saya</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+    </div>
 </div>
 
-<script>
-// Cek login
-const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-if(!sesi) { alert('Masuk dulu!'); location.href='login.html'; }
-
-// Muat data iklan
-const semuaIklan = JSON.parse(localStorage.getItem('daftarIklan') || '[]');
-const iklanSaya = semuaIklan.filter(i => i.pemilik === sesi.id);
-
-const wadah = document.getElementById('daftarIklan');
-if(iklanSaya.length === 0){
-    wadah.innerHTML = `<div class="kosong">Belum ada iklan yang dipasang.<br>Yuk pasang iklan pertamamu!</div>`;
-} else {
-    iklanSaya.forEach(iklan => {
-        let kelasStatus = 'menunggu';
-        if(iklan.status === 'aktif') kelasStatus = 'aktif';
-        if(iklan.status === 'ditolak') kelasStatus = 'tolak';
-
-        wadah.innerHTML += `
-        <div class="kartu">
-            <div class="judul">${iklan.judul}</div>
-            <div class="lokasi">${iklan.kabupaten}, ${iklan.provinsi}</div>
-            <span class="status ${kelasStatus}">${iklan.status || 'menunggu persetujuan'}</span>
-            <div class="aksi">
-                <button class="btn-sundul" onclick="sundulIklan('${iklan.id}')">🚀 Sundul</button>
-                <button class="btn-hapus" onclick="hapusIklan('${iklan.id}')">🗑️ Hapus</button>
-            </div>
-        </div>`;
-    });
-}
-
-// Fungsi dasar
-// Aturan batas sundul per paket
-const aturanPaket = {
-  'Kaveling': {maks:1},
-  'Cluster': {maks:4},
-  'Residence': {maks:999},
-  'Estate': {maks:999}
-};
-
-function sundulIklan(id){
-  const dataAkun = JSON.parse(localStorage.getItem('dataAkunTeravia')||'[]');
-  const akun = dataAkun.find(a=>a.id===sesi.id) || {paket:'Kaveling'};
-  const batas = aturanPaket[akun.paket].maks;
-
-  // Cek hitungan hari ini
-  const hariIni = new Date().toDateString();
-  const catatan = JSON.parse(localStorage.getItem('catatanSundul')||'{}');
-  const jumlahHariIni = (catatan[sesi.id]?.tanggal === hariIni) ? catatan[sesi.id].jumlah : 0;
-
-  if(jumlahHariIni >= batas){
-    return alert(`❌ Batas sundul hari ini sudah habis!\nPaket ${akun.paket} maksimal ${batas}x sehari.`);
-  }
-
-  // Lakukan sundul: ubah waktu jadi paling baru
-  const index = semuaIklan.findIndex(i=>i.id===id);
-  if(index > -1){
-    semuaIklan[index].waktuSundul = new Date().toISOString();
-    localStorage.setItem('daftarIklan', JSON.stringify(semuaIklan));
+<!-- KONTEN UTAMA -->
+<main class="wadah">
+    <h2>📋 Iklan Properti Saya</h2>
+    <a href="pages/pasang-iklan.html" class="tautan-tambah">+ Pasang Iklan Baru</a>
     
-    // Simpan catatan
-    catatan[sesi.id] = {tanggal: hariIni, jumlah: jumlahHariIni+1};
-    localStorage.setItem('catatanSundul', JSON.stringify(catatan));
+    <div id="daftarIklan"></div>
     
-    alert(`✅ Berhasil disundul!\nSisa hari ini: ${batas - jumlahHariIni -1} kali lagi.`);
-    location.reload();
-  }
-}
+    <p class="kembali">
+        <a href="profil-member.html">← Kembali ke Profil</a>
+    </p>
+</main>
 
-function hapusIklan(id){
-    if(confirm('Yakin hapus iklan ini?')){
-        const sisa = semuaIklan.filter(i => i.id !== id);
-        localStorage.setItem('daftarIklan', JSON.stringify(sisa));
-        location.reload();
-    }
-}
-</script>
+<!-- FOOTER SERAGAM -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bawah">
+            <p>&copy; 2026 Teravia. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/iklan-saya.js"></script>
 </body>
 </html>
-
