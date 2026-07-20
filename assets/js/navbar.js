@@ -33,25 +33,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Cek status login & level member
-const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+let sesi = null;
 
-if (sesi && sesi.statusLogin) {
-    // Ganti menu Masuk/Daftar jadi Nama Profil + Lencana Premium
-    const menuAkun = document.querySelector('.tautan-nav:contains("Masuk")');
-    if (menuAkun) {
-        menuAkun.outerHTML = `
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span style="color:#F59E0B;font-weight:600;">👑 ${sesi.namaPaket}</span>
-                <a href="profil.html" style="color:#165DFF;">👤 ${sesi.nama}</a>
-                <button onclick="keluarAkun()" style="background:none;border:none;color:#EF4444;">Keluar</button>
-            </div>
-        `;
-    }
+try {
+    sesi = JSON.parse(
+        localStorage.getItem(TERAVIA_CONFIG.STORAGE.SESSION)
+    );
+} catch (e) {
+    sesi = null;
+}
+
+if (sesi && sesi.status_login) {
+    
 }
 
 // Fungsi Keluar
 function keluarAkun() {
-    localStorage.removeItem('sesiTeravia');
+    localStorage.removeItem(TERAVIA_CONFIG.STORAGE.SESSION
+);
     alert('Berhasil keluar!');
-    window.location.href = 'login.html';
+    window.location.href = TERAVIA_CONFIG.ROUTE.LOGIN;
 }
