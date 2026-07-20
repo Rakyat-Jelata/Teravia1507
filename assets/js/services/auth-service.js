@@ -4,26 +4,32 @@
    assets/js/services/auth-service.js
 ========================================================== */
 
+
+// REGISTER USER
 async function registerUser(data) {
 
     const { nama, jenisAkun, noHp, email, password } = data;
 
-    // 1. Buat akun di Supabase Auth
+
+    // 1. Buat akun Supabase Auth
     const { data: authData, error: authError } =
-        await supabase.auth.signUp({
+        await supabaseClient.auth.signUp({
             email: email,
             password: password
         });
+
 
     if (authError) {
         throw authError;
     }
 
+
     const user = authData.user;
 
-    // 2. Simpan data tambahan ke profiles
+
+    // 2. Simpan profile user
     const { error: profileError } =
-        await supabase
+        await supabaseClient
             .from('profiles')
             .insert([
                 {
@@ -36,48 +42,66 @@ async function registerUser(data) {
                 }
             ]);
 
+
     if (profileError) {
         throw profileError;
     }
 
+
     return user;
+
 }
 
 
-// Login
+
+// LOGIN USER
 async function loginUser(email, password) {
 
     const { data, error } =
-        await supabase.auth.signInWithPassword({
+        await supabaseClient.auth.signInWithPassword({
             email,
             password
         });
 
+
     if (error) {
         throw error;
     }
 
+
     return data;
+
 }
 
 
-// Logout
+
+// LOGOUT USER
 async function logoutUser() {
 
     const { error } =
-        await supabase.auth.signOut();
+        await supabaseClient.auth.signOut();
+
 
     if (error) {
         throw error;
     }
+
 }
 
 
-// Cek user aktif
+
+// GET USER AKTIF
 async function getCurrentUser() {
 
-    const { data } =
-        await supabase.auth.getUser();
+    const { data, error } =
+        await supabaseClient.auth.getUser();
+
+
+    if (error) {
+        throw error;
+    }
+
 
     return data.user;
+
 }
