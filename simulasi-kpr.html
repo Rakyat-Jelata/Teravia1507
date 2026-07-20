@@ -6,72 +6,86 @@
     <title>Simulasi KPR - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
-        .wadah { max-width: 720px; width: 90%; margin: 32px auto; padding: 0 16px; }
-        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; }
-        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
-        .grup-input { margin-bottom: 16px; }
-        .grup-input label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #334155; }
-        .grup-input input, .grup-input select { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 15px; }
-        .tombol { width: 100%; padding: 13px; background: #165DFF; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; }
-        .hasil { margin-top:20px; padding:16px; background:#F0F7FF; border-radius:12px; }
-        .baris-hasil { display:flex; justify-content:space-between; padding:6px 0; font-size:14px; }
-        .baris-hasil.utama { font-size:16px; font-weight:700; color:#165DFF; border-top:1px solid #CBD5E1; padding-top:10px; margin-top:4px; }
-        .bank-mitra { margin-top:24px; }
-        .daftar-bank { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-top:12px; }
-        .kotak-bank { padding:12px; border:1px solid #E2E8F0; border-radius:10px; text-align:center; font-size:14px; font-weight:500; }
-    </style>
+    <link rel="stylesheet" href="assets/css/simulasi-kpr.css">
 </head>
 <body>
-<nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
-    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
-        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+
+<!-- NAVBAR SERAGAM TERAVIA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
             <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
-            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
         </a>
-        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
-        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
-            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
-            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Properti</a>
-            <a href="profil-member.html" style="text-decoration:none;color:#165DFF;font-weight:600;">Profil</a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="simulasi-kpr.html" class="tautan-nav aktif">🏦 Simulasi KPR</a>
+            <a href="profil-member.html" class="tautan-nav">Profil</a>
         </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
+<!-- MENU SAMPING MOBILE -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="simulasi-kpr.html" class="tautan-menu aktif">🏦 Simulasi KPR</a>
+        <a href="profil-member.html" class="tautan-menu">👤 Profil Saya</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">Keluar</a>
+    </div>
+</div>
+
 <main class="wadah">
     <div class="kartu">
-        <h1 class="judul">🏦 Simulasi KPR</h1>
+        <h1 class="judul">🏦 Simulasi Pembiayaan KPR</h1>
+        
         <div class="grup-input">
             <label>Harga Properti (Rp)</label>
-            <input type="number" id="harga" placeholder="500000000" required>
+            <input type="number" id="harga" placeholder="Contoh: 500000000" min="10000000" required>
         </div>
+
         <div class="grup-input">
-            <label>Uang Muka (% minimal 10%)</label>
-            <input type="number" id="persenUangMuka" value="10" min="10" max="50">
+            <label>Uang Muka (Minimal 10%)</label>
+            <div class="input-ganda">
+                <input type="number" id="persenUangMuka" value="10" min="10" max="50">
+                <span class="samping-input">%</span>
+            </div>
         </div>
+
         <div class="grup-input">
-            <label>Jangka Waktu KPR (Tahun)</label>
+            <label>Jangka Waktu KPR</label>
             <select id="tahun">
                 <option value="5">5 Tahun</option>
                 <option value="10">10 Tahun</option>
                 <option value="15">15 Tahun</option>
-                <option value="20">20 Tahun</option>
+                <option value="20" selected>20 Tahun</option>
                 <option value="25">25 Tahun</option>
                 <option value="30">30 Tahun</option>
             </select>
         </div>
+
         <div class="grup-input">
-            <label>Suku Bunga Tahunan (%)</label>
-            <input type="number" id="bunga" value="6.5" step="0.1">
+            <label>Suku Bunga Tahunan Efektif</label>
+            <div class="input-ganda">
+                <input type="number" id="bunga" value="6.5" min="3" max="15" step="0.1">
+                <span class="samping-input">%</span>
+            </div>
         </div>
+
         <button class="tombol" onclick="hitungKPR()">Hitung Simulasi</button>
         <div id="hasilSimulasi"></div>
     </div>
 
     <div class="kartu bank-mitra">
-        <h2 class="judul">🏛️ Daftar Bank Mitra KPR</h2>
+        <h2 class="judul">🏛️ Bank Mitra KPR Terpercaya</h2>
+        <p class="keterangan">Teravia bekerja sama dengan bank-bank resmi di Indonesia untuk memudahkan pengajuan KPR Anda.</p>
         <div class="daftar-bank">
             <div class="kotak-bank">Bank BCA</div>
             <div class="kotak-bank">Bank BRI</div>
@@ -83,58 +97,11 @@
             <div class="kotak-bank">Bank Danamon</div>
         </div>
     </div>
+
+    <p class="catatan">* Hasil simulasi bersifat perkiraan, suku bunga dan syarat resmi mengikuti ketentuan bank yang bersangkutan.</p>
 </main>
 
-<script>
-const btnHam = document.getElementById('btnHamburger');
-const menuNav = document.getElementById('menuNav');
-function aturMenu() {
-    if(window.innerWidth <= 768) {
-        btnHam.style.display = 'block';
-        menuNav.style.display = 'none';
-        menuNav.style.flexDirection = 'column';
-        menuNav.style.position = 'absolute';
-        menuNav.style.top = '100%';
-        menuNav.style.left = '0';
-        menuNav.style.width = '100%';
-        menuNav.style.background = 'white';
-        menuNav.style.padding = '16px';
-        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-    } else {
-        btnHam.style.display = 'none';
-        menuNav.style.display = 'flex';
-        menuNav.style.position = 'static';
-        menuNav.style.boxShadow = 'none';
-    }
-}
-btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
-window.addEventListener('resize', aturMenu);
-aturMenu();
-
-function hitungKPR(){
-    const harga = parseFloat(document.getElementById('harga').value);
-    const persenUangMuka = parseFloat(document.getElementById('persenUangMuka').value);
-    const tahun = parseInt(document.getElementById('tahun').value);
-    const bunga = parseFloat(document.getElementById('bunga').value);
-
-    const uangMuka = harga * persenUangMuka / 100;
-    const pinjaman = harga - uangMuka;
-    const bungaBulanan = bunga / 100 / 12;
-    const bulan = tahun * 12;
-
-    const angsuran = pinjaman * (bungaBulanan * Math.pow(1 + bungaBulanan, bulan)) / (Math.pow(1 + bungaBulanan, bulan) - 1);
-    const totalBayar = angsuran * bulan;
-
-    document.getElementById('hasilSimulasi').innerHTML = `
-    <div class="hasil">
-        <div class="baris-hasil"><span>Uang Muka</span><span>Rp ${uangMuka.toLocaleString('id-ID')}</span></div>
-        <div class="baris-hasil"><span>Pinjaman</span><span>Rp ${pinjaman.toLocaleString('id-ID')}</span></div>
-        <div class="baris-hasil"><span>Jangka Waktu</span><span>${tahun} Tahun</span></div>
-        <div class="baris-hasil utama"><span>Angsuran per Bulan</span><span>Rp ${Math.round(angsuran).toLocaleString('id-ID')}</span></div>
-        <div class="baris-hasil"><span>Total Pembayaran</span><span>Rp ${Math.round(totalBayar).toLocaleString('id-ID')}</span></div>
-    </div>`;
-}
-</script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/simulasi-kpr.js"></script>
 </body>
 </html>
-
