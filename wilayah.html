@@ -300,17 +300,71 @@
 
 <script src="assets/js/navbar.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const tombolBuka = document.getElementById('tombolMenu');
-    const tombolTutup = document.getElementById('tombolTutup');
-    const menuSamping = document.getElementById('menuMobile');
-    const latarGelap = document.getElementById('latarGelap');
-    function bukaMenu() { menuSamping.classList.add('buka'); latarGelap.classList.add('tampil'); document.body.style.overflow='hidden'; }
-    function tutupMenu() { menuSamping.classList.remove('buka'); latarGelap.classList.remove('tampil'); document.body.style.overflow='auto'; }
-    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
-    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
-    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
+// === SCRIPT HAMBURGER BARU ===
+const btnHam = document.getElementById('btnHamburger');
+const menuNav = document.getElementById('menuNav');
+function aturMenu() {
+    if(window.innerWidth <= 768) {
+        btnHam.style.display = 'block';
+        menuNav.style.display = 'none';
+        menuNav.style.flexDirection = 'column';
+        menuNav.style.position = 'absolute';
+        menuNav.style.top = '100%';
+        menuNav.style.left = '0';
+        menuNav.style.width = '100%';
+        menuNav.style.background = 'white';
+        menuNav.style.padding = '16px';
+        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+    } else {
+        btnHam.style.display = 'none';
+        menuNav.style.display = 'flex';
+        menuNav.style.position = 'static';
+        menuNav.style.boxShadow = 'none';
+    }
+}
+btnHam.addEventListener('click', () => {
+    menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex';
 });
+window.addEventListener('resize', aturMenu);
+aturMenu();
+
+// === SCRIPT DAFTAR WILAYAH (TETAP DIPERTAHANKAN) ===
+const urlParams = new URLSearchParams(window.location.search);
+const provinsiDipilih = urlParams.get('provinsi');
+
+const dataWilayah = {
+    "DKI Jakarta": ["Jakarta Pusat", "Jakarta Utara", "Jakarta Selatan", "Jakarta Timur", "Jakarta Barat", "Kepulauan Seribu"],
+    "Jawa Barat": ["Bandung", "Bogor", "Bekasi", "Depok", "Cirebon", "Sukabumi"],
+    "Banten": ["Serang", "Tangerang", "Tangerang Selatan", "Cilegon", "Pandeglang"],
+    "Jawa Timur": ["Surabaya", "Malang", "Sidoarjo", "Gresik", "Kediri"],
+    "Bali": ["Denpasar", "Badung", "Gianyar", "Tabanan"],
+    "Jawa Tengah": ["Semarang", "Solo", "Sukoharjo", "Klaten"],
+    "Sumatera Utara": ["Medan", "Binjai", "Deli Serdang", "Langkat"]
+};
+
+const wadahDaftar = document.getElementById("daftarKabupaten");
+const judulHalaman = document.getElementById("judulWilayah");
+
+if (provinsiDipilih && dataWilayah[provinsiDipilih]) {
+    judulHalaman.textContent = `Pilih Kota/Kabupaten di ${provinsiDipilih}`;
+    dataWilayah[provinsiDipilih].forEach(kab => {
+        wadahDaftar.innerHTML += `
+        <a href="daftar-properti.html?provinsi=${encodeURIComponent(provinsiDipilih)}&kabupaten=${encodeURIComponent(kab)}" 
+           style="display:block;padding:14px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;">
+            ${kab}
+        </a>`;
+    });
+} else {
+    judulHalaman.textContent = "Pilih Provinsi";
+    Object.keys(dataWilayah).forEach(prov => {
+        wadahDaftar.innerHTML += `
+        <a href="wilayah.html?provinsi=${encodeURIComponent(prov)}" 
+           style="display:block;padding:14px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;font-weight:500;">
+            ${prov}
+        </a>`;
+    });
+}
 </script>
+
 </body>   
 </html>
