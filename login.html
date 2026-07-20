@@ -36,61 +36,10 @@
     </div>
 </div>
 
-<!-- KONEKSI SUPABASE -->
+<!-- KONEKSI SUPABASE (SIAP PAKAI) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/sesi.js"></script>
-<script>
-// === FUNGSI LIHAT/SEMBUNYI SANDI ===
-function ubahSandi(id, tombol) {
-    const input = document.getElementById(id);
-    input.type = input.type === "password" ? "text" : "password";
-    tombol.textContent = input.type === "password" ? "👁️" : "🙈";
-}
+<script src="assets/js/sesi.js"></script>
+<script src="assets/js/login.js"></script>
 
-// === PROSES LOGIN (PASTI JALAN) ===
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('formLogin');
-    if(!form) return;
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim().toLowerCase();
-        const sandi = document.getElementById('sandi').value;
-
-        try {
-            // ✅ AKUN TRIAL KAMU - PASTI BERHASIL
-            if (email === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
-                const sesiTrial = {
-                    id: 'trial-001',
-                    nama_lengkap: 'Teravia VIP',
-                    email: email,
-                    paket_aktif: 'Estate Premium',
-                    jenis_akun: 'broker',
-                    is_admin: false,
-                    status_login: true
-                };
-                localStorage.setItem('sesiTeravia', JSON.stringify(sesiTrial));
-                alert('✅ BERHASIL MASUK! Selamat datang Member Estate Premium!');
-                
-                // Kembali ke halaman tujuan atau beranda
-                const tujuan = localStorage.getItem('tujuanSetelahLogin') || 'index.html';
-                localStorage.removeItem('tujuanSetelahLogin');
-                window.location.href = tujuan;
-                return;
-            }
-
-            // ❌ Akun lain
-            alert('❌ Gunakan akun trial dulu:\nEmail: teravia.vip@gmail.com\nSandi: TeraviaVip@2026');
-
-        } catch (err) {
-            console.error('Error:', err);
-            alert('❌ Kesalahan: ' + err.message);
-        }
-    });
-});
-
-</script>
-    
 </body>
 </html>
-
