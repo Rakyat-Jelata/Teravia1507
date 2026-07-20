@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Masuk - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/pesan-masuk.css">
+</head>
+<body>
+
+<!-- NAVBAR SERAGAM TERAVIA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+        </a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="profil-member.html" class="tautan-nav">Profil Akun</a>
+            <a href="pesan-masuk.html" class="tautan-nav aktif">💬 Pesan</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING MOBILE -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu">
+        <button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button>
+    </div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="profil-member.html" class="tautan-menu">👤 Profil Akun</a>
+        <a href="pesan-masuk.html" class="tautan-menu aktif">💬 Pesan Masuk</a>
+        <div class="garis-pemisah"></div>
+        <a href="login.html" class="tautan-menu">Keluar</a>
+    </div>
+</div>
+
+<main class="wadah">
+    <div class="kartu">
+        <h1 class="judul">💬 Pesan Masuk</h1>
+        
+        <!-- Tampilan saat belum ada pesan -->
+        <div class="kosong">
+            <p class="ikon-kosong">📭</p>
+            <h3>Belum ada pesan masuk</h3>
+            <p>Pesan dari penjual, pembeli, atau mitra akan muncul di sini setelah Anda berinteraksi melalui daftar properti.</p>
+            <a href="daftar-properti.html" class="tombol-aksi">Cari Properti Sekarang</a>
+        </div>
+
+        <!-- Nanti saat ada pesan, tampilkan daftar seperti ini:
+        <div class="daftar-pesan">
+            <div class="item-pesan">
+                <div class="pengirim">Budi Santoso</div>
+                <div class="subjek">Tanya detail rumah di Jakarta Selatan</div>
+                <div class="waktu">2 jam lalu</div>
+            </div>
+        </div>
+        -->
+    </div>
+</main>
+
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/sesi.js"></script>
+<script>
+// Cek status login otomatis lewat sesi.js, jika perlu tambahan:
+const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+if (!sesi) {
+    alert('⚠️ Silakan masuk terlebih dahulu untuk melihat pesan!');
+    window.location.href = 'login.html';
+}
+</script>
+</body>
+</html>
