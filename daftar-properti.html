@@ -6,267 +6,11 @@
     <title>Cari Properti - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        /* === SEMUA GAYA KHUSUS HALAMAN INI, TIDAK BENTROK === */
-        * { box-sizing: border-box; margin:0; padding:0; }
-
-        /* === HEADER UTAMA === */
-        .header-pencarian {
-    background: linear-gradient(rgba(22, 93, 255, 0.75), rgba(15, 66, 193, 0.8)), url('assets/img/HERO-BG.jpg') center/cover no-repeat !important;
-    color: white;
-    padding: 32px 16px 48px;
-    text-align: center;
-}
-
-        .header-pencarian h1 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-        .header-pencarian p {
-            font-size: 15px;
-            margin-bottom: 24px;
-            opacity: 0.95;
-        }
-        .tab-pencarian {
-            display: flex;
-            max-width: 600px;
-            margin: 0 auto 16px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .tab-pencarian button {
-            flex:1;
-            padding: 12px;
-            border: none;
-            background: transparent;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tab-pencarian button.aktif {
-            background: white;
-            color: #165DFF;
-            border-radius: 8px;
-            margin: 4px;
-        }
-        .kotak-pencarian {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            background: white;
-            border-radius: 12px;
-            padding: 10px 14px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-        .kotak-pencarian input {
-            flex:1;
-            border: none;
-            outline: none;
-            font-size: 15px;
-            padding-left: 8px;
-            color: #333;
-        }
-        .kotak-pencarian input::placeholder { color: #999; }
-        .kotak-pencarian button {
-            background: #165DFF;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* === BAGIAN PROPERTI UNGGULAN & TERBARU === */
-        .bagian-spesial {
-            padding: 24px 16px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .judul-bagian {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .judul-bagian h2 {
-            font-size: 18px;
-            color: #1E293B;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .judul-bagian a {
-            font-size: 14px;
-            color: #165DFF;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .grid-spesial {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
-        .kartu-spesial {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
-        }
-        .kartu-spesial:hover { transform: translateY(-3px); }
-        .gambar-spesial {
-            height: 160px;
-            background: #E2E8F0;
-            position: relative;
-        }
-        .label-spesial {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #F59E0B;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .isi-spesial { padding: 12px; }
-        .harga-spesial {
-            font-size: 16px;
-            font-weight: 700;
-            color: #165DFF;
-            margin-bottom: 6px;
-        }
-        .judul-spesial {
-            font-size: 14px;
-            color: #1E293B;
-            margin-bottom: 6px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .lokasi-spesial {
-            font-size: 12px;
-            color: #64748B;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* === FILTER & DAFTAR PROPERTI === */
-        .baris-filter {
-            max-width: 1200px;
-            margin: 0 auto 24px;
-            padding: 0 16px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .btn-filter {
-            padding: 10px 16px;
-            border: 1px solid #E2E8F0;
-            background: white;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-filter.aktif {
-            background: #165DFF;
-            color: white;
-            border-color: #165DFF;
-            font-weight: 600;
-        }
-        .pilih-filter {
-            padding: 10px 14px;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            font-size: 14px;
-            background: white;
-            flex:1;
-            min-width: 140px;
-        }
-        .grid-kartu-properti {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
-        }
-        .kartu-properti {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .gambar-properti {
-            height: 170px;
-            position: relative;
-        }
-        .isi-kartu { padding: 14px; }
-        .harga {
-            font-size: 17px;
-            font-weight: 700;
-            color: #165DFF;
-            margin-bottom: 6px;
-        }
-        .isi-kartu h4 {
-            font-size: 15px;
-            color: #1E293B;
-            margin-bottom: 6px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .lokasi {
-            font-size: 13px;
-            color: #64748B;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .spesifikasi {
-            display: flex;
-            gap: 12px;
-            font-size: 13px;
-            color: #475569;
-            flex-wrap: wrap;
-        }
-        .label-unggulan, .label-baru, .label-sewa {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-        }
-        .label-unggulan { background: #F59E0B; }
-        .label-baru { background: #10B981; }
-        .label-sewa { background: #8B5CF6; }
-
-        /* === RESPONSIVE KHUSUS === */
-        @media (max-width: 768px) {
-            .header-pencarian { padding: 24px 12px 36px; }
-            .header-pencarian h1 { font-size: 20px; }
-            .grid-spesial, .grid-kartu-properti { grid-template-columns: 1fr; }
-            .baris-filter { padding: 0 12px; }
-            .pilih-filter { min-width: 100%; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/daftar-properti.css">
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM STANDAR -->
+<!-- NAVBAR SERAGAM -->
 <nav class="navbar">
     <div class="wadah-nav">
         <a href="index.html" class="logo">
@@ -287,7 +31,7 @@
     </div>
 </nav>
 
-<!-- MENU SAMPING DIPERBARUI: DITAMBAHKAN KALKULATOR KPR -->
+<!-- MENU SAMPING -->
 <div id="latarGelap" class="latar-gelap"></div>
 <div id="menuMobile" class="menu-samping">
     <div class="tutup-menu">
@@ -310,7 +54,7 @@
 
 <!-- KONTEN UTAMA -->
 <main>
-    <!-- HEADER & PENCARIAN UTAMA -->
+    <!-- HEADER & PENCARIAN -->
     <div class="header-pencarian">
         <h1>Jual Beli dan Sewa Properti Jadi Mudah</h1>
         <p>Temukan rumah, apartemen, atau lahan impian di seluruh Indonesia</p>
@@ -320,7 +64,7 @@
             <button id="tabBaru">Properti Baru</button>
         </div>
         <div class="kotak-pencarian">
-            <span style="color:#165DFF; font-size:18px;">🔍</span>
+            <span>🔍</span>
             <input type="text" placeholder="Lokasi, kata kunci, tipe properti, atau pengembang">
             <button>Cari</button>
         </div>
@@ -428,7 +172,6 @@
         </div>
 
         <div class="grid-kartu-properti" id="wadahIklan">
-            <!-- KARTU CONTOH 1 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #e2e8f0;">
                     <span class="label-unggulan">⭐ Unggulan</span>
@@ -444,8 +187,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- KARTU CONTOH 2 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #cbd5e1;">
                     <span class="label-baru">Baru</span>
@@ -461,8 +202,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- KARTU CONTOH 3 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #e2e8f0;">
                     <span class="label-sewa">Sewa</span>
@@ -478,8 +217,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- KARTU CONTOH 4 -->
             <div class="kartu-properti">
                 <div class="gambar-properti" style="background: #cbd5e1;">
                     <span class="label-baru">Baru</span>
@@ -498,7 +235,7 @@
     </div>
 </main>
 
-<!-- FOOTER SERAGAM -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
         <div class="footer-baris">
@@ -527,46 +264,7 @@
     </div>
 </footer>
 
-<!-- SCRIPT PENTING -->
 <script src="assets/js/navbar.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let tujuan = urlParams.get('tujuan') || 'beli';
-    const btnBeli = document.getElementById('btnFilterBeli');
-    const btnSewa = document.getElementById('btnFilterSewa');
-    const tabBeli = document.getElementById('tabBeli');
-    const tabSewa = document.getElementById('tabSewa');
-    const tabBaru = document.getElementById('tabBaru');
-
-    function tandaiTombol() {
-        if (tujuan === 'beli') {
-            btnBeli.classList.add('aktif');
-            btnSewa.classList.remove('aktif');
-            tabBeli.classList.add('aktif');
-            tabSewa.classList.remove('aktif');
-            tabBaru.classList.remove('aktif');
-        } else if (tujuan === 'sewa') {
-            btnSewa.classList.add('aktif');
-            btnBeli.classList.remove('aktif');
-            tabSewa.classList.add('aktif');
-            tabBeli.classList.remove('aktif');
-            tabBaru.classList.remove('aktif');
-        } else {
-            tabBaru.classList.add('aktif');
-            tabBeli.classList.remove('aktif');
-            tabSewa.classList.remove('aktif');
-        }
-    }
-    tandaiTombol();
-
-    btnBeli.addEventListener('click', () => { tujuan = 'beli'; tandaiTombol(); });
-    btnSewa.addEventListener('click', () => { tujuan = 'sewa'; tandaiTombol(); });
-    tabBeli.addEventListener('click', () => { tujuan = 'beli'; tandaiTombol(); });
-    tabSewa.addEventListener('click', () => { tujuan = 'sewa'; tandaiTombol(); });
-    tabBaru.addEventListener('click', () => { tujuan = 'baru'; tandaiTombol(); });
-});
-</script>
-
+<script src="assets/js/daftar-properti.js"></script>
 </body>
 </html>
