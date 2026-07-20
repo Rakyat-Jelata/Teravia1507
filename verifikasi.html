@@ -4,30 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verifikasi Akun - Teravia</title>
-  <style>
-    .wadah{max-width:400px;margin:100px auto;text-align:center;padding:20px;}
-    .berhasil{color:green;} .gagal{color:red;}
-  </style>
+  <link rel="stylesheet" href="assets/css/verifikasi.css">
 </head>
 <body>
 <div class="wadah">
   <h2 id="pesan"></h2>
-  <a href="/login.html">→ Masuk Sekarang</a>
+  <a href="login.html">→ Masuk Sekarang</a>
 </div>
 
-<script>
-const emailVerif = new URLSearchParams(window.location.search).get('email');
-const semuaUser = JSON.parse(localStorage.getItem('teravia_users') || '[]');
-const user = semuaUser.find(u => u.email === emailVerif);
-
-if(user){
-  user.terverifikasi = true;
-  localStorage.setItem('teravia_users', JSON.stringify(semuaUser));
-  document.getElementById('pesan').innerHTML = '✅ Akunmu sudah aktif!';
-} else {
-  document.getElementById('pesan').innerHTML = '❌ Tautan tidak valid atau sudah kadaluarsa';
-}
-</script>
+<script src="assets/js/verifikasi.js"></script>
 </body>
-</html
-  >
+</html>
