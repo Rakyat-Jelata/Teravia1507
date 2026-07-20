@@ -17,14 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             // ✅ AKUN TRIAL - SELALU BERHASIL
-            if (email === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
+            if (
+    email === TERAVIA_CONFIG.TRIAL.EMAIL &&
+    sandi === TERAVIA_CONFIG.TRIAL.PASSWORD) {
                 const sesiTrial = {
-                    id: 'trial-001',
-                    nama_lengkap: 'Teravia VIP',
+                    id: TERAVIA_CONFIG.MEMBER.ID,
+                    nama_lengkap: TERAVIA_CONFIG.MEMBER.NAME,
                     email: email,
-                    paket_aktif: 'Estate Premium',
-                    jenis_akun: 'broker',
-                    is_admin: false,
+                    paket_aktif: TERAVIA_CONFIG.MEMBER.PACKAGE,
+                    jenis_akun: TERAVIA_CONFIG.MEMBER.ROLE,
+                    is_admin: TERAVIA_CONFIG.MEMBER.ADMIN,
                     status_login: true
                 };
                 localStorage.setItem(TERAVIA_CONFIG.STORAGE.SESSION,JSON.stringify(sesiTrial));
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Arahkan ke halaman tujuan atau beranda
                 const tujuan = localStorage.getItem(TERAVIA_CONFIG.STORAGE.REDIRECT)||TERAVIA_CONFIG.ROUTE.HOME;
-                localStorage.removeItem('tujuanSetelahLogin');
+                localStorage.removeItem(TERAVIA_CONFIG.STORAGE.REDIRECT);
                 window.location.href = tujuan;
                 return;
             }
