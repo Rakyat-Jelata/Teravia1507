@@ -3,11 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // BACA DATA SESI DENGAN AMAN
     let sesi;
     try {
-        sesi = JSON.parse(localStorage.getItem('sesiTeravia') || '{}');
-    } catch {
-        sesi = {};
-    }
-    console.log("📥 Data Sesi Dibaca:", sesi);
+        sesi = JSON.parse(
+    localStorage.getItem(TERAVIA_CONFIG.STORAGE.SESSION) || '{}'
+);
 
     // TENTUKAN JALUR RELATIF (untuk file di folder pages/)
     const jalurDasar = location.pathname.includes('/pages/') ? '../' : '';
@@ -69,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // === FUNGSI KELUAR AKUN ===
 function keluarAkun() {
-    localStorage.removeItem('sesiTeravia');
+    localStorage.removeItem(TERAVIA_CONFIG.STORAGE.SESSION);
     alert('✅ Berhasil Keluar Akun!');
-    window.location.href = 'index.html';
+    window.location.href = TERAVIA_CONFIG.ROUTE.HOME;
 }
