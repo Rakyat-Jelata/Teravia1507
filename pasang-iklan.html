@@ -1,0 +1,1737 @@
+<!-- ==========================================================
+     STEP 1 - DATA PROPERTI
+========================================================== -->
+
+<section class="form-step active" id="step1">
+
+    <h2>🏠 Data Properti</h2>
+    <p>Lengkapi informasi dasar properti Anda.</p>
+
+    <!-- Status Iklan -->
+    <div class="form-group">
+        <label>Status Iklan <span>*</span></label><label>
+            <input type="radio" name="status" value="jual" required>Dijual</label>
+        <label><input type="radio" name="status" value="sewa">Disewa></label>
+    </div>
+
+    <!-- Kategori -->
+    <div class="form-group">
+        <label for="kategori">Kategori Properti <span>*</span></label>
+
+        <select id="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="hunian">Hunian</option>
+            <option value="komersial">Komersial</option>
+            <option value="tanah">Tanah & Lahan</option>
+            <option value="institusi">Institusi & Fasilitas</option>
+        </select>
+    </div>
+
+    <!-- Jenis -->
+    <div class="form-group">
+        <label for="jenis">Jenis Properti <span>*</span></label>
+
+        <select id="jenis" required>
+            <option value="">Pilih Jenis Properti</option>
+        </select>
+    </div>
+
+    <!-- Judul -->
+    <div class="form-group">
+        <label for="judul">Judul Iklan <span>*</span></label>
+
+        <input type="text" id="judul" maxlength="100" placeholder="Contoh: Rumah Minimalis 2 Lantai di Bogor" required>
+
+        <small id="counterJudul">0 / 100</small>
+    </div>
+
+    <!-- Kode Referensi -->
+    <div class="form-group">
+        <label for="kodeReferensi">Kode Referensi</label>
+
+        <input
+            type="text"
+            id="kodeReferensi"
+            placeholder="Opsional">
+    </div>
+
+    <!-- Kondisi -->
+    <div class="form-group">
+        <label for="kondisi">Kondisi Properti <span>*</span></label>
+
+        <select id="kondisi" required>
+            <option value="">Pilih Kondisi</option>
+            <option value="baru">Baru</option>
+            <option value="bekas">Bekas</option>
+            <option value="pembangunan">Dalam Pembangunan</option>
+        </select>
+    </div>
+
+    <!-- Status Kepemilikan -->
+    <div class="form-group">
+        <label for="kepemilikan">Status Kepemilikan <span>*</span></label>
+
+        <select id="kepemilikan" required>
+            <option value="">Pilih Status</option>
+            <option value="pemilik">Pemilik Langsung</option>
+            <option value="agen">Agen</option>
+            <option value="broker">Broker</option>
+            <option value="developer">Developer</option>
+        </select>
+    </div>
+
+    <!-- Legalitas -->
+    <div class="form-group">
+        <label for="legalitas">Legalitas <span>*</span></label>
+
+        <select id="legalitas" required>
+            <option value="">Pilih Legalitas</option>
+            <option>SHM</option>
+            <option>SHGB</option>
+            <option>AJB</option>
+            <option>PPJB</option>
+            <option>Hak Pakai</option>
+            <option>HGU</option>
+            <option>Girik</option>
+            <option>Letter C</option>
+            <option>Lainnya</option>
+        </select>
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+        <button type="button" id="btnDraft">
+            Simpan Draft
+        </button>
+
+        <button type="button" id="btnStep2">
+            Lanjut →
+        </button>
+    </div>
+</section>
+<!-- ==========================================================
+     STEP 2 - DETAIL PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step2">
+
+    <h2>📐 Detail Properti</h2>
+    <p>Lengkapi spesifikasi utama properti Anda.</p>
+
+    <!-- Luas Tanah -->
+    <div class="form-group">
+        <label for="luasTanah">
+            Luas Tanah (m²) <span>*</span>
+        </label>
+
+        <input
+            type="number"
+            id="luasTanah"
+            min="0"
+            placeholder="Contoh: 120"
+            required>
+    </div>
+
+    <!-- Luas Bangunan -->
+    <div class="form-group">
+        <label for="luasBangunan">
+            Luas Bangunan (m²)
+        </label>
+
+        <input
+            type="number"
+            id="luasBangunan"
+            min="0"
+            placeholder="Contoh: 90">
+    </div>
+
+    <!-- Dimensi -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label for="panjang">
+                Panjang (m)
+            </label>
+
+            <input
+                type="number"
+                id="panjang"
+                min="0"
+                step="0.1"
+                placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="lebar">
+                Lebar (m)
+            </label>
+
+            <input
+                type="number"
+                id="lebar"
+                min="0"
+                step="0.1"
+                placeholder="0">
+        </div>
+
+    </div>
+
+    <!-- Kamar -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label for="kamarTidur">
+                Kamar Tidur
+            </label>
+
+            <input
+                type="number"
+                id="kamarTidur"
+                min="0"
+                placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="kamarMandi">
+                Kamar Mandi
+            </label>
+
+            <input
+                type="number"
+                id="kamarMandi"
+                min="0"
+                placeholder="0">
+        </div>
+
+    </div>
+
+    <!-- Lantai -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label for="jumlahLantai">
+                Jumlah Lantai
+            </label>
+
+            <input
+                type="number"
+                id="jumlahLantai"
+                min="1"
+                placeholder="1">
+        </div>
+
+        <div class="form-group">
+            <label for="tahunBangun">
+                Tahun Dibangun
+            </label>
+
+            <input
+                type="number"
+                id="tahunBangun"
+                min="1900"
+                max="2100"
+                placeholder="2020">
+        </div>
+
+    </div>
+
+    <!-- Parkir -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label for="garasi">
+                Garasi
+            </label>
+
+            <input
+                type="number"
+                id="garasi"
+                min="0"
+                placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="carport">
+                Carport
+            </label>
+
+            <input
+                type="number"
+                id="carport"
+                min="0"
+                placeholder="0">
+        </div>
+
+    </div>
+
+    <!-- Hadap -->
+    <div class="form-group">
+        <label for="hadapBangunan">
+            Hadap Bangunan
+        </label>
+
+        <select id="hadapBangunan">
+            <option value="">Pilih Arah</option>
+            <option>Utara</option>
+            <option>Timur Laut</option>
+            <option>Timur</option>
+            <option>Tenggara</option>
+            <option>Selatan</option>
+            <option>Barat Daya</option>
+            <option>Barat</option>
+            <option>Barat Laut</option>
+        </select>
+    </div>
+
+    <!-- Furnished -->
+    <div class="form-group">
+        <label for="furnished">
+            Furnished
+        </label>
+
+        <select id="furnished">
+            <option value="">Pilih</option>
+            <option value="full">Full Furnished</option>
+            <option value="semi">Semi Furnished</option>
+            <option value="non">Non Furnished</option>
+        </select>
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+        <button
+            type="button"
+            id="btnStep1">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep3">
+            Lanjut →
+        </button>
+    </div>
+
+          </section>
+
+<!-- ==========================================================
+     STEP 3 - HARGA
+========================================================== -->
+
+<section class="form-step" id="step3">
+
+    <h2>💰 Harga Properti</h2>
+    <p>Tentukan harga jual atau sewa properti Anda.</p>
+
+    <!-- Harga -->
+    <div class="form-group">
+        <label for="harga">
+            Harga Properti <span>*</span>
+        </label>
+
+        <input
+            type="number"
+            id="harga"
+            min="0"
+            placeholder="Contoh: 850000000"
+            required>
+    </div>
+
+    <!-- Status Harga -->
+    <div class="form-group">
+        <label for="statusHarga">
+            Status Harga
+        </label>
+
+        <select id="statusHarga">
+            <option value="tetap">Harga Tetap</option>
+            <option value="nego">Bisa Nego</option>
+            <option value="cash">Cash Only</option>
+            <option value="kpr">Bisa KPR</option>
+            <option value="cash_kpr">Cash / KPR</option>
+        </select>
+    </div>
+
+    <!-- Biaya Tambahan -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label for="ipl">
+                IPL / Service Charge
+            </label>
+
+            <input
+                type="number"
+                id="ipl"
+                min="0"
+                placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="pbb">
+                PBB / Tahun
+            </label>
+
+            <input
+                type="number"
+                id="pbb"
+                min="0"
+                placeholder="0">
+        </div>
+
+    </div>
+
+    <!-- Harga per Meter -->
+    <div class="form-group">
+        <label for="hargaMeter">
+            Harga per m²
+        </label>
+
+        <input
+            type="text"
+            id="hargaMeter"
+            readonly
+            placeholder="Otomatis dihitung">
+    </div>
+
+    <!-- Catatan Harga -->
+    <div class="form-group">
+        <label for="catatanHarga">
+            Catatan Harga
+        </label>
+
+        <textarea
+            id="catatanHarga"
+            rows="3"
+            placeholder="Contoh: Harga masih bisa dinegosiasikan untuk pembeli serius."></textarea>
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep2">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep4">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 4 - LOKASI PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step4">
+
+    <h2>📍 Lokasi Properti</h2>
+    <p>Tentukan lokasi properti secara lengkap.</p>
+
+    <!-- Provinsi -->
+    <div class="form-group">
+        <label for="provinsi">
+            Provinsi <span>*</span>
+        </label>
+
+        <select id="provinsi" required>
+            <option value="">Pilih Provinsi</option>
+        </select>
+    </div>
+
+    <!-- Kabupaten -->
+    <div class="form-group">
+        <label for="kabupaten">
+            Kabupaten / Kota <span>*</span>
+        </label>
+
+        <select id="kabupaten" required disabled>
+            <option value="">Pilih Kabupaten / Kota</option>
+        </select>
+    </div>
+
+    <!-- Kecamatan -->
+    <div class="form-group">
+        <label for="kecamatan">
+            Kecamatan <span>*</span>
+        </label>
+
+        <select id="kecamatan" required disabled>
+            <option value="">Pilih Kecamatan</option>
+        </select>
+    </div>
+
+    <!-- Kelurahan -->
+    <div class="form-group">
+        <label for="kelurahan">
+            Desa / Kelurahan <span>*</span>
+        </label>
+
+        <select id="kelurahan" required disabled>
+            <option value="">Pilih Desa / Kelurahan</option>
+        </select>
+    </div>
+
+    <!-- Kode Pos -->
+    <div class="form-group">
+        <label for="kodePos">
+            Kode Pos
+        </label>
+
+        <input
+            type="text"
+            id="kodePos"
+            maxlength="5"
+            placeholder="Contoh: 16111">
+    </div>
+
+    <!-- Alamat -->
+    <div class="form-group">
+        <label for="alamat">
+            Alamat Lengkap <span>*</span>
+        </label>
+
+        <textarea
+            id="alamat"
+            rows="4"
+            placeholder="Nama jalan, nomor rumah, RT/RW, patokan lokasi"
+            required></textarea>
+    </div>
+
+    <!-- Google Maps -->
+    <div class="form-group">
+        <label for="maps">
+            Link Google Maps
+        </label>
+
+        <input
+            type="url"
+            id="maps"
+            placeholder="https://maps.google.com/...">
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep3">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep5">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 5 - LEGALITAS PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step5">
+
+    <h2>📄 Legalitas Properti</h2>
+    <p>Lengkapi informasi dokumen dan status kepemilikan properti.</p>
+
+    <!-- Jenis Legalitas -->
+    <div class="form-group">
+        <label for="legalitas">
+            Jenis Legalitas <span>*</span>
+        </label>
+
+        <select
+            id="legalitas"
+            required>
+
+            <option value="">Pilih Legalitas</option>
+            <option value="shm">SHM</option>
+            <option value="shgb">SHGB</option>
+            <option value="hak_pakai">Hak Pakai</option>
+            <option value="hgu">HGU</option>
+            <option value="ajb">AJB</option>
+            <option value="ppjb">PPJB</option>
+            <option value="girik">Girik</option>
+            <option value="letter_c">Letter C</option>
+            <option value="lainnya">Lainnya</option>
+
+        </select>
+    </div>
+
+    <!-- Nomor Sertifikat -->
+    <div class="form-group">
+        <label for="nomorSertifikat">
+            Nomor Sertifikat
+        </label>
+
+        <input
+            type="text"
+            id="nomorSertifikat"
+            placeholder="Opsional">
+    </div>
+
+    <!-- IMB / PBG -->
+    <div class="form-group">
+        <label for="imb">
+            IMB / PBG
+        </label>
+
+        <select id="imb">
+
+            <option value="">Pilih</option>
+            <option value="ada">Ada</option>
+            <option value="tidak">Tidak Ada</option>
+            <option value="proses">Sedang Diproses</option>
+
+        </select>
+    </div>
+
+    <!-- Status Pajak -->
+    <div class="form-group">
+        <label for="pajak">
+            Status PBB
+        </label>
+
+        <select id="pajak">
+
+            <option value="">Pilih</option>
+            <option value="lunas">Lunas</option>
+            <option value="belum">Belum Lunas</option>
+
+        </select>
+    </div>
+
+    <!-- Keterangan -->
+    <div class="form-group">
+        <label for="keteranganLegalitas">
+            Keterangan
+        </label>
+
+        <textarea
+            id="keteranganLegalitas"
+            rows="3"
+            placeholder="Tambahkan informasi legalitas bila diperlukan"></textarea>
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep4">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep6">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 6 - SPESIFIKASI PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step6">
+
+    <h2>⚙️ Spesifikasi Properti</h2>
+    <p>Lengkapi spesifikasi dan utilitas properti.</p>
+
+    <!-- Listrik -->
+    <div class="form-group">
+        <label for="dayaListrik">
+            Daya Listrik
+        </label>
+
+        <select id="dayaListrik">
+            <option value="">Pilih Daya</option>
+            <option>450 VA</option>
+            <option>900 VA</option>
+            <option>1.300 VA</option>
+            <option>2.200 VA</option>
+            <option>3.500 VA</option>
+            <option>4.400 VA</option>
+            <option>5.500 VA</option>
+            <option>> 6.600 VA</option>
+        </select>
+    </div>
+
+    <!-- Air -->
+    <div class="form-group">
+        <label for="sumberAir">
+            Sumber Air
+        </label>
+
+        <select id="sumberAir">
+            <option value="">Pilih Sumber Air</option>
+            <option>PDAM</option>
+            <option>Sumur Bor</option>
+            <option>Sumur Gali</option>
+            <option>Air Pegunungan</option>
+        </select>
+    </div>
+
+    <!-- Internet -->
+    <div class="form-group">
+        <label for="internet">
+            Internet
+        </label>
+
+        <select id="internet">
+            <option value="">Pilih</option>
+            <option>Fiber Optik</option>
+            <option>Wireless</option>
+            <option>Belum Tersedia</option>
+        </select>
+    </div>
+
+    <!-- Jalan -->
+    <div class="form-group">
+        <label for="lebarJalan">
+            Lebar Jalan Depan
+        </label>
+
+        <input
+            type="number"
+            id="lebarJalan"
+            min="0"
+            step="0.5"
+            placeholder="Meter">
+    </div>
+
+    <!-- Akses -->
+    <div class="form-group">
+        <label for="aksesJalan">
+            Akses Jalan
+        </label>
+
+        <select id="aksesJalan">
+            <option value="">Pilih</option>
+            <option>Motor</option>
+            <option>Mobil</option>
+            <option>Truk</option>
+            <option>Kontainer</option>
+        </select>
+    </div>
+
+    <!-- Hadap -->
+    <div class="form-group">
+        <label for="hadap">
+            Hadap Properti
+        </label>
+
+        <select id="hadap">
+            <option value="">Pilih Arah</option>
+            <option>Utara</option>
+            <option>Timur Laut</option>
+            <option>Timur</option>
+            <option>Tenggara</option>
+            <option>Selatan</option>
+            <option>Barat Daya</option>
+            <option>Barat</option>
+            <option>Barat Laut</option>
+        </select>
+    </div>
+
+    <!-- Kondisi -->
+    <div class="form-group">
+        <label for="kondisiBangunan">
+            Kondisi Bangunan
+        </label>
+
+        <select id="kondisiBangunan">
+            <option value="">Pilih</option>
+            <option>Baru</option>
+            <option>Sangat Baik</option>
+            <option>Baik</option>
+            <option>Perlu Renovasi Ringan</option>
+            <option>Perlu Renovasi Total</option>
+        </select>
+    </div>
+
+    <!-- Deskripsi -->
+    <div class="form-group">
+        <label for="deskripsi">
+            Deskripsi Properti
+        </label>
+
+        <textarea
+            id="deskripsi"
+            rows="6"
+            maxlength="3000"
+            placeholder="Jelaskan keunggulan properti Anda..."></textarea>
+
+        <small id="counterDeskripsi">
+            0 / 3000
+        </small>
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep5">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep7">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 7 - FASILITAS PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step7">
+
+    <h2>⭐ Fasilitas Properti</h2>
+    <p>Pilih fasilitas yang tersedia pada properti.</p>
+
+    <!-- Fasilitas Dalam Rumah -->
+    <div class="form-group">
+
+        <label>🏠 Fasilitas Bangunan</label>
+
+        <div class="checkbox-grid">
+
+            <label><input type="checkbox" value="ac"> AC</label>
+            <label><input type="checkbox" value="water_heater"> Water Heater</label>
+            <label><input type="checkbox" value="kitchen_set"> Kitchen Set</label>
+            <label><input type="checkbox" value="wifi"> WiFi</label>
+            <label><input type="checkbox" value="telepon"> Telepon</label>
+            <label><input type="checkbox" value="cctv"> CCTV</label>
+            <label><input type="checkbox" value="balkon"> Balkon</label>
+            <label><input type="checkbox" value="gudang"> Gudang</label>
+            <label><input type="checkbox" value="taman"> Taman</label>
+            <label><input type="checkbox" value="kolam_renang"> Kolam Renang</label>
+
+        </div>
+
+    </div>
+
+    <!-- Fasilitas Lingkungan -->
+    <div class="form-group">
+
+        <label>🌳 Fasilitas Lingkungan</label>
+
+        <div class="checkbox-grid">
+
+            <label><input type="checkbox" value="security"> Keamanan 24 Jam</label>
+            <label><input type="checkbox" value="one_gate"> One Gate System</label>
+            <label><input type="checkbox" value="club_house"> Club House</label>
+            <label><input type="checkbox" value="gym"> Gym</label>
+            <label><input type="checkbox" value="playground"> Playground</label>
+            <label><input type="checkbox" value="jogging_track"> Jogging Track</label>
+            <label><input type="checkbox" value="masjid"> Masjid</label>
+            <label><input type="checkbox" value="taman_bermain"> Taman Bermain</label>
+
+        </div>
+
+    </div>
+
+    <!-- Fasilitas Sekitar -->
+    <div class="form-group">
+
+        <label>📍 Dekat Dengan</label>
+
+        <div class="checkbox-grid">
+
+            <label><input type="checkbox" value="tol"> Gerbang Tol</label>
+            <label><input type="checkbox" value="stasiun"> Stasiun</label>
+            <label><input type="checkbox" value="terminal"> Terminal</label>
+            <label><input type="checkbox" value="bandara"> Bandara</label>
+            <label><input type="checkbox" value="rumah_sakit"> Rumah Sakit</label>
+            <label><input type="checkbox" value="sekolah"> Sekolah</label>
+            <label><input type="checkbox" value="kampus"> Kampus</label>
+            <label><input type="checkbox" value="mall"> Mall</label>
+            <label><input type="checkbox" value="pasar"> Pasar</label>
+
+        </div>
+
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep6">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep8">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 8 - MEDIA PROPERTI
+========================================================== -->
+
+<section class="form-step" id="step8">
+
+    <h2>📸 Media Properti</h2>
+    <p>Upload foto, denah, video, dan brosur properti.</p>
+
+    <!-- Foto Properti -->
+    <div class="form-group">
+
+        <label>
+            Foto Properti <span>*</span>
+        </label>
+
+        <input
+            type="file"
+            id="fotoProperti"
+            accept="image/*"
+            multiple>
+
+        <small>
+            Maksimal 10 foto (JPG, PNG, WEBP)
+        </small>
+
+        <div id="previewFoto" class="preview-grid"></div>
+
+    </div>
+
+    <!-- Foto Cover -->
+    <div class="form-group">
+
+        <label>
+            Foto Cover
+        </label>
+
+        <small>
+            Pilih salah satu foto sebagai cover utama.
+        </small>
+
+    </div>
+
+    <!-- Denah -->
+    <div class="form-group">
+
+        <label>
+            Denah Bangunan
+        </label>
+
+        <input
+            type="file"
+            id="denahBangunan"
+            accept="image/*,.pdf">
+
+        <small>
+            JPG, PNG atau PDF
+        </small>
+
+    </div>
+
+    <!-- Video -->
+    <div class="form-group">
+
+        <label>
+            Video Properti
+        </label>
+
+        <input
+            type="url"
+            id="videoProperti"
+            placeholder="https://youtube.com/...">
+
+    </div>
+
+    <!-- Brosur -->
+    <div class="form-group">
+
+        <label>
+            Brosur Properti
+        </label>
+
+        <input
+            type="file"
+            id="brosur"
+            accept=".pdf">
+
+        <small>
+            Format PDF
+        </small>
+
+    </div>
+
+    <!-- Virtual Tour -->
+    <div class="form-group">
+
+        <label>
+            Virtual Tour 360°
+        </label>
+
+        <input
+            type="url"
+            id="virtualTour"
+            placeholder="https://...">
+
+    </div>
+
+    <!-- Tombol -->
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep7">
+            ← Kembali
+        </button>
+
+        <button
+            type="button"
+            id="btnStep9">
+            Lanjut →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 9 - AI ASSISTANT
+========================================================== -->
+
+<section class="form-step" id="step9">
+
+    <h2>🤖 AI Assistant</h2>
+    <p>Biarkan AI membantu membuat iklan yang lebih menarik.</p>
+
+    <!-- Judul -->
+    <div class="form-group">
+
+        <label>Judul Properti</label>
+
+        <textarea
+            id="aiJudul"
+            rows="2"
+            placeholder="Judul akan muncul di sini..."></textarea>
+
+        <button
+            type="button"
+            id="generateJudul">
+            ✨ Generate Judul
+        </button>
+
+    </div>
+
+    <!-- Deskripsi -->
+    <div class="form-group">
+
+        <label>Deskripsi Properti</label>
+
+        <textarea
+            id="aiDeskripsi"
+            rows="8"
+            placeholder="Deskripsi akan muncul di sini..."></textarea>
+
+        <div class="button-group">
+
+            <button
+                type="button"
+                id="generateDeskripsi">
+
+                ✨ Generate Deskripsi
+
+            </button>
+
+            <button
+                type="button"
+                id="improveDeskripsi">
+
+                🪄 Perbaiki Deskripsi
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Caption -->
+
+    <div class="form-group">
+
+        <label>Caption Media Sosial</label>
+
+        <div class="button-group">
+
+            <button
+                type="button"
+                id="captionFacebook">
+
+                Facebook
+
+            </button>
+
+            <button
+                type="button"
+                id="captionInstagram">
+
+                Instagram
+
+            </button>
+
+            <button
+                type="button"
+                id="captionThreads">
+
+                Threads
+
+            </button>
+
+            <button
+                type="button"
+                id="captionWhatsApp">
+
+                WhatsApp
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Tombol -->
+
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep8">
+
+            ← Kembali
+
+        </button>
+
+        <button
+            type="button"
+            id="btnStep10">
+
+            Lanjut →
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 10 - INFORMASI PENJUAL
+========================================================== -->
+
+<section class="form-step" id="step10">
+
+    <h2>👤 Informasi Penjual</h2>
+    <p>Data ini akan ditampilkan pada halaman detail properti.</p>
+
+    <!-- Nama -->
+    <div class="form-group">
+
+        <label for="namaPenjual">
+            Nama Penjual
+        </label>
+
+        <input
+            type="text"
+            id="namaPenjual"
+            readonly>
+
+    </div>
+
+    <!-- Jenis Akun -->
+    <div class="form-group">
+
+        <label for="jenisAkun">
+            Status Penjual
+        </label>
+
+        <input
+            type="text"
+            id="jenisAkun"
+            readonly>
+
+    </div>
+
+    <!-- Nomor WhatsApp -->
+    <div class="form-group">
+
+        <label for="whatsapp">
+            Nomor WhatsApp
+        </label>
+
+        <input
+            type="tel"
+            id="whatsapp">
+
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            readonly>
+
+    </div>
+
+    <!-- Tampilkan Nomor -->
+    <div class="form-group">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="tampilkanNomor"
+                checked>
+
+            Tampilkan nomor WhatsApp kepada calon pembeli
+
+        </label>
+
+    </div>
+
+    <!-- Hubungi via WhatsApp -->
+    <div class="form-group">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="chatWhatsapp"
+                checked>
+
+            Izinkan calon pembeli menghubungi melalui WhatsApp
+
+        </label>
+
+    </div>
+
+    <!-- Tombol -->
+
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep9">
+
+            ← Kembali
+
+        </button>
+
+        <button
+            type="button"
+            id="btnStep11">
+
+            Lanjut →
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 11 - PREVIEW IKLAN
+========================================================== -->
+
+<section class="form-step" id="step11">
+
+    <h2>👁️ Preview Iklan</h2>
+    <p>Periksa kembali informasi sebelum dipublikasikan.</p>
+
+    <!-- Cover -->
+
+    <div class="preview-cover">
+
+        <img
+            id="previewCover"
+            src="../assets/img/no-image.jpg"
+            alt="Preview Properti">
+
+    </div>
+
+    <!-- Judul -->
+
+    <div class="preview-card">
+
+        <h3 id="previewJudul">
+            Judul Properti
+        </h3>
+
+        <h2 id="previewHarga">
+            Rp 0
+        </h2>
+
+        <span id="previewStatus">
+            Dijual
+        </span>
+
+    </div>
+
+    <!-- Ringkasan -->
+
+    <div class="preview-card">
+
+        <h4>Ringkasan</h4>
+
+        <ul>
+
+            <li id="previewKategori"></li>
+
+            <li id="previewJenis"></li>
+
+            <li id="previewLT"></li>
+
+            <li id="previewLB"></li>
+
+            <li id="previewKT"></li>
+
+            <li id="previewKM"></li>
+
+            <li id="previewLegalitas"></li>
+
+        </ul>
+
+    </div>
+
+    <!-- Lokasi -->
+
+    <div class="preview-card">
+
+        <h4>Lokasi</h4>
+
+        <p id="previewAlamat"></p>
+
+    </div>
+
+    <!-- Fasilitas -->
+
+    <div class="preview-card">
+
+        <h4>Fasilitas</h4>
+
+        <div id="previewFasilitas"></div>
+
+    </div>
+
+    <!-- Deskripsi -->
+
+    <div class="preview-card">
+
+        <h4>Deskripsi</h4>
+
+        <p id="previewDeskripsi"></p>
+
+    </div>
+
+    <!-- AI Score -->
+
+    <div class="preview-card">
+
+        <h4>🤖 AI Property Score</h4>
+
+        <div id="aiScore">
+
+            0 / 100
+
+        </div>
+
+    </div>
+
+    <!-- Tombol -->
+
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep10">
+
+            ← Kembali
+
+        </button>
+
+        <button
+            type="button"
+            id="btnStep12">
+
+            Lanjut →
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 12 - PROMOSIKAN IKLAN
+========================================================== -->
+
+<section class="form-step" id="step12">
+
+    <h2>🚀 Promosikan Iklan</h2>
+    <p>Tingkatkan jangkauan iklan Anda dengan fitur promosi.</p>
+
+    <!-- Sundul -->
+    <div class="promo-card">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="autoSundul">
+
+            <strong>🔄 Sundul Otomatis</strong>
+
+        </label>
+
+        <small>
+            Iklan otomatis naik ke atas hasil pencarian setiap hari.
+        </small>
+
+    </div>
+
+    <!-- Featured -->
+    <div class="promo-card">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="featuredListing">
+
+            <strong>⭐ Featured Listing</strong>
+
+        </label>
+
+        <small>
+            Tampil pada bagian Properti Pilihan dan halaman utama.
+        </small>
+
+    </div>
+
+    <!-- Meta Ads -->
+    <div class="promo-card">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="metaAds">
+
+            <strong>📢 Meta Ads</strong>
+
+        </label>
+
+        <small>
+            Iklan dipromosikan ke Facebook & Instagram.
+        </small>
+
+    </div>
+
+    <!-- Estimasi -->
+
+    <div id="metaAdsConfig" style="display:none;">
+
+        <div class="form-group">
+
+            <label for="budgetAds">
+                Budget Iklan
+            </label>
+
+            <select id="budgetAds">
+
+                <option value="">Pilih Budget</option>
+
+                <option value="50000">
+                    Rp50.000
+                </option>
+
+                <option value="100000">
+                    Rp100.000
+                </option>
+
+                <option value="250000">
+                    Rp250.000
+                </option>
+
+                <option value="500000">
+                    Rp500.000
+                </option>
+
+                <option value="1000000">
+                    Rp1.000.000
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="durasiAds">
+                Durasi
+            </label>
+
+            <select id="durasiAds">
+
+                <option>3 Hari</option>
+                <option>5 Hari</option>
+                <option>7 Hari</option>
+                <option>14 Hari</option>
+                <option>30 Hari</option>
+
+            </select>
+
+        </div>
+
+        <div class="promo-summary">
+
+            <p>Biaya Meta Ads</p>
+
+            <h3 id="estimasiAds">
+
+                Rp0
+
+            </h3>
+
+            <small>
+
+                Sudah termasuk biaya pengelolaan TERAVIA.
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Ringkasan -->
+
+    <div class="promo-summary">
+
+        <h3>Total Biaya</h3>
+
+        <h2 id="totalPromo">
+
+            Rp0
+
+        </h2>
+
+    </div>
+
+    <!-- Tombol -->
+
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep11">
+
+            ← Kembali
+
+        </button>
+
+        <button
+            type="button"
+            id="btnStep13">
+
+            Lanjut →
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     STEP 13 - PUBLIKASIKAN IKLAN
+========================================================== -->
+
+<section class="form-step" id="step13">
+
+    <h2>📢 Publikasikan Iklan</h2>
+
+    <p>
+        Semua data telah lengkap. Silakan periksa ringkasan berikut sebelum mempublikasikan iklan.
+    </p>
+
+    <!-- Ringkasan -->
+
+    <div class="summary-card">
+
+        <h3>Ringkasan Listing</h3>
+
+        <div id="summaryListing"></div>
+
+    </div>
+
+    <!-- Membership -->
+
+    <div class="summary-card">
+
+        <h3>Status Membership</h3>
+
+        <p id="membershipInfo">
+            -
+        </p>
+
+    </div>
+
+    <!-- AI Audit -->
+
+    <div class="summary-card">
+
+        <h3>🤖 AI Final Audit</h3>
+
+        <div id="finalAudit"></div>
+
+    </div>
+
+    <!-- Persetujuan -->
+
+    <div class="form-group">
+
+        <label class="checkbox-item">
+
+            <input
+                type="checkbox"
+                id="agreePublish"
+                required>
+
+            Saya menyatakan seluruh data yang saya masukkan benar dan dapat dipertanggungjawabkan.
+
+        </label>
+
+    </div>
+
+    <!-- Tombol -->
+
+    <div class="step-action">
+
+        <button
+            type="button"
+            id="btnStep12">
+
+            ← Kembali
+
+        </button>
+
+        <button
+            type="button"
+            id="btnSaveDraft">
+
+            💾 Simpan Draft
+
+        </button>
+
+        <button
+            type="button"
+            id="btnPublish">
+
+            🚀 Publikasikan Sekarang
+
+        </button>
+
+    </div>
+
+</section>
+<!-- STEP 13 -->
+<section id="step13">
+
+...
+
+</section>
+
+<!-- Modal Simpan Draft -->
+
+<div id="modalDraft" class="modal">
+
+...
+
+</div>
+
+<!-- Modal AI Loading -->
+
+<div id="modalLoadingAI" class="modal">
+
+...
+
+</div>
+
+<!-- Modal Konfirmasi Keluar -->
+
+<div id="modalExit" class="modal">
+
+...
+
+</div>
+
+<!-- Modal Publish Berhasil -->
+
+<div id="modalPublish" class="modal">
+
+...
+
+</div>
+
+</main>
+
+<footer>
+
+...
+
+</footer>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Config -->
+<script src="../assets/js/supabase.js"></script>
+
+<!-- Services -->
+<script src="../assets/js/services/auth-service.js"></script>
+<script src="../assets/js/services/property-service.js"></script>
+<script src="../assets/js/services/storage-service.js"></script>
+
+<!-- Components -->
+<script src="../assets/js/components/navbar.js"></script>
+<script src="../assets/js/components/modal.js"></script>
+<script src="../assets/js/components/toast.js"></script>
+
+<!-- Page -->
+<script src="../assets/js/pasang-iklan.js"></script>
+
+</body>
+</html>
