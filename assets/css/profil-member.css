@@ -1,0 +1,79 @@
+.wadah-profil {
+    max-width: 600px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu-profil {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+.judul-profil {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+    color: #1E293B;
+}
+.judul-bagian {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1E293B;
+}
+
+.baris-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #F8FAFC;
+    font-size: 15px;
+}
+.baris-data:last-child { border: none; }
+.label { font-weight: 500; color: #64748B; }
+.nilai { font-weight: 600; color: #1E293B; text-align: right; }
+
+/* Lencana Paket */
+.lencana-paket {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+.paket-gratis { background: #94A3B8; }
+.paket-kaveling { background: #10B981; }
+.paket-cluster { background: #3B82F6; }
+.paket-residence { background: #F59E0B; }
+.paket-estate { background: #8B5CF6; }
+
+/* Menu Akun */
+.menu-akun { display: flex; flex-direction: column; gap: 10px; }
+.tombol-menu {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.2s ease;
+}
+.tombol-menu.utama { background: #165DFF; color: white; }
+.tombol-menu.biasa { background: #F1F5F9; color: #1E293B; }
+.tombol-menu.merah { background: #FEE2E2; color: #DC2626; }
+.tombol-menu:hover { opacity: 0.9; }
+
+/* Responsif HP */
+@media (max-width: 480px) {
+    .wadah-profil { margin: 20px auto; }
+    .kartu-profil { padding: 20px; }
+    .baris-data { font-size: 14px; }
+    .tombol-menu { font-size: 14px; padding: 11px; }
+}
