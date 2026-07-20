@@ -1,0 +1,62 @@
+.wadah-peta {
+    max-width: 1200px;
+    width: 90%;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+.judul-halaman {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1E293B;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.keterangan-peta {
+    text-align: center;
+    color: #64748B;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.peta {
+    width: 100%;
+    height: 550px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #E2E8F0;
+}
+.petunjuk {
+    margin-top: 16px;
+    text-align: center;
+}
+.petunjuk p {
+    font-size: 13px;
+    color: #94A3B8;
+    margin-bottom: 12px;
+}
+.tombol-kembali {
+    display: inline-block;
+    color: #165DFF;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+.tombol-kembali:hover {
+    color: #0F42C1;
+    text-decoration: underline;
+}
+
+/* Responsif HP */
+@media (max-width:768px) {
+    .wadah-peta { margin: 20px auto; }
+    .peta { height: 400px; border-radius: 12px; }
+    .judul-halaman { font-size: 20px; }
+}
+
+/* Sesuaikan tampilan popup Leaflet */
+.leaflet-popup-content-wrapper { border-radius: 12px; }
+.leaflet-popup-content { margin: 12px 16px; font-size: 14px; }
+.leaflet-popup-content b { color: #1E293B; font-size: 15px; }
+.leaflet-popup-content a { color: #165DFF; font-weight: 500; text-decoration: none; display: inline-block; margin-top: 6px; }
+.leaflet-popup-content a:hover { text-decoration: underline; }
