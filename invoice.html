@@ -71,23 +71,26 @@ if (jenis === 'upgrade') {
 // Tampilkan pesan jika data tidak ditemukan
 if (!dataPesanan) {
     document.getElementById('isiInvoice').innerHTML = `
-        <p style="text-align:center;color:#EF4444;padding:20px;">⚠️ Data invoice tidak ditemukan atau sudah kadaluarsa!</p>
+        <p style="text-align:center;color:#EF4444;padding:20px;">⚠️ Data invoice tidak ditemukan!</p>
     `;
 } else {
     tampilkanInvoice(dataPesanan, jenis);
 }
 
-// Fungsi tampilkan isi invoice
+// Fungsi tampilkan isi invoice BUKTI LUNAS
 function tampilkanInvoice(data, jenis) {
     const noInv = `INV-${jenis.toUpperCase()}-${data.id}`;
     let judul = '', rincian = '', total = data.biaya || 0;
+    let namaPaket = '';
 
     if (jenis === 'upgrade') {
-        judul = `Upgrade Keanggotaan`;
-        rincian = `<div class="baris"><span>Paket Tujuan</span><span>${data.paketTujuan}</span></div>`;
+        judul = `Upgrade Keanggotaan Berhasil`;
+        namaPaket = data.paketTujuan;
+        rincian = `<div class="baris"><span>Paket Keanggotaan</span><span>${namaPaket}</span></div>`;
         total = data.harga || 0;
     } else {
         judul = `Promosi Meta Ads`;
+        namaPaket = 'Layanan Iklan';
         rincian = `
         <div class="baris"><span>Judul Iklan</span><span>${data.judulIklan}</span></div>
         <div class="baris"><span>Durasi</span><span>${data.durasiHari} Hari</span></div>
@@ -99,19 +102,19 @@ function tampilkanInvoice(data, jenis) {
     document.getElementById('isiInvoice').innerHTML = `
     <div class="kepala">
         <img src="assets/img/logo.png" alt="Teravia" class="logo">
-        <h2>INVOICE PEMBAYARAN</h2>
+        <h2>BUKTI PEMBAYARAN LUNAS</h2>
         <div class="no-invoice">No: ${noInv} | Tanggal: ${data.tanggal}</div>
-        <span class="status menunggu">Menunggu Verifikasi</span>
+        <span class="status" style="background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0;">✅ LUNAS</span>
     </div>
 
     <div class="bagian">
-        <h4>Tagihan Kepada:</h4>
+        <h4>Data Anggota:</h4>
         <div class="baris"><span>Nama Lengkap</span><span>${sesi.namaLengkap || sesi.username || '-'}</span></div>
         <div class="baris"><span>ID Pengguna</span><span>${sesi.id || '-'}</span></div>
     </div>
 
     <div class="bagian">
-        <h4>Rincian Pembayaran:</h4>
+        <h4>Rincian Transaksi:</h4>
         <div class="baris"><span>Deskripsi</span><span>${judul}</span></div>
         ${rincian}
     </div>
@@ -121,54 +124,51 @@ function tampilkanInvoice(data, jenis) {
         <div class="nilai">Rp ${total.toLocaleString('id-ID')}</div>
     </div>
 
-    <div class="bagian" style="margin-top:20px;padding-top:16px;border-top:1px solid #eee;">
-        <h4>Metode Pembayaran:</h4>
-        <div class="baris"><span>Bank BCA</span><span>1234567890</span></div>
-        <div class="baris"><span>a.n.</span><span>Teravia Properti</span></div>
+    <div style="margin-top:24px;padding:20px;background:#F8FAFC;border-radius:12px;text-align:center;">
+        <p style="font-size:15px;line-height:1.6;color:#1E293B;">
+            Terima kasih telah bergabung sebagai anggota <strong>${namaPaket}</strong> di <strong>TERAVIA</strong>.<br>
+            Semoga kesuksesan dan kemudahan selalu menghampiri Anda dalam setiap langkah investasi properti! 🤝
+        </p>
     </div>
     `;
 }
 
-// ✅ FUNGSI KIRIM KE WHATSAPP (SUDAH DIPERBAIKI)
+// ✅ FUNGSI KIRIM KE WHATSAPP
 function kirimKeWA() {
     const elemenNoInv = document.querySelector('.no-invoice');
     const elemenTotal = document.querySelector('.nilai');
     
     if (!elemenNoInv || !elemenTotal) {
-        return alert('⚠️ Data invoice belum dimuat sepenuhnya!');
+        return alert('⚠️ Data belum dimuat sepenuhnya!');
     }
 
     const teksPesan = `
-*INVOICE PEMBAYARAN - TERAVIA*
+✅ *BUKTI PEMBAYARAN LUNAS - TERAVIA*
 ${elemenNoInv.textContent.trim()}
 
 Jenis Transaksi: ${jenis === 'upgrade' ? 'Upgrade Keanggotaan' : 'Promosi Iklan'}
-Total Pembayaran: ${elemenTotal.textContent.trim()}
+Total Dibayar: ${elemenTotal.textContent.trim()}
 
-Silakan lakukan pembayaran ke:
-🏦 Bank BCA
-🔢 1234567890
-👤 a.n. Teravia Properti
-
-Terima kasih!
+Terima kasih telah menjadi anggota Teravia!
+Semoga kesuksesan selalu menyertai Anda.
     `.trim();
 
-    const linkWA = `https://wa.me/6281234567890?text=${encodeURIComponent(teksPesan)}`;
+    const linkWA = `https://wa.me/?text=${encodeURIComponent(teksPesan)}`;
     window.open(linkWA, '_blank');
     alert('✅ Membuka WhatsApp...');
 }
 
-// ✅ FUNGSI KIRIM KE EMAIL (SUDAH DIPERBAIKI)
+// ✅ FUNGSI KIRIM KE EMAIL
 function kirimKeEmail() {
     const elemenNoInv = document.querySelector('.no-invoice');
     const elemenTotal = document.querySelector('.nilai');
     
     if (!elemenNoInv || !elemenTotal) {
-        return alert('⚠️ Data invoice belum dimuat sepenuhnya!');
+        return alert('⚠️ Data belum dimuat sepenuhnya!');
     }
 
-    const subjek = `Invoice Pembayaran Teravia - ${jenis === 'upgrade' ? 'Upgrade Paket' : 'Promosi Iklan'}`;
-    const isiPesan = `Nomor Invoice: ${elemenNoInv.textContent.trim()}\nTotal Pembayaran: ${elemenTotal.textContent.trim()}\n\nSilakan transfer ke Bank BCA nomor 1234567890 a.n. Teravia Properti.\n\nTerima kasih.`;
+    const subjek = `Bukti Pembayaran Lunas - Teravia`;
+    const isiPesan = `Nomor: ${elemenNoInv.textContent.trim()}\nTotal: ${elemenTotal.textContent.trim()}\n\nTerima kasih telah bergabung bersama Teravia. Semoga kesuksesan selalu menghampiri Anda!`;
 
     window.location.href = `mailto:?subject=${encodeURIComponent(subjek)}&body=${encodeURIComponent(isiPesan)}`;
     alert('✅ Membuka aplikasi email...');
