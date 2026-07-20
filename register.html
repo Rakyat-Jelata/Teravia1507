@@ -6,85 +6,11 @@
     <title>Daftar Akun Baru - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        /* === TEMA DAN GAYA DIPERTAHANKAN PERSIS SEPERTI ASLINYA === */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        .wadah-daftar {
-            max-width: 420px;
-            width: 90%;
-            margin: 40px auto;
-            background: white;
-            border-radius: 16px;
-            padding: 32px 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-        .logo-tengah { text-align: center; margin-bottom: 24px; }
-        .logo-tengah img { height: 40px; }
-        .judul-daftar { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-        .subjudul { text-align: center; font-size: 14px; color: #64748B; margin-bottom: 24px; }
-
-        .grup-input { margin-bottom: 16px; position: relative; }
-        .grup-input label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #334155; }
-        .grup-input input {
-            width: 100%;
-            padding: 12px 44px 12px 12px; /* Beri ruang untuk tombol mata */
-            border: 1px solid #CBD5E1;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-        .grup-input input:focus {
-            outline: none;
-            border-color: #165DFF;
-            box-shadow: 0 0 0 3px rgba(22,93,255,0.1);
-        }
-
-        /* === TOMBOL TOGGLE MATA SANDI === */
-        .tombol-mata {
-            position: absolute;
-            right: 12px;
-            top: 38px;
-            font-size: 18px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #94A3B8;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tombol-mata:hover { color: #165DFF; }
-
-        .tombol-daftar {
-            width: 100%;
-            padding: 13px;
-            background: #165DFF;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px; font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 8px;
-        }
-        .tombol-daftar:hover { background: #0F42C1; }
-
-        .tautan-masuk {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #64748B;
-        }
-        .tautan-masuk a { color: #165DFF; font-weight: 500; text-decoration: none; }
-        .tautan-masuk a:hover { text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="assets/css/daftar.css">
 </head>
 <body>
 
-<main style="flex: 1; display: flex; align-items: center;">
+<main class="wadah-utama">
     <div class="wadah-daftar">
         <div class="logo-tengah">
             <img src="assets/img/logo.png" alt="Teravia">
@@ -96,6 +22,16 @@
             <div class="grup-input">
                 <label for="namaLengkap">Nama Lengkap</label>
                 <input type="text" id="namaLengkap" placeholder="Masukkan nama lengkap" required>
+            </div>
+
+            <div class="grup-input">
+                <label for="jenisAkun">Saya Mendaftar Sebagai</label>
+                <select id="jenisAkun" required>
+                    <option value="">Pilih jenis akun</option>
+                    <option value="pemilik">Pemilik Properti</option>
+                    <option value="agen">Agen Properti</option>
+                    <option value="broker">Broker / Pengembang</option>
+                </select>
             </div>
 
             <div class="grup-input">
@@ -111,8 +47,14 @@
             <div class="grup-input">
                 <label for="kataSandi">Kata Sandi</label>
                 <input type="password" id="kataSandi" placeholder="Minimal 6 karakter" required minlength="6">
-                <!-- TOMBOL MATA SUDAH DIPERBAIKI POSISI & LOGIKANYA -->
                 <button type="button" id="toggleMata" class="tombol-mata" aria-label="Tampilkan/Sembunyikan sandi">👁️</button>
+            </div>
+
+            <div class="grup-input">
+                <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
+                    <input type="checkbox" id="setuju" required>
+                    Saya setuju dengan <a href="#" style="color:#165DFF;">Syarat & Ketentuan</a>
+                </label>
             </div>
 
             <button type="submit" class="tombol-daftar">Daftar Sekarang</button>
@@ -124,53 +66,6 @@
     </div>
 </main>
 
-<script>
-// === 1. LOGIKA TOGGLE MATA SANDI (SUDAH DIPERBAIKI) ===
-const inputSandi = document.getElementById('kataSandi');
-const tombolMata = document.getElementById('toggleMata');
-
-tombolMata.addEventListener('click', function() {
-    const tipe = inputSandi.getAttribute('type') === 'password' ? 'text' : 'password';
-    inputSandi.setAttribute('type', tipe);
-    tombolMata.textContent = tipe === 'password' ? '👁️' : '🙈';
-});
-
-// === 2. LOGIKA PENDAFTARAN & PENYIMPANAN DATA ===
-document.getElementById('formDaftar').addEventListener('submit', function(e) {
-    e.preventDefault(); // Cegah halaman diam/muat ulang
-
-    // Ambil semua nilai dari form
-    const nama = document.getElementById('namaLengkap').value.trim();
-    const nohp = document.getElementById('noHp').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const sandi = document.getElementById('kataSandi').value.trim();
-
-    // Ambil paket yang dipilih dari halaman membership
-    const paketTerpilih = localStorage.getItem('paketAkanDibayar') || 'Gratis';
-
-    // Susun data akun lengkap
-    const dataAkun = {
-        namaLengkap: nama,
-        nomorHp: nohp,
-        email: email,
-        kataSandi: sandi,
-        jenisKeanggotaan: paketTerpilih,
-        tanggalDaftar: new Date().toLocaleDateString('id-ID'),
-        statusAktif: true
-    };
-
-    // Simpan ke penyimpanan browser
-    localStorage.setItem('sesiTeravia', JSON.stringify(dataAkun));
-
-    // Beri notifikasi & pindah halaman
-    alert('✅ Pendaftaran berhasil! Selamat datang di Teravia.');
-    
-    // Pindah ke tujuan yang disiapkan atau langsung ke beranda
-    const tujuan = localStorage.getItem('tujuanSetelahLogin') || 'index.html';
-    localStorage.removeItem('tujuanSetelahLogin'); // Hapus agar tidak terbaca ulang
-    window.location.href = tujuan;
-});
-</script>
-
+<script src="assets/js/daftar.js"></script>
 </body>
 </html>
