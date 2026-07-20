@@ -105,3 +105,21 @@ async function getCurrentUser() {
     return data.user;
 
 }
+
+// RESET PASSWORD
+
+async function resetPassword(email){
+
+    const { error } =
+        await supabaseClient.auth
+        .resetPasswordForEmail(email,{
+            redirectTo:
+            window.location.origin + '/reset-password.html'
+        });
+
+
+    if(error){
+        throw error;
+    }
+
+}
