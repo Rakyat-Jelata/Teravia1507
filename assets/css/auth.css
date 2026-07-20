@@ -1,165 +1,157 @@
-/* ==============================================
-   HALAMAN LOGIN - GLASSMORPHISM & TENGAH LAYAR
-============================================== */
+/* === HALAMAN LOGIN & DAFTAR (AUTH) === */
 .halaman-login {
-    margin: 0;
-    padding: 0;
     min-height: 100vh;
-    background: url('assets/img/hero-bg.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.halaman-login::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+    padding: 20px 16px;
 }
 
 .wadah-login {
-    position: relative;
-    z-index: 1;
-    width: 90%;
+    width: 100%;
     max-width: 420px;
-    padding: 20px;
 }
 
 .kotak-login {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    padding: 40px 30px;
+    background: white;
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(22, 93, 255, 0.1);
     text-align: center;
 }
 
 .logo-login {
-    height: 45px;
-    margin-bottom: 15px;
+    height: 40px;
+    margin-bottom: 12px;
 }
 
 .kotak-login h2 {
-    color: #1E293B;
-    font-size: 28px;
-    margin-bottom: 25px;
+    font-size: 22px;
     font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 24px;
+}
+
+.form-login {
+    text-align: left;
 }
 
 .grup-input {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .grup-input input {
     width: 100%;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.7);
+    padding: 13px 16px;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
     font-size: 15px;
     color: #1E293B;
+    background: #FAFBFF;
+    transition: all 0.2s ease;
+}
+
+.grup-input input:focus {
     outline: none;
+    border-color: #165DFF;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
 }
 
 .grup-input input::placeholder {
-    color: #64748B;
+    color: #94A3B8;
 }
 
-.opsi-bawah {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    font-size: 13px;
-}
-
-.ingat-saya {
-    color: #1E293B;
-    cursor: pointer;
-}
-
-.lupa-sandi {
-    color: var(--utama);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.btn-masuk {
-    width: 100%;
-    padding: 13px;
-    background: var(--utama);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-masuk:hover {
-    background: var(--sekunder);
-}
-
-.tautan-daftar {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #1E293B;
-}
-
-.tautan-daftar a {
-    color: var(--utama);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.tautan-kembali {
-    margin-top: 12px;
-}
-
-.tautan-kembali a {
-    font-size: 13px;
-    color: #475569;
-    text-decoration: none;
-}
-
-/* ==============================================
-   PENYESUAIAN KHUSUS HALAMAN DAFTAR
-============================================== */
-.kotak-daftar {
-    max-width: 420px;
-    width: 90%;
-}
-
-.form-daftar .grup-input {
+/* === KELOMPOK INPUT SANDI === */
+.sandi-grup {
     position: relative;
-    margin-bottom: 16px;
+}
+
+.sandi-grup input {
+    padding-right: 48px;
 }
 
 .tombol-mata {
     position: absolute;
-    right: 15px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
+    background: none;
     border: none;
     font-size: 18px;
     cursor: pointer;
-    padding: 0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
 }
 
-.sandi-grup input {
-    padding-right: 45px;
+.tombol-mata:hover {
+    background: #F1F5F9;
 }
 
+/* === TOMBOL MASUK === */
+.btn-masuk {
+    width: 100%;
+    padding: 13px;
+    background: #165DFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-top: 8px;
+}
+
+.btn-masuk:hover {
+    background: #0F42C1;
+}
+
+.btn-masuk:active {
+    transform: scale(0.98);
+}
+
+/* === TAUTAN BAWAH === */
+.tautan-daftar {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #64748B;
+}
+
+.tautan-daftar a {
+    color: #165DFF;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tautan-daftar a:hover {
+    text-decoration: underline;
+}
+
+.tautan-kembali {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.tautan-kembali a {
+    color: #94A3B8;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.tautan-kembali a:hover {
+    color: #165DFF;
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 480px) {
     .kotak-login {
-        padding: 30px 20px;
+        padding: 24px 18px;
     }
     .kotak-login h2 {
-        font-size: 24px;
+        font-size: 20px;
     }
 }
