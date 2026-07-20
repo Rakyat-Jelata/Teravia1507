@@ -1,0 +1,13 @@
+.wadah{max-width:600px;margin:20px auto;padding:0 16px;}
+.kartu{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.judul{font-size:18px;font-weight:bold;margin-bottom:8px;}
+.ringkas{color:#666;margin-bottom:12px;}
+.pilihan{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap;}
+.opsi{flex:1;min-width:140px;padding:12px;border:2px solid #e5e7eb;border-radius:10px;text-align:center;cursor:pointer;}
+.opsi.terpilih{border-color:#16a34a;background:#f0fdf4;}
+.harga-opsi{font-weight:bold;font-size:16px;margin-top:4px;}
+.total{border-top:1px solid #eee;padding-top:16px;margin-top:16px;}
+.total .nilai{font-size:22px;font-weight:bold;color:#16a34a;}
+.btn-bayar{width:100%;padding:14px;background:#16a34a;color:white;border:none;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer;}
+.info-syarat{font-size:13px;color:#888;margin-top:12px;text-align:center;}
+
