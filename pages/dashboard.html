@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard - TERAVIA</title>
+
+<link rel="icon" href="../assets/img/logo.png">
+<link rel="stylesheet" href="../assets/css/general.css">
+
+</head>
+
+<body>
+
+
+<main class="dashboard">
+
+<section class="kotak-dashboard">
+
+
+    <div class="profil-dashboard">
+
+        <img 
+        src="../assets/img/logo.png"
+        class="avatar-dashboard">
+
+        <h1>
+            Halo, <span id="namaUser">User</span>
+        </h1>
+
+        <p>
+            Akun:
+            <span id="jenisAkun">-</span>
+        </p>
+
+    </div>
+
+
+
+    <div class="status-member">
+
+        <h3>
+            Membership
+        </h3>
+
+        <p id="statusMembership">
+            Gratis
+        </p>
+
+    </div>
+
+
+
+    <div class="menu-dashboard">
+
+        <a href="pasang-iklan.html">
+            🏠 Pasang Iklan
+        </a>
+
+
+        <a href="profil.html">
+            👤 Profil Saya
+        </a>
+
+
+        <a href="membership.html">
+            ⭐ Upgrade Membership
+        </a>
+
+
+        <button id="btnLogout">
+            Keluar
+        </button>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../assets/js/supabase.js"></script>
+
+<script src="../assets/js/services/auth-service.js"></script>
+
+<script src="../assets/js/auth-guard.js"></script>
+
+<script src="../assets/js/dashboard.js"></script>
+
+
+</body>
+</html>
