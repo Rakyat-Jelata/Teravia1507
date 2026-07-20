@@ -1,0 +1,59 @@
+.wadah {
+    max-width: 780px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.judul {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E2E8F0;
+    text-align: center;
+}
+.sub-judul {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    color: #1E293B;
+}
+.isi {
+    font-size: 15px;
+    color: #334155;
+    margin-bottom: 14px;
+    text-align: justify;
+    line-height: 1.7;
+}
+.isi ul {
+    padding-left: 24px;
+    margin: 10px 0;
+}
+.isi li {
+    margin: 6px 0;
+}
+.isi strong {
+    color: #1E293B;
+}
+.catatan {
+    background: #F8FAFC;
+    border-left: 4px solid #165DFF;
+    padding: 14px;
+    margin: 18px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+}
+.tgl-terakhir {
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid #E2E8F0;
+    font-size: 13px;
+    color: #94A3B8;
+    text-align: right;
+}
