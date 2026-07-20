@@ -1,0 +1,105 @@
+.wadah {
+    max-width: 720px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.judul {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+    color: #1E293B;
+}
+
+/* Tampilan kosong */
+.kosong {
+    text-align: center;
+    padding: 50px 20px;
+    color: #64748B;
+}
+.ikon-kosong {
+    font-size: 56px;
+    margin-bottom: 16px;
+}
+.kosong h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+}
+.kosong p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tombol-aksi {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #165DFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.tombol-aksi:hover {
+    background: #0F42C1;
+}
+
+/* Gaya daftar pesan (siap diaktifkan nanti) */
+/*
+.daftar-pesan {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.item-pesan {
+    padding: 14px;
+    border: 1px solid #F1F5F9;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.item-pesan:hover {
+    border-color: #165DFF;
+    background: rgba(22,93,255,0.02);
+}
+.pengirim {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1E293B;
+    margin-bottom: 4px;
+}
+.subjek {
+    font-size: 14px;
+    color: #64748B;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.waktu {
+    font-size: 12px;
+    color: #94A3B8;
+    text-align: right;
+}
+*/
+
+/* Responsif */
+@media (max-width: 480px) {
+    .wadah { margin: 20px auto; }
+    .kartu { padding: 18px; }
+    .kosong { padding: 30px 16px; }
+}
