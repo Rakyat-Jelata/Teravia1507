@@ -6,44 +6,52 @@
     <title>Pilih Lokasi - Teravia</title>
     <link rel="icon" href="assets/img/logo.png">
     <link rel="stylesheet" href="assets/css/general.css">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
-        .wadah { max-width: 720px; width: 90%; margin: 32px auto; padding: 0 16px; }
-        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; display:flex; align-items:center; gap:10px; }
-        .tombol-kembali { color:#165DFF; text-decoration:none; font-size:14px; font-weight:500; }
-        .item-lokasi { padding:14px 0; border-bottom:1px solid #F1F5F9; cursor:pointer; transition:0.1s; }
-        .item-lokasi:last-child { border:none; }
-        .item-lokasi:hover { padding-left:8px; color:#165DFF; }
-        .loading { text-align:center; padding:30px; color:#64748B; }
-        .breadcrumb { font-size:13px; color:#64748B; margin-bottom:12px; }
-        .breadcrumb span { margin:0 6px; }
-    </style>
+    <link rel="stylesheet" href="assets/css/wilayah.css">
 </head>
 <body>
 
-<!-- NAVBAR SERAGAM -->
-<nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
-    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
-        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
-            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
-            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
-        </a>
-        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
-        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
-            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
-            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Cari Properti</a>
-            <a href="peta-lokasi.html" style="text-decoration:none;color:#64748B;font-weight:500;">Peta Lokasi</a>
-            <a href="mitra-notaris.html" style="text-decoration:none;color:#64748B;font-weight:500;">Mitra Notaris</a>
-            <a href="blog.html" style="text-decoration:none;color:#64748B;font-weight:500;">Blog Properti</a>
-            <a href="tentang.html" style="text-decoration:none;color:#64748B;font-weight:500;">Tentang Kami</a>
-            <a href="pages/pasang-iklan.html" style="padding:8px 14px;background:#165DFF;color:white;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;">+ Pasang Iklan</a>
-            <a href="login.html" style="text-decoration:none;color:#64748B;font-weight:500;">Masuk</a>
-            <a href="register.html" style="padding:8px 14px;background:#EFF6FF;color:#165DFF;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;">Daftar</a>
+<!-- NAVBAR STANDAR TERAVIA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Teravia" style="height:32px;"></a>
+        <div class="menu-desktop">
+            <a href="index.html" class="tautan-nav">Beranda</a>
+            <a href="daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="wilayah.html" class="tautan-nav aktif">Pilih Wilayah</a>
+            <a href="peta-lokasi.html" class="tautan-nav">Peta Lokasi</a>
+            <a href="mitra-notaris.html" class="tautan-nav">Mitra Notaris</a>
+            <a href="blog.html" class="tautan-nav">Blog Properti</a>
+            <a href="tentang.html" class="tautan-nav">Tentang Kami</a>
+            <a href="pages/pasang-iklan.html" class="btn-pasang">+ Pasang Iklan</a>
+            <a href="login.html" class="tautan-nav">Masuk</a>
+            <a href="register.html" class="btn-daftar">Daftar</a>
         </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
+
+<!-- MENU SAMPING STANDAR -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
+    <div class="isi-menu">
+        <a href="index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="wilayah.html" class="tautan-menu aktif">📍 Pilih Wilayah</a>
+        <a href="peta-lokasi.html" class="tautan-menu">🗺️ Peta Lokasi</a>
+        <a href="kalkulator-kpr.html" class="tautan-menu">🧮 Kalkulator KPR</a>
+        <a href="membership.html" class="tautan-menu">💎 Keanggotaan</a>
+        <a href="mitra-notaris.html" class="tautan-menu">🏛️ Mitra Notaris/PPAT</a>
+        <a href="blog.html" class="tautan-menu">📰 Blog Properti</a>
+        <a href="tentang.html" class="tautan-menu">ℹ️ Tentang Kami</a>
+        <div class="garis-pemisah"></div>
+        <a href="pages/pasang-iklan.html" class="btn-pasang-menu">📢 Pasang Iklan Sekarang</a>
+        <a href="login.html" class="tautan-menu">👤 Masuk</a>
+        <a href="register.html" class="btn-pasang-menu" style="background:#10b981;">📝 Daftar Baru</a>
+    </div>
+</div>
 
 <main class="wadah">
     <div class="kartu">
@@ -58,148 +66,7 @@
     </div>
 </main>
 
-<script>
-// === HAMBURGER MENU ===
-const btnHam = document.getElementById('btnHamburger');
-const menuNav = document.getElementById('menuNav');
-function aturMenu() {
-    if(window.innerWidth <= 768) {
-        btnHam.style.display = 'block';
-        menuNav.style.display = 'none';
-        menuNav.style.flexDirection = 'column';
-        menuNav.style.position = 'absolute';
-        menuNav.style.top = '100%';
-        menuNav.style.left = '0';
-        menuNav.style.width = '100%';
-        menuNav.style.background = 'white';
-        menuNav.style.padding = '16px';
-        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-    } else {
-        btnHam.style.display = 'none';
-        menuNav.style.display = 'flex';
-        menuNav.style.position = 'static';
-        menuNav.style.boxShadow = 'none';
-    }
-}
-btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
-window.addEventListener('resize', aturMenu);
-aturMenu();
-
-// === KONFIGURASI API EMSIFA ===
-const BASE_API = "https://www.emsifa.com/api-wilayah-indonesia/api"; 
-const wadah = document.getElementById('daftarLokasi');
-const judul = document.getElementById('judulHalaman');
-const jalur = document.getElementById('jalurLokasi');
-
-// Baca parameter dari URL
-const url = new URLSearchParams(window.location.search);
-const provinsiId = url.get('provinsi_id');
-const kabupatenId = url.get('kabupaten_id');
-const kecamatanId = url.get('kecamatan_id');
-const namaProv = url.get('provinsi') || '';
-const namaKab = url.get('kabupaten') || '';
-const namaKec = url.get('kecamatan') || '';
-
-// === FUNGSI AMBIL DATA YANG SUDAH DIPERBAIKI ===
-async function ambilData(endpoint, id = '') {
-    try {
-        // Format URL standar EMSIFA: /{endpoint}/{id}.json
-        const urlPanggil = id ? `${BASE_API}/${endpoint}/${id}.json` : `${BASE_API}/${endpoint}.json`;
-        console.log("Memanggil:", urlPanggil); // Untuk cek di konsol
-        const res = await fetch(urlPanggil);
-        if(!res.ok) throw new Error(`Gagal: ${res.status}`);
-        return await res.json();
-    } catch (err) {
-        console.error("Error API:", err);
-        wadah.innerHTML = `
-            <div style="text-align:center;padding:30px;color:#EF4444;">
-                <p>⚠️ Gagal memuat data lokasi</p>
-                <p style="font-size:13px;margin-top:8px;">${err.message}</p>
-                <button onclick="tampilkanLokasi()" style="margin-top:12px;padding:8px 16px;background:#165DFF;color:white;border:none;border-radius:8px;">Coba Lagi</button>
-            </div>`;
-        return [];
-    }
-}
-
-// === FUNGSI TAMPILKAN LOKASI ===
-async function tampilkanLokasi() {
-    wadah.innerHTML = `<div style="text-align:center;padding:30px;color:#64748B;">⏳ Memuat daftar lokasi...</div>`;
-
-    if(!provinsiId) {
-        judul.textContent = "Pilih Provinsi";
-        jalur.innerHTML = "";
-        const provinsi = await ambilData('provinces');
-        wadah.innerHTML = "";
-        provinsi.forEach(item => {
-            wadah.innerHTML += `
-            <div class="item-lokasi" onclick="pilihProvinsi('${item.id}', '${item.name}')">
-                ${item.name}
-            </div>`;
-        });
-    } 
-    else if(provinsiId && !kabupatenId) {
-        judul.textContent = `Pilih Kabupaten/Kota di ${namaProv}`;
-        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> ${namaProv}`;
-        const kabupaten = await ambilData('regencies', provinsiId);
-        wadah.innerHTML = "";
-        if(kabupaten.length === 0) {
-            wadah.innerHTML = `<p style="text-align:center;color:#64748B;padding:30px;">Tidak ada data kabupaten/kota</p>`;
-            return;
-        }
-        kabupaten.forEach(item => {
-            wadah.innerHTML += `
-            <div class="item-lokasi" onclick="pilihKabupaten('${item.id}', '${item.name}')">
-                ${item.name}
-            </div>`;
-        });
-    }
-    else if(provinsiId && kabupatenId && !kecamatanId) {
-        judul.textContent = `Pilih Kecamatan di ${namaKab}`;
-        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
-                          <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> ${namaKab}`;
-        const kecamatan = await ambilData('districts', kabupatenId);
-        wadah.innerHTML = "";
-        kecamatan.forEach(item => {
-            wadah.innerHTML += `
-            <div class="item-lokasi" onclick="pilihKecamatan('${item.id}', '${item.name}')">
-                ${item.name}
-            </div>`;
-        });
-    }
-    else if(provinsiId && kabupatenId && kecamatanId) {
-        judul.textContent = `Pilih Kelurahan/Desa di ${namaKec}`;
-        jalur.innerHTML = `<a href="wilayah.html" style="color:#165DFF;text-decoration:none;">Provinsi</a> <span>›</span> 
-                          <a href="wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}" style="color:#165DFF;text-decoration:none;">${namaProv}</a> <span>›</span> 
-                          <a href="wilayah.html?provinsi_id=${provinsiId}&kabupaten_id=${kabupatenId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}" style="color:#165DFF;text-decoration:none;">${namaKab}</a> <span>›</span> ${namaKec}`;
-        const kelurahan = await ambilData('villages', kecamatanId);
-        wadah.innerHTML = "";
-        kelurahan.forEach(item => {
-            wadah.innerHTML += `
-            <div class="item-lokasi" onclick="bukaProperti('${item.name}')">
-                ${item.name}
-            </div>`;
-        });
-    }
-}
-
-
-// === FUNGSI PINDAH HALAMAN ===
-function pilihProvinsi(id, nama) {
-    location.href = `wilayah.html?provinsi_id=${id}&provinsi=${encodeURIComponent(nama)}`;
-}
-function pilihKabupaten(id, nama) {
-    location.href = `wilayah.html?provinsi_id=${provinsiId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten_id=${id}&kabupaten=${encodeURIComponent(nama)}`;
-}
-function pilihKecamatan(id, nama) {
-    location.href = `wilayah.html?provinsi_id=${provinsiId}&kabupaten_id=${kabupatenId}&provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}&kecamatan_id=${id}&kecamatan=${encodeURIComponent(nama)}`;
-}
-function bukaProperti(namaKel) {
-    // Buka daftar properti dengan filter lengkap
-    location.href = `daftar-properti.html?provinsi=${encodeURIComponent(namaProv)}&kabupaten=${encodeURIComponent(namaKab)}&kecamatan=${encodeURIComponent(namaKec)}&kelurahan=${encodeURIComponent(namaKel)}`;
-}
-
-// JALANKAN SAAT HALAMAN DIBUKA
-tampilkanLokasi();
-</script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/wilayah.js"></script>
 </body>
 </html>
