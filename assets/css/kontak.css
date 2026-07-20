@@ -1,0 +1,95 @@
+.wadah {
+    max-width: 720px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+}
+.judul {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+}
+.info-kontak {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.baris-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #334155;
+}
+.baris-info span:first-child {
+    font-size: 20px;
+    min-width: 28px;
+    color: #165DFF;
+}
+.sub-judul-form {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1E293B;
+}
+.grup-input {
+    margin-bottom: 16px;
+}
+.grup-input label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #334155;
+}
+.grup-input input, .grup-input textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: white;
+}
+.grup-input input:focus, .grup-input textarea:focus {
+    outline: none;
+    border-color: #165DFF;
+    box-shadow: 0 0 0 3px rgba(22,93,255,0.1);
+}
+.tombol {
+    width: 100%;
+    padding: 13px;
+    background: #165DFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.tombol:hover {
+    background: #0F42C1;
+}
+.kembali {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    color: #64748B;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+.kembali:hover {
+    color: #165DFF;
+}
