@@ -395,108 +395,104 @@
 <!-- SCRIPT -->
 <script src="assets/js/navbar.js"></script>
 <script>
-let paketTerpilih = null;
-const tombolLanjut = document.getElementById('lanjutBayar');
-const kotakSetuju = document.getElementById('setujuSyarat');
-
-// Pilih paket
-document.querySelectorAll('.pilih-paket').forEach(tombol => {
-    tombol.addEventListener('click', () => {
-        // Hapus tanda terpilih sebelumnya
-        document.querySelectorAll('.kartu-tingkatan').forEach(k => k.style.outline = '');
-        // Tandai paket terpilih
-        const kartu = tombol.closest('.kartu-tingkatan');
-        kartu.style.outline = '3px solid #165DFF';
-        paketTerpilih = kartu.dataset.paket;
-    });
-});
-
-// ✅ DIUBAH: Tombol aktif HANYA jika dicentang saja (tanpa syarat pilih paket)
-tombolLanjut.addEventListener('click', () => {
-    if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
-    if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
-
-    // Simpan paket yang dipilih untuk proses selanjutnya
-    localStorage.setItem('paketAkanDibayar', paketTerpilih);
-    
-    // Langsung arahkan ke halaman pembayaran
-    window.location.href = 'payment.html';
-});
-// Aksi lanjut pembayaran
-tombolLanjut.addEventListener('click', () => {
-    if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
-    if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
-
-    // Cek login
-    const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
-    if (!sesi) {
-        alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
-        localStorage.setItem('tujuanSetelahLogin', 'membership.html');
-        return window.location.href = 'login.html';
-    }
-
-    // Simpan data dan lanjut
-    localStorage.setItem('paketAkanDibayar', paketTerpilih);
-    window.location.href = `invoice.html?jenis=paket&id=${Date.now()}`;
-});
-
-    sesi.jenisAkun = document.getElementById('jenisAkunUpgrade').value;
-localStorage.setItem('sesiTeravia', JSON.stringify(sesi));
-
-
-// Pengaman menu
-document.addEventListener('DOMContentLoaded', function () {
-    const tombolBuka = document.getElementById('tombolMenu');
-    const tombolTutup = document.getElementById('tombolTutup');
-    const menuSamping = document.getElementById('menuMobile');
-    const latarGelap = document.getElementById('latarGelap');
-
-    function bukaMenu() {
-        menuSamping.classList.add('buka');
-        latarGelap.classList.add('tampil');
-        document.body.style.overflow = 'hidden';
-    }
-    function tutupMenu() {
-        menuSamping.classList.remove('buka');
-        latarGelap.classList.remove('tampil');
-        document.body.style.overflow = 'auto';
-    }
-
-    if(tombolBuka) tombolBuka.addEventListener('click', bukaMenu);
-    if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
-    if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
-});
-    let paketTerpilih = false;
-
-// Fungsi cek apakah semua syarat terpenuhi
-function cekBisaLanjut() {
-    const setuju = document.getElementById('setujuSyarat').checked;
-    const jenisAkun = document.getElementById('jenisAkunUpgrade').value;
-    const tombol = document.getElementById('btnLanjut');
-
-    // Aktifkan tombol jika: paket sudah dipilih + status sudah dipilih + sudah dicentang
-    if(paketTerpilih && jenisAkun !== '' && setuju) {
-        tombol.disabled = false;
-        tombol.style.opacity = '1';
-        tombol.style.cursor = 'pointer';
-    } else {
-        tombol.disabled = true;
-        tombol.style.opacity = '0.5';
-        tombol.style.cursor = 'not-allowed';
-    }
-}
-
-// Contoh: saat paket dipilih, tandai sudah terpilih
-function bukaPilihanPaket() {
-    // ... kode memilih paket kamu ...
-    paketTerpilih = true;
-    document.getElementById('btnPilihPaket').textContent = 'Paket Terpilih ✅';
-    cekBisaLanjut(); // Cek ulang syarat
-}
-
-// Tambahkan juga cek saat dropdown berubah
-document.getElementById('jenisAkunUpgrade').addEventListener('change', cekBisaLanjut);
-    
+let paketTerpilih = null; // HANYA DEKLARASI SEKALI SAJA
+ // Ambil elemen dengan ID yang SESUAI
+ const tombolLanjut = document.getElementById('lanjutBayar'); // Sesuai ID di tombolmu
+ const kotakSetuju = document.getElementById('setujuSyarat');
+ const dropdownStatus = document.getElementById('jenisAkunUpgrade');
+ // ==============================================
+ // FUNGSI PILIH PAKET
+ // ==============================================
+ document.querySelectorAll('.pilih-paket').forEach(tombol => {
+     tombol.addEventListener('click', () => {
+         // Hapus tanda terpilih dari semua kartu
+         document.querySelectorAll('.kartu-tingkatan').forEach(kartu => {
+             kartu.style.outline = '';
+             kartu.style.boxShadow = '';
+         });
+         // Tandai kartu yang dipilih
+         const kartuAktif = tombol.closest('.kartu-tingkatan');
+         kartuAktif.style.outline = '3px solid #165DFF';
+         kartuAktif.style.boxShadow = '0 0 12px rgba(22, 93, 255, 0.2)';
+         // Simpan data paket dari atribut data-paket
+         paketTerpilih = kartuAktif.dataset.paket;
+         console.log("Paket dipilih:", paketTerpilih);
+         // Cek ulang syarat tombol
+         cekSemuaSyarat();
+     });
+ });
+ // ==============================================
+ // FUNGSI CEK SYARAT TOMBOL LANJUT
+ // ==============================================
+ function cekSemuaSyarat() {
+     const sudahPilihPaket = paketTerpilih !== null;
+     const sudahPilihStatus = dropdownStatus.value !== '';
+     const sudahSetuju = kotakSetuju.checked;
+     if (sudahPilihPaket && sudahPilihStatus && sudahSetuju) {
+         // ✅ AKTIFKAN TOMBOL
+         tombolLanjut.disabled = false;
+         tombolLanjut.style.opacity = '1';
+         tombolLanjut.style.cursor = 'pointer';
+         tombolLanjut.style.background = '#165DFF';
+     } else {
+         // ❌ KUNCI TOMBOL
+         tombolLanjut.disabled = true;
+         tombolLanjut.style.opacity = '0.5';
+         tombolLanjut.style.cursor = 'not-allowed';
+         tombolLanjut.style.background = '#94A3B8';
+     }
+ }
+ // ==============================================
+ // AKSI SAAT TOMBOL LANJUT DIKLIK
+ // ==============================================
+ tombolLanjut.addEventListener('click', () => {
+     if (!kotakSetuju.checked) return alert('Centang persetujuan terlebih dahulu!');
+     if (!paketTerpilih) return alert('Silakan pilih paket keanggotaan terlebih dahulu!');
+     if (!dropdownStatus.value) return alert('Silakan pilih status keanggotaan Anda!');
+     // Cek status login
+     const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+     if (!sesi) {
+         alert('⚠️ Silakan Masuk / Daftar Akun Dulu!');
+         localStorage.setItem('tujuanSetelahLogin', 'membership.html');
+         return window.location.href = 'login.html';
+     }
+     // ✅ SIMPAN SEMUA DATA DENGAN BENAR
+     sesi.paketAkanDibayar = paketTerpilih;
+     sesi.jenisAkun = dropdownStatus.value;
+     sesi.tanggalUpgrade = new Date().toLocaleString('id-ID');
+     localStorage.setItem('sesiTeravia', JSON.stringify(sesi));
+     // Pindah ke halaman invoice
+     window.location.href = `invoice.html?jenis=paket&id=${Date.now()}`;
+ });
+ // ==============================================
+ // JALANKAN CEK SETIAP ADA PERUBAHAN
+ // ==============================================
+ dropdownStatus.addEventListener('change', cekSemuaSyarat);
+ kotakSetuju.addEventListener('change', cekSemuaSyarat);
+ cekSemuaSyarat(); // Cek pertama kali saat halaman dibuka
+ // ==============================================
+ // SCRIPT HAMBURGER MENU (DIPERTAHANKAN & DIPERBAIKI)
+ // ==============================================
+ document.addEventListener('DOMContentLoaded', function () {
+     const tombolBuka = document.getElementById('tombolMenu');
+     const tombolTutup = document.getElementById('tombolTutup');
+     const menuSamping = document.getElementById('menuMobile');
+     const latarGelap = document.getElementById('latarGelap');
+     if (!tombolBuka || !menuSamping) return; // Cek dulu elemen ada
+     function bukaMenu() {
+         menuSamping.classList.add('buka');
+         if(latarGelap) latarGelap.classList.add('tampil');
+         document.body.style.overflow = 'hidden';
+     }
+     function tutupMenu() {
+         menuSamping.classList.remove('buka');
+         if(latarGelap) latarGelap.classList.remove('tampil');
+         document.body.style.overflow = 'auto';
+     }
+     tombolBuka.addEventListener('click', bukaMenu);
+     if(tombolTutup) tombolTutup.addEventListener('click', tutupMenu);
+     if(latarGelap) latarGelap.addEventListener('click', tutupMenu);
+ });
 </script>
 
 </body>
