@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Notifikasi - Teravia</title>
+    <link rel="icon" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/general.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #F8FAFC; color: #1E293B; }
+        .wadah { max-width: 720px; width: 90%; margin: 32px auto; padding: 0 16px; }
+        .kartu { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .judul { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; display:flex; justify-content:space-between; align-items:center; }
+        .tombol-kecil { padding:6px 12px; font-size:13px; background:#EFF6FF; color:#165DFF; border:none; border-radius:8px; cursor:pointer; }
+        .item-notif { padding:14px 0; border-bottom:1px solid #F1F5F9; display:flex; gap:12px; }
+        .item-notif:last-child { border:none; }
+        .item-notif.belum-dibaca { background:#F8FAFC; margin:0 -12px; padding:14px 12px; border-radius:10px; }
+        .ikon { font-size:20px; min-width:28px; text-align:center; }
+        .isi-notif h4 { font-size:15px; margin-bottom:2px; }
+        .isi-notif p { font-size:13px; color:#64748B; margin-bottom:4px; }
+        .isi-notif span { font-size:12px; color:#94A3B8; }
+        .kosong { text-align:center; padding:40px 20px; color:#94A3B8; }
+    </style>
+</head>
+<body>
+<nav style="background:white;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:99;">
+    <div style="max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+            <img src="assets/img/logo.png" alt="Teravia" style="height:32px;">
+            <span style="font-weight:700;font-size:18px;color:#1E293B;">Teravia</span>
+        </a>
+        <button id="btnHamburger" style="background:none;border:none;font-size:24px;cursor:pointer;display:none;">☰</button>
+        <div id="menuNav" style="display:flex;gap:24px;align-items:center;">
+            <a href="index.html" style="text-decoration:none;color:#64748B;font-weight:500;">Beranda</a>
+            <a href="daftar-properti.html" style="text-decoration:none;color:#64748B;font-weight:500;">Properti</a>
+            <a href="profil-member.html" style="text-decoration:none;color:#165DFF;font-weight:600;">Profil</a>
+        </div>
+    </div>
+</nav>
+
+<main class="wadah">
+    <div class="kartu">
+        <div class="judul">
+            <span>🔔 Pusat Notifikasi</span>
+            <button class="tombol-kecil" onclick="tandaiSemuaDibaca()">Tandai Semua Dibaca</button>
+        </div>
+        <div id="daftarNotif">
+            <div class="kosong">
+                <p style="font-size:40px;">🔕</p>
+                <p>Belum ada notifikasi baru.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+const btnHam = document.getElementById('btnHamburger');
+const menuNav = document.getElementById('menuNav');
+function aturMenu() {
+    if(window.innerWidth <= 768) {
+        btnHam.style.display = 'block';
+        menuNav.style.display = 'none';
+        menuNav.style.flexDirection = 'column';
+        menuNav.style.position = 'absolute';
+        menuNav.style.top = '100%';
+        menuNav.style.left = '0';
+        menuNav.style.width = '100%';
+        menuNav.style.background = 'white';
+        menuNav.style.padding = '16px';
+        menuNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+    } else {
+        btnHam.style.display = 'none';
+        menuNav.style.display = 'flex';
+        menuNav.style.position = 'static';
+        menuNav.style.boxShadow = 'none';
+    }
+}
+btnHam.addEventListener('click', () => menuNav.style.display = menuNav.style.display === 'flex' ? 'none' : 'flex');
+window.addEventListener('resize', aturMenu);
+aturMenu();
+
+const sesi = JSON.parse(localStorage.getItem('sesiTeravia') || 'null');
+if(!sesi) { alert('Silakan masuk dulu!'); location.href='login.html'; }
+
+// Contoh data notifikasi
+let notifikasi = JSON.parse(localStorage.getItem('notifikasi') || `[
+    {"id":1,"ikon":"✅","judul":"Pembayaran Berhasil","pesan":"Upgrade keanggotaan Anda telah aktif.","waktu":"10 menit yang lalu","dibaca":false},
+    {"id":2,"ikon":"📢","judul":"Iklan Disetujui","pesan":"Iklan Rumah di Jakarta Timur sudah tayang.","waktu":"2 jam yang lalu","dibaca":true},
+    {"id":3,"ikon":"💬","judul":"Pesan Baru","pesan":"Ada yang bertanya harga properti Anda.","waktu":"Kemarin","dibaca":false}
+]`);
+
+function tampilkanNotif(){
+    const wadah = document.getElementById('daftarNotif');
+    if(notifikasi.length === 0) return;
+    wadah.innerHTML = '';
+    notifikasi.forEach(item => {
+        wadah.innerHTML += `
+        <div class="item-notif ${item.dibaca ? '' : 'belum-dibaca'}" onclick="bukaNotif(${item.id})">
+            <div class="ikon">${item.ikon}</div>
+            <div class="isi-notif">
+                <h4>${item.judul}</h4>
+                <p>${item.pesan}</p>
+                <span>${item.waktu}</span>
+            </div>
+        </div>`;
+    });
+}
+
+function tandaiSemuaDibaca(){
+    notifikasi.forEach(n => n.dibaca = true);
+    localStorage.setItem('notifikasi', JSON.stringify(notifikasi));
+    tampilkanNotif();
+    alert('Semua ditandai sudah dibaca.');
+}
+
+tampilkanNotif();
+</script>
+</body>
+</html>
+
