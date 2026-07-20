@@ -39,10 +39,11 @@
 <!-- KONEKSI SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// === KONEKSI SUPABASE (SUDAH BENAR) ===
+// === KONEKSI SUPABASE (DIPERBAIKI) ===
 const SUPABASE_URL = "https://jvzrhjlwaysbsqyawnci.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2enJoamx3YXlzYnNxeWF3bmNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxODkyMzYsImV4cCI6MjA5OTc2NTIzNn0.rnc5A6xABjEMI0pG-g0hCCRdFK0Om2UspFjTjOkCzeU";
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// ✅ PERBAIKAN: Pakai window.supabase yang dimuat dari CDN
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // === FUNGSI LIHAT/SEMBUNYI SANDI ===
 function ubahSandi(id, tombol) {
@@ -63,19 +64,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             // ✅ KHUSUS AKUN TRIAL KAMU (BYPASS AMAN)
-            if (email === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
+            if (email.toLowerCase() === 'teravia.vip@gmail.com' && sandi === 'TeraviaVip@2026') {
                 const sesiTrial = {
                     id: 'trial-001',
                     nama_lengkap: 'Teravia VIP',
                     email: email,
-                    paket_aktif: 'Estate Premium', // Langsung Premium
+                    paket_aktif: 'Estate Premium',
                     jenis_akun: 'broker',
                     is_admin: false,
                     status_login: true
                 };
                 localStorage.setItem('sesiTeravia', JSON.stringify(sesiTrial));
                 alert('✅ Berhasil Masuk! Selamat datang Member Estate Premium!');
-                window.location.href = 'index.html';
+                const tujuan = localStorage.getItem('tujuanSetelahLogin') || 'index.html';
+                localStorage.removeItem('tujuanSetelahLogin');
+                window.location.href = tujuan;
                 return;
             }
 
@@ -84,16 +87,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 .from('users')
                 .select('*')
                 .eq('email', email)
-                .limit(1)
-                .single();
+                .maybeSingle(); // ✅ Lebih aman daripada .single() kalau data tidak ada
 
-            if (error || !data) throw new Error("Email tidak terdaftar!");
+            if (error) throw new Error(`Kesalahan: ${error.message}`);
+            if (!data) throw new Error("Email belum terdaftar!");
             if (data.sandi !== sandi) throw new Error("Kata sandi salah!");
 
-            // Simpan sesi dari database
+            // Simpan sesi
             localStorage.setItem('sesiTeravia', JSON.stringify({
                 id: data.id,
-                nama_lengkap: data.nama_lengkap,
+                nama_lengkap: data.nama_lengkap || 'Pengguna Teravia',
                 email: data.email,
                 paket_aktif: data.paket_aktif || 'Kaveling',
                 jenis_akun: data.jenis_akun || 'pemilik',
@@ -105,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = data.is_admin ? "admin-dashboard.html" : "index.html";
 
         } catch (err) {
-            console.error("Error Login:", err);
+            console.error("Detail Error:", err);
             alert("❌ " + err.message);
         }
     });
