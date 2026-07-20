@@ -1,0 +1,94 @@
+.wadah {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.ilustrasi {
+    text-align: center;
+    margin: 40px 0 24px;
+}
+.ilustrasi img {
+    max-width: 280px;
+    border-radius: 16px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 12px;
+}
+
+.keterangan {
+    text-align: center;
+    color: #64748B;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tombol-kembali {
+    display: block;
+    text-align: center;
+    color: #165DFF;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.tombol-kembali:hover {
+    color: #0F42C1;
+    text-decoration: underline;
+}
+
+/* Nanti saat fitur sudah siap, aktifkan gaya di bawah ini */
+/*
+.grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.kartu {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.nama {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #1E293B;
+}
+.wilayah {
+    color: #165DFF;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+.detail {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 6px;
+}
+.hubungi {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px;
+    background: #EFF6FF;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #165DFF;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.hubungi:hover {
+    background: #165DFF;
+    color: white;
+}
+*/
