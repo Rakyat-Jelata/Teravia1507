@@ -331,6 +331,17 @@
             </div>
         </div>
 
+        <div class="grup-input" style="margin-top:20px;">
+    <label>Apakah Anda ingin mendaftar sebagai?</label>
+    <select id="jenisAkunUpgrade" required>
+        <option value="">Pilih salah satu</option>
+        <option value="pemilik">Pemilik Properti Pribadi</option>
+        <option value="agen">Agen Properti Terdaftar</option>
+        <option value="broker">Broker / Makelar Independen</option>
+    </select>
+    <p style="font-size:12px;color:#64748B;margin-top:4px;">Status ini akan muncul di profil Anda setelah upgrade.</p>
+        </div>
+        
         <!-- PERSETUJUAN -->
         <div class="kotak-syarat">
             <div class="cek-syarat">
@@ -424,6 +435,10 @@ tombolLanjut.addEventListener('click', () => {
     localStorage.setItem('paketAkanDibayar', paketTerpilih);
     window.location.href = `invoice.html?jenis=paket&id=${Date.now()}`;
 });
+
+    sesi.jenisAkun = document.getElementById('jenisAkunUpgrade').value;
+localStorage.setItem('sesiTeravia', JSON.stringify(sesi));
+
 
 // Pengaman menu
 document.addEventListener('DOMContentLoaded', function () {
