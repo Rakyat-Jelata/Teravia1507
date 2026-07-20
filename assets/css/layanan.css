@@ -1,0 +1,125 @@
+/* === RUNNING TEXT === */
+@keyframes geserKananKiri {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.running-text {
+    position: relative;
+    width: 100%;
+    padding: 10px 16px;
+    padding-top: calc(10px + env(safe-area-inset-top));
+    background: #EFF6FF;
+    border-bottom: 1px solid #BFDBFE;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 99999;
+}
+.running-text span {
+    display: inline-block;
+    animation: geserKananKiri 24s linear infinite;
+    font-size: 12px;
+    color: #1E40AF;
+    font-weight: 600;
+}
+
+/* === NAVBAR PENYESUAIAN === */
+.navbar { top: 0; z-index: 9998; }
+.wadah-nav { position: relative; }
+.btn-iklan-mob {
+    display: none;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: #165DFF;
+    background: #E6EFFF;
+    padding: 7px 14px;
+    border-radius: 20px;
+    align-items: center;
+    gap: 3px;
+}
+.tautan-nav.aktif { color: #165DFF; font-weight: 600; }
+
+/* === KONTEN HALAMAN === */
+.konten {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 80px;
+}
+.judul-halaman { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.sub-judul { font-size: 14px; color: #64748b; margin-bottom: 32px; }
+.grid-layanan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.kartu-layanan {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
+}
+.kartu-layanan:hover { transform: translateY(-3px); }
+.kartu-layanan .ikon { font-size: 32px; margin-bottom: 12px; }
+.kartu-layanan h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.kartu-layanan p { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+/* === FOOTER DESKTOP === */
+.footer-desktop {
+    background: #1e293b;
+    color: #94a3b8;
+    padding: 40px 24px 20px;
+    font-size: 13px;
+    margin-top: 40px;
+}
+.footer-isi { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+/* === BOTTOM NAV === */
+.bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 65px;
+    background: white;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    z-index: 9999;
+    border-top: 1px solid #e2e8f0;
+    padding: 0 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 10px;
+    gap: 3px;
+    flex: 1;
+    text-align: center;
+    padding: 6px 2px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+.nav-item.aktif { color: #165DFF; font-weight: 600; background: #EFF6FF; }
+.nav-item span:first-child { font-size: 18px; }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    body { padding-bottom: 70px; }
+    .menu-desktop, .footer-desktop { display: none !important; }
+    .btn-iklan-mob { display: flex; position: absolute; right: 16px; }
+    .bottom-nav { display: flex; }
+    .judul-halaman { font-size: 20px; }
+    .grid-layanan { grid-template-columns: 1fr; gap: 16px; }
+    .wadah-nav { justify-content: center; }
+}
+
+@media (min-width: 769px) {
+    .running-text { position: fixed; top: 0; }
+    .navbar { top: 40px; }
+    body { padding-top: 80px; }
+                 }
