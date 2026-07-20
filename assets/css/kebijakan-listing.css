@@ -1,0 +1,40 @@
+.header-halaman {
+    background: linear-gradient(135deg, #165DFF 0%, #0F42C1 100%);
+    color: white;
+    padding: 40px 16px;
+    text-align: center;
+}
+.header-halaman h1 { font-size: 28px; margin-bottom: 8px; }
+
+.wadah-isi {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+.blok-isi {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+.blok-isi h3 {
+    color: #165DFF;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+.blok-isi p, .blok-isi li {
+    color: #475569;
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+.blok-isi ul { padding-left: 20px; }
+
+.peringatan {
+    background: #FEF2F2;
+    border-left: 4px solid #EF4444;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
