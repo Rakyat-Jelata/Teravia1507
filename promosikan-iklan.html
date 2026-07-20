@@ -9,26 +9,62 @@
     <link rel="stylesheet" href="../assets/css/promosikan.css">
 </head>
 <body>
-<div class="wadah">
-    <h2>📢 Promosikan ke Meta Ads</h2>
+
+<!-- NAVBAR SERAGAM TERAVIA -->
+<nav class="navbar">
+    <div class="wadah-nav">
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/logo.png" alt="Teravia" style="height:32px;">
+        </a>
+        <div class="menu-desktop">
+            <a href="../index.html" class="tautan-nav">Beranda</a>
+            <a href="../daftar-properti.html" class="tautan-nav">Cari Properti</a>
+            <a href="../profil-member.html" class="tautan-nav">Profil</a>
+            <a href="iklan-saya.html" class="tautan-nav aktif">Iklan Saya</a>
+        </div>
+        <button type="button" id="tombolMenu" class="tombol-hamburger" aria-label="Buka Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MENU SAMPING MOBILE -->
+<div id="latarGelap" class="latar-gelap"></div>
+<div id="menuMobile" class="menu-samping">
+    <div class="tutup-menu"><button type="button" id="tombolTutup" aria-label="Tutup Menu">✕</button></div>
+    <div class="isi-menu">
+        <a href="../index.html" class="tautan-menu">🏠 Beranda</a>
+        <a href="../daftar-properti.html" class="tautan-menu">🔍 Cari Properti</a>
+        <a href="../profil-member.html" class="tautan-menu">👤 Profil Saya</a>
+        <a href="iklan-saya.html" class="tautan-menu aktif">📋 Daftar Iklan Saya</a>
+        <div class="garis-pemisah"></div>
+        <a href="../login.html" class="tautan-menu">👤 Masuk</a>
+    </div>
+</div>
+
+<main class="wadah">
+    <h2>📢 Promosikan Iklan Properti</h2>
 
     <div class="kartu" id="infoIklan">
-        <!-- Data iklan akan dimuat di sini -->
+        <p class="memuat">Memuat data iklan...</p>
     </div>
 
     <div class="kartu">
-        <h3>Pilih Durasi & Jangkauan</h3>
+        <h3>Pilih Durasi Promosi</h3>
         <div class="pilihan">
             <div class="opsi" data-harga="200000" data-hari="7">
-                <div>1 Minggu</div>
+                <div class="durasi">1 Minggu</div>
+                <div class="keterangan">Jangkauan hingga 5.000 orang</div>
                 <div class="harga-opsi">Rp 200.000</div>
             </div>
             <div class="opsi" data-harga="400000" data-hari="14">
-                <div>2 Minggu</div>
+                <div class="durasi">2 Minggu</div>
+                <div class="keterangan">Jangkauan hingga 12.000 orang</div>
                 <div class="harga-opsi">Rp 400.000</div>
             </div>
             <div class="opsi" data-harga="800000" data-hari="30">
-                <div>1 Bulan</div>
+                <div class="durasi">1 Bulan</div>
+                <div class="keterangan">Jangkauan hingga 30.000 orang</div>
                 <div class="harga-opsi">Rp 800.000</div>
             </div>
         </div>
@@ -39,14 +75,20 @@
         </div>
     </div>
 
-    <button class="btn-bayar" id="tombolLanjut">Lanjut ke Pembayaran</button>
-    <p class="info-syarat">
-        * Harga sudah sesuai alokasi budget iklan paket Residence/Estate.<br>
-        * Iklan akan berjalan maksimal 1x24 jam setelah pembayaran terkonfirmasi.
-    </p>
-    <p style="text-align:center;margin-top:16px;"><a href="iklan-saya.html">← Kembali ke Daftar Iklan</a></p>
-</div>
+    <button class="btn-bayar" id="tombolLanjut" disabled>Pilih durasi terlebih dahulu</button>
 
+    <p class="info-syarat">
+        * Harga sudah termasuk biaya iklan Meta Ads & penanganan oleh tim Teravia.<br>
+        * Iklan akan mulai berjalan maksimal 1x24 jam setelah pembayaran terkonfirmasi.<br>
+        * Fitur ini hanya tersedia untuk anggota paket <b>Residence</b> dan <b>Estate Premium</b>.
+    </p>
+
+    <p class="kembali">
+        <a href="iklan-saya.html">← Kembali ke Daftar Iklan</a>
+    </p>
+</main>
+
+<script src="../assets/js/navbar.js"></script>
 <script src="../assets/js/promosikan.js"></script>
 </body>
 </html>
