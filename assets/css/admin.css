@@ -1,0 +1,36 @@
+* { box-sizing: border-box; margin:0; padding:0; font-family: system-ui, sans-serif; }
+body { background: #f8fafc; padding: 20px 0; min-height: 100vh; }
+.wadah { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.header-admin { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap:12px; }
+.header-admin h1 { font-size: 22px; color: #165DFF; }
+.info-login { font-size: 13px; color: #64748b; margin-top: 4px; }
+.btn-keluar { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight:600; }
+
+.ringkasan { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 12px; margin-bottom: 24px; }
+.kartu-ringkasan { background: white; padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.angka { font-size: 26px; font-weight: 700; color: #165DFF; margin-bottom: 4px; }
+.label { font-size: 13px; color: #64748b; }
+
+.tab-menu { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px; }
+.tombol-tab { padding: 10px 16px; border: none; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; white-space: nowrap; font-weight:500; }
+.tombol-tab.aktif { background: #165DFF; color: white; }
+
+.konten-tab { display: block; }
+.konten-tab.sembunyi { display: none !important; }
+
+.kartu-antrean { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.info-baris { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.judul-item { font-weight: 600; font-size: 15px; color: #1e293b; }
+.badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.badge.Kaveling { background: #e2e8f0; color: #475569; }
+.badge.Cluster { background: #fef3c7; color: #d97706; }
+.badge.Residence { background: #dbeafe; color: #1d4ed8; }
+.badge.Estate { background: #ede9fe; color: #7c3aed; }
+.detail { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+.aksi { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-aksi { padding: 8px 14px; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn-setuju { background: #22c55e; color: white; }
+.btn-tolak { background: #ef4444; color: white; }
+.btn-detail { background: #f59e0b; color: white; }
+.kosong { text-align: center; padding: 40px; color: #94a3b8; }
+
