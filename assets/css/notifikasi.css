@@ -1,0 +1,115 @@
+.wadah {
+    max-width: 720px;
+    width: 90%;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.kartu {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.judul {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tombol-kecil {
+    padding: 6px 12px;
+    font-size: 13px;
+    background: #EFF6FF;
+    color: #165DFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.tombol-kecil:hover {
+    background: #DBEafe;
+}
+
+/* Daftar Notifikasi */
+.item-notif {
+    padding: 14px 0;
+    border-bottom: 1px solid #F1F5F9;
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.item-notif:last-child { border: none; }
+.item-notif:hover {
+    background: #FAFBFF;
+    margin: 0 -12px;
+    padding: 14px 12px;
+    border-radius: 10px;
+}
+.item-notif.belum-dibaca {
+    background: #F8FAFC;
+    margin: 0 -12px;
+    padding: 14px 12px;
+    border-radius: 10px;
+    border-left: 3px solid #165DFF;
+}
+.ikon {
+    font-size: 20px;
+    min-width: 28px;
+    text-align: center;
+    padding-top: 2px;
+}
+.isi-notif h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: #1E293B;
+}
+.isi-notif p {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+.isi-notif span {
+    font-size: 12px;
+    color: #94A3B8;
+}
+
+/* Tampilan Kosong */
+.kosong {
+    text-align: center;
+    padding: 50px 20px;
+    color: #64748B;
+}
+.ikon-kosong {
+    font-size: 56px;
+    margin-bottom: 16px;
+}
+.kosong h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+}
+.kosong p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Responsif HP */
+@media (max-width: 480px) {
+    .wadah { margin: 20px auto; }
+    .kartu { padding: 18px; }
+    .judul { font-size: 19px; }
+    .item-notif { padding: 12px 0; }
+    .item-notif.belum-dibaca { padding: 12px; }
+  }
