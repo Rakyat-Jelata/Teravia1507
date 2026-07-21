@@ -1,135 +1,55 @@
 /* ==========================================================
-   EMSIFA API
+   TERAVIA
+   Wilayah Service
+   API Wilayah Indonesia - Emsifa
+   Version : 2.0
 ========================================================== */
 
-const EMSIFA_API = {
-  provinsi: "https://wilayah.id/api/provinces.json",
-
-  kabupaten: (provinceId) =>
-    `https://wilayah.id/api/regencies/${provinceId}.json`,
-
-  kecamatan: (regencyId) =>
-    `https://wilayah.id/api/districts/${regencyId}.json`,
-
-  kelurahan: (districtId) =>
-    `https://wilayah.id/api/villages/${districtId}.json`
-};
-
-/* ==========================================================
-   INIT EMSIFA
-========================================================== */
-
-function initWilayah() {
-  loadProvinsi();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  initWilayah();
-});
-
-/* ==========================================================
-   ELEMENT
-========================================================== */
+const EMSIFA_BASE_URL =
+  "https://www.emsifa.com/api-wilayah-indonesia/api";
 
 const provinsiSelect = document.getElementById("provinsi");
 const kabupatenSelect = document.getElementById("kabupaten");
 const kecamatanSelect = document.getElementById("kecamatan");
 const kelurahanSelect = document.getElementById("kelurahan");
 
+document.addEventListener("DOMContentLoaded", () => {
+  initWilayah();
+});
+
+async function initWilayah() {
+  await loadProvinsi();
+}
+
 /* ==========================================================
-   PROVINSI
+   LOAD PROVINSI
 ========================================================== */
 
 async function loadProvinsi() {
   try {
-    const response = await fetch(EMSIFA_API.provinsi);
-    const result = await response.json();
 
-    fillSelect(provinsiSelect, result.data, "Pilih Provinsi");
-  } catch (error) {
-    console.error(error);
-    showToast("Gagal memuat provinsi.", "error");
+    resetSelect(provinsiSelect, "Pilih Provinsi");
+    resetSelect(kabupatenSelect, "Pilih Kabupaten / Kota");
+    resetSelect(kecamatanSelect, "Pilih Kecamatan");
+    resetSelect(kelurahanSelect, "Pilih Desa / Kelurahan");
+
+    const response = await fetch(
+      `${EMSIFA_BASE_URL}/provinces.json`
+    );
+
+    if (!response.ok)
+      throw new Error("HTTP " + response.status);
+
+    const data = await response.json();
+
+    fillSelect(
+      provinsiSelect,
+      data,
+      "Pilih Provinsi"
+    );
+
+  } catch (err) {
+    console.error(err);
+    showToast("Gagal memuat data provinsi.", "error");
   }
-}
-
-/* ==========================================================
-   FILL SELECT
-========================================================== */
-
-function fillSelect(element, data, placeholder) {
-  element.innerHTML = `<option value="">${placeholder}</option>`;
-
-  data.forEach((item) => {
-    element.innerHTML += `
-      <option value="${item.code}">
-        ${item.name}
-      </option>
-    `;
-  });
-}
-
-/* ==========================================================
-   EVENT
-========================================================== */
-
-provinsiSelect.addEventListener("change", () => {
-  loadKabupaten(provinsiSelect.value);
-});
-
-kabupatenSelect.addEventListener("change", () => {
-  loadKecamatan(kabupatenSelect.value);
-});
-
-kecamatanSelect.addEventListener("change", () => {
-  loadKelurahan(kecamatanSelect.value);
-});
-
-async function loadKabupaten(id) {
-  resetSelect(kabupatenSelect, "Pilih Kabupaten");
-  resetSelect(kecamatanSelect, "Pilih Kecamatan");
-  resetSelect(kelurahanSelect, "Pilih Kelurahan");
-
-  if (!id) {
-    return;
-  }
-
-  const response = await fetch(EMSIFA_API.kabupaten(id));
-  const result = await response.json();
-
-  fillSelect(kabupatenSelect, result.data, "Pilih Kabupaten");
-}
-
-async function loadKecamatan(id) {
-  resetSelect(kecamatanSelect, "Pilih Kecamatan");
-  resetSelect(kelurahanSelect, "Pilih Kelurahan");
-
-  if (!id) {
-    return;
-  }
-
-  const response = await fetch(EMSIFA_API.kecamatan(id));
-  const result = await response.json();
-
-  fillSelect(kecamatanSelect, result.data, "Pilih Kecamatan");
-}
-
-async function loadKelurahan(id) {
-  resetSelect(kelurahanSelect, "Pilih Kelurahan");
-
-  if (!id) {
-    return;
-  }
-
-  const response = await fetch(EMSIFA_API.kelurahan(id));
-  const result = await response.json();
-
-  fillSelect(kelurahanSelect, result.data, "Pilih Kelurahan");
-}
-
-/* ==========================================================
-   RESET
-========================================================== */
-
-function resetSelect(element, placeholder) {
-  element.innerHTML = `<option value="">${placeholder}</option>`;
 }
