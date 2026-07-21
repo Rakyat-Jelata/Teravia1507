@@ -1,0 +1,526 @@
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:32px 20px 80px;
+}
+
+.form-step{
+display:none;
+background:#fff;
+padding:32px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+margin-bottom:24px;
+}
+
+.form-step.active{
+display:block;
+}
+
+.form-step h2{
+margin-bottom:8px;
+font-size:28px;
+font-weight:700;
+color:var(--primary-color);
+}
+
+.form-step>p{
+margin-bottom:28px;
+color:#666;
+line-height:1.6;
+}
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+.progress-wrapper{
+margin-bottom:28px;
+}
+
+.progress-bar{
+width:100%;
+height:10px;
+background:#e5e7eb;
+border-radius:999px;
+overflow:hidden;
+}
+
+#progressFill{
+width:7.7%;
+height:100%;
+background:var(--primary-color);
+transition:.3s ease;
+}
+
+#progressText{
+margin-top:10px;
+font-size:14px;
+font-weight:600;
+color:#555;
+text-align:right;
+}
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+.progress-wrapper{
+position:sticky;
+top:72px;
+z-index:50;
+background:#fff;
+padding:16px 20px;
+margin-bottom:32px;
+border:1px solid #e5e7eb;
+border-radius:14px;
+box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+
+.progress-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+
+.progress-title{
+font-size:15px;
+font-weight:700;
+color:#111827;
+}
+
+#progressText{
+font-size:14px;
+font-weight:600;
+color:var(--primary-color);
+}
+
+.progress-bar{
+width:100%;
+height:10px;
+background:#e5e7eb;
+border-radius:999px;
+overflow:hidden;
+}
+
+#progressFill{
+width:7.69%;
+height:100%;
+background:linear-gradient(90deg,#16a34a,#22c55e);
+border-radius:999px;
+transition:width .35s ease;
+}
+
+.progress-step{
+display:flex;
+justify-content:space-between;
+margin-top:12px;
+font-size:12px;
+color:#6b7280;
+}
+
+.progress-step span{
+flex:1;
+text-align:center;
+}
+
+.progress-step .active{
+font-weight:700;
+color:var(--primary-color);
+}
+
+@media(max-width:768px){
+
+.progress-wrapper{
+top:64px;
+padding:14px 16px;
+margin-bottom:24px;
+}
+
+.progress-title{
+font-size:14px;
+}
+
+#progressText{
+font-size:13px;
+}
+
+.progress-bar{
+height:8px;
+}
+
+.progress-step{
+display:none;
+}
+
+}
+
+/* ==========================================================
+   STEP CARD
+========================================================== */
+
+.form-step{
+display:none;
+background:#fff;
+padding:32px;
+margin-bottom:32px;
+border:1px solid #e5e7eb;
+border-radius:16px;
+box-shadow:0 8px 24px rgba(0,0,0,.06);
+animation:fadeStep .25s ease;
+}
+
+.form-step.active{
+display:block;
+}
+
+.form-step h2{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:8px;
+font-size:28px;
+font-weight:700;
+color:var(--primary-color);
+}
+
+.form-step>p{
+margin-bottom:28px;
+font-size:15px;
+line-height:1.7;
+color:#6b7280;
+}
+
+.step-action{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:16px;
+margin-top:40px;
+padding-top:24px;
+border-top:1px solid #e5e7eb;
+}
+
+.step-action .btn{
+min-width:150px;
+}
+
+@keyframes fadeStep{
+
+from{
+opacity:0;
+transform:translateY(15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@media(max-width:768px){
+
+.form-step{
+padding:20px;
+margin-bottom:24px;
+border-radius:12px;
+}
+
+.form-step h2{
+font-size:22px;
+}
+
+.form-step>p{
+font-size:14px;
+margin-bottom:20px;
+}
+
+.step-action{
+flex-direction:column-reverse;
+}
+
+.step-action .btn{
+width:100%;
+}
+
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.form-group{
+display:flex;
+flex-direction:column;
+margin-bottom:24px;
+}
+
+.form-group label{
+display:flex;
+align-items:center;
+gap:6px;
+margin-bottom:8px;
+font-size:14px;
+font-weight:600;
+color:#374151;
+}
+
+.form-group label span{
+color:#ef4444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+width:100%;
+padding:14px 16px;
+font-size:14px;
+font-family:inherit;
+color:#111827;
+background:#fff;
+border:1px solid #d1d5db;
+border-radius:10px;
+outline:none;
+transition:.25s ease;
+}
+
+.form-group textarea{
+min-height:140px;
+resize:vertical;
+line-height:1.6;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+color:#9ca3af;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+border-color:var(--primary-color);
+box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled{
+background:#f3f4f6;
+cursor:not-allowed;
+}
+
+.form-group small{
+margin-top:6px;
+font-size:12px;
+color:#6b7280;
+}
+
+.form-group .error{
+margin-top:6px;
+font-size:12px;
+color:#dc2626;
+}
+
+.form-group .success{
+margin-top:6px;
+font-size:12px;
+color:#16a34a;
+}
+
+/* ==========================================================
+   RADIO & CHECKBOX
+========================================================== */
+
+.radio-group,
+.checkbox-group{
+display:flex;
+flex-wrap:wrap;
+gap:16px;
+margin-top:8px;
+}
+
+.radio-group label,
+.checkbox-group label{
+display:flex;
+align-items:center;
+gap:8px;
+margin:0;
+font-weight:500;
+cursor:pointer;
+}
+
+.radio-group input,
+.checkbox-group input{
+width:18px;
+height:18px;
+cursor:pointer;
+}
+
+/* ==========================================================
+   COUNTER
+========================================================== */
+
+.char-counter{
+margin-top:6px;
+text-align:right;
+font-size:12px;
+color:#6b7280;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+.form-group{
+margin-bottom:20px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+padding:12px 14px;
+font-size:14px;
+}
+
+.radio-group,
+.checkbox-group{
+flex-direction:column;
+gap:10px;
+}
+
+}
+
+/* ==========================================================
+   PROPERTY DETAIL
+========================================================== */
+
+.detail-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-bottom:24px;
+}
+
+.detail-grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-bottom:24px;
+}
+
+.detail-grid-4{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:24px;
+}
+
+.detail-item{
+display:flex;
+flex-direction:column;
+}
+
+.detail-item label{
+margin-bottom:8px;
+font-size:14px;
+font-weight:600;
+color:#374151;
+}
+
+.detail-item input,
+.detail-item select{
+width:100%;
+padding:14px 16px;
+border:1px solid #d1d5db;
+border-radius:10px;
+font-size:14px;
+background:#fff;
+transition:.25s ease;
+}
+
+.detail-item input:focus,
+.detail-item select:focus{
+border-color:var(--primary-color);
+box-shadow:0 0 0 3px rgba(37,99,235,.15);
+outline:none;
+}
+
+.input-satuan{
+position:relative;
+}
+
+.input-satuan input{
+padding-right:60px;
+}
+
+.input-satuan span{
+position:absolute;
+top:50%;
+right:16px;
+transform:translateY(-50%);
+font-size:13px;
+font-weight:600;
+color:#6b7280;
+pointer-events:none;
+}
+
+.detail-divider{
+margin:32px 0 24px;
+padding-bottom:10px;
+border-bottom:1px solid #e5e7eb;
+font-size:18px;
+font-weight:700;
+color:var(--primary-color);
+}
+
+.info-box{
+padding:16px;
+margin-top:20px;
+background:#f9fafb;
+border:1px solid #e5e7eb;
+border-radius:10px;
+font-size:13px;
+line-height:1.7;
+color:#6b7280;
+}
+
+@media(max-width:992px){
+
+.detail-grid-4{
+grid-template-columns:repeat(2,1fr);
+}
+
+.detail-grid-3{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.detail-grid,
+.detail-grid-3,
+.detail-grid-4{
+grid-template-columns:1fr;
+gap:16px;
+}
+
+.detail-item input,
+.detail-item select{
+padding:12px 14px;
+}
+
+.detail-divider{
+font-size:16px;
+}
+
+}
