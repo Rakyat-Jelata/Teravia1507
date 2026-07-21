@@ -941,6 +941,64 @@
 
 <!-- Page -->
 <script src="assets/js/pasang-iklan.js"></script>
+<!-- ==========================================================
+     ERUDA MOBILE CONSOLE (DEBUG ONLY)
+========================================================== -->
 
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  eruda.init({
+    tool: [
+      "console",
+      "elements",
+      "network",
+      "resources",
+      "sources"
+    ]
+  });
+
+  console.log("================================");
+  console.log("TERAVIA Debug Mode");
+  console.log("User Agent :", navigator.userAgent);
+  console.log("================================");
+
+  window.onerror = function(message, source, line, column, error) {
+    console.error("JS ERROR");
+    console.error({
+      message,
+      source,
+      line,
+      column,
+      error
+    });
+  };
+
+  window.addEventListener("unhandledrejection", (event) => {
+    console.error("PROMISE ERROR");
+    console.error(event.reason);
+  });
+
+});
+                          </script>
+
+    <script>
+const _fetch = window.fetch;
+
+window.fetch = async (...args) => {
+
+  console.log("FETCH >", args[0]);
+
+  const response = await _fetch(...args);
+
+  console.log("STATUS >", response.status);
+
+  return response;
+
+};
+    </script>
+    
 </body>
 </html>
