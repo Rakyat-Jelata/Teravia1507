@@ -4,6 +4,7 @@
    API Wilayah Indonesia - Emsifa
    Version : 2.0
 ========================================================== */
+console.log("=== WILAYAH SERVICE LOADED ===");
 
 const EMSIFA_BASE_URL =
   "https://www.emsifa.com/api-wilayah-indonesia/api";
