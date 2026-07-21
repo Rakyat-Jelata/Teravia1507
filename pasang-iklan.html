@@ -35,7 +35,7 @@
   <!-- Judul -->
   <div class="form-group">
     <label for="judul">Judul Iklan <span>*</span></label>
-    <input type="text" id="judul" maxlength="100" placeholder="Contoh: Rumah Minimalis 2 Lantai di Bogor" required>
+    <input type="text" id="judul" maxlength="200" placeholder="Contoh: Rumah Minimalis 2 Lantai di Bogor" required>
     <small id="counterJudul">0 / 100</small>
   </div>
 
@@ -108,18 +108,18 @@
   <!-- Luas Bangunan -->
   <div class="form-group">
     <label for="luasBangunan">Luas Bangunan (m²)</label>
-    <input type="number" id="luasBangunan" min="0" placeholder="Contoh: 90">
+    <input type="number" id="luasBangunan" min="0" placeholder="Contoh: 90"required>
   </div>
 
   <!-- Dimensi -->
   <div class="form-row">
     <div class="form-group">
       <label for="panjang">Panjang (m)</label>
-      <input type="number" id="panjang" min="0" step="0.1" placeholder="0">
+      <input type="number" id="panjang" min="0" step="0.1" placeholder="0"required>
     </div>
     <div class="form-group">
       <label for="lebar">Lebar (m)</label>
-      <input type="number" id="lebar" min="0" step="0.1" placeholder="0">
+      <input type="number" id="lebar" min="0" step="0.1" placeholder="0"required>
     </div>
   </div>
 
@@ -127,11 +127,11 @@
   <div class="form-row">
     <div class="form-group">
       <label for="kamarTidur">Kamar Tidur</label>
-      <input type="number" id="kamarTidur" min="0" placeholder="0">
+      <input type="number" id="kamarTidur" min="0" placeholder="0"required>
     </div>
     <div class="form-group">
       <label for="kamarMandi">Kamar Mandi</label>
-      <input type="number" id="kamarMandi" min="0" placeholder="0">
+      <input type="number" id="kamarMandi" min="0" placeholder="0"required>
     </div>
   </div>
 
@@ -139,11 +139,11 @@
   <div class="form-row">
     <div class="form-group">
       <label for="jumlahLantai">Jumlah Lantai</label>
-      <input type="number" id="jumlahLantai" min="1" placeholder="1">
+      <input type="number" id="jumlahLantai" min="1" placeholder="1"required>
     </div>
     <div class="form-group">
       <label for="tahunBangun">Tahun Dibangun</label>
-      <input type="number" id="tahunBangun" min="1900" max="2100" placeholder="2020">
+      <input type="number" id="tahunBangun" min="1900" max="2100" placeholder="2020"required>
     </div>
   </div>
 
@@ -151,11 +151,11 @@
   <div class="form-row">
     <div class="form-group">
       <label for="garasi">Garasi</label>
-      <input type="number" id="garasi" min="0" placeholder="0">
+      <input type="number" id="garasi" min="0" placeholder="0"required>
     </div>
     <div class="form-group">
       <label for="carport">Carport</label>
-      <input type="number" id="carport" min="0" placeholder="0">
+      <input type="number" id="carport" min="0" placeholder="0"required>
     </div>
   </div>
 
@@ -222,18 +222,18 @@
   <div class="form-row">
     <div class="form-group">
       <label for="ipl">IPL / Service Charge</label>
-      <input type="number" id="ipl" min="0" placeholder="0">
+      <input type="number" id="ipl" min="0" placeholder="0"required>
     </div>
     <div class="form-group">
       <label for="pbb">PBB / Tahun</label>
-      <input type="number" id="pbb" min="0" placeholder="0">
+      <input type="number" id="pbb" min="0" placeholder="0"required>
     </div>
   </div>
 
   <!-- Harga per Meter -->
   <div class="form-group">
     <label for="hargaMeter">Harga per m²</label>
-    <input type="text" id="hargaMeter" readonly placeholder="Otomatis dihitung">
+    <input type="text" id="hargaMeter" readonly placeholder="Otomatis dihitung"required>
   </div>
 
   <!-- Catatan Harga -->
@@ -562,7 +562,7 @@
   </div>
 
   <!-- Foto Cover -->
-  <div class="form-group">
+  <div class="form-group" required>
     <label>Foto Cover</label>
     <small>Pilih salah satu foto sebagai cover utama.</small>
   </div>
@@ -664,7 +664,7 @@
   <!-- Nomor WhatsApp -->
   <div class="form-group">
     <label for="whatsapp">Nomor WhatsApp</label>
-    <input type="tel" id="whatsapp">
+    <input type="tel" id="whatsapp" inputmode="numeric">
   </div>
 
   <!-- Email -->
