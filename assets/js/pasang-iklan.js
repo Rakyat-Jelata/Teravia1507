@@ -40,37 +40,27 @@ function initPasangIklan() {
 ========================================================== */
 
 function showStep(step) {
+
   steps.forEach((item) => {
     item.classList.remove("active");
   });
 
-  const currentPage = document.getElementById(`step${step}`);
+  const currentPage =
+      document.getElementById(`step${step}`);
+
   if (currentPage) {
     currentPage.classList.add("active");
   }
 
   currentStep = step;
+
   updateProgress();
+
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    top:0,
+    behavior:"smooth"
   });
-}
 
-function nextStep() {
-  if (!validateStep(currentStep)) {
-    return;
-  }
-
-  if (currentStep < TOTAL_STEP) {
-    showStep(currentStep + 1);
-  }
-}
-
-function prevStep() {
-  if (currentStep > 1) {
-    showStep(currentStep - 1);
-  }
 }
 
 /* ==========================================================
@@ -414,12 +404,16 @@ function loadDraft() {
     return;
   }
 
-  const data = JSON.parse(draft);
+  let data;
 
-  Object.keys(data).forEach((key) => {
-    if (key === "currentStep" || key === "updatedAt") {
-      return;
-    }
+try {
+  data = JSON.parse(draft);
+} catch (error) {
+  clearDraft();
+  return;
+}
+
+Object.keys(data).forEach((key) => {
 
     const radio = document.querySelector(
       `input[name="${key}"][value="${data[key]}"]`
@@ -510,8 +504,16 @@ function openModal({
 
   modalCallback = onConfirm;
 
-  modalElement.querySelector(".modal-title").textContent = title;
-  modalElement.querySelector(".modal-body").innerHTML = message;
+  const modalTitle = modalElement.querySelector(".modal-title");
+const modalBody = modalElement.querySelector(".modal-body");
+
+if (modalTitle) {
+  modalTitle.textContent = title;
+}
+
+if (modalBody) {
+  modalBody.innerHTML = message;
+}
 
   const btnConfirm = modalElement.querySelector("#modalConfirm");
   btnConfirm.textContent = confirmText;
