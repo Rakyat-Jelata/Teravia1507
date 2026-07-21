@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function initWilayah() {
+   console.log("initWilayah jalan");
   await loadProvinsi();
 
   provinsiSelect.addEventListener("change", () => {
@@ -43,7 +44,7 @@ async function initWilayah() {
 ========================================================== */
 
 async function loadProvinsi() {
-
+console.log("loadProvinsi jalan");
   try {
 
     resetSelect(provinsiSelect, "Pilih Provinsi");
