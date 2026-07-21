@@ -25,31 +25,22 @@ async function initWilayah() {
    LOAD PROVINSI
 ========================================================== */
 
-async function loadProvinsi() {
-  try {
+const response = await fetch(
+  `${EMSIFA_BASE_URL}/provinces.json`
+);
 
-    resetSelect(provinsiSelect, "Pilih Provinsi");
-    resetSelect(kabupatenSelect, "Pilih Kabupaten / Kota");
-    resetSelect(kecamatanSelect, "Pilih Kecamatan");
-    resetSelect(kelurahanSelect, "Pilih Desa / Kelurahan");
+console.log("Status :", response.status);
 
-    const response = await fetch(
-      `${EMSIFA_BASE_URL}/provinces.json`
-    );
+if (!response.ok)
+  throw new Error("HTTP " + response.status);
 
-    if (!response.ok)
-      throw new Error("HTTP " + response.status);
+const data = await response.json();
 
-    const data = await response.json();
+console.log("Data :", data);
+console.log("Jumlah :", data.length);
 
-    fillSelect(
-      provinsiSelect,
-      data,
-      "Pilih Provinsi"
-    );
-
-  } catch (err) {
-    console.error(err);
-    showToast("Gagal memuat data provinsi.", "error");
-  }
-}
+fillSelect(
+  provinsiSelect,
+  data,
+  "Pilih Provinsi"
+);
